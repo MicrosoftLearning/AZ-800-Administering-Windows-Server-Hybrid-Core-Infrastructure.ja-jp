@@ -13,7 +13,7 @@ ms.locfileid: "137907040"
 
 ## <a name="scenario"></a>シナリオ
 
-Contoso, Ltd. は、自社の環境に新しいサーバーをいくつか新規に実装することを望んでいて、Server Core を使用することを決定しています。 また、組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center を実装することも希望しています。
+CContoso 社は、Server Core を使用して自社の環境に新しいサーバーを実装することを検討しています。 また、同社は組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center の実装も検討しています。
 
 ## <a name="objectives"></a>目標
 
