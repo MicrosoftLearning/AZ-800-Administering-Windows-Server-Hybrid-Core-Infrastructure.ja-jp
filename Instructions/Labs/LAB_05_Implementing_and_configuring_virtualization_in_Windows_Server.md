@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: Windows Server での仮想化の実装と構成'
   module: 'Module 5: Hyper-V virtualization in Windows Server'
-ms.openlocfilehash: c9ff5dddf134be5073ec9f2fa33d84ca07b0a343
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: e9b70ecdc5eef196b00ea2d0c88471c779d6d701
+ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907003"
+ms.lasthandoff: 03/19/2022
+ms.locfileid: "140742072"
 ---
 # <a name="lab-implementing-and-configuring-virtualization-in-windows-server"></a>ラボ: Windows Server での仮想化の実装と構成
 
@@ -108,7 +108,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
-1. メッセージが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -191,7 +191,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 1. 次のコマンドを実行して、オンラインの Microsoft リポジトリから docker の基本イメージを一覧表示します。
 
    ```powershell
-   docker search Microsoft
+   docker search microsoft
    ```
 1. 次のコマンドを実行して、インターネット インフォメーション サービス (IIS) インストールを含む Nano Server イメージをダウンロードします。
 

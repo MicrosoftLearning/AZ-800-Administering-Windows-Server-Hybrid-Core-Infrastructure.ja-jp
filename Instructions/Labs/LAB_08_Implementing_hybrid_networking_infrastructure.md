@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: ハイブリッド ネットワーク インフラストラクチャの実装'
   module: 'Module 8: Implementing Windows Server IaaS VM networking'
-ms.openlocfilehash: d568d7fb6226cd53fb624f5a87e9efe1180c0da1
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: b56ee27db3848fd2eae0a2621ab8c60579036fd4
+ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137906998"
+ms.lasthandoff: 03/19/2022
+ms.locfileid: "140742078"
 ---
 # <a name="lab-implementing-hybrid-networking-infrastructure"></a>ラボ: ハイブリッド ネットワーク インフラストラクチャの実装
 
@@ -452,13 +452,13 @@ ms.locfileid: "137906998"
 1. [Cloud Shell] ペインで次のコマンドを実行して、このラボで作成されたすべてのリソース グループのリストを表示します。
 
    ```powershell
-   Get-AzResourceGroup -Name 'az800l08*'
+   Get-AzResourceGroup -Name 'AZ800-L08*'
    ```
 
 1. 次のコマンドを実行して、このラボで作成したすべてのリソース グループを削除します。
 
    ```powershell
-   Get-AzResourceGroup -Name 'az800l08*' | Remove-AzResourceGroup -Force -AsJob
+   Get-AzResourceGroup -Name 'AZ800-L08*' | Remove-AzResourceGroup -Force -AsJob
    ```
 
    >**注**: このコマンドは非同期で実行されるため ( *-AsJob* パラメーターによって決定されます)、同じ PowerShell セッション内で直後に別の PowerShell コマンドを実行できますが、リソース グループが実際に削除されるまでに数分かかります。
