@@ -8,7 +8,7 @@ ms.locfileid: "137907011"
 ---
 # <a name="az-800t00-administering-windows-server-hybrid-core-infrastructure"></a>AZ-800T00: Windows Server ハイブリッド コア アーキテクチャの管理
 
-- **[最新の受講者ハンドブックと AllFiles コンテンツをダウンロードする](../../releases/latest)**
+- **[最新の受講生用ハンドブックと AllFiles コンテンツをダウンロードする](../../releases/latest)**
 - **あなたは MCT ですか?** - [MCT 向けの GitHub ユーザー ガイド](https://microsoftlearning.github.io/MCT-User-Guide/)をご覧ください
 - **ラボの手順を手動で作成する必要がありますか?** - 手順は、[MicrosoftLearning/Docker-Build](https://github.com/MicrosoftLearning/Docker-Build) リポジトリで確認できます
 
@@ -22,13 +22,13 @@ ms.locfileid: "137907011"
 
 - 講師ハンドブックと PowerPoint は、引き続きコースのコンテンツを教えるための主要なソースになるでしょう。
 
-- GitHub 上のこれらのファイルは受講者ハンドブックと組み合わせて使用するように設計されています。ただし、中央リポジトリとして GitHub 内にあるので、MCT とコース作成者が最新のラボ ファイルの共有ソースを持っている可能性があります。
+- GitHub 上のこれらのファイルは受講生用ハンドブックと組み合わせて使用するように設計されています。ただし、中央リポジトリとして GitHub 内にあるので、MCT とコース作成者が最新のラボ ファイルの共有ソースを持っている可能性があります。
 
 - すべての配信について、トレーナーは GitHub を確認のうえ、最新の Azure サービスに対応するために変更された可能性のある情報を確認し、配信用の最新のファイルを取得することをお勧めします。
 
-## <a name="what-about-changes-to-the-student-handbook"></a>受講者ハンドブックの変更について
+## <a name="what-about-changes-to-the-student-handbook"></a>受講生用ハンドブックの変更について
 
-- 受講者ハンドブックは四半期ごとに見直され、必要に応じて通常の MOC リリース チャネルを通じて更新されます。
+- 受講生用ハンドブックは四半期ごとに見直され、必要に応じて通常の MOC リリース チャネルを通じて更新されます。
 
 ## <a name="how-do-i-contribute"></a>投稿方法
 

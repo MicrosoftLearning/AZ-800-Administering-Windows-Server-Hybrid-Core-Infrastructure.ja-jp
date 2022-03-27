@@ -10,7 +10,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 01/28/2022
 ms.locfileid: "137907031"
 ---
-# <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ回答キー: Azure VM での Windows Server のデプロイと構成
+# <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ解答キー: Azure VM での Windows Server のデプロイと構成
 
 ## <a name="exercise-1-authoring-azure-resource-manager-arm-templates-for-azure-vm-deployment"></a>演習 1: Azure VM デプロイ用の Azure Resource Manager (ARM) テンプレートの作成
 
