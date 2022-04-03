@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   type: Answer Key
   module: 'Module 7: Network Infrastructure services in Windows Server'
-ms.openlocfilehash: b07da01785e12c2d025ba76fa3e712fdd35b781a
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: b31ce2d69a285e266a1e43c505451fe342d7ebe2
+ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907033"
+ms.lasthandoff: 03/19/2022
+ms.locfileid: "140742075"
 ---
 # <a name="lab-answer-key-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
@@ -21,7 +21,7 @@ ms.locfileid: "137907033"
 
    >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
 
-1. **Windows PowerShell** コンソールで、次のコマンドを入力してから Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
+1. **[Windows PowerShell]** コンソールで、次のコマンドを入力し、Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
@@ -34,11 +34,11 @@ ms.locfileid: "137907033"
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
-1. **SEA-ADM1** で Microsoft Edge を起動してから、`https://SEA-ADM1.contoso.com` に移動します。
+1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` にアクセスします。
 
-   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
+   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルにアクセスし、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
 
-1. メッセージが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -135,7 +135,7 @@ ms.locfileid: "137907033"
 1. **[イーサネットのプロパティ]** ダイアログ ボックスで、 **[インターネット プロトコル バージョン 4 (TCP/IPv4)]** を選んでから、 **[プロパティ]** を選択します。
 1. **[インターネット プロトコル バージョン 4 (TCP/IPv4) のプロパティ]** ダイアログ ボックスで、 **[IP アドレスを自動的に取得する]** を選択し、 **[DNS サーバーアドレスを自動的に取得する]** を選んでから、 **[OK]** を選択します。
 1. **[閉じる]** を選択してから、 **[イーサネットの状態]** ウィンドウで **[詳細]** を選択します。
-1. **[ネットワーク接続の詳細]** ダイアログ ボックスで、DHCP が有効になっていること、IP アドレスが取得されたこと、および **SEA-SVR2 (172.16.10.12)** DHCP サーバーによってリースが発行されたことを確認します。
+1. **[ネットワーク接続の詳細]** ダイアログ ボックスで、DHCP が有効になっていること、IP アドレスが取得されたこと、および **SEA-SVR1 (172.16.10.12)** DHCP サーバーによってリースが発行されたことを確認します。
 1. **[閉じる]** を選択して、 **[イーサネットの状態]** ウィンドウに戻ります。
 1. **SEA-ADM1** の **[DHCP]** ウィンドウで、 **[172.16.10.12]** ノードを展開し、 **[IPv4]** ノードを展開します。次に、 **[スコープ [172.16.0.0] Contoso]** ノードを展開し、 **[アドレス リース]** を選択します。
 1. **SEA-ADM1.contoso.com** リースを表すエントリがあることを確認します。

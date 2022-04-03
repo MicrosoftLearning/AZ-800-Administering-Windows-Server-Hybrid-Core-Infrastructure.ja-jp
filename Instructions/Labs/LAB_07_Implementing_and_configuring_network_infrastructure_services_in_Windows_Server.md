@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   module: 'Module 7: Network Infrastructure services in Windows Server'
-ms.openlocfilehash: 3d4a37155a7609316235b4ec8c4fcb8360cfe2f7
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: d50ffa7e7dc2631ee6c955b27e8b3507479ee8c9
+ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137906999"
+ms.lasthandoff: 03/19/2022
+ms.locfileid: "140742069"
 ---
 # <a name="lab-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
@@ -28,7 +28,7 @@ Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件�
 
 仮想マシン: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
 
-> **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、および **AZ-800T00A-SEA-ADM1** 仮想マシンによって、**SEA-DC1**、**SEA-SVR1**、および **SEA-ADM1** のインストールがホストされます
+> **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-SEA-ADM1** 仮想マシンによって、**SEA-DC1**、**SEA-SVR1**、**SEA-ADM1** のインストールがホストされます。
 
 1. **SEA-ADM1** を選択します。
 1. 次の資格情報を使用してサインインします。
@@ -76,7 +76,7 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
    >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
    
-1. メッセージが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -129,9 +129,9 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 ### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
 
 1. **SEA-ADM1** で、IP 構成を静的から動的に割り当てられるように変更します。
-1. 結果の IP 構成を調べ、DHCP リースが **SEA-SVR2 (172.16.10.12)** から取得されたことを確認します。
+1. 結果の IP 構成を調べ、DHCP リースが **SEA-SVR1 (172.16.10.12)** から取得されたことを確認します。
 1. **SEA-ADM1** の **DHCP 管理コンソール** で、両方の DHCP サーバーの **Contoso** スコープに **SEA-ADM1** のリースが一覧表示されていることを確認します。
-1. **SEA-ADM1** で、**DHCP 管理コンソール** を使用して、**SEA-SVR2 (172.16.10.12)** 上の **DHCP** サービスを停止します。
+1. **SEA-ADM1** で、**DHCP 管理コンソール** を使用して、**SEA-SVR1 (172.16.10.12)** 上の **DHCP** サービスを停止します。
 1. **SEA-ADM1** のイーサネット ネットワーク接続を無効にしてから再度有効にして、リースを強制的に更新します。
 1. **SEA-ADM1** で、同じ DHCP リースが **SEA-DC1 (172.16.10.10)** から取得されていることを確認します。
 
