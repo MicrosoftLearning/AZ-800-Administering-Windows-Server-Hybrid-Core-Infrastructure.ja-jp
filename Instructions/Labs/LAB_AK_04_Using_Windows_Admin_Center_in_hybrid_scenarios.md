@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   type: Answer Key
   module: 'Module 4: Facilitating hybrid management'
-ms.openlocfilehash: bbdbcae39ff3756d24061a0bf4e4df2aaf7d4c0a
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: b7f4d58c81945aae9c79d4cee0197f2fd1f1a407
+ms.sourcegitcommit: fd8252ad223934b8c3e178706dbc03a8fd9bb030
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137906955"
+ms.lasthandoff: 05/07/2022
+ms.locfileid: "144813033"
 ---
 # <a name="lab-answer-key-using-windows-admin-center-in-hybrid-scenarios"></a>ラボの回答キー: ハイブリッド シナリオでの Windows Admin Center の使用
 
@@ -65,14 +65,14 @@ ms.locfileid: "137906955"
 
 1. **SEA-ADM1** で **[スタート]** を選択し、 **[Windows PowerShell (管理者)]** を選択します。
 
-   >**注**: Windows Admin Center を **SEA-ADM1** にまだインストールしていない場合は、次の 2 つの手順を行います。
+   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
 
 1. **[Windows PowerShell]** コンソールで、次のコマンドを入力し、Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
    ```
-1. 次のコマンドを入力し、Enter キーを押して、Windows Admin Center をインストールします。
+1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
@@ -84,7 +84,7 @@ ms.locfileid: "137906955"
 
    >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルにアクセスし、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
    
-1. メッセージが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -168,6 +168,7 @@ ms.locfileid: "137906955"
      SubnetName = $subnetName
      GenerateSslCert = $true
      size = $size
+     PublicIPAddressName = $pipname
    }
    ```
 
@@ -250,7 +251,7 @@ ms.locfileid: "137906955"
 #### <a name="task-1-start-a-powershell-session-in-cloud-shell"></a>タスク 1: Cloud Shell で PowerShell セッションを開始する
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えます。
-1. Azure portal が表示されている Microsoft Edge ウィンドウで、[Cloud Shell] アイコンを選択して [Cloud Shell] ウィンドウを開きます。
+1. Azure portal を表示している Microsoft Edge ウィンドウで、[Cloud Shell] アイコンを選んで [Cloud Shell] ペインを開きます。
 
 #### <a name="task-2-identify-all-azure-resources-provisioned-in-the-lab"></a>タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
 

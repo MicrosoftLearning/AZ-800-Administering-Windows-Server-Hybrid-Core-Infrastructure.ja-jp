@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: AD DS と Azure AD の統合の実装'
   type: Answer Key
   module: 'Module 2: Implementing Identity in Hybrid Scenarios'
-ms.openlocfilehash: 8cbcc563a86ca5c1c997a69884e1b132cbf2f86e
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 7defc132d092b6db2286718a9bfd5ce619c7b632
+ms.sourcegitcommit: fd8252ad223934b8c3e178706dbc03a8fd9bb030
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137906962"
+ms.lasthandoff: 05/07/2022
+ms.locfileid: "144813025"
 ---
 # <a name="lab-implementing-integration-between-ad-ds-and-azure-ad"></a>ラボ: AD DS と Azure AD の統合の実装
 
@@ -248,7 +248,7 @@ ms.locfileid: "137906962"
 
    ```powershell
    New-Item -Type Directory -Path '\\SEA-SVR1.contoso.com\C$\Temp' -Force
-   Copy-Item -Path "$env:USERPROFILE\Downloads\AzureADPasswordProtectionProxySetup.msi" -Destination '\\SEA-SVR1.contoso.com\C$\Temp\'
+   Copy-Item -Path "$env:USERPROFILE\Downloads\AzureADPasswordProtectionProxySetup.exe" -Destination '\\SEA-SVR1.contoso.com\C$\Temp\'
    Invoke-Command -ComputerName SEA-SVR1.contoso.com -ScriptBlock { Start-Process -FilePath C:\Temp\AzureADPasswordProtectionProxySetup.msi -ArgumentList '/quiet /log C:\Temp\AzureADPPProxyInstall.log' -Wait }
    ```
 1. 次のコマンドを実行して **SEA-DC1** に **C:\Temp** ディレクトリを作成し、**AzureADPasswordProtectionDCAgentSetup.msi** インストーラーをそのディレクトリにコピーし、インストールを起動して、インストールが完了したらドメイン コントローラーを再起動します。
