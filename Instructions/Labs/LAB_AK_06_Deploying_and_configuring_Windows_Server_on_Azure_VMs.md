@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: Azure VM での Windows Server のデプロイと構成'
   type: Answer Key
   module: 'Module 6: Deploying and Configuring Azure VMs'
-ms.openlocfilehash: 19550acaddcfe670775ddd8bcc56d7df05ef72be
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 350b089387e4765feaa860612d3026138aa4d829
+ms.sourcegitcommit: f7b3ca18320bb2b31f1c39247fa90ed4c9f8a3eb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907031"
+ms.lasthandoff: 04/09/2022
+ms.locfileid: "141580007"
 ---
 # <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ解答キー: Azure VM での Windows Server のデプロイと構成
 
@@ -104,6 +104,7 @@ ms.locfileid: "137907031"
 #### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
 1. **SEA-ADM1** の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
+   >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
 
    ```json
         {

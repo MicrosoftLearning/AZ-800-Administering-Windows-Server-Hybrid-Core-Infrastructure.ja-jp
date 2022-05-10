@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: Azure VM での Windows Server のデプロイと構成'
   module: 'Module 6: Deploying and Configuring Azure VMs'
-ms.openlocfilehash: d2505e999d7e5194fd7a407cc035834dee2464f3
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 0acf54cd8a93c3aaaf2c885b10deaaa3e6ddcaad
+ms.sourcegitcommit: f7b3ca18320bb2b31f1c39247fa90ed4c9f8a3eb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907002"
+ms.lasthandoff: 04/09/2022
+ms.locfileid: "141580010"
 ---
 # <a name="lab-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ: Azure VM での Windows Server のデプロイと構成
 
@@ -83,21 +83,21 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |リージョン|Azure 仮想マシンをプロビジョニングできる Azure リージョンの名前を使用します|
    |可用性のオプション|インフラストラクチャの冗長性は必要ありません|
    |Image|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
-   |Azure Spot インスタンス|No|
+   |Azure Spot インスタンス|いいえ|
    |サイズ|**Standard_D2s_v3**|
-   |ユーザー名|**Student**|
+   |ユーザー名|**学生**|
    |パスワード|**Pa55w.rd1234**|
-   |パブリック受信ポート|None|
-   |既存の Windows Server ライセンスを使用しますか|No|
+   |パブリック受信ポート|なし|
+   |既存の Windows Server ライセンスを使用しますか|いいえ|
    |OS ディスクの種類|**Standard HDD**|
    |名前|**az800l06-vnet**|
    |アドレス範囲|**10.60.0.0/20**|
    |サブネット名|**subnet0**|
    |サブネット範囲|**10.60.0.0/24**|
-   |パブリック IP|None|
+   |パブリック IP|なし|
    |NIC ネットワーク セキュリティ グループ|None|
    |Accelerated Networking|Off|
-   |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|No|
+   |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|いいえ|
    |ブート診断|**マネージド ストレージ アカウントで有効にする (推奨)**|
 
 1. 「**仮想マシンの作成**」ページの **[確認と作成]** タブまで移動したら、タスク 3 に進みます。
@@ -129,6 +129,8 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
 #### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
 1. ラボ VM の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
+
+   >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
 
    ```json
         {
@@ -267,7 +269,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 1. Azure portal で、「**az800l06-vm0**」ページに戻ります。
 1. 「**az800l06-vm0**」ページで、 **[構成]** を選択します。 
 1. 「**az800l06-vm0 \| 構成**」ページで、 **[JIT VM アクセスを有効にする]** を選択し、 **[Azure Security Center を開く]** リンクを選択します。
-1. 「**Just-In-Time VM アクセス**」ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
+1. 「**Just In Time VM アクセス**」ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
 #### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する
 
@@ -277,7 +279,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
    
    |設定|値|
    |---|---|
-   |ユーザー名|**Student**|
+   |ユーザー名|**学生**|
    |パスワード|**Pa55w.rd1234**|
 
 1. Azure VM で実行されているオペレーティング システムがリモート デスクトップ経由で正常にアクセスできることを確認し、リモート デスクトップ セッションを閉じます。

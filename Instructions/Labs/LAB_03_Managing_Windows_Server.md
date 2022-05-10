@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: Windows Server の管理'
   module: 'Module 3: Windows Server administration'
-ms.openlocfilehash: 6a8e3b2971dd2cacbc057a061f51bad7e18ff230
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 7d1545386316c5d6a3aa1e2bcd9425ea534611bc
+ms.sourcegitcommit: f7b3ca18320bb2b31f1c39247fa90ed4c9f8a3eb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907040"
+ms.lasthandoff: 04/09/2022
+ms.locfileid: "141580016"
 ---
 # <a name="lab-managing-windows-server"></a>ラボ: Windows Server の管理
 
@@ -65,6 +65,8 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
    ```
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+
+   > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
 
 #### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
 

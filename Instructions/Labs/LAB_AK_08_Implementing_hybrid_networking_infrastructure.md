@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: Windows Server IaaS VM のネットワークの実装'
   type: Answer Key
   module: 'Module 8: Implementing Windows Server IaaS VM networking'
-ms.openlocfilehash: 03d9699e32a1e7d71217abd840829ef21145de68
-ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
+ms.openlocfilehash: 2cdfd4c09ee1b0db6ba40dd32c0fc2e349dedcd7
+ms.sourcegitcommit: 32ed048f66b9810d6ee6f680c4b9637b28ffa316
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/19/2022
-ms.locfileid: "140742084"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "141184695"
 ---
 # <a name="lab-implementing-hybrid-networking-infrastructure"></a>ラボ: ハイブリッド ネットワーク インフラストラクチャの実装
 
@@ -69,8 +69,8 @@ ms.locfileid: "140742084"
 
 1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、 **[Azure portal](https://portal.azure.com)** に移動します。
 1. Azure portal で、ツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**仮想ネットワーク**」を検索して選びます。
-1. 仮想ネットワークの一覧で **az800l08-vnet1** を選びます。
-1. **az800l08-vnet1** 仮想ネットワーク ページの **[設定]** セクションで **[ピアリング]** を選び、 **[+ 追加]** を選びます。
+1. 仮想ネットワークの一覧で **az800l08-vnet0** を選びます。
+1. **az800l08-vnet0** 仮想ネットワーク ページの **[設定]** セクションで **[ピアリング]** を選び、 **[+ 追加]** を選びます。
 1. 次の設定を指定し (その他は既定値のままにします)、 **[追加]** を選びます。
 
     | 設定 | 値 |
@@ -124,7 +124,7 @@ ms.locfileid: "140742084"
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm0** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.81.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
@@ -143,7 +143,7 @@ ms.locfileid: "140742084"
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm0** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
@@ -164,7 +164,7 @@ ms.locfileid: "140742084"
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
@@ -291,7 +291,7 @@ ms.locfileid: "140742084"
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
@@ -349,7 +349,7 @@ ms.locfileid: "140742084"
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **az800l08-vm2.contoso.org** |
     | 優先 IP バージョン | **IPv4** |
     | Protocol | **TCP** |
