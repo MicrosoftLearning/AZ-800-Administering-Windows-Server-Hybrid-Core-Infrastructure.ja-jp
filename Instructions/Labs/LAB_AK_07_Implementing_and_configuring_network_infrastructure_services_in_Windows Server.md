@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   type: Answer Key
   module: 'Module 7: Network Infrastructure services in Windows Server'
-ms.openlocfilehash: b31ce2d69a285e266a1e43c505451fe342d7ebe2
-ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
+ms.openlocfilehash: 1cac073eaffb0c24b73dc4e2731d89e2a143e568
+ms.sourcegitcommit: fd8252ad223934b8c3e178706dbc03a8fd9bb030
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/19/2022
-ms.locfileid: "140742075"
+ms.lasthandoff: 05/07/2022
+ms.locfileid: "144813028"
 ---
 # <a name="lab-answer-key-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
@@ -76,6 +76,9 @@ ms.locfileid: "140742075"
 #### <a name="task-3-create-a-scope"></a>タスク 3: スコープを作成する
 
 1. **SEA-ADM1** で、**SEA-SVR1** の **[DHCP]** 設定が表示されている Microsoft Edge ウィンドウの Windows Admin Center に切り替えます。
+
+   > **注**:メニューに DHCP オプションが表示されるまでに数分かかる場合があります。 必要に応じて、sea-svr1 への接続を更新します。 DHCP PowerShell ツールのインストールを求められたら、 **[インストール]** を選択します。
+
 1. **[DHCP]** ページで、 **[+ 新しいスコープ]** を選択します。
 1. 新しいスコープの作成ペインで、次の設定を指定してから、 **[作成]** を選択します。
 

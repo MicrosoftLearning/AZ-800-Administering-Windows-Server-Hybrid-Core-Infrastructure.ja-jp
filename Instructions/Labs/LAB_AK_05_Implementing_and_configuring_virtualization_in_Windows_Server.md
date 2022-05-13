@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: Windows Server での仮想化の実装と構成'
   type: Answer Key
   module: 'Module 5: Hyper-V virtualization in Windows Server'
-ms.openlocfilehash: c267fd20d8ec5d4f013422119a707253100a9aa6
-ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
+ms.openlocfilehash: 9d245ed491ca11a2513ba5bc61627331324aab99
+ms.sourcegitcommit: fd8252ad223934b8c3e178706dbc03a8fd9bb030
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/19/2022
-ms.locfileid: "140742081"
+ms.lasthandoff: 05/07/2022
+ms.locfileid: "144813031"
 ---
 # <a name="lab-answer-key-implementing-and-configuring-virtualization-in-windows-server"></a>ラボの回答キー: Windows Server での仮想化の実装と構成
 
@@ -20,7 +20,7 @@ ms.locfileid: "140742081"
 1. **SEA-ADM1** で、 **[スタート]** を選択してから、 **[サーバー マネージャー]** を選びます。
 1. サーバー マネージャーで、 **[すべてのサーバー]** を選択します。
 1. [サーバー] リストで **[SEA-SVR1]** エントリを選び、そのコンテキスト メニューを表示してから、 **[Hyper-V マネージャー]** を選択します。
-1. Hyper-V マネージャーで、**SEA-SVR1.Contoso.com** が選択されていることを確かめます。
+1. Hyper-V マネージャーで、**SEA-SVR1.Contoso.com** が選択されている Hyper-V サーバーであることを確認します。
 1. [操作] ウィンドウで **[仮想スイッチ マネージャー]** を選択します。
 1. **[仮想スイッチ マネージャー]** の **[仮想スイッチの作成]** ペインで、 **[プライベート]** を選び、 **[仮想スイッチの作成]** を選択します。
 1. **[仮想スイッチのプロパティ]** ボックスで、次の設定を指定してから、 **[OK]** を選択します。
@@ -77,7 +77,7 @@ ms.locfileid: "140742081"
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。 Web ページが応答しない場合、**services.msc** を開き、Windows Admin Center サーバーが **開始** されていることを確認します。
 
 1. **SEA-ADM1** で Microsoft Edge を起動してから、`https://SEA-ADM1.contoso.com` に移動します。 
 1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
