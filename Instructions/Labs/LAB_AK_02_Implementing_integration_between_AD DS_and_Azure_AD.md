@@ -21,7 +21,7 @@ ms.locfileid: "144813025"
 1. Azure portal で、 **[Azure Active Directory]** に移動します。
 1. **[Azure Active Directory]** ページで、 **[カスタム ドメイン名]** を選択します。
 1. **[カスタムドメイン名]** ページで、 **[カスタムドメインの追加]** を選択します。
-1. **[カスタム ドメイン名]** ペインで、 **[カスタム ドメイン名]** ボックスに「**contoso.com**」と入力し、 **[ドメインの追加]** を選択します。
+1. **[カスタム ドメイン名]** ペインで、**[カスタム ドメイン名]** ボックスに「**contoso.com**」と入力し、**[ドメインの追加]** を選択します。
 1. `contoso.com` の [カスタムドメイン名] ページで、ドメインを確認するために使用するドメイン ネーム システム (DNS) レコードの種類を確認します。
 1. ドメイン名を確認せずにウィンドウを閉じます。
 
@@ -31,7 +31,7 @@ ms.locfileid: "144813025"
 
 1. **SEA-ADM1** の Azure portal 内の **[Azure Active Directory]** ページで、 **[ユーザー]** を選択します。
 1. **[すべてのユーザー]** ページで、 **[新しいユーザー]** を選択します。
-1. **[新しいユーザー]** ページの **[ID]** で、 **[ユーザー名]** および **[名前]** テキスト ボックスに「**admin**」と入力します。
+1. **[新しいユーザー]** ページの **[ID]** で、**[ユーザー名]** および **[名前]** テキスト ボックスに「**admin**」と入力します。
 
    > **注**: **[ユーザー名]** の [ドメイン名] ドロップダウンメニューに、`onmicrosoft.com` で終わる既定のドメイン名が表示されていることを確認します。
 
@@ -125,7 +125,7 @@ ms.locfileid: "144813025"
 1. **SEA-ADM1** で、サーバー マネージャーの **[ツール]** メニューから **[Active Directory ユーザーとコンピューター]** を選択します。
 1. **[Active Directory ユーザーとコンピューター]** で、**Sales** 組織単位 (OU) を展開し、**Ben Miller** のプロパティを開きます。
 1. ユーザーのプロパティで、 **[組織]** タブを選択します。
-1. **[役職]** テキストボックスに「**マネージャー**」と入力し、 **[OK]** を選択します。
+1. **[役職]** テキストボックスに「**マネージャー**」と入力し、**[OK]** を選択します。
 
 #### <a name="task-4-create-a-user-account-in-active-directory"></a>タスク 4: Active Directory でユーザー アカウントを作成する
 
@@ -136,7 +136,7 @@ ms.locfileid: "144813025"
    - 姓: **Mitchell**
    - ユーザーログオン名: **Jordan**
 
-1. **[パスワード]** および **[パスワードの確認]** フィールドに「**Pa55w.rd**」と入力し、 **[次へ]** を選択します。
+1. **[パスワード]** および **[パスワードの確認]** フィールドに「**Pa55w.rd**」と入力し、**[次へ]** を選択します。
 1. **[完了]** を選択します。
 
 #### <a name="task-5-sync-changes-to-azure-ad"></a>タスク 5: Azure AD に対する変更を同期する
@@ -231,8 +231,8 @@ ms.locfileid: "144813025"
 
 #### <a name="task-5-install-and-register-the-azure-ad-password-protection-proxy-service-and-dc-agent"></a>タスク 5: Azure AD パスワード保護プロキシ サービスと DC エージェントをインストールして登録する
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトに移動し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、 **[ダウンロード]** を選択します。
-1. 「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページで **AzureADPasswordProtectionProxySetup.msi** と **AzureADPasswordProtectionDCAgentSetup.msi** ファイルを選び、 **[次へ]** を選択します。
+1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトに移動し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、**[ダウンロード]** を選択します。
+1. 「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページで **AzureADPasswordProtectionProxySetup.msi** と **AzureADPasswordProtectionDCAgentSetup.msi** ファイルを選び、**[次へ]** を選択します。
 1. **[Download]** を選択します。
 1. **[複数のファイルのダウンロード]** ダイアログ ボックスで、 **[許可]** を選択します。
 

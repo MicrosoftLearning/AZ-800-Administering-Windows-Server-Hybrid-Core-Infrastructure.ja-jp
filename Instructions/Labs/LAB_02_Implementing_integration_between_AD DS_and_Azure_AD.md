@@ -185,7 +185,7 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 1. **SEA-ADM1** の **[サーバー マネージャー]** で **Active Directory ユーザーとコンピューター** を開きます。
 1. **[Active Directory ユーザーとコンピューター]** で、**Sales** 組織単位 (OU) を展開し、**Ben Miller** のプロパティを開きます。
 1. ユーザーのプロパティで、 **[組織]** タブを選択します。
-1. **[役職]** テキストボックスに「**マネージャー**」と入力し、 **[OK]** を選択します。
+1. **[役職]** テキストボックスに「**マネージャー**」と入力し、**[OK]** を選択します。
 
 #### <a name="task-4-create-a-user-account-in-active-directory"></a>タスク 4: Active Directory でユーザー アカウントを作成する
 
@@ -284,7 +284,7 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-5-install-and-register-the-azure-ad-password-protection-proxy-service-and-dc-agent"></a>タスク 5: Azure AD パスワード保護プロキシ サービスと DC エージェントをインストールして登録する
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトを参照し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、 **[ダウンロード]** を選択します。
+1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトを参照し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、**[ダウンロード]** を選択します。
 1. **AzureADPasswordProtectionProxySetup.exe** と **AzureADPasswordProtectionDCAgentSetup.msi** を **SEA-ADM1** にダウンロードします。
 
    > **注**: ドメイン コントローラーではないサーバーにプロキシ サービスをインストールすることをお勧めします。 さらに、プロキシ サービスは、Azure AD Connect エージェントと同じサーバーにはインストールできません。 プロキシ サービスは **SEA-SVR1** に、パスワード保護 DC エージェントは **SEA-DC1** にインストールします。

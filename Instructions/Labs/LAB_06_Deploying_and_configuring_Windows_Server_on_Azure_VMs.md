@@ -167,7 +167,7 @@ ARM テンプレートが構成された状態で、概念実証 Azure サブス
 
 #### <a name="task-1-deploy-an-azure-vm-by-using-an-arm-template"></a>タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
 
-1. **SEA-ADM1** の Azure portal で、「**カスタム デプロイ**」ページを参照し、 **[エディターで独自のテンプレートを作成する]** オプションを選択します。
+1. **SEA-ADM1** の Azure portal で、「**カスタム デプロイ**」ページを参照し、**[エディターで独自のテンプレートを作成する]** オプションを選択します。
 1. テンプレート ファイルとパラメーター ファイルを「**カスタム デプロイ**」ページに読み込みます。
 1. 次の設定でテンプレートをデプロイし、他のすべての設定は既定値のままにします。
 
@@ -206,8 +206,8 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
 #### <a name="task-2-review-the-just-in-time-access-settings"></a>タスク 2: Just-In-Time アクセス設定を確認する
 
-1. Azure portal で、「**Microsoft Defender for Cloud\| ワークロード保護**」ページを参照し、 **[Just In Time VM アクセス]** 設定を確認します。
-1. 「**Just In Time VM アクセス**」ページで、 **[構成済み]** 、 **[未構成]** 、および **[サポート対象外]** のタブを確認します。
+1. Azure portal で、「**Microsoft Defender for Cloud\| ワークロード保護**」ページを参照し、**[Just In Time VM アクセス]** 設定を確認します。
+1. 「**Just In Time VM アクセス**」ページで、**[構成済み]**、**[未構成]**、および **[サポート対象外]** のタブを確認します。
 
    >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
 
@@ -267,8 +267,8 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 >**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
 
 1. Azure portal で、「**az800l06-vm0**」ページに戻ります。
-1. 「**az800l06-vm0**」ページで、 **[構成]** を選択します。 
-1. 「**az800l06-vm0 \| 構成**」ページで、 **[JIT VM アクセスを有効にする]** を選択し、 **[Azure Security Center を開く]** リンクを選択します。
+1. 「**az800l06-vm0**」ページで、**[構成]** を選択します。 
+1. 「**az800l06-vm0 \| 構成**」ページで、**[JIT VM アクセスを有効にする]** を選択し、**[Azure Security Center を開く]** リンクを選択します。
 1. 「**Just In Time VM アクセス**」ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
 #### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する
