@@ -1,5 +1,5 @@
 ---
-title: オンラインでホストされている手順
+title: オンライン ホステッド インストラクション
 permalink: index.html
 layout: home
 ms.openlocfilehash: 05d7da4e2aaed3698475858b3e196a921f63140f
