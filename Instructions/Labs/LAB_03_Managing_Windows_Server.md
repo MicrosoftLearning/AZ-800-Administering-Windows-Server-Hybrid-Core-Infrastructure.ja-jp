@@ -2,18 +2,18 @@
 lab:
   title: 'ラボ: Windows Server の管理'
   module: 'Module 3: Windows Server administration'
-ms.openlocfilehash: 7d1545386316c5d6a3aa1e2bcd9425ea534611bc
-ms.sourcegitcommit: f7b3ca18320bb2b31f1c39247fa90ed4c9f8a3eb
+ms.openlocfilehash: 88b5dda91ee1aa239f87b94e55ed5bd6f42aca10
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/09/2022
-ms.locfileid: "141580016"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039396"
 ---
 # <a name="lab-managing-windows-server"></a>ラボ: Windows Server の管理
 
 ## <a name="scenario"></a>シナリオ
 
-CContoso 社は、Server Core を使用して自社の環境に新しいサーバーを実装することを検討しています。 また、同社は組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center の実装も検討しています。
+Contoso, Ltd. は、自社の環境に新しいサーバーをいくつか新規に実装することを望んでいて、Server Core を使用することを決定しています。 また、組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center を実装することも希望しています。
 
 ## <a name="objectives"></a>目標
 
@@ -87,7 +87,7 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
    > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 
 1. インストールされている拡張機能の一覧に DNS (プレビュー) 拡張機能が含まれていることを確認します。
-1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、 **[サーバー マネージャー]** を選択します。
+1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、**[サーバー マネージャー]** を選択します。
 1. Windows Admin Center 内で、`sea-dc1.contoso.com` に接続し、必要に応じて、ユーザー名として **CONTOSO\\Administrator** を、パスワードとして **Pa55w.rd** を使用してサインインします。
 1. `sea-dc1.contoso.com` 上の DNS サーバーに接続し、DNS PowerShell ツールをインストールします。
 1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。

@@ -2,18 +2,18 @@
 lab:
   title: 'ラボ: AD DS と Azure AD の統合の実装'
   module: 'Module 2: Implementing Identity in Hybrid Scenarios'
-ms.openlocfilehash: 28c289f8aec85f56f865aedf0df0c352d0f21725
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: e3ef2ed624f090989019e4d4c4a23276a2f77330
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907041"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039393"
 ---
 # <a name="lab-implementing-integration-between-ad-ds-and-azure-ad"></a>ラボ: AD DS と Azure AD の統合の実装
 
 ## <a name="scenario"></a>シナリオ
 
-Microsoft Azure Active Directory (Azure AD) を使用して Azure リソースへのアクセスを認証および承認する作業で生じる管理と監視のオーバーヘッドの懸念事項に対処するために、あなたは、オンプレミスの Active Directory Domain Services (AD DS) と Azure AD の間の統合をテストし、複数のユーザー アカウントの管理に、オンプレミスとクラウド リソースを組み合わせて使用することに関するビジネス上の懸念に対処できることを検証することにしました。
+Microsoft Azure Active Directory (Azure AD) を使用して Azure リソースへのアクセスを認証および承認したことで生じる管理と監視のオーバーヘッドについての懸念に対応するために、あなたは、オンプレミスの Active Directory Domain Services (AD DS) と Azure AD の間の統合をテストし、複数のユーザー アカウントの管理に、オンプレミスとクラウド リソースを組み合わせて使用することに関するビジネス上の懸念に対処できることを検証することにしました。
 
 さらに、あなたは、自分のアプローチが情報セキュリティ チームの懸念事項に対応し、サインイン時間やパスワード ポリシーなどの、Active Directory ユーザーに適用される既存のコントロールを保持することを確認する必要があると考えています。 最後に、オンプレミスの Active Directory のセキュリティを一層強化し、管理オーバーヘッドを最小限に抑える Azure AD 統合機能を特定する必要があります。これには、Windows Server Active Directory 用の Azure AD パスワード保護や、パスワード ライトバックを使用したセルフサービス パスワード リセット (SSPR) が含まれます。
 
@@ -62,15 +62,15 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 1. **SEA-ADM1** で Microsoft Edge を起動してから、Azure portal に移動します。
 1. インストラクターが提供する資格情報を使用して、Azure portal にサインインします。
-1. Azure portal で、 **[Azure Active Directory]** に移動します。
-1. **[Azure Active Directory]** ページで、 **[カスタム ドメイン名]** を選択して `contoso.com` を追加します。
+1. Azure portal で、**[Azure Active Directory]** に移動します。
+1. **[Azure Active Directory]** ページで、**[カスタム ドメイン名]** を選択して `contoso.com` を追加します。
 1. ドメインの検証に使用する DNS レコードの種類を確認し、ドメイン名を確認せずにウィンドウを閉じます。
 
    > **注**: 一般には、DNS レコードを使用してドメインを確認しますが、このラボでは検証済みドメインを使用する必要はありません。
 
 #### <a name="task-2-create-a-user-with-the-global-administrator-role"></a>タスク 2: グローバル管理者ロールを持つユーザーを作成する
 
-1. **SEA-ADM1** の [Microsoft Edge] ウィンドウで、 **[Azure Active Directory]** ページを表示し、 **[すべてのユーザー]** ページを参照して、次のプロパティを持つユーザー アカウントを作成します。 
+1. **SEA-ADM1** の [Microsoft Edge] ウィンドウで、**[Azure Active Directory]** ページを表示し、**[すべてのユーザー]** ページを参照して、次のプロパティを持つユーザー アカウントを作成します。 
 
    - ユーザー名: **admin**
 
@@ -102,15 +102,15 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-1-install-idfix"></a>タスク 1: IdFix をインストールする
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、 **https://github.com/microsoft/idfix** にアクセスします。
-1. **Github** ページの **[ClickOnce の起動]** で、 **[起動]** を選択します。
-1. **[IdFix プライバシーステートメント]** ダイアログ ボックスで、免責事項を確認し、 **[OK]** を選択します。
+1. **SEA-ADM1** で Microsoft Edge を起動し、**https://github.com/microsoft/idfix** にアクセスします。
+1. **Github** ページの **[ClickOnce の起動]** で、**[起動]** を選択します。
+1. **[IdFix プライバシーステートメント]** ダイアログ ボックスで、免責事項を確認し、**[OK]** を選択します。
 
 #### <a name="task-2-run-idfix"></a>タスク 2: IdFix を実行する
 
-1. **IdFix** ウィンドウで、 **[クエリ]** を選択します。
-1. オンプレミスの Active Directory でオブジェクトの一覧を確認して、 **[エラー]** および **[属性]** 列を確認します。 このシナリオでは、**ContosoAdmin** の **displayName** の値が空白で、ツールの推奨される新しい値が **更新** 列に表示されます。
-1. **IdFix** ウィンドウの、 **[アクション]** ドロップダウン メニューで **[編集]** を選択し、 **[適用]** を選択すると、推奨される変更が自動的に実装されます。
+1. **IdFix** ウィンドウで、**[クエリ]** を選択します。
+1. オンプレミスの Active Directory でオブジェクトの一覧を確認して、**[エラー]** および **[属性]** 列を確認します。 このシナリオでは、**ContosoAdmin** の **displayName** の値が空白で、ツールの推奨される新しい値が **更新** 列に表示されます。
+1. **IdFix** ウィンドウの、**[アクション]** ドロップダウン メニューで **[編集]** を選択し、**[適用]** を選択すると、推奨される変更が自動的に実装されます。
 1. **[保留中の適用]** ダイアログ ボックスで **[はい]** を選択し、IdFix ツールを閉じます。
 
 ## <a name="exercise-3-downloading-installing-and-configuring-azure-ad-connect"></a>演習 3: Azure AD Connect のダウンロード、インストール、構成
@@ -125,11 +125,11 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-1-install-and-configure-azure-ad-connect"></a>タスク 1: Azure AD Connect のインストールと構成
 
-1. **SEA-ADM1** 上の、Azure portal が表示されている Microsoft Edge ウィンドウで、 **[Azure Active Directory]** ページから **[Azure AD Connect]** ページを参照します。
-1. **[Microsoft Azure Active Directory Connect]** ページから、 **[ダウンロード]** を選択します。
+1. **SEA-ADM1** 上の、Azure portal が表示されている Microsoft Edge ウィンドウで、**[Azure Active Directory]** ページから **[Azure AD Connect]** ページを参照します。
+1. **[Microsoft Azure Active Directory Connect]** ページから、**[ダウンロード]** を選択します。
 1. Azure AD Connect インストール バイナリーをダウンロードし、インストールを開始します。
-1. **[Microsoft Azure Active Directory Connect]** ページで、 **[ライセンス条項とプライバシーに関する声明に同意します]** チェックボックスをオンにし、 **[続行]** を選択します。
-1. **[簡易設定]** ページで、 **[簡易設定を使用する]** を選択します。
+1. **[Microsoft Azure Active Directory Connect]** ページで、**[ライセンス条項とプライバシーに関する声明に同意します]** チェックボックスをオンにし、**[続行]** を選択します。
+1. **[簡易設定]** ページで、**[簡易設定を使用する]** を選択します。
 1. **[Azure AD への接続]** ページで、演習 1 で作成した Azure AD グローバル管理者ユーザー アカウントのユーザー名とパスワードを入力します。
 1. **[AD DS への接続]** ページで、次の資格情報を入力します。
 
@@ -161,18 +161,18 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 #### <a name="task-1-verify-synchronization-in-the-azure-portal"></a>タスク 1: Azure portal で同期を検証する
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えます。 
-1. **Azure AD Connect** ページを更新し、 **[Active Directory からのプロビジョニング]** の下の情報を確認します。
+1. **Azure AD Connect** ページを更新し、**[Active Directory からのプロビジョニング]** の下の情報を確認します。
 1. **[Azure Active Directory]** ページから **[ユーザー]** ページを参照します。
 1. Active Directory から同期されたユーザーの一覧を確認します。
 
    > **注**: ディレクトリ同期が開始されると、Active Directory オブジェクトが Azure AD ポータルに表示されるまでに 15 分かかることがあります。
 
-1. **[ユーザー]** ページで、 **[グループ]** ページを参照します。
+1. **[ユーザー]** ページで、**[グループ]** ページを参照します。
 1. Active Directory から同期されたグループの一覧を確認します。
 
 #### <a name="task-2-verify-synchronization-in-the-synchronization-service-manager"></a>タスク 2: Synchronization Service Manager で同期を検証する
 
-1. **SEA-ADM1** の **[スタート]** メニューで、 **[Azure AD Connect]** を展開し、 **[同期サービス]** を選択します。
+1. **SEA-ADM1** の **[スタート]** メニューで、**[Azure AD Connect]** を展開し、**[同期サービス]** を選択します。
 1. **[Synchronization Service Manager]** ウィンドウの **[操作]** タブで、Active Directory オブジェクトを同期するために実行されたタスクを確認します。
 1. **[コネクタ]** タブを選択し、2 つのコネクタに注目します。
 
@@ -183,7 +183,7 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 #### <a name="task-3-update-a-user-account-in-active-directory"></a>タスク 3: Active Directory でユーザー アカウントを更新する
 
 1. **SEA-ADM1** の **[サーバー マネージャー]** で **Active Directory ユーザーとコンピューター** を開きます。
-1. **[Active Directory ユーザーとコンピューター]** で、**Sales** 組織単位 (OU) を展開し、**Ben Miller** のプロパティを開きます。
+1. **[Active Directory ユーザーとコンピューター]** で、**Sales** 組織単位 (OU) を展開し、**Sumesh Rajan** のプロパティを開きます。
 1. ユーザーのプロパティで、 **[組織]** タブを選択します。
 1. **[役職]** テキストボックスに「**マネージャー**」と入力し、**[OK]** を選択します。
 
@@ -208,10 +208,10 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-6-verify-changes-in-azure-ad"></a>タスク 6: Azure AD での変更を検証する
 
-1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替えて Azure portal を表示し、 **[Azure Active Directory]** ページに戻ります。
+1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替えて Azure portal を表示し、**[Azure Active Directory]** ページに戻ります。
 1. **[Azure Active Directory]** ページから **[ユーザー]** ページを参照します。
-1. **[すべてのユーザー]** ページで、ユーザー **Ben** を検索します。
-1. ユーザー **Ben Miller** のプロパティ ページを開き、**役職** の属性が Active Directory から同期されたことを確認します。
+1. **[すべてのユーザー]** ページで、ユーザー **Sumesh** を検索します。
+1. ユーザー **Sumesh Rajan** のプロパティ ページを開き、**役職** の属性が Active Directory から同期されたことを確認します。
 1. Microsoft Edge で、 **[すべてのユーザー]** ページに戻ります。
 1. **[すべてのユーザー]** ページで、ユーザーを **Jordan** 検索します。
 1. ユーザー **Jordan Mitchell** の [プロパティ] ページを開き、Active Directory から同期されたユーザー アカウントの属性を確認します。
@@ -233,7 +233,7 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-1-enable-self-service-password-reset-in-azure"></a>タスク 1: Azure でセルフサービス パスワード リセットを有効にする
 
-1. **SEA-ADM1** の、Azure portal が表示されている Microsoft Edge ウィンドウで、Azure AD の **[ライセンス]** ページを参照し、 **[Azure AD Premium P2]** 無料試用版をアクティブにします。 
+1. **SEA-ADM1** の、Azure portal が表示されている Microsoft Edge ウィンドウで、Azure AD の **[ライセンス]** ページを参照し、**[Azure AD Premium P2]** 無料試用版をアクティブにします。 
 1. 演習 1 で作成した Azure AD グローバル管理者ユーザー アカウントに Azure AD Premium P2 ライセンスを割り当てます。
 1. Azure portal で、Azure AD の **[パスワードのリセット]** ページを参照します。
 1. **[パスワードのリセット]** ページで、構成を適用するユーザーのスコープを選択できることに注目してください。
@@ -243,42 +243,42 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 #### <a name="task-2-enable-password-writeback-in-azure-ad-connect"></a>タスク 2: Azure AD Connect でパスワード ライトバックを有効にする
 
 1. **SEA-ADM1** で、**Azure AD Connect** を開きます。
-1. **[Microsoft Azure Active Directory Connect]** ウィンドウで、 **[構成]** を選択します。
-1. **[追加のタスク]** ページで、 **[同期オプションのカスタマイズ]** を選択します。
+1. **[Microsoft Azure Active Directory Connect]** ウィンドウで、**[構成]** を選択します。
+1. **[追加のタスク]** ページで、**[同期オプションのカスタマイズ]** を選択します。
 1. **[Azure AD への接続]** ページで、演習 1 で作成した Azure AD グローバル管理者ユーザー アカウントのユーザー名とパスワードを入力します。
-1. **[オプション機能]** ページで、 **[パスワード ライトバック]** を選択します。
+1. **[オプション機能]** ページで、**[パスワード ライトバック]** を選択します。
 
    > **注**: Active Directory ユーザーのセルフサービス パスワード リセットには、パスワード ライトバックが必要です。 これにより、Azure AD 内のユーザーによってパスワードが変更され、Active Directory に同期されます。
 
-1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、 **[構成]** を選択します。
-1. 構成が完了したら、 **[Microsoft Azure Active Directory Connect]** ウィンドウを閉じます。
+1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、**[構成]** を選択します。
+1. 構成が完了したら、**[Microsoft Azure Active Directory Connect]** ウィンドウを閉じます。
 
 #### <a name="task-3-enable-pass-through-authentication-in-azure-ad-connect"></a>タスク 3: Azure AD Connect でパススルー認証を有効にする
 
-1. **SEA-ADM1** の **[スタート]** メニューで、 **[Azure AD Connect]** を展開し、 **[Azure AD Connect]** を選択します。
-1. **[Microsoft Azure Active Directory Connect]** ウィンドウで、 **[構成]** を選択します。
-1. **[追加のタスク]** ページで、 **[ユーザー サインインの変更]** を選択します。
+1. **SEA-ADM1** の **[スタート]** メニューで、**[Azure AD Connect]** を展開し、**[Azure AD Connect]** を選択します。
+1. **[Microsoft Azure Active Directory Connect]** ウィンドウで、**[構成]** を選択します。
+1. **[追加のタスク]** ページで、**[ユーザー サインインの変更]** を選択します。
 1. **[Azure AD への接続]** ページで、演習 1 で作成した Azure AD グローバル管理者ユーザー アカウントのユーザー名とパスワードを入力します。
-1. **[ユーザー サインイン]** ページで、 **[パススルー認証]** を選択します。
+1. **[ユーザー サインイン]** ページで、**[パススルー認証]** を選択します。
 1. **[シングル サインオンを有効にする]** チェック ボックスがオンになっていることを確認します。
-1. **[シングル サインオンを有効にする]** ページで、 **[資格情報の入力]** を選択します。
+1. **[シングル サインオンを有効にする]** ページで、**[資格情報の入力]** を選択します。
 1. **[フォレストの資格情報]** ダイアログ ボックスで、次の資格情報を使用して認証します。
 
    - ユーザー名: **Administrator**
    - パスワード: **Pa55w.rd**
 
-1. **[シングル サインオンを有効にする]** ページで、 **[資格情報の入力]** の横に緑色のチェック マークが表示されているのを確認します。
-1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、 **[構成]** を選択します。
-1. 構成が完了したら、 **[Microsoft Azure Active Directory Connect]** ウィンドウを閉じます。
+1. **[シングル サインオンを有効にする]** ページで、**[資格情報の入力]** の横に緑色のチェック マークが表示されているのを確認します。
+1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、**[構成]** を選択します。
+1. 構成が完了したら、**[Microsoft Azure Active Directory Connect]** ウィンドウを閉じます。
 
 #### <a name="task-4-verify-pass-through-authentication-in-azure"></a>タスク 4: Azure でパススルー認証を検証する
 
 1. **SEA-ADM1** の、Azure portal で **[Azure Active Directory]** ページから **[Azure AD Connect]** ページを参照します。
-1. **[Azure AD Connect]** ページの、 **[ユーザー サインイン]** の下に表示されている情報を確認します。
-1. **[ユーザー サインイン]** で、 **[シームレス シングル サインオン]** を選択します。
+1. **[Azure AD Connect]** ページの、**[ユーザー サインイン]** の下に表示されている情報を確認します。
+1. **[ユーザー サインイン]** で、**[シームレス シングル サインオン]** を選択します。
 1. **[シームレス シングル サインオン]** ページで、オンプレミスのドメイン名を確認します。
 1. **[シームレス シングル サインオン]** ページから、 **[パススルー認証]** ページを参照します。
-1. **[パススルー認証]** ページで、 **[認証エージェント]** の下にあるサーバーの一覧を確認します。
+1. **[パススルー認証]** ページで、 **[認証エージェント]** の下にあるサーバーのリストを確認します。
 
    > **注**: Azure AD Authentication エージェントを環境内の複数のサーバーにインストールするには、Azure portal の **[パススルー認証]** ページからバイナリーをダウンロードします。
 
@@ -349,10 +349,10 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-6-enable-password-protection-in-azure"></a>タスク 6: Azure でパスワード保護を有効にする
 
-1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替え、 **[Azure Active Directory]** ページに戻り、 **[セキュリティ]** ページを閲覧します。
-1. **[セキュリティ]** ページで、 **[認証方法]** を選択します。
-1. **[認証方法]** ページで、 **[パスワード保護]** を選択します。
-1. **[パスワード保護]** ページで、 **[カスタム リストの適用]** を有効にします。
+1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替え、**[Azure Active Directory]** ページに戻り、**[セキュリティ]** ページを閲覧します。
+1. **[セキュリティ]** ページで、**[認証方法]** を選択します。
+1. **[認証方法]** ページで、**[パスワード保護]** を選択します。
+1. **[パスワード保護]** ページで、**[カスタム リストの適用]** を有効にします。
 1. **[カスタム禁止パスワード リスト]** テキスト ボックスに、次の単語を (1 行に 1 語) 入力します。
  
    - **Contoso**
@@ -376,8 +376,8 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-1-uninstall-azure-ad-connect"></a>タスク 1 Azure AD Connect のアンインストール
 
-1. **SEA-ADM1** で、 **[コントロール パネル]** を開きます。
-1. **[プログラムのアンインストールまたは変更]** 機能を使用して、 **[Microsoft Azure AD Connect]** をアンインストールします。
+1. **SEA-ADM1** で、**[コントロール パネル]** を開きます。
+1. **[プログラムのアンインストールまたは変更]** 機能を使用して、**[Microsoft Azure AD Connect]** をアンインストールします。
 
 #### <a name="task-2-disable-directory-synchronization-in-azure"></a>タスク 2: Azure でディレクトリ同期を無効にする
 
@@ -392,7 +392,7 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
    ```powershell
    $msolcred=Get-Credential
    ```
-1. ダイアログが表示されたら、 **[Windows PowerShell 資格情報要求]** ダイアログ ボックスで、演習 1 で作成したユーザー アカウントの資格情報を入力します。
+1. ダイアログが表示されたら、**[Windows PowerShell 資格情報要求]** ダイアログ ボックスで、演習 1 で作成したユーザー アカウントの資格情報を入力します。
 1. 次のコマンドを実行して Azure に接続します。
 
    ```powershell

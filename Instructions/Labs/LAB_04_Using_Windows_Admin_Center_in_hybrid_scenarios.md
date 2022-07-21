@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   module: 'Module 4: Facilitating hybrid management'
-ms.openlocfilehash: e380f49ae9b53ee46e48a21ac40e40cbddd51852
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: a39562df5131e07d2cb50634629bbb40a15f82c8
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907023"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039387"
 ---
 # <a name="lab-using-windows-admin-center-in-hybrid-scenarios"></a>ラボ: ハイブリッド シナリオでの Windows Admin Center の使用
 
@@ -58,7 +58,7 @@ ms.locfileid: "137907023"
 1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal を参照して、Azure 資格情報で認証します。
 1. Azure portal の ［Cloud Shell］ ペインで PowerShell セッションを開きます。
 1. **C:\\Labfiles\\Lab04\\L04-sub_template.json** ファイルを Cloud Shell ホーム ディレクトリにアップロードします。
-1. Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。 (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 （**eastus** など) に置き換えます)。
+1. [Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。 (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 （**eastus** など) に置き換えます)。
 
    >**注**: このラボは、米国東部を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
 
@@ -125,7 +125,7 @@ ms.locfileid: "137907023"
 
    >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
 
-1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -173,14 +173,14 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
    ```powershell
    Enable-AzureRmAlias -Scope Process
    ```
-1. 次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトを実行するために必要な変数値を設定します。
+1. 次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトを実行するために必要な変数の値を設定します (`<Azure region>` プレースホルダーは、このラボで先ほどリソースをデプロイした Azure リージョンの名前 (**eastus** など) に置き換えてください)。
 
    ```powershell
    $rgName = 'AZ800-L0401-RG'
    $vnetName = 'az800l04-vnet'
    $nsgName = 'az800l04-web-nsg'
    $subnetName = 'subnet1'
-   $location = 'eastus'
+   $location = '<Azure region>'
    $pipName = 'wac-public-ip'
    $size = 'Standard_D2s_v3'
    ```
@@ -194,9 +194,10 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
      SubnetName = $subnetName
      GenerateSslCert = $true
      size = $size
+     PublicIPAddressName = $pipname
    }
    ```
-1. 次のコマンドを実行して、PowerShell リモート処理の証明書の検証を無効にします。
+1. 次のコマンドを実行して、PowerShell リモート処理の証明書検証を無効にします (最初のコマンドの後にプロンプトが表示されたら、**A** を入力して Enter キーを押します)。
 
    ```powershell
    install-module pswsman
@@ -284,7 +285,7 @@ Azure 関連の料金を最小限に抑えるため、このラボでプロビ�
 #### <a name="task-1-start-a-powershell-session-in-cloud-shell"></a>タスク 1: Cloud Shell で PowerShell セッションを開始する
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えます。
-1. Azure portal の [Cloud Shell] ペインで PowerShell セッションを開きます。
+1. Azure portal の ［Cloud Shell］ ペインで PowerShell セッションを開きます。
 
 #### <a name="task-2-identify-all-azure-resources-provisioned-in-the-lab"></a>タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
 
