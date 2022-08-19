@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: AD DS と Azure AD の統合の実装'
   type: Answer Key
   module: 'Module 2: Implementing Identity in Hybrid Scenarios'
-ms.openlocfilehash: eeedd9f2c83c2165ad1799ff503706629a4ec70a
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
+ms.openlocfilehash: 19bd0eda7cf9282a1ed3ea6f5597e3dc22811cb6
+ms.sourcegitcommit: a93f00deb8cc1f5cd2d826a0e43ef449dd9b36f6
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039429"
+ms.lasthandoff: 08/13/2022
+ms.locfileid: "147563929"
 ---
 # <a name="lab-answer-key-implementing-integration-between-ad-ds-and-azure-ad"></a>ラボの回答キー: AD DS と Azure AD の統合の実装
 
@@ -21,7 +21,7 @@ ms.locfileid: "147039429"
 1. Azure portal で、**[Azure Active Directory]** に移動します。
 1. **[Azure Active Directory]** ページで、 **[カスタム ドメイン名]** を選択します。
 1. **[カスタムドメイン名]** ページで、**[カスタムドメインの追加]** を選択します。
-1. **[カスタム ドメイン名]** ペインで、**[カスタム ドメイン名]** ボックスに「**contoso.com**」と入力し、**[ドメインの追加]** を選択します。
+1. **[カスタム ドメイン名]** ペインで、**[カスタム ドメイン名]** テキスト ボックスに「**contoso.com**」と入力し、**[ドメインの追加]** を選択します。
 1. `contoso.com` の [カスタムドメイン名] ページで、ドメインを確認するために使用するドメイン ネーム システム (DNS) レコードの種類を確認します。
 1. ドメイン名を確認せずにウィンドウを閉じます。
 
@@ -136,7 +136,7 @@ ms.locfileid: "147039429"
    - 姓: **Mitchell**
    - ユーザーログオン名: **Jordan**
 
-1. **[パスワード]** および **[パスワードの確認]** フィールドに「**Pa55w.rd**」と入力し、**[次へ]** を選択します。
+1. **"パスワード"** および **"パスワードの確認"** フィールドに「**Pa55w.rd**」と入力し、**[次へ]** を選択します。
 1. **[完了]** を選択します。
 
 #### <a name="task-5-sync-changes-to-azure-ad"></a>タスク 5: Azure AD に対する変更を同期する
@@ -232,7 +232,7 @@ ms.locfileid: "147039429"
 #### <a name="task-5-install-and-register-the-azure-ad-password-protection-proxy-service-and-dc-agent"></a>タスク 5: Azure AD パスワード保護プロキシ サービスと DC エージェントをインストールして登録する
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトに移動し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、**[ダウンロード]** を選択します。
-1. 「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページで **AzureADPasswordProtectionProxySetup.exe** と **AzureADPasswordProtectionDCAgentSetup.msi** ファイルを選び、 **[次へ]** を選択します。
+1. 「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページで **AzureADPasswordProtectionProxySetup.exe** と **AzureADPasswordProtectionDCAgentSetup.msi** ファイルを選び、**[次へ]** を選択します。
 1. **[Download]** を選択します。
 1. **[複数のファイルのダウンロード]** ダイアログ ボックスで、**[許可]** を選択します。
 
@@ -249,7 +249,7 @@ ms.locfileid: "147039429"
    ```powershell
    New-Item -Type Directory -Path '\\SEA-SVR1.contoso.com\C$\Temp' -Force
    Copy-Item -Path "$env:USERPROFILE\Downloads\AzureADPasswordProtectionProxySetup.exe" -Destination '\\SEA-SVR1.contoso.com\C$\Temp\'
-   Invoke-Command -ComputerName SEA-SVR1.contoso.com -ScriptBlock { Start-Process -FilePath C:\Temp\AzureADPasswordProtectionProxySetup.msi -ArgumentList '/quiet /log C:\Temp\AzureADPPProxyInstall.log' -Wait }
+   Invoke-Command -ComputerName SEA-SVR1.contoso.com -ScriptBlock { Start-Process -FilePath C:\Temp\AzureADPasswordProtectionProxySetup.exe -ArgumentList '/quiet /log C:\Temp\AzureADPPProxyInstall.log' -Wait }
    ```
 1. 次のコマンドを実行して **SEA-DC1** に **C:\Temp** ディレクトリを作成し、**AzureADPasswordProtectionDCAgentSetup.msi** インストーラーをそのディレクトリにコピーし、インストールを起動して、インストールが完了したらドメイン コントローラーを再起動します。
 
