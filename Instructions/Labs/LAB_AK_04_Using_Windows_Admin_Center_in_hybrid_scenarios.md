@@ -3,12 +3,12 @@ lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   type: Answer Key
   module: 'Module 4: Facilitating hybrid management'
-ms.openlocfilehash: 421d45b0bd0c9453ad44300759473539e7a82c03
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
+ms.openlocfilehash: a5cdb72ed0fcf358012268fec48b873900082fcf
+ms.sourcegitcommit: dff3b850fb952cbe51f8e1b712359c89f41216f2
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039447"
+ms.lasthandoff: 08/27/2022
+ms.locfileid: "147695185"
 ---
 # <a name="lab-answer-key-using-windows-admin-center-in-hybrid-scenarios"></a>ラボの回答キー: ハイブリッド シナリオでの Windows Admin Center の使用
 
@@ -65,14 +65,14 @@ ms.locfileid: "147039447"
 
 1. **SEA-ADM1** で **[スタート]** を選択し、**[Windows PowerShell (管理者)]** を選択します。
 
-   >**注**: Windows Admin Center を **SEA-ADM1** にまだインストールしていない場合は、次の 2 つの手順を行います。
+   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
 
 1. **[Windows PowerShell]** コンソールで、次のコマンドを入力し、Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
    ```
-1. 次のコマンドを入力し、Enter キーを押して、Windows Admin Center をインストールします。
+1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
@@ -114,7 +114,7 @@ ms.locfileid: "147039447"
 
 #### <a name="task-2-create-an-azure-network-adapter"></a>タスク 2: Azure ネットワーク アダプターを作成する
 
-1. **SEA-ADM1** で、Windows Admin Center が表示されている Microsoft Edge ウィンドウに戻り、**[sea-svr2.contoso.com]** ページにアクセスして、**[ネットワーク]** を選択します。
+1. **SEA-ADM1** で、Windows Admin Center が表示されている Microsoft Edge ウィンドウに戻り、 **[sea-adm1.contoso.com]** ページにアクセスして、 **[ネットワーク]** を選択します。
 1. Windows Admin Center の **[ネットワーク]** ページで、 **[アクション]** メニューから **[+ Azure ネットワーク アダプター (プレビュー) の追加]** エントリを再度選択します。
 1. **[Add Azure Network Adapter]\(Azure ネットワーク アダプターの追加\)** 設定ペインで、次の設定を指定して、 **[作成]** を選びます (他の設定は既定値のままにします)。
 
@@ -172,7 +172,7 @@ ms.locfileid: "147039447"
    }
    ```
 
-1. [Cloud Shell] ウィンドウから、次のコマンドを実行して、PowerShell リモート処理の証明書の検証を無効にします (信頼されていないリポジトリからのインストールを確認するように求めるメッセージが表示されたら、「**A**」を入力し、Enter キーを押します)。
+1. [Cloud Shell] ペインから、次のコマンドを実行して、PowerShell リモート処理の証明書の検証を無効にします (信頼されていないリポジトリからのインストールを確認するように求めるメッセージが表示されたら、「**A**」を入力し、Enter キーを押します)。
 
    ```powershell
    Install-Module -Name pswsman
@@ -185,8 +185,8 @@ ms.locfileid: "147039447"
    ./Deploy-WACAzVM.ps1 @scriptParams
    ```
 
-1. ローカル Administrator アカウントの名前を入力するように求めるメッセージが表示されたら、「**Student**」と入力します
-1. ローカル Administrator アカウントのパスワードを入力するように求めるメッセージが表示されたら、「**Pa55w.rd1234**」と入力します
+1. ローカル Administrator アカウントの名前を入力するように求めるダイアログが表示されたら、「**Student**」と入力します
+1. ローカル Administrator アカウントのパスワードを入力するように求めるダイアログが表示されたら、「**Pa55w.rd1234**」と入力します
 
    >**注**: プロビジョニング スクリプトが完了するまで待ちます。 これには 5 分ほどかかる場合があります。
 
