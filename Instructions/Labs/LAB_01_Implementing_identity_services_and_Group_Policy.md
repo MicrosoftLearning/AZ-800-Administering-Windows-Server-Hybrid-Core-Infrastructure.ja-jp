@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: ID サービスおよびグループ ポリシーの実装'
   module: 'Module 1: Identity services in Windows Server'
-ms.openlocfilehash: 34c6259da5db4beca5e31998564c06102902ca48
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 62d1b1751656bfbed6f1096ff84b353f46f2f3da
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907039"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039399"
 ---
 # <a name="lab-implementing-identity-services-and-group-policy"></a>ラボ: ID サービスおよびグループ ポリシーの実装
 
@@ -163,7 +163,7 @@ ms.locfileid: "137907039"
 1. GPO 設定を作成して編集します。
 1. クライアント コンピューターで設定を適用して確認します。
 
-### <a name="task-1-create-and-edit-a-gpo"></a>タスク 1: GPO を作成および編集する
+#### <a name="task-1-create-and-edit-a-gpo"></a>タスク 1: GPO を作成および編集する
 
 1. **SEA-ADM1** で、 **[サーバー マネージャー]** から **[グループ ポリシーの管理]** コンソールを開きます。
 1. **Contoso Standards** という名前の GPO を **[グループ ポリシー オブジェクト]** コンテナーに作成します。
@@ -172,11 +172,11 @@ ms.locfileid: "137907039"
 1. **[ユーザーの構成]、[ポリシー]、[管理用テンプレート]、[コントロール パネル]、[個人用設定]** フォルダーの順に移動し、**スクリーン セーバー** のタイムアウト ポリシーを **600** 秒になるように構成します。
 1. **[パスワードでスクリーン セーバーを保護する]** ポリシー設定を有効にしてから、 **[グループ ポリシー管理エディター]** ウィンドウを閉じます。
 
-### <a name="task-2-link-the-gpo"></a>タスク 2: GPO をリンクする
+#### <a name="task-2-link-the-gpo"></a>タスク 2: GPO をリンクする
 
   - **Contoso Standards** GPO を `contoso.com` ドメインにリンクします。
 
-### <a name="task-3-review-the-effects-of-the-gpos-settings"></a>タスク 3: GPO の設定の効果を確認する
+#### <a name="task-3-review-the-effects-of-the-gpos-settings"></a>タスク 3: GPO の設定の効果を確認する
 
 1. **SEA-ADM1** で、 **[コントロール パネル]** を開きます。
 1. **Windows Defender ファイアウォール** インターフェイスを使用して、 **[リモート イベントのログ管理]** ドメイン トラフィックを有効にします。 
@@ -190,7 +190,7 @@ ms.locfileid: "137907039"
 1. **SEA-ADM1** の **[グループ ポリシーの管理]** コンソールで、**Seattle** OU にリンクされている **Seattle Application Override** という名前の新しい GPO を作成します。
 1. **[スクリーン セーバーのタイムアウト]** ポリシー設定が無効になるように構成してから、 **[グループ ポリシー管理エディター]** ウィンドウを閉じます。
 
-### <a name="task-5-verify-the-order-of-precedence"></a>タスク 5: 優先順位を確認する
+#### <a name="task-5-verify-the-order-of-precedence"></a>タスク 5: 優先順位を確認する
 
 1. **SEA-ADM1** で、 **[サーバー マネージャー]** から **[グループ ポリシーの管理]** コンソールを開きます。
 1. **[グループ ポリシー管理コンソール]** ツリーで、**Seattle** OU を選択します。
@@ -198,12 +198,12 @@ ms.locfileid: "137907039"
 
    > **注**: Seattle Application Override GPO は CONTOSO Standards GPO より優先順位が高くなります。 Seattle Application Override GPO で先ほど構成したスクリーン セーバーのタイムアウト ポリシー設定は、CONTOSO Standards GPO の設定の後に適用されます。 そのため、新しい設定で CONTOSO Standards GPO 設定が上書きされます。 Seattle Application Override GPO のスコープ内のユーザーに対して、スクリーン セーバーのタイムアウトが無効になります。
 
-### <a name="task-6-configure-the-scope-of-a-gpo-with-security-filtering"></a>タスク 6: セキュリティ フィルター処理を使用して GPO のスコープを構成する
+#### <a name="task-6-configure-the-scope-of-a-gpo-with-security-filtering"></a>タスク 6: セキュリティ フィルター処理を使用して GPO のスコープを構成する
 
 1. **SEA-ADM1** の **[グループ ポリシーの管理]** コンソールで、**Seattle Application Override** GPO を選択します。 **[セキュリティ フィルター処理]** セクションで、認証されたすべてのユーザーに GPO が既定で適用されていることに注目してください。
 1. **[セキュリティ フィルター処理]** セクションで、まず **認証されたユーザー** を削除してから **SeattleBranchUsers** グループと **SEA-ADM1** コンピューター アカウントを追加します。
 
-### <a name="task-7-verify-the-application-of-settings"></a>タスク 7: 設定の適用を確認する
+#### <a name="task-7-verify-the-application-of-settings"></a>タスク 7: 設定の適用を確認する
 
 1. [グループ ポリシーの管理] のナビゲーション ペインで、 **[グループ ポリシーのモデル作成]** を選択します。
 1. **[グループ ポリシーのモデル作成ウィザード]** を起動します。

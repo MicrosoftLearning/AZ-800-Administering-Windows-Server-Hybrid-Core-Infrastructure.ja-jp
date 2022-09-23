@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: ハイブリッド ネットワーク インフラストラクチャの実装'
   module: 'Module 8: Implementing Windows Server IaaS VM networking'
-ms.openlocfilehash: d568d7fb6226cd53fb624f5a87e9efe1180c0da1
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 51779ce44ce596adb1093bc73553836c7b9d3405
+ms.sourcegitcommit: 32ed048f66b9810d6ee6f680c4b9637b28ffa316
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137906998"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "141184693"
 ---
 # <a name="lab-implementing-hybrid-networking-infrastructure"></a>ラボ: ハイブリッド ネットワーク インフラストラクチャの実装
 
@@ -109,8 +109,8 @@ ms.locfileid: "137906998"
 このタスクでは、前のタスクでデプロイした仮想ネットワーク間にローカル ピアリングを構成し、ハブ アンド スポーク ネットワーク トポロジを作成します。
 
 1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、 **[Azure portal](https://portal.azure.com)** に移動します。
-1. Azure portal で **az800l08-vnet1** 仮想ネットワーク ページに移動します。
-1. **az800l08-vnet1** 仮想ネットワーク ページから、次の設定でピアリングを作成します (その他は既定値のままにします)。
+1. Azure portal で **az800l08-vnet0** 仮想ネットワーク ページに移動します。
+1. **az800l08-vnet0** 仮想ネットワーク ページから、次の設定でピアリングを作成します (その他は既定値のままにします)。
 
     | 設定 | 値 |
     | --- | --- |
@@ -452,13 +452,13 @@ ms.locfileid: "137906998"
 1. [Cloud Shell] ペインで次のコマンドを実行して、このラボで作成されたすべてのリソース グループのリストを表示します。
 
    ```powershell
-   Get-AzResourceGroup -Name 'az800l08*'
+   Get-AzResourceGroup -Name 'AZ800-L08*'
    ```
 
 1. 次のコマンドを実行して、このラボで作成したすべてのリソース グループを削除します。
 
    ```powershell
-   Get-AzResourceGroup -Name 'az800l08*' | Remove-AzResourceGroup -Force -AsJob
+   Get-AzResourceGroup -Name 'AZ800-L08*' | Remove-AzResourceGroup -Force -AsJob
    ```
 
    >**注**: このコマンドは非同期で実行されるため ( *-AsJob* パラメーターによって決定されます)、同じ PowerShell セッション内で直後に別の PowerShell コマンドを実行できますが、リソース グループが実際に削除されるまでに数分かかります。

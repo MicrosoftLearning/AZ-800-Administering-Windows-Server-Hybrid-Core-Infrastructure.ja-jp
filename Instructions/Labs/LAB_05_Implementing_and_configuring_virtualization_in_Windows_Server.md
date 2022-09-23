@@ -2,18 +2,18 @@
 lab:
   title: 'ラボ: Windows Server での仮想化の実装と構成'
   module: 'Module 5: Hyper-V virtualization in Windows Server'
-ms.openlocfilehash: c9ff5dddf134be5073ec9f2fa33d84ca07b0a343
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 7120bfad95a023f547426f44af6a775b98dbf491
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907003"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039390"
 ---
 # <a name="lab-implementing-and-configuring-virtualization-in-windows-server"></a>ラボ: Windows Server での仮想化の実装と構成
 
 ## <a name="scenario"></a>シナリオ
 
-Contoso は、米国シアトルに本社があるグローバルなエンジニアリングおよび製造会社です。 IT オフィスとデータセンターはシアトルにあり、シアトルやその他のオフィスをサポートしています。 Contoso 社では最近、Windows Server とクライアント インフラストラクチャをデプロイしました。 
+Contoso は、米国シアトルに本社があるグローバルなエンジニアリングおよび製造会社です。 IT オフィスとデータ センターはシアトルにあり、シアトルの場所やその他の場所をサポートしています。 Contoso では最近、Windows Server サーバーとクライアント インフラストラクチャを展開しました。 
 
 現在使用率が低い物理サーバーが多数あるため、仮想化を展開して環境を最適化する予定です。 このため、あなたは仮想マシン環境の管理に Hyper-V をどのように使用できるかを確認するための概念実証を行うことにしました。 また、Contoso DevOps チームはコンテナー テクノロジを調べ、新しいアプリケーションの展開時間を短縮できるかどうかを判断し、クラウドへのアプリケーションの移行を簡素化したいと考えています。 あなたはそのチームと協力して Windows Server コンテナーを評価し、コンテナーでのインターネット インフォメーション サービス (Web サービス) の提供を検討する予定です。
 
@@ -57,7 +57,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 #### <a name="task-1-create-a-hyper-v-virtual-switch"></a>タスク 1: Hyper-V 仮想スイッチを作成する
 
 1. **SEA-ADM1** で、**サーバー マネージャー** を開きます。 
-1. サーバー マネージャーで、 **[すべてのサーバー]** を選択します。 
+1. サーバー マネージャーで、**[すべてのサーバー]** を選択します。 
 1. [サーバー] リストで **SEA-SVR1** を選択し、状況依存のメニューを使用して、そのサーバーをターゲットとする **Hyper-V マネージャー** を起動します。 
 1. **Hyper-V マネージャー** で、**仮想スイッチ マネージャー** を使用して、**SEA-SVR1** に次の設定で仮想スイッチを作成します。
 
@@ -66,7 +66,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 #### <a name="task-2-create-a-virtual-hard-disk"></a>タスク 2: 仮想ハード ディスクを作成する
 
-1. **SEA-ADM1** の Hyper-V マネージャーで、 **[仮想ハード ディスクの新規作成ウィザード]** を使用して、**SEA-SVR1** に次の設定で新しい仮想ハード ディスクを作成します。 
+1. **SEA-ADM1** の Hyper-V マネージャーで、**[仮想ハード ディスクの新規作成ウィザード]** を使用して、**SEA-SVR1** に次の設定で新しい仮想ハード ディスクを作成します。 
 
    - ディスク フォーマット: **VHD**
    - ディスクの種類: **差分**
@@ -108,17 +108,17 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
-1. メッセージが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
 1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。 
-1. **[ツール]** リストで、 **[仮想マシン]** を選択し、 **[要約]** ペインを確認します。
+1. **[ツール]** リストで、**[仮想マシン]** を選択し、**[要約]** ペインを確認します。
 1. Windows Admin Center を使用して、サイズが 5 GB の新しいディスクを作成します。
 1. Windows Admin Center を使用して **SEA-VM1** を起動してから、実行中の VM の統計情報を表示します。
 1. Windows Admin Center を使用して、**SEA-VM1** をシャットダウンします。
-1. **[ツール]** リストで、 **[仮想スイッチ]** を選択し、既存のスイッチを特定します。
+1. **[ツール]** リストで、**[仮想スイッチ]** を選択し、既存のスイッチを特定します。
 
 ### <a name="exercise-1-results"></a>演習 1 の結果
 
@@ -138,7 +138,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 #### <a name="task-1-install-docker-on-windows-server"></a>タスク 1: Windows Server に Docker をインストールする
 
-1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、 **[ツール]** メニューを使用して、そのサーバーへの PowerShell リモート処理セッションを確立します。 
+1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**[ツール]** メニューを使用して、そのサーバーへの PowerShell リモート処理セッションを確立します。 
 
    > **注**: Windows Admin Center での PowerShell 接続は、ラボで使用される入れ子になった仮想化が原因で比較的遅くなる可能性があります。そのため、**SEA-ADM1** の Windows Powershell コンソールから `Enter-PSSession -ComputerName SEA-SVR1` を実行する別の方法があります。
 
@@ -188,11 +188,6 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
    > **注**: ローカル リポジトリ ストアにイメージがないことを確認してください。
 
-1. 次のコマンドを実行して、オンラインの Microsoft リポジトリから docker の基本イメージを一覧表示します。
-
-   ```powershell
-   docker search Microsoft
-   ```
 1. 次のコマンドを実行して、インターネット インフォメーション サービス (IIS) インストールを含む Nano Server イメージをダウンロードします。
 
    ```powershell
@@ -222,7 +217,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
    > **注**: vEthernet (nat) という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これは、新しいコンテナーのアドレスです。 次に、**Ethernet** という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これはホスト (**SEA-SVR1**) の IP アドレスであり、**172.16.10.12** に設定されています。
 
-1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替え、別のタブを開き、 **http://172.16.10.12** に移動します。 ブラウザーに既定の IIS ページが表示されていることを確認します。
+1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替え、別のタブを開き、**http://172.16.10.12** に移動します。 ブラウザーに既定の IIS ページが表示されていることを確認します。
 1. **SEA-ADM1** で、**SEA-SVR1** への PowerShell リモート処理セッションに戻り、**Windows PowerShell** コンソールで次のコマンドを実行し、実行中のコンテナーを一覧表示します。
 
    ```powershell

@@ -2,18 +2,18 @@
 lab:
   title: 'ラボ: Windows Server の管理'
   module: 'Module 3: Windows Server administration'
-ms.openlocfilehash: 6a8e3b2971dd2cacbc057a061f51bad7e18ff230
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: 88b5dda91ee1aa239f87b94e55ed5bd6f42aca10
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907040"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039396"
 ---
 # <a name="lab-managing-windows-server"></a>ラボ: Windows Server の管理
 
 ## <a name="scenario"></a>シナリオ
 
-CContoso 社は、Server Core を使用して自社の環境に新しいサーバーを実装することを検討しています。 また、同社は組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center の実装も検討しています。
+Contoso, Ltd. は、自社の環境に新しいサーバーをいくつか新規に実装することを望んでいて、Server Core を使用することを決定しています。 また、組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center を実装することも希望しています。
 
 ## <a name="objectives"></a>目標
 
@@ -66,6 +66,8 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
+   > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
+
 #### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
 
 1. **SEA-ADM1** で Microsoft Edge を開始して、`https://SEA-ADM1.contoso.com` にアクセスします。 
@@ -85,7 +87,7 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
    > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 
 1. インストールされている拡張機能の一覧に DNS (プレビュー) 拡張機能が含まれていることを確認します。
-1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、 **[サーバー マネージャー]** を選択します。
+1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、**[サーバー マネージャー]** を選択します。
 1. Windows Admin Center 内で、`sea-dc1.contoso.com` に接続し、必要に応じて、ユーザー名として **CONTOSO\\Administrator** を、パスワードとして **Pa55w.rd** を使用してサインインします。
 1. `sea-dc1.contoso.com` 上の DNS サーバーに接続し、DNS PowerShell ツールをインストールします。
 1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。

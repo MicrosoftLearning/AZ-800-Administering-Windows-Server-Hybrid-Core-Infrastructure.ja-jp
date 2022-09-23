@@ -2,18 +2,18 @@
 lab:
   title: 'ラボ: Azure VM での Windows Server のデプロイと構成'
   module: 'Module 6: Deploying and Configuring Azure VMs'
-ms.openlocfilehash: d2505e999d7e5194fd7a407cc035834dee2464f3
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: bbf7d0657532d3b162ac8c366cc37da11ae3c32c
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907002"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039432"
 ---
 # <a name="lab-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ: Azure VM での Windows Server のデプロイと構成
 
 ## <a name="scenario"></a>シナリオ
 
-現在のインフラストラクチャに関する懸念事項に対処する必要があります。 運用モデルが古く、自動化の使用が限定的であるため、情報セキュリティ チームは Windows Server ベースのワークロードを実行する Azure VM に適用するための追加制御に関して懸念を示しています あなたは、Windows Server で実行されている Azure VM の自動デプロイと構成プロセスを開発して実装することにしました。
+現在のインフラストラクチャに関する懸念事項に対処する必要があります。 Windows Server ベースのワークロードを実行している Azure VM に適用する必要がある追加の制御に関して、運用モデルが古い、自動化の使用が限定的、および情報セキュリティ チームの懸念があります。 あなたは、Windows Server で実行されている Azure VM の自動デプロイと構成プロセスを開発して実装することにしました。
 
 このプロセスには、Azure VM 拡張機能を使用した Azure Resource Manager (ARM) テンプレートと OS 構成が伴います。 また、AppLocker によるアプリケーション許可リスト、ファイルの整合性チェック、アダプティブ ネットワークまたは DDoS 保護など、オンプレミス システムに既に適用されている以外の追加のセキュリティ保護メカニズムも組み込まれます。 また、JIT 機能を利用して、Azure VM への管理アクセスをロンドン本社に関連付けられているパブリック IP アドレス範囲に制限します。
 
@@ -68,8 +68,8 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
 
 >**注**: Azure サブスクリプションで Microsoft Defender for Cloud を既に有効にしている場合は、このタスクの残りのステップをスキップし、次に直接進みます。
 
-1. Azure portal で、「**Microsoft Defender for Cloud**」ページを参照します。
-1. 「**Microsoft Defender for Cloud \| 使用開始**」ページで、Microsoft Defender for Cloud のセキュリティを強化し、Microsoft Defender for Cloud エージェントの自動インストールを有効にしてください。
+1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
+1. **[Microsoft Defender for Cloud \| の使用開始]** ページで、Microsoft Defender for Cloud のセキュリティを強化し、Microsoft Defender for Cloud エージェントの自動インストールを有効にしてください。
 
 #### <a name="task-2-generate-an-arm-template-and-parameters-files-by-using-the-azure-portal"></a>タスク 2: Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する
 
@@ -85,29 +85,29 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |Image|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
    |Azure Spot インスタンス|No|
    |サイズ|**Standard_D2s_v3**|
-   |ユーザー名|**Student**|
+   |ユーザー名|**学生**|
    |パスワード|**Pa55w.rd1234**|
-   |パブリック受信ポート|None|
+   |パブリック受信ポート|なし|
    |既存の Windows Server ライセンスを使用しますか|No|
    |OS ディスクの種類|**Standard HDD**|
    |名前|**az800l06-vnet**|
    |アドレス範囲|**10.60.0.0/20**|
    |サブネット名|**subnet0**|
    |サブネット範囲|**10.60.0.0/24**|
-   |パブリック IP|None|
+   |パブリック IP|なし|
    |NIC ネットワーク セキュリティ グループ|None|
    |Accelerated Networking|Off|
    |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|No|
    |ブート診断|**マネージド ストレージ アカウントで有効にする (推奨)**|
 
-1. 「**仮想マシンの作成**」ページの **[確認と作成]** タブまで移動したら、タスク 3 に進みます。
+1. **[仮想マシンの作成]** ページの **[確認と作成]** タブまで移動したら、タスク 3 に進みます。
 
    >**注**: 仮想マシンは作成しないでください。 この目的で、自動生成されたテンプレートを使用します。
 
 #### <a name="task-3-download-the-arm-template-and-parameters-files-from-the-azure-portal"></a>タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
 
-1. 「**仮想マシンの作成**」ページの **[確認と作成]** タブから、自動化のためのテンプレートをダウンロードして、ラボ VM の **C:\\Labfiles\\Mod06** フォルダーにコピーします。
-1. Azure portal で、「**仮想マシンの作成**」ページを閉じます。
+1. **[仮想マシンの作成]** ページの **[確認と作成]** タブから、自動化のためのテンプレートをダウンロードして、ラボ VM の **C:\\Labfiles\\Mod06** フォルダーにコピーします。
+1. Azure portal で、**[仮想マシンの作成]** ページを閉じます。
 
 ## <a name="exercise-2-modifying-arm-templates-to-include-vm-extension-based-configuration"></a>演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
 
@@ -129,6 +129,8 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
 #### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
 1. ラボ VM の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
+
+   >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
 
    ```json
         {
@@ -165,8 +167,8 @@ ARM テンプレートが構成された状態で、概念実証 Azure サブス
 
 #### <a name="task-1-deploy-an-azure-vm-by-using-an-arm-template"></a>タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
 
-1. **SEA-ADM1** の Azure portal で、「**カスタム デプロイ**」ページを参照し、 **[エディターで独自のテンプレートを作成する]** オプションを選択します。
-1. テンプレート ファイルとパラメーター ファイルを「**カスタム デプロイ**」ページに読み込みます。
+1. **SEA-ADM1** の Azure portal で、**[カスタム デプロイ]** ページを参照し、**[エディターで独自のテンプレートを作成する]** オプションを選択します。
+1. テンプレート ファイルとパラメーター ファイルを **[カスタム デプロイ]** ページに読み込みます。
 1. 次の設定でテンプレートをデプロイし、他のすべての設定は既定値のままにします。
 
    |設定|値|
@@ -199,13 +201,13 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
 #### <a name="task-1-verify-the-status-of-azure-microsoft-defender-for-cloud"></a>タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
 
-1. Azure portal で、「**Microsoft Defender for Cloud**」ページを参照します。
+1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
 1. Microsoft Defender for Cloud のセキュリティ強化機能が有効になっていることを確認します。
 
-#### <a name="task-2-review-the-just-in-time-access-settings"></a>タスク 2: Just-In-Time アクセス設定を確認する
+#### <a name="task-2-review-the-just-in-time-vm-access-settings"></a>タスク 2:Just-In-Time VM アクセスの設定を確認する
 
-1. Azure portal で、「**Microsoft Defender for Cloud\| ワークロード保護**」ページを参照し、 **[Just In Time VM アクセス]** 設定を確認します。
-1. 「**Just In Time VM アクセス**」ページで、 **[構成済み]** 、 **[未構成]** 、および **[サポート対象外]** のタブを確認します。
+1. Azure portal で、**[Microsoft Defender for Cloud\| ワークロード保護]** ページを参照し、**[Just In Time VM アクセス]** 設定を確認します。
+1. **[Just In Time VM アクセス]** ページで、**[構成済み]**、**[未構成]**、**[サポート対象外]** のタブを確認します。
 
    >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
 
@@ -264,20 +266,20 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
 >**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
 
-1. Azure portal で、「**az800l06-vm0**」ページに戻ります。
-1. 「**az800l06-vm0**」ページで、 **[構成]** を選択します。 
-1. 「**az800l06-vm0 \| 構成**」ページで、 **[JIT VM アクセスを有効にする]** を選択し、 **[Azure Security Center を開く]** リンクを選択します。
-1. 「**Just-In-Time VM アクセス**」ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
+1. Azure portal で、**[az800l06-vm0]** ページに戻ります。
+1. **[az800l06-vm0]** ページで、**[構成]** を選択します。 
+1. **[az800l06-vm0 \| 構成]** ページで、 **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Azure Security Center を開く]** リンクを選択します。
+1. **[Just In Time VM アクセス]** ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
 #### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する
 
-1. Azure portal の「**az800l06-vm0**」ページから、JIT VM アクセスを要求します。
+1. Azure portal の **[az800l06-vm0]** ページから、JIT VM アクセスを要求します。
 1. 要求が承認されると、ターゲット Azure VM へのリモート デスクトップ セッションが開始します。
 1. 資格情報のプロンプトが表示されたら、次の値を指定します。
    
    |設定|値|
    |---|---|
-   |ユーザー名|**Student**|
+   |ユーザー名|**学生**|
    |パスワード|**Pa55w.rd1234**|
 
 1. Azure VM で実行されているオペレーティング システムがリモート デスクトップ経由で正常にアクセスできることを確認し、リモート デスクトップ セッションを閉じます。

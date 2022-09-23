@@ -2,12 +2,12 @@
 lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   module: 'Module 4: Facilitating hybrid management'
-ms.openlocfilehash: e380f49ae9b53ee46e48a21ac40e40cbddd51852
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
+ms.openlocfilehash: a39562df5131e07d2cb50634629bbb40a15f82c8
+ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907023"
+ms.lasthandoff: 07/09/2022
+ms.locfileid: "147039387"
 ---
 # <a name="lab-using-windows-admin-center-in-hybrid-scenarios"></a>ラボ: ハイブリッド シナリオでの Windows Admin Center の使用
 
@@ -58,9 +58,9 @@ ms.locfileid: "137907023"
 1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal を参照して、Azure 資格情報で認証します。
 1. Azure portal の ［Cloud Shell］ ペインで PowerShell セッションを開きます。
 1. **C:\\Labfiles\\Lab04\\L04-sub_template.json** ファイルを Cloud Shell ホーム ディレクトリにアップロードします。
-1. Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。 (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 （**eastus** など) に置き換えます)。
+1. [Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。 (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 （**eastus** など) に置き換えます)。
 
-   >**注**: このラボは East US を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定する場合には、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
+   >**注**: このラボは、米国東部を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
 
    ```powershell
    $location = '<Azure region>'
@@ -106,9 +106,9 @@ ms.locfileid: "137907023"
 
 1. **SEA-ADM1** で、管理者として **Windows PowerShell** を開始します。
 
-   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を実行します。
+   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
 
-1. **Windows PowerShell** コンソールで、次のコマンドを実行してから Enter キーを押し、Windows Admin Center の最新バージョンをダウンロードします。
+1. **Windows PowerShell** コンソールで、次のコマンドを実行してから Enter キーを押し、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
@@ -123,9 +123,9 @@ ms.locfileid: "137907023"
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 
-   >**注**: リンクが機能しない場合には、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了したら、Microsoft Edge を最新の情報に更新します。 
+   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
 
-1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -173,14 +173,14 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
    ```powershell
    Enable-AzureRmAlias -Scope Process
    ```
-1. 次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトを実行するために必要な変数値を設定します。
+1. 次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトを実行するために必要な変数の値を設定します (`<Azure region>` プレースホルダーは、このラボで先ほどリソースをデプロイした Azure リージョンの名前 (**eastus** など) に置き換えてください)。
 
    ```powershell
    $rgName = 'AZ800-L0401-RG'
    $vnetName = 'az800l04-vnet'
    $nsgName = 'az800l04-web-nsg'
    $subnetName = 'subnet1'
-   $location = 'eastus'
+   $location = '<Azure region>'
    $pipName = 'wac-public-ip'
    $size = 'Standard_D2s_v3'
    ```
@@ -194,9 +194,10 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
      SubnetName = $subnetName
      GenerateSslCert = $true
      size = $size
+     PublicIPAddressName = $pipname
    }
    ```
-1. 次のコマンドを実行して、PowerShell リモート処理の証明書の検証を無効にします。
+1. 次のコマンドを実行して、PowerShell リモート処理の証明書検証を無効にします (最初のコマンドの後にプロンプトが表示されたら、**A** を入力して Enter キーを押します)。
 
    ```powershell
    install-module pswsman
@@ -212,7 +213,7 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 
     >**注**: プロビジョニング スクリプトが完了するまで待ちます。 これには 5 分ほどかかる場合があります。
 
-1. スクリプトが正常に完了したことを確認し、Windows Admin Center インストールをホストする Azure VM の完全修飾名が含まれる URL が記載された最後のメッセージに注目します。
+1. スクリプトが正常に完了したことを確認し、Windows Admin Center インストールをホストする Azure VM の完全修飾名を含む URL を示す最後のメッセージに注意してください。
 
    >**注**: Azure VM の完全修飾名を記録します。 このラボで後ほど必要になります。
 
