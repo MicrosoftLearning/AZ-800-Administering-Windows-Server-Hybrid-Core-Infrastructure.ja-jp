@@ -2,20 +2,15 @@
 lab:
   title: 'ラボ: Azure VM での Windows Server のデプロイと構成'
   module: 'Module 6: Deploying and Configuring Azure VMs'
-ms.openlocfilehash: bbf7d0657532d3b162ac8c366cc37da11ae3c32c
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039432"
 ---
+
 # <a name="lab-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ: Azure VM での Windows Server のデプロイと構成
 
 ## <a name="scenario"></a>シナリオ
 
-現在のインフラストラクチャに関する懸念事項に対処する必要があります。 Windows Server ベースのワークロードを実行している Azure VM に適用する必要がある追加の制御に関して、運用モデルが古い、自動化の使用が限定的、および情報セキュリティ チームの懸念があります。 あなたは、Windows Server で実行されている Azure VM の自動デプロイと構成プロセスを開発して実装することにしました。
+You need to address concerns regarding your current infrastructure. You have an outdated operational model, a limited use of automation, and Information Security team concerns regarding additional controls that should be applied to Azure VMs running Windows Server-based workloads. You have decided to develop and implement an automated deployment and configuration process for Azure VMs running Windows Server.
 
-このプロセスには、Azure VM 拡張機能を使用した Azure Resource Manager (ARM) テンプレートと OS 構成が伴います。 また、AppLocker によるアプリケーション許可リスト、ファイルの整合性チェック、アダプティブ ネットワークまたは DDoS 保護など、オンプレミス システムに既に適用されている以外の追加のセキュリティ保護メカニズムも組み込まれます。 また、JIT 機能を利用して、Azure VM への管理アクセスをロンドン本社に関連付けられているパブリック IP アドレス範囲に制限します。
+The process will involve Azure Resource Manager (ARM) templates and OS configuration through Azure VM extensions. It will also incorporate additional security protection mechanisms beyond those already applied to on-premises systems, such as application allow lists through AppLocker, file integrity checks, and adaptive network/DDoS protection. You will also leverage JIT functionality to restrict administrative access to Azure VMs to public IP address ranges associated with the London headquarters.
 
 目標は、管理容易性とセキュリティの要件を満たす方法で、Windows Server を実行している Azure VM をデプロイして構成することです。
 
@@ -34,7 +29,7 @@ ms.locfileid: "147039432"
 
 ## <a name="lab-setup"></a>ラボのセットアップ
 
-仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
+Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept> and <bpt id="p2">**</bpt>AZ-800T00A-ADM1<ept id="p2">**</ept> must be running. Other VMs can be running, but they aren't required for this lab.
 
 > **注**: **AZ-800T00A-SEA-DC1** と **AZ-800T00A-SEA-ADM1** の各仮想マシンが **SEA-DC1** と **SEA-ADM1** のインストールをホストしています。
 
@@ -45,13 +40,13 @@ ms.locfileid: "147039432"
    - パスワード: **Pa55w.rd**
    - ドメイン: **CONTOSO**
 
-このラボでは、使用可能な VM 環境と Azure サブスクリプションを使用します。 ラボを開始する前に、Azure サブスクリプションと、そのサブスクリプションの所有者または共同作成者ロールを持つユーザー アカウントがあることを確認してください。
+For this lab, you'll use the available VM environment and an Azure subscription. Before you begin the lab, ensure that you have an Azure subscription and a user account with the Owner or Contributor role in that subscription.
 
 ## <a name="exercise-1-authoring-arm-templates-for-azure-vm-deployment"></a>演習 1: Azure VM デプロイ用の ARM テンプレートの作成
 
 ### <a name="scenario"></a>シナリオ
 
-Azure ベースの操作を効率化するために、Azure VM への Windows Server の自動デプロイと構成プロセスを開発して実装することにしました。 デプロイは、情報セキュリティ チームの要件に準拠し、高可用性を含む Contoso, Ltd. の意図されたターゲット運用モデルに準拠する必要があります。
+現在のインフラストラクチャに関する懸念事項に対処する必要があります。
 
 この演習の主なタスクは次のとおりです。
 
@@ -83,12 +78,12 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |リージョン|Azure 仮想マシンをプロビジョニングできる Azure リージョンの名前を使用します|
    |可用性のオプション|インフラストラクチャの冗長性は必要ありません|
    |Image|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
-   |Azure Spot インスタンス|No|
+   |Azure Spot インスタンス|いいえ|
    |サイズ|**Standard_D2s_v3**|
    |ユーザー名|**学生**|
    |パスワード|**Pa55w.rd1234**|
    |パブリック受信ポート|なし|
-   |既存の Windows Server ライセンスを使用しますか|No|
+   |既存の Windows Server ライセンスを使用しますか|いいえ|
    |OS ディスクの種類|**Standard HDD**|
    |名前|**az800l06-vnet**|
    |アドレス範囲|**10.60.0.0/20**|
@@ -97,12 +92,12 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |パブリック IP|なし|
    |NIC ネットワーク セキュリティ グループ|None|
    |Accelerated Networking|Off|
-   |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|No|
+   |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|いいえ|
    |ブート診断|**マネージド ストレージ アカウントで有効にする (推奨)**|
 
 1. **[仮想マシンの作成]** ページの **[確認と作成]** タブまで移動したら、タスク 3 に進みます。
 
-   >**注**: 仮想マシンは作成しないでください。 この目的で、自動生成されたテンプレートを使用します。
+   >Windows Server ベースのワークロードを実行している Azure VM に適用する必要がある追加の制御に関して、運用モデルが古い、自動化の使用が限定的、および情報セキュリティ チームの懸念があります。
 
 #### <a name="task-3-download-the-arm-template-and-parameters-files-from-the-azure-portal"></a>タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
 
@@ -113,7 +108,7 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
 
 ### <a name="scenario"></a>シナリオ
 
-Azure リソースのデプロイの自動化に加えて、Azure VM で実行されている Windows サーバーを自動的に構成することもできます。 これを実現するには、Azure カスタム スクリプト拡張機能の使用をテストします。
+あなたは、Windows Server で実行されている Azure VM の自動デプロイと構成プロセスを開発して実装することにしました。
 
 この演習の主なタスクは次のとおりです。
 
@@ -123,14 +118,14 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
 #### <a name="task-1-review-the-arm-template-and-parameters-files-for-azure-vm-deployment"></a>タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
 
 1. ダウンロードしたアーカイブの内容を **C:\\Labfiles\\Mod06** フォルダーに抽出します。
-1. メモ帳で **template.json** ファイルを開き、内容を確認します。 メモ帳ウィンドウは開いたままにしておきます。
+1. Open the <bpt id="p1">**</bpt>template.json<ept id="p1">**</ept> file in Notepad and review the contents. Keep the Notepad window open.
 1. メモ帳で **C:\\Labfiles\\Mod06\\parameters.json** ファイルを開き、確認して、メモ帳ウィンドウを閉じます。
 
 #### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
 1. ラボ VM の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
 
-   >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
+   >このプロセスには、Azure VM 拡張機能を使用した Azure Resource Manager (ARM) テンプレートと OS 構成が伴います。
 
    ```json
         {
@@ -260,11 +255,11 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 1. ラボ VM からブラウザー タブを開き、新しく作成されたパブリック IP アドレスを参照し、**Hello World from az800l06-vm0** のメッセージがページに表示されていることを確認します。
 1. ラボ VM から同じ IP アドレスへのリモート デスクトップ接続を確立し、接続試行が失敗することを確認します。
 
-   >**注**: Azure VM は現在、TCP ポート 3389 経由でインターネットからアクセスできないので、これは想定されています。 TCP ポート 80 経由でのみアクセスできます。
+   >また、AppLocker によるアプリケーション許可リスト、ファイルの整合性チェック、アダプティブ ネットワークまたは DDoS 保護など、オンプレミス システムに既に適用されている以外の追加のセキュリティ保護メカニズムも組み込まれます。
 
 #### <a name="task-3-trigger-re-evaluation-of-the-jit-status-of-an-azure-vm"></a>タスク 3: Azure VM の JIT 状態の再評価をトリガーする
 
->**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
+>また、JIT 機能を利用して、Azure VM への管理アクセスをロンドン本社に関連付けられているパブリック IP アドレス範囲に制限します。
 
 1. Azure portal で、**[az800l06-vm0]** ページに戻ります。
 1. **[az800l06-vm0]** ページで、**[構成]** を選択します。 

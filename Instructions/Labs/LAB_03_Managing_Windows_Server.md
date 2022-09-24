@@ -2,18 +2,13 @@
 lab:
   title: 'ラボ: Windows Server の管理'
   module: 'Module 3: Windows Server administration'
-ms.openlocfilehash: 88b5dda91ee1aa239f87b94e55ed5bd6f42aca10
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039396"
 ---
+
 # <a name="lab-managing-windows-server"></a>ラボ: Windows Server の管理
 
 ## <a name="scenario"></a>シナリオ
 
-Contoso, Ltd. は、自社の環境に新しいサーバーをいくつか新規に実装することを望んでいて、Server Core を使用することを決定しています。 また、組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center を実装することも希望しています。
+Contoso, Ltd. wants to implement several new servers in their environment, and they have decided to use Server Core. They also want to implement Windows Admin Center for remote management of both these servers and other servers in the organization.
 
 ## <a name="objectives"></a>目標
 
@@ -23,7 +18,7 @@ Contoso, Ltd. は、自社の環境に新しいサーバーをいくつか新規
 
 ## <a name="lab-setup"></a>ラボのセットアップ
 
-仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
+Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept> and <bpt id="p2">**</bpt>AZ-800T00A-ADM1<ept id="p2">**</ept> must be running. Other VMs can be running, but they aren't required for this lab.
 
 > **注**: **AZ-800T00A-SEA-DC1** と **AZ-800T00A-SEA-ADM1** の各仮想マシンが **SEA-DC1** と **SEA-ADM1** のインストールをホストしています。
 
@@ -64,9 +59,9 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
-   > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: After installation completes, you may encounter the error message 'ERR_Connection_Refused'. If this occurs, restart SEA-ADM1 to correct the issue.
 
 #### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
 
@@ -82,7 +77,7 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
 1. **SEA-ADM1** の右上隅にある **[設定]** アイコン (歯車) を選択します。
 1. 使用可能な拡張機能を確認します。
-1. **セキュリティ (プレビュー)** 拡張機能をインストールします。 拡張機能がインストールされ Windows Admin Center が更新されます。
+1. Contoso, Ltd. は、自社の環境に新しいサーバーをいくつか新規に実装することを望んでいて、Server Core を使用することを決定しています。
 
    > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 
@@ -94,7 +89,7 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
 #### <a name="task-4-verify-remote-administration"></a>タスク 4: リモート管理を確認する
 
-1. **SEA-ADM1** の Windows Admin Center で、`sea-dc1.contoso.com` に接続されている間に [概要] ペインを確認します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。
+1. また、組織内のこれらのサーバーとその他のサーバーの両方をリモートで管理するために Windows Admin Center を実装することも希望しています。
 1. Windows Admin Center で、ロールおよび機能ツールを使用して、**Telnet Client** を `sea-dc1.contoso.com` にインストールします。 
 1. Windows Admin Center で、 **[設定]** インターフェイスを使用して `sea-dc1.contoso.com` 上の [リモート デスクトップ] を有効にします。
 1. Windows Admin Center で、リモート デスクトップ経由で `sea-dc1.contoso.com` に接続します。
@@ -132,4 +127,4 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
 ### <a name="results"></a>結果
 
-この演習を完了すると、Windows Admin Center がインストールされ、ラボ環境内のサーバーに接続されます。 機能のインストールや、リモート デスクトップ接続の有効化およびテストなどのリモート管理タスクを複数実行しました。 最後に、PowerShell リモート処理を使用してサービスの状態を確認して、開始しました。
+After completing this exercise, you will have installed Windows Admin Center and connected it to the servers in your lab environment. You performed a number of remote management tasks including installing a feature as well as enabling and testing Remote Desktop connectivity. Finally, you used PowerShell Remoting to check the status of a service and then to start it.

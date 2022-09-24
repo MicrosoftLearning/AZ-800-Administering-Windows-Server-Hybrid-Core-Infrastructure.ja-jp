@@ -2,13 +2,8 @@
 lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   module: 'Module 4: Facilitating hybrid management'
-ms.openlocfilehash: a39562df5131e07d2cb50634629bbb40a15f82c8
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039387"
 ---
+
 # <a name="lab-using-windows-admin-center-in-hybrid-scenarios"></a>ラボ: ハイブリッド シナリオでの Windows Admin Center の使用
 
 ## <a name="scenario"></a>シナリオ
@@ -29,7 +24,7 @@ ms.locfileid: "147039387"
 
 ## <a name="lab-setup"></a>ラボのセットアップ
 
-仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
+Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept> and <bpt id="p2">**</bpt>AZ-800T00A-ADM1<ept id="p2">**</ept> must be running. Other VMs can be running, but they aren't required for this lab.
 
 > **注**: **AZ-800T00A-SEA-DC1** VM と **AZ-800T00A-SEA-ADM1** VM で **SEA-DC1** と **SEA-ADM1** のインストールをホストしています
 
@@ -40,13 +35,13 @@ ms.locfileid: "147039387"
    - パスワード: **Pa55w.rd**
    - ドメイン: **CONTOSO**
 
-このラボでは、使用可能な VM 環境と Azure サブスクリプションを使用します。 ラボを開始する前に、Azure サブスクリプションがあり、そのサブスクリプションの所有者ロールまたは共同作成者ロールを持ち、そのサブスクリプションに関連付けられている Azure Active Directory (Azure AD) テナントのグローバル管理者ロールを持っているユーザー アカウントがあることを確認します。
+For this lab, you'll use the available VM environment and an Azure subscription. Before you begin the lab, ensure that you have an Azure subscription and a user account with the Owner or Contributor role in that subscription, as well as with the Global Administrator role in the Azure Active Directory (Azure AD) tenant associated with that subscription.
 
 ## <a name="exercise-1-provisioning-azure-vms-running-windows-server"></a>演習 1: Windows Server を実行する Azure VM のプロビジョニング
 
 ### <a name="scenario"></a>シナリオ
 
-オンプレミス サーバーと Azure 仮想ネットワークの間にハイブリッド接続を確立できることを確認する必要があります。 そのためにはまず、Azure Resource Manager テンプレートを使用して、Windows Server を実行する Azure VM をプロビジョニングします。
+You need to verify that you can establish hybrid connectivity between an on-premises server and an Azure virtual network. To start, you'll provision Azure VMs running Windows Server by using an Azure Resource Manager template.
 
 この演習の主なタスクは次のとおりです。
 
@@ -58,9 +53,9 @@ ms.locfileid: "147039387"
 1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal を参照して、Azure 資格情報で認証します。
 1. Azure portal の ［Cloud Shell］ ペインで PowerShell セッションを開きます。
 1. **C:\\Labfiles\\Lab04\\L04-sub_template.json** ファイルを Cloud Shell ホーム ディレクトリにアップロードします。
-1. [Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。 (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 （**eastus** など) に置き換えます)。
+1. From the Cloud Shell pane, run the following commands to create a resource group that will contain resources you provision in this lab. (Replace the <ph id="ph1">`&lt;Azure region&gt;`</ph> placeholder with the name of an Azure region into which you can deploy Azure virtual machines, such as <bpt id="p1">**</bpt>eastus<ept id="p1">**</ept>.)
 
-   >**注**: このラボは、米国東部を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: This lab has been tested and verified using East US, so you should use that region. In general, to identify Azure regions where you can provision Azure VMs, refer to <bpt id="p1">[</bpt>Find Azure credit offers in your region<ept id="p1">](https://aka.ms/regions-offers)</ept>.
 
    ```powershell
    $location = '<Azure region>'
@@ -86,7 +81,7 @@ ms.locfileid: "147039387"
      -TemplateParameterFile $HOME/L04-rg_template.parameters.json
    ```
 
-   >**注**: このデプロイが完了するまで待ってから、次の演習に進んでください。 デプロイには約 5 分かかります。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the deployment to complete before you proceed to the next exercise. The deployment should take about 5 minutes.
 
 1. Azure portal の [Cloud Shell] ペインを閉じます。
 1. Azure portal で、**az800l04-vnet** 仮想ネットワークに対して、IP アドレスの範囲が **10.4.3.224/27** の **GatewaySubnet** を追加します。
@@ -95,7 +90,7 @@ ms.locfileid: "147039387"
 
 ### <a name="scenario"></a>シナリオ
 
-オンプレミス サーバーと前の演習でプロビジョニングした Azure VM の間にハイブリッド接続を確立できることを確認する必要があります。 この目的のために、Windows Admin Center の Azure ネットワーク アダプター機能を使用します。
+You need to verify that you can establish hybrid connectivity between an on-premises server and the Azure VM you provisioned in the previous exercise. You'll use the Azure Network Adapter feature of Windows Admin Center for this purpose.
 
 この演習の主なタスクは次のとおりです。
 
@@ -119,11 +114,11 @@ ms.locfileid: "147039387"
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 
-   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: If the link does not work, on <bpt id="p2">**</bpt>SEA-ADM1<ept id="p2">**</ept>, browse to the <bpt id="p3">**</bpt>WindowsAdminCenter.msi<ept id="p3">**</ept> file, open the context menu for it, and then select <bpt id="p4">**</bpt>Repair<ept id="p4">**</ept>. After the repair completes, refresh Microsoft Edge. 
 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
@@ -150,13 +145,13 @@ ms.locfileid: "147039387"
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替え、**WAC-Created-vpngw-** で始まる名前の新しい仮想ネットワーク ゲートウェイがプロビジョニングされていることを確認します。
 
-   >**注**: Azure 仮想ネットワーク ゲートウェイのプロビジョニングには最大 45 分かかります。 プロビジョニングが完了するのを待たずに、次の演習に進んでください。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The provisioning of the Azure virtual network gateway can take up to 45 minutes. Do not wait for the provisioning to complete but instead proceed to the next exercise.
 
 ## <a name="exercise-3-deploying-windows-admin-center-gateway-in-azure"></a>演習 3: Azure での Windows Admin Center ゲートウェイのデプロイ
 
 ### <a name="scenario"></a>シナリオ
 
-Windows Admin Center を使用して、Windows Server OS を実行している Azure VM を管理する機能を評価する必要があります。 これを行うには、まず、このラボの最初の演習で実装した Azure 仮想ネットワークに Windows Admin Center ゲートウェイをインストールします。
+You need to evaluate the ability to manage Azure VMs running Windows Server OS by using Windows Admin Center. To accomplish this, you'll first install a Windows Admin Center gateway in the Azure virtual network you implemented in the first exercise of this lab.
 
 この演習の主なタスクは次のとおりです。
 
@@ -211,11 +206,11 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 1. ローカル管理者アカウントの名前を入力するように求められたら、「**Student**」と入力します。
 1. ローカル管理者アカウントのパスワードを入力するように求められたら、「**Pa55w.rd1234**」と入力します。
 
-    >**注**: プロビジョニング スクリプトが完了するまで待ちます。 これには 5 分ほどかかる場合があります。
+    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the provisioning script to complete. This might take about 5 minutes.
 
 1. スクリプトが正常に完了したことを確認し、Windows Admin Center インストールをホストする Azure VM の完全修飾名を含む URL を示す最後のメッセージに注意してください。
 
-   >**注**: Azure VM の完全修飾名を記録します。 このラボで後ほど必要になります。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Record the fully qualified name of the Azure VM. You will need it later in this lab.
 
 1. [Cloud Shell] ペインを閉じます。
 
@@ -301,7 +296,7 @@ Azure 関連の料金を最小限に抑えるため、このラボでプロビ�
    Get-AzResourceGroup -Name 'az800l04*' | Remove-AzResourceGroup -Force -AsJob
    ```
 
-   >**注**: このコマンドは非同期で実行されます (-AsJob パラメーターによって決定されます)。 そのため、同じ PowerShell セッション内ですぐに別の PowerShell コマンドを実行できるようになりますが、リソース グループが実際に削除されるまでに数分かかります。
+   >仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。
 
 ### <a name="results"></a>結果
 

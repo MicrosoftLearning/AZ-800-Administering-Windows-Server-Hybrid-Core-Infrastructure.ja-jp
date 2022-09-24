@@ -3,13 +3,8 @@ lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   type: Answer Key
   module: 'Module 4: Facilitating hybrid management'
-ms.openlocfilehash: a5cdb72ed0fcf358012268fec48b873900082fcf
-ms.sourcegitcommit: dff3b850fb952cbe51f8e1b712359c89f41216f2
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 08/27/2022
-ms.locfileid: "147695185"
 ---
+
 # <a name="lab-answer-key-using-windows-admin-center-in-hybrid-scenarios"></a>ラボの回答キー: ハイブリッド シナリオでの Windows Admin Center の使用
 
 ## <a name="exercise-1-provisioning-azure-vms-running-windows-server"></a>演習 1: Windows Server を実行する Azure VM のプロビジョニング
@@ -24,9 +19,9 @@ ms.locfileid: "147695185"
    >**注**: Cloud Shell を起動するのが初めてで、"**ストレージがマウントされていません**" というメッセージが表示される場合は、このラボで使用しているサブスクリプションを選択し、**[ストレージの作成]** を選択します。
 
 1. [Cloud Shell] ウィンドウのツールバーで、**[ファイルのアップロード/ダウンロード]** アイコンを選択し、ドロップダウン メニューで **[アップロード]** を選択し、**C:\\Labfiles\\Lab04\\L04-sub_template.json** ファイルを Cloud Shell のホーム ディレクトリにアップロードします。
-1. [Cloud Shell] ウィンドウで、次のコマンドを実行して、このラボでプロビジョニングするリソースを含めるリソース グループを作成します  (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 (**eastus** など) に置き換えます)。
+1. From the Cloud Shell pane, run the following commands to create a resource group that will contain the resources you provision in this lab. (Replace the <ph id="ph1">`&lt;Azure region&gt;`</ph> placeholder with the name of an Azure region into which you can deploy Azure virtual machines, such as <bpt id="p1">**</bpt>eastus<ept id="p1">**</ept>.)
 
-   >**注**: このラボは、米国東部を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: This lab has been tested and verified using East US, so you should use that region. In general, to identify Azure regions where you can provision Azure VMs, refer to <bpt id="p1">[</bpt>Find Azure credit offers in your region<ept id="p1">](https://aka.ms/regions-offers)</ept>.
 
    ```powershell
    $location = '<Azure region>'
@@ -52,7 +47,7 @@ ms.locfileid: "147695185"
      -TemplateParameterFile $HOME/L04-rg_template.parameters.json
    ```
 
-   >**注**: このデプロイが完了するまで待ってから、次の演習に進んでください。 デプロイには約 5 分かかります。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the deployment to complete before you proceed to the next exercise. The deployment should take about 5 minutes.
 
 1. Azure portal の [Cloud Shell] ウィンドウを閉じます。
 1. Azure portal で、ツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで「**az800l04-vnet**」仮想ネットワークを検索して選択します。
@@ -78,11 +73,11 @@ ms.locfileid: "147695185"
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` にアクセスします。
 
-   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルにアクセスし、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: If the link does not work, on <bpt id="p2">**</bpt>SEA-ADM1<ept id="p2">**</ept>, browse to the <bpt id="p3">**</bpt>WindowsAdminCenter.msi<ept id="p3">**</ept> file, open the context menu for it, and then select <bpt id="p4">**</bpt>Repair<ept id="p4">**</ept>. After the repair completes, refresh Microsoft Edge. 
    
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
@@ -92,7 +87,7 @@ ms.locfileid: "147695185"
 1. **[すべての接続]** ページで **[sea-adm1.contoso.com]** エントリを選択します。 
 1. Windows Admin Center で、**[ネットワーク]**、**[アクション]**、**[+ Azure ネットワーク アダプター (プレビュー) の追加]** の順に選択します。
 
-   > **注**: **[アクション]** メニューが使用できない場合、画面の解像度によっては、**省略記号** アイコンを選択することが必要になる場合があります。
+   > **注**: **[アクション]** メニューが使用できない場合、画面の解像度によっては、**省略記号**アイコンを選択することが必要になる場合があります。
 
 1. メッセージが表示されたら、**[Azure ネットワーク アダプターの追加]** ウィンドウで、**[Windows Admin Center を Azure に登録する]** を選択します。
 
@@ -108,13 +103,13 @@ ms.locfileid: "147695185"
 1. **[サインイン]** ページで、前の演習で Azure サブスクリプションへのサインインに使用したものと同じユーザー名を入力し、**[次へ]** を選択します。次に、対応するパスワードを入力し、**[サインイン]** を選択します。
 1. "**Are you trying to sign in to Windows Admin Center?**" (Windows Admin Center にサインインしますか?) というメッセージが表示されたら、**[続行]** を選びます。
 1. Windows Admin Center で、正常にサインインしたことを確認し、Microsoft Edge ウィンドウに新しく開いたタブを閉じます。
-1. **[Windows Admin Center で Azure を使用して作業を開始する]** ウィンドウで、**Azure Active Directory アプリケーション** が **[新規作成]** に設定されていることを確認した後、**[接続]** を選択します。
-1. 登録手順のステップの一覧で **[サインイン]** を選択します。 これにより、**[要求されたアクセス許可]** というラベルの付いたポップアップ ウィンドウが開きます。
+1. **[Windows Admin Center で Azure を使用して作業を開始する]** ウィンドウで、**Azure Active Directory アプリケーション**が **[新規作成]** に設定されていることを確認した後、**[接続]** を選択します。
+1. In the listing of the steps of the registration procedure, select <bpt id="p1">**</bpt>Sign in<ept id="p1">**</ept>. This will open a pop-up window labeled <bpt id="p1">**</bpt>Permissions requested<ept id="p1">**</ept>.
 1. **[要求されたアクセス許可]** ポップアップ ウィンドウで、**[組織の代理として同意する]**、**[同意する]** の順に選択します。
 
 #### <a name="task-2-create-an-azure-network-adapter"></a>タスク 2: Azure ネットワーク アダプターを作成する
 
-1. **SEA-ADM1** で、Windows Admin Center が表示されている Microsoft Edge ウィンドウに戻り、 **[sea-adm1.contoso.com]** ページにアクセスして、 **[ネットワーク]** を選択します。
+1. **SEA-ADM1**で、Windows Admin Center が表示されている Microsoft Edge ウィンドウに戻り、 **[sea-adm1.contoso.com]** ページにアクセスして、 **[ネットワーク]** を選択します。
 1. Windows Admin Center の **[ネットワーク]** ページで、 **[アクション]** メニューから **[+ Azure ネットワーク アダプター (プレビュー) の追加]** エントリを再度選択します。
 1. **[Add Azure Network Adapter]\(Azure ネットワーク アダプターの追加\)** 設定ペインで、次の設定を指定して、 **[作成]** を選びます (他の設定は既定値のままにします)。
 
@@ -131,7 +126,7 @@ ms.locfileid: "147695185"
 1. **SEA-ADM1** の Azure portal が表示されている Microsoft Edge ウィンドウのツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**仮想ネットワーク ゲートウェイ**」を検索して選びます。
 1. **[仮想ネットワーク ゲートウェイ]** ページで **[更新]** を選び、仮想ネットワーク ゲートウェイの一覧に、名前が **WAC-Created-vpngw-96** で始まる新しいエントリが表示されることを確認します。
 
->**注**: Azure 仮想ネットワーク ゲートウェイのプロビジョニングには最大 45 分かかります。 プロビジョニングが完了するのを待たずに、次の演習に進んでください。
+><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The provisioning of the Azure virtual network gateway can take up to 45 minutes. Do not wait for the provisioning to complete but instead proceed to the next exercise.
 
 ## <a name="exercise-3-deploying-windows-admin-center-gateway-in-azure"></a>演習 3: Azure での Windows Admin Center ゲートウェイのデプロイ
 
@@ -188,11 +183,11 @@ ms.locfileid: "147695185"
 1. ローカル Administrator アカウントの名前を入力するように求めるダイアログが表示されたら、「**Student**」と入力します
 1. ローカル Administrator アカウントのパスワードを入力するように求めるダイアログが表示されたら、「**Pa55w.rd1234**」と入力します
 
-   >**注**: プロビジョニング スクリプトが完了するまで待ちます。 これには 5 分ほどかかる場合があります。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the provisioning script to complete. This might take about 5 minutes.
 
 1. スクリプトが正常に完了したことを確認し、Windows Admin Center インストールをホストする Azure VM の完全修飾名を含む URL を示す最後のメッセージに注意してください。
 
-   >**注**: Azure VM の完全修飾名を記録します。 このラボで後ほど必要になります。
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Record the fully qualified name of the Azure VM. You will need it later in this lab.
 
 1. [Cloud Shell] ペインを閉じます。
 
@@ -207,7 +202,7 @@ ms.locfileid: "147695185"
 
 #### <a name="task-1-connect-to-the-windows-admin-center-gateway-running-in-azure-vm"></a>タスク 1: Azure VM で実行されている Windows Admin Center ゲートウェイに接続する
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、前の演習で特定した Windows Admin Center インストールをホストするターゲット Azure VM の完全修飾名を含む URL に移動します。
+1. **SEA-ADM1**で Microsoft Edge を起動し、前の演習で特定した Windows Admin Center インストールをホストするターゲット Azure VM の完全修飾名を含む URL に移動します。
 1. Microsoft Edge ウィンドウで、"**お使いの接続は、プライベートではありません**" というメッセージを無視し、**[詳細]** を選択し、テキスト "**に続く**" を含むリンクを選択します。
 1. メッセージが表示されたら、**[サインインしてこのサイトにアクセスする]** ダイアログ ボックスで、ユーザー名 **Student** とパスワード **Pa55w.rd1234** を使用してサインインします。
 1. Windows Admin Center の **[すべての接続]** ページで、**[az800l04-vmwac [ゲートウェイ]]** を選択します。
@@ -215,7 +210,7 @@ ms.locfileid: "147695185"
 
 #### <a name="task-2-enable-powershell-remoting-on-an-azure-vm"></a>タスク 2: Azure VM の PowerShell リモート処理を有効にする
 
-1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えて、ツール バーにある **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**仮想マシン**」を検索して選択します。
+1. **SEA-ADM1**で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えて、ツール バーにある **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**仮想マシン**」を検索して選択します。
 1. **[仮想マシン]** ページで、**[az800l04-vm0]** を選択します。
 1. **[az800l04-vm0]** ページの **[操作]** セクションで、**[コマンドの実行]** を選択し、**[RunPowerShellScript]** を選択します。
 1. Windows リモート管理が無効になっている場合は、**[コマンド スクリプトの実行]** ページの **[PowerShell スクリプト]** セクションで、次のコマンドを入力し、**[実行]** を選択して有効にします。

@@ -3,13 +3,8 @@ lab:
   title: 'ラボ: Windows Server での仮想化の実装と構成'
   type: Answer Key
   module: 'Module 5: Hyper-V virtualization in Windows Server'
-ms.openlocfilehash: 34dc334218d43b71f9b48b12c066fdcfcb605ccb
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039438"
 ---
+
 # <a name="lab-answer-key-implementing-and-configuring-virtualization-in-windows-server"></a>ラボの回答キー: Windows Server での仮想化の実装と構成
 
 ### <a name="exercise-1-creating-and-configuring-vms"></a>演習 1: VM の作成と構成
@@ -30,7 +25,7 @@ ms.locfileid: "147039438"
 
 #### <a name="task-2-create-a-virtual-hard-disk"></a>タスク 2: 仮想ハード ディスクを作成する
 
-1. **SEA-ADM1** の **SEA-SVR1** に接続されている Hyper-V マネージャーで、**[新規]** を選択してから、**[ハード ディスク]** を選びます。 **仮想ハード ディスクの新規作成ウィザード** が開始されます。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, in Hyper-V Manager connected to <bpt id="p2">**</bpt>SEA-SVR1<ept id="p2">**</ept>, select <bpt id="p3">**</bpt>New<ept id="p3">**</ept>, and then select <bpt id="p4">**</bpt>Hard Disk<ept id="p4">**</ept>. The <bpt id="p1">**</bpt>New Virtual Hard Disk Wizard<ept id="p1">**</ept> starts.
 1. **[開始する前に]** ページで、 **[次へ]** を選択します。
 1. **[ディスク フォーマットの選択]** ページで、 **[VHD]** を選んでから、 **[次へ]** を選択します。
 1. **[ディスクの種類の選択]** ページで **[差分]** を選んでから、**[次へ]** を選択します。
@@ -44,7 +39,7 @@ ms.locfileid: "147039438"
 
 #### <a name="task-3-create-a-virtual-machine"></a>タスク 3: 仮想マシンを作成する
 
-1. **SEA-ADM1** の Hyper-V マネージャーで、**[新規]** を選択し、**[仮想マシン]** を選びます。 **[仮想マシンの新規作成ウィザード]** が起動します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, in Hyper-V Manager, select <bpt id="p2">**</bpt>New<ept id="p2">**</ept>, and then select <bpt id="p3">**</bpt>Virtual Machine<ept id="p3">**</ept>. The <bpt id="p1">**</bpt>New Virtual Machine Wizard<ept id="p1">**</ept> starts.
 1. **[開始する前に]** ページで、 **[次へ]** を選択します。
 1. **[名前と場所の指定]** ページで 「**SEA-VM1**」と入力し、**[仮想マシンを別の場所に格納する]** の横にあるチェック ボックスをオンにします。
 1. **[場所]** ボックスに「**C:\Base**」と入力し、**[次へ]** を選択します。
@@ -53,7 +48,7 @@ ms.locfileid: "147039438"
 1. **[ネットワークの構成]** ページで、[接続] ドロップダウン メニューを選択し、 **[Contoso Private Switch]** を選んでから、 **[次へ]** を選択します。
 1. **[仮想ハード ディスクの接続]** ページで、**[既存の仮想ハード ディスクを使用する]** を選んでから、**[参照]** を選択します。
 1. **C:\Base** に移動し、**[SEA-VM1.vhd]**、**[開く]**、**[次へ]** の順に選択します。
-1. **[要約]** ページで、**[完了]** を選択します。 仮想マシン リストに **SEA-VM1** が表示されていることに注目してください。
+1. On the <bpt id="p1">**</bpt>Summary<ept id="p1">**</ept> page, select <bpt id="p2">**</bpt>Finish<ept id="p2">**</ept>. Notice that <bpt id="p1">**</bpt>SEA-VM1<ept id="p1">**</ept> displays in the Virtual Machines list.
 1. **[SEA-VM1]** を選択し、[操作] ペインの **[SEA-VM1]** の下にある **[設定]** を選択します。
 1. **[ハードウェア]** リストで、**[メモリ]** を選択します。
 1. **[動的メモリ]** セクションで、**[動的メモリを有効にする]** の横にあるチェック ボックスをオンにします。
@@ -66,7 +61,7 @@ ms.locfileid: "147039438"
 
    >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
 
-1. **Windows PowerShell** コンソールで、以下のコマンドを入力します。 その後、Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
+1. In the <bpt id="p1">**</bpt>Windows PowerShell<ept id="p1">**</ept> console, enter the following command. and then press Enter to download the latest version of Windows Admin Center:
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
@@ -77,7 +72,7 @@ ms.locfileid: "147039438"
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。 Web ページが応答しない場合、**services.msc** を開き、Windows Admin Center サーバーが **開始** されていることを確認します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes. If the web page does not respond, open <bpt id="p1">**</bpt>services.msc<ept id="p1">**</ept> and verify that the Windows Admin Center server is <bpt id="p2">**</bpt>Started<ept id="p2">**</ept>.
 
 1. **SEA-ADM1** で Microsoft Edge を起動してから、`https://SEA-ADM1.contoso.com` に移動します。 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
@@ -93,7 +88,7 @@ ms.locfileid: "147039438"
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
-   > **注**: 手順 8 を実行した後、**お客様はこのサーバーを自分の接続リストに追加できますが、Microsoft 側でそれが利用可能であることを確認できません** という内容のエラー メッセージが 表示された場合は、**[追加]** を選択します。 [すべての接続] ペインで、**[sea-svr1.contoso.com]** を選んでから、**[管理に使用する資格情報]** を選択します。 **[資格情報の指定]** ダイアログ ボックスで、**[この接続に別のアカウントを使用する]** オプションが選択されていることを確かめ、管理者の資格情報を入力してから **[続行]** を選択します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: After performing step 8, if an error message that says <bpt id="p2">**</bpt>You can add this server to your list of connections, but we can't confirm it's available.<ept id="p2">**</ept> appears, select <bpt id="p1">**</bpt>Add<ept id="p1">**</ept>. In the All Connections pane,  select <bpt id="p1">**</bpt>sea-svr1.contoso.com<ept id="p1">**</ept>, and then select <bpt id="p2">**</bpt>Manage as<ept id="p2">**</ept>. In the <bpt id="p1">**</bpt>Specify your credentials<ept id="p1">**</ept> dialog box, ensure that the <bpt id="p2">**</bpt>Use another account for this connection<ept id="p2">**</ept> option is selected, enter the Administrator credentials, and then select <bpt id="p3">**</bpt>Continue<ept id="p3">**</ept>.
 
    > **注**: シングル サインオンを実行するには、Kerberos の制約付き委任を設定する必要があります。
 
@@ -118,7 +113,7 @@ ms.locfileid: "147039438"
 
 #### <a name="task-1-install-docker-on-windows-server"></a>タスク 1: Windows Server に Docker をインストールする
 
-1. **SEA-ADM1** で、**SEA-SVR1** の **[ツール]** リストの **[PowerShell]** を選択します。 メッセージが表示されたら、「**Pa55w.rd**」と入力して **CONTOSO\\Administrator** ユーザー アカウントを使用して認証してから、Enter キーを押します。 
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, in the <bpt id="p2">**</bpt>Tools<ept id="p2">**</ept> listing for <bpt id="p3">**</bpt>SEA-SVR1<ept id="p3">**</ept>, select <bpt id="p4">**</bpt>PowerShell<ept id="p4">**</ept>. When prompted, type <bpt id="p1">**</bpt>Pa55w.rd<ept id="p1">**</ept> to authenticate using the <bpt id="p2">**</bpt>CONTOSO<ph id="ph1">\\</ph>Administrator<ept id="p2">**</ept> user account, and then press Enter. 
 
    > **注**: これにより、SEA-SVR1 への PowerShell リモート処理接続が確立されます。
 
@@ -199,15 +194,15 @@ ms.locfileid: "147039438"
    ipconfig
    ```
 
-   > **注**: vEthernet (nat) という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これは、新しいコンテナーのアドレスです。 次に、**Ethernet** という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これはホスト (**SEA-SVR1**) の IP アドレスであり、**172.16.10.12** に設定されています。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Identify the IPv4 address of the Ethernet adapter named vEthernet (nat). This is the address of the new container. Next, identify the IPv4 address of the Ethernet adapter named <bpt id="p1">**</bpt>Ethernet<ept id="p1">**</ept>. This is the IP address of the host (<bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept>) and is set to <bpt id="p2">**</bpt>172.16.10.12<ept id="p2">**</ept>.
 
-1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替え、別のタブを開き、**http://172.16.10.12** に移動します。 ブラウザーに既定の IIS ページが表示されていることを確認します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, switch to the Microsoft Edge window, open another tab and go to <bpt id="p2">**</bpt><ph id="ph1">http://172.16.10.12</ph><ept id="p2">**</ept>. Verify that the browser displays the default IIS page.
 1. **SEA-ADM1** で、**SEA-SVR1** への PowerShell リモート処理セッションに戻り、**Windows PowerShell** コンソールで次のコマンドを入力し、Enter キーを押して実行中のコンテナーを一覧表示します。
 
    ```powershell
    docker ps
    ```
-   > **注**: このコマンドは、**SEA-SVR1** で現在実行されているコンテナーに関する情報を提供するものです。 コンテナーを停止するために使用するため、コンテナー ID を記録します。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: This command provides information on the container that is currently running on <bpt id="p2">**</bpt>SEA-SVR1<ept id="p2">**</ept>. Record the container ID because you will use it to stop the container. 
 
 1. 次のコマンドを入力し、Enter キーを押して、実行中のコンテナーを停止します (`<ContainerID>` プレースホルダーは、前の手順で特定したコンテナー ID に置き換えてください)。 
 
@@ -222,7 +217,7 @@ ms.locfileid: "147039438"
 
 #### <a name="task-3-use-windows-admin-center-to-manage-containers"></a>タスク 3: Windows Admin Center を使用してコンテナーを管理する
 
-1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** の [ツール] メニューの **[コンテナー]** を選択します。 **PowerShell** セッションを閉じるように求められたら、 **[続行]** を選択します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, in the Windows Admin Center, in the Tools menu of <bpt id="p2">**</bpt>sea-svr1.contoso.com<ept id="p2">**</ept>, select <bpt id="p3">**</bpt>Containers<ept id="p3">**</ept>. When prompted to close the <bpt id="p1">**</bpt>PowerShell<ept id="p1">**</ept> session, select <bpt id="p2">**</bpt>Continue<ept id="p2">**</ept>.
 1. コンテナー ペインで、 **[要約]** 、 **[コンテナー]** 、 **[イメージ]** 、 **[ネットワーク]** 、 **[ボリューム]** の各タブを参照します。
 
 ### <a name="exercise-2-results"></a>演習 2 の結果
