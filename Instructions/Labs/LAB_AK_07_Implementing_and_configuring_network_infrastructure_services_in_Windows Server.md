@@ -3,13 +3,8 @@ lab:
   title: 'ラボ: Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   type: Answer Key
   module: 'Module 7: Network Infrastructure services in Windows Server'
-ms.openlocfilehash: 5157a50a5a5317acfcb7d38b68fa4e16e5201c01
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039384"
 ---
+
 # <a name="lab-answer-key-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
 ## <a name="exercise-1-deploying-and-configuring-dhcp"></a>演習 1: DHCP の展開と構成
@@ -19,24 +14,24 @@ ms.locfileid: "147039384"
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\\Administrator** としてサインインします。
 1. **SEA-ADM1** で **[スタート]** を選択してから、**[Windows PowerShell (管理者)]** を選びます。
 
-   >**注**: Windows Admin Center を **SEA-ADM1** にまだインストールしていない場合は、次の 2 つの手順を行います。
+   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
 
 1. **[Windows PowerShell]** コンソールで、次のコマンドを入力し、Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
    ```
-1. 次のコマンドを入力し、Enter キーを押して、Windows Admin Center をインストールします。
+1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` にアクセスします。
 
-   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルにアクセスし、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
+   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: If the link does not work, on <bpt id="p2">**</bpt>SEA-ADM1<ept id="p2">**</ept>, browse to the <bpt id="p3">**</bpt>WindowsAdminCenter.msi<ept id="p3">**</ept> file, open the context menu for it, and then select <bpt id="p4">**</bpt>Repair<ept id="p4">**</ept>. After the repair completes, refresh Microsoft Edge. 
 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
@@ -44,7 +39,7 @@ ms.locfileid: "147039384"
    - パスワード: **Pa55w.rd**
 
 1. [すべての接続] ペインで、**[+ 追加]** を選択します。
-1. リソースの追加または作成ペインの **[サーバー]** タイルで、**[追加]** を選択します。
+1. リソースの追加または作成ペインの **[サーバー]** タイルで、 **[追加]** を選択します。
 1. **[サーバー名]** テキスト ボックスに、「**sea-svr1.contoso.com**」と入力します。 
 1. **[Use another account for this connection]\(この接続に別のアカウントを使用する\)** オプションが選択されていることを確かめ、次の資格情報を入力してから、**[Add with credentials]\(資格情報を使用して追加\)** を選択します。
 
@@ -57,13 +52,13 @@ ms.locfileid: "147039384"
 1. [役割と機能] ペインで、**[DHCP サーバー]** チェックボックスをオンにし、**[+ インストール]** を選択します。
 1. [Install Roles and Features]\(役割と機能のインストール\) ペインで、**[はい]** を選択します。
 
-   > **注**: DHCP 役割がインストールされていることを示す通知が行われるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the notification indicating that the DHCP role is installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
 
 1. **Microsoft Edge** ページを更新して **[sea-svr1.contoso.com]** ページに戻り、**[ツール]** リストで **[DHCP]** を選んでから、詳細ペインで **[インストール]** を選択して DHCP PowerShell ツールをインストールします。 
 
    > **注**: **sea-svr1.contoso.com** の **[ツール]** リストで **DHCP** エントリを利用できない場合は、**Microsoft Edge** ページを更新して、もう一度やり直してください。
 
-1. DHCP PowerShell ツールがインストールされていることを知らせる通知を待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
+1. Wait for a notification that the DHCP PowerShell tools are installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
 
 #### <a name="task-2-authorize-the-dhcp-server"></a>タスク 2: DHCP サーバーを承認する
 
@@ -77,7 +72,7 @@ ms.locfileid: "147039384"
 
 1. **SEA-ADM1** で、**SEA-SVR1** の **[DHCP]** 設定が表示されている Microsoft Edge ウィンドウの Windows Admin Center に切り替えます。
 
-   > **注**:メニューに DHCP オプションが表示されるまでに数分かかる場合があります。 必要に応じて、sea-svr1 への接続を更新します。 DHCP PowerShell ツールのインストールを求められたら、**[インストール]** を選択します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: It might take a few minutes for the DHCP option to appear in the menu. If necessary, refresh the connection to sea-svr1. If prompted to install the DHCP Powershell tools, select <bpt id="p1">**</bpt>Install<ept id="p1">**</ept>.
 
 1. **[DHCP]** ページで、 **[+ 新しいスコープ]** を選択します。
 1. 新しいスコープの作成ペインで、次の設定を指定してから、**[作成]** を選択します。
@@ -128,7 +123,7 @@ ms.locfileid: "147039384"
 1. **[フェールオーバーに使用するパートナー サーバーの指定]** 画面で、**[パートナー サーバー]** ボックスに「**172.16.10.12**」と入力し、**[このサーバーで構成された既存のフェールオーバー リレーションシップを再利用する (存在する場合)]** チェックボックスをオンにしてから、**[次へ]** を選択します。
 1. **[このサーバーで既に構成されているフェールオーバー リレーションシップから選択]** 画面で、**[次へ]** を選択してから、**[完了]** を選択します。
 1. **[フェールオーバーの構成]** ダイアログ ボックスで、**[閉じる]** を選択します。
-1. **[172.16.10.12]** で **[IPv4]** を選択してから、両方のスコープが一覧表示されていることを確認します。 必要に応じて、**F5** キーを押して更新します。
+1. Under <bpt id="p1">**</bpt>172.16.10.12<ept id="p1">**</ept>, select <bpt id="p2">**</bpt>IPv4<ept id="p2">**</ept>, and then verify that both scopes are listed. If necessary, press the <bpt id="p1">**</bpt>F5<ept id="p1">**</ept> key to refresh.
 
 #### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
 
@@ -147,7 +142,7 @@ ms.locfileid: "147039384"
 1. **[172.16.10.12]** を選び、[操作] ペインで **[その他の操作]** を選択し、**[すべてのタスク]** を選んでから **[停止]** を選択します。
 1. **SEA-ADM1** で、**[イーサネットの状態]** ウィンドウに戻り、**[無効]** を選択します。
 1. **[ネットワークと共有センター]** ウィンドウに戻り、**[アダプターの設定の変更]** を選択し、**[イーサネット]** を選んでから **[このネットワーク デバイスを有効にする]** を選択します。
-1. 有効な **イーサネット** 接続をダブルクリックして、その状態ウィンドウを表示します。
+1. 有効な**イーサネット**接続をダブルクリックして、その状態ウィンドウを表示します。
 1. **[イーサネットの状態]** ウィンドウで、**[詳細]** を選択します。
 1. **[ネットワーク接続の詳細]** ダイアログ ボックスで、DHCP が有効になっていること、IP アドレスが取得されたこと、および **SEA-DC1 (172.16.10.10)** DHCP サーバーによってリースが発行されたことを確認します。
 1. **[閉じる]** を選択して、**[イーサネットの状態]** ウィンドウに戻ります。
@@ -161,7 +156,7 @@ ms.locfileid: "147039384"
 
 1. **[インターネット プロトコル バージョン 4 (TCP/IPv4) のプロパティ]** ダイアログ ボックスで、**[次の DNS サーバーのアドレスを使用する]** を選択し、**[優先 DNS サーバー]** を **172.16.10.10** に設定してから **[OK]** を選択します。
 
-   > **注**: **[イーサネットの状態]** ウィンドウは開いたままにしておきます。 このラボで後ほど必要になります。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Leave the <bpt id="p2">**</bpt>Ethernet Status<ept id="p2">**</ept> window open. You will need it later in this lab. 
 
 ## <a name="exercise-2-deploying-and-configuring-dns"></a>演習 2: DNS の展開と構成
 
@@ -172,13 +167,13 @@ ms.locfileid: "147039384"
 1. [役割と機能] ペインで、**[DNS サーバー]** チェックボックスをオンにし、**[+ インストール]** を選択します。
 1. [Install Roles and Features]\(役割と機能のインストール\) ペインで、**[はい]** を選択します。
 
-   > **注**: DNS 役割がインストールされていることを示す通知が行われるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the notification indicating that the DNS role is installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
 
 1. **[Microsoft Edge]** ページを更新し、**[sea-svr1.contoso.com]** ページに戻り、**[ツール]** リストで **[DNS]** を選んでから、詳細ペインで **[インストール]** を選択して DNS PowerShell ツールをインストールします。 
 
    > **注**: **sea-svr1.contoso.com** の **[ツール]** リストで **DNS** エントリを利用できない場合は、**Microsoft Edge** ページを更新して、もう一度試してください。
 
-1. DNS PowerShell ツールがインストールされていることを示す通知が表示されるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
+1. Wait until a notification appears indicating that the DNS PowerShell tools are installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
 
 #### <a name="task-2-create-a-dns-zone"></a>タスク 2: DNS ゾーンを作成する
 
@@ -224,7 +219,7 @@ ms.locfileid: "147039384"
 1. **[新しい条件付きフォワーダー]** ダイアログ ボックスの **[DNS ドメイン]** ボックスに、「**Contoso.com**」と入力します。
 1. **[マスター サーバーの IP アドレス]** ボックスに「**172.16.10.10**」と入力してから、**Enter** キーを押します。
 
-   > **注**: **[新しい条件付きフォワーダー]** ダイアログ ボックス内の検証列の **不明なエラーが発生しました** というメッセージは無視してください。
+   > **注**: **[新しい条件付きフォワーダー]** ダイアログ ボックス内の検証列の**不明なエラーが発生しました**というメッセージは無視してください。
 
 1. **[OK]** を選択します。
 1. **SEA-ADM1** で、**Windows PowerShell** コンソールに切り替えます。
@@ -262,7 +257,7 @@ ms.locfileid: "147039384"
 #### <a name="task-6-verify-dns-policy-functionality"></a>タスク 6: DNS ポリシー機能を確認する
 
 1. **SEA-ADM1** で、**Windows PowerShell** コンソールに切り替えます。
-1. **Windows PowerShell** コンソールで、「`ipconfig`」と入力してから、Enter キーを押して現在の IP 構成を表示します。
+1. **Windows PowerShell**コンソールで、「`ipconfig`」と入力してから、Enter キーを押して現在の IP 構成を表示します。
 
    > **注**: イーサネット アダプターの IP アドレスは、ポリシーで構成されている **HeadOfficeSubnet** の一部であることに注意してください。
 
@@ -285,7 +280,7 @@ ms.locfileid: "147039384"
    Resolve-DnsName -Server sea-svr1.contoso.com -Name testapp.treyresearch.net
    ```
 
-   > **注**: 名前が **172.30.99.234** に解決されることを確認します。 **SEA-ADM1** の IP アドレスが **HeadOfficeSubnet** 内に存在しなくなったため、これは想定内です。 `testapp.treyresearch.net` をターゲットとする **(172.16.10.0/24)** の **HeadOfficeSubnet** からの DNS クエリは、**172.30.99.100** に解決されます。 `testapp.treyresearch.net` をターゲットとするこのサブネット外からの DNS クエリは、**172.30.99.234** に解決されます。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Verify that the name resolves to <bpt id="p2">**</bpt>172.30.99.234<ept id="p2">**</ept>. This is expected, because the IP address of <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept> is no longer within the <bpt id="p2">**</bpt>HeadOfficeSubnet<ept id="p2">**</ept>. DNS queries originating from the <bpt id="p1">**</bpt>HeadOfficeSubnet<ept id="p1">**</ept> of <bpt id="p2">**</bpt>(172.16.10.0/24)<ept id="p2">**</ept> targeting <ph id="ph1">`testapp.treyresearch.net`</ph> resolve to <bpt id="p3">**</bpt>172.30.99.100<ept id="p3">**</ept>. DNS queries from outside of this subnet targeting <ph id="ph1">`testapp.treyresearch.net`</ph> resolve to <bpt id="p1">**</bpt>172.30.99.234<ept id="p1">**</ept>.
 
    > **注**: ここで、**SEA-ADM1** の IP アドレスをその元の値に戻します。
 

@@ -2,18 +2,13 @@
 lab:
   title: 'ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   module: 'Module 7: Network Infrastructure services in Windows Server'
-ms.openlocfilehash: d50ffa7e7dc2631ee6c955b27e8b3507479ee8c9
-ms.sourcegitcommit: 33fdeedf81ac2a39e09176f7a4b7a72b983a072f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 03/19/2022
-ms.locfileid: "140742069"
 ---
+
 # <a name="lab-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
 ## <a name="scenario"></a>シナリオ
 
-Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件がある大規模な組織です。 これらの要件を満たせるように、DHCP を展開および構成し、サービスの可用性を確保するための高可用性を実現します。 また、Contoso 内の部門である Trey Research がテスト領域で独自の DNS サーバーを持てるように、DNS を設定します。 最後に、Windows Admin Center へのリモート アクセスを提供し、Web アプリケーション プロキシを使用してセキュリティで保護します。
+Contoso, Ltd. is a large organization with complex requirements for network services. To help meet these requirements, you will deploy and configure DHCP so that it is highly available to ensure service availability. You will also set up DNS so that Trey Research, a department within Contoso, can have its own DNS server in the testing area. Finally, you will provide remote access to Windows Admin Center and secure it with Web Application Proxy.
 
 ## <a name="objectives"></a>目標
 
@@ -26,7 +21,7 @@ Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件�
 
 ## <a name="lab-setup"></a>ラボのセットアップ
 
-仮想マシン: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
+Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept>, <bpt id="p2">**</bpt>AZ-800T00A-SEA-SVR1<ept id="p2">**</ept>, and <bpt id="p3">**</bpt>AZ-800T00A-ADM1<ept id="p3">**</ept> must be running. Other VMs can be running, but they aren't required for this lab.
 
 > **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-SEA-ADM1** 仮想マシンによって、**SEA-DC1**、**SEA-SVR1**、**SEA-ADM1** のインストールがホストされます。
 
@@ -43,7 +38,7 @@ Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件�
 
 ### <a name="scenario"></a>シナリオ
 
-Contoso の Trey Research の下位部門には、約 50 人のユーザーのみが存在する別のオフィスがあります。 彼らはすべて自分のコンピューターで IP アドレスを手動で構成しており、代わりに DHCP の使用を開始したいと考えています。 DHCP は、Trey Research サイトのスコープを持つ **SEA-SVR1** にインストールします。 さらに、**SEA-DC1** での高可用性を実現するために新しい DHCP サーバーを使用して、DHCP フェールオーバーを構成します。
+The Trey Research subdivision of Contoso has a separate office with only about 50 users. They have been manually configuring IP addresses on all of their computers and want to begin using DHCP instead. You will install DHCP on <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> with a scope for the Trey Research site. Additionally, you will configure DHCP Failover by using the new DHCP server for high availability with <bpt id="p1">**</bpt>SEA-DC1<ept id="p1">**</ept>.
 
 この演習の主なタスクは次のとおりです。
 
@@ -70,13 +65,13 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。
 
-   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
+   >Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件がある大規模な組織です。 
    
-1. ダイアログが表示されたら、 **[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、 **[OK]** を選択します。
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
@@ -106,7 +101,7 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 1. サーバー マネージャーの **[ツール]** メニューで、 **[DHCP 管理コンソール]** を開きます。
 1. **[DHCP 管理コンソール]** で、すべての承認済みサーバー (**172.16.10.12** および **SEA-DC1.contoso.com**) を追加します。
-1. **[DHCP 管理コンソール]** で、DHCP サーバー **172.16.10.12** ノードを参照し、**ContosoClients** スコープで、値が **172.16.10.10** のスコープ オプション **006 DNS サーバー** を追加します。
+1. **[DHCP 管理コンソール]** で、DHCP サーバー **172.16.10.12** ノードを参照し、**ContosoClients** スコープで、値が **172.16.10.10** のスコープ オプション **006 DNS サーバー**を追加します。
 
 ### <a name="task-4-configure-dhcp-failover"></a>タスク 4: DHCP フェールオーバーを構成する
 
@@ -130,8 +125,8 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 1. **SEA-ADM1** で、IP 構成を静的から動的に割り当てられるように変更します。
 1. 結果の IP 構成を調べ、DHCP リースが **SEA-SVR1 (172.16.10.12)** から取得されたことを確認します。
-1. **SEA-ADM1** の **DHCP 管理コンソール** で、両方の DHCP サーバーの **Contoso** スコープに **SEA-ADM1** のリースが一覧表示されていることを確認します。
-1. **SEA-ADM1** で、**DHCP 管理コンソール** を使用して、**SEA-SVR1 (172.16.10.12)** 上の **DHCP** サービスを停止します。
+1. **SEA-ADM1** の **DHCP 管理コンソール**で、両方の DHCP サーバーの **Contoso** スコープに **SEA-ADM1** のリースが一覧表示されていることを確認します。
+1. **SEA-ADM1** で、**DHCP 管理コンソール**を使用して、**SEA-SVR1 (172.16.10.12)** 上の **DHCP** サービスを停止します。
 1. **SEA-ADM1** のイーサネット ネットワーク接続を無効にしてから再度有効にして、リースを強制的に更新します。
 1. **SEA-ADM1** で、同じ DHCP リースが **SEA-DC1 (172.16.10.10)** から取得されていることを確認します。
 
@@ -139,7 +134,7 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 ### <a name="scenario"></a>シナリオ
 
-Contoso 内の Trey Research の場所で働いているスタッフには、テスト環境にレコードを作成するための自身の DNS サーバーが必要です。 しかし、テスト環境では、引き続き Contoso のインターネット DNS 名とリソース レコードを解決できる必要があります。 これらのニーズを満たすために、インターネット サービス プロバイダー (ISP) への転送を構成し、**SEA-DC1** に **contoso.com** の条件付きフォワーダーを作成します。 また、ユーザーの場所に基づいて異なる IP アドレスの解決を必要とするテスト アプリケーションもあります。 DNS ポリシーを使用して、**testapp.treyresearch.net** を、本社のユーザーに対して異なる方法で解決するように構成します。
+これらの要件を満たせるように、DHCP を展開および構成し、サービスの可用性を確保するための高可用性を実現します。
 
 この演習の主なタスクは次のとおりです。
 
@@ -182,7 +177,7 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
 
 ### <a name="task-3-configure-forwarding"></a>タスク 3: 転送を構成する
 
-1. **SEA-ADM1** で、サーバー マネージャーの **[ツール]** メニューから、**DNS マネージャー コンソール** を開きます。
+1. **SEA-ADM1** で、サーバー マネージャーの **[ツール]** メニューから、**DNS マネージャー コンソール**を開きます。
 1. **[DNS マネージャー]** で、**SEA-SVR1.contoso.com** に接続します。
 1. **SEA-SVR1.contoso.com** のプロパティの **[フォワーダー]** タブで、フォワーダーとして **131.107.0.100** を構成します。
 
@@ -239,6 +234,6 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
     ```powershell
     Resolve-DnsName -Server sea-svr1.contoso.com -Name testapp.treyresearch.net
     ```
-   > **注**: 名前が **172.30.99.234** に解決されることを確認します。 **SEA-ADM1** の IP アドレスが **HeadOfficeSubnet** 内に存在しなくなったため、これは想定内です。 `testapp.treyresearch.net` をターゲットとする **(172.16.10.0/24)** の **HeadOfficeSubnet** からの DNS クエリは、**172.30.99.100** に解決されます。 `testapp.treyresearch.net` をターゲットとするこのサブネット外からの DNS クエリは、**172.30.99.234** に解決されます。
+   > また、Contoso 内の部門である Trey Research がテスト領域で独自の DNS サーバーを持てるように、DNS を設定します。
 
 1. **SEA-ADM1** の IP アドレスを元の値に戻します。

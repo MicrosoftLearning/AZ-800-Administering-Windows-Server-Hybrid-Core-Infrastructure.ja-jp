@@ -3,16 +3,11 @@ lab:
   title: 'ラボ: Windows Server での記憶域ソリューションの実装'
   type: Answer Key
   module: 'Module 9: File servers and storage management in Windows Server'
-ms.openlocfilehash: 6019d7dac7105bf65a5720b292ef5afc46f4faac
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039378"
 ---
+
 # <a name="lab-answer-key-implementing-storage-solutions-in-windows-server"></a>ラボの回答キー: Windows Server での記憶域ソリューションの実装
 
-> **注**: 各演習の間で、仮想マシン (VM) を必ず元に戻してください。 ほとんどの VM は Windows Server 2019 Server Core なので、演習で記憶域環境に行った変更を元に戻すより、VM を元に戻して再起動する方が時間がかかりません。
+> <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Be sure to revert the virtual machines (VMs) between each exercise. Due to most of the VMs being Windows Server 2019 Server Core, the time it takes to revert and restart is faster than attempting to undo changes made to the storage environment in the exercises.
 
 ## <a name="exercise-1-implementing-data-deduplication"></a>演習 1: データ重複除去の実装
 
@@ -21,13 +16,13 @@ ms.locfileid: "147039378"
 1. **SEA-ADM1** に接続し、必要であればパスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてサインインします。
 1. **SEA-ADM1** で、**[スタート]** を選択し、**[サーバー マネージャー]** を選択します。
 1. サーバー マネージャーで、**[管理]** を選択してから、**[役割と機能の追加]** を選択します。
-1. **役割と機能の追加ウィザード** で、**[次へ]** を 2 回選択します。
+1. **役割と機能の追加ウィザード**で、**[次へ]** を 2 回選択します。
 1. **[対象サーバーの選択]** ページの [サーバープール] ペインで、**SEA-SVR3.Contoso.com** を選択してから、**[次へ]** を選択します。
 1. **[サーバーの役割の選択]** ページの [役割] ペインで、**[ファイル サービスと記憶域サービス]** 項目を展開してから、**[ファイル サービスおよび iSCSI サービス]** 項目を展開し、**[データ重複除去]** 項目を選択して、**[次へ]** を選択します。
 1. **[機能の選択]** ページで **[次へ]** を選択し、**[インストール オプションの確認]** ページで **[インストール]** を選択します。
 1. 役割サービスのインストール中に、タスク バーでの **[エクスプローラー]** アイコンを選択します。
-1. **エクスプローラー** で **C** ドライブを参照します。
-1. **Labfiles** ディレクトリを選択し、状況依存のメニューを表示します。 メニューで **[アクセスを付与する対象]** を選択し、カスケードメニューで **[特定のユーザー]** を選択します。
+1. **エクスプローラー**で **C** ドライブを参照します。
+1. Select the <bpt id="p1">**</bpt>Labfiles<ept id="p1">**</ept> directory, and then display the context-sensitive menu. In the menu, select <bpt id="p1">**</bpt>Give access to<ept id="p1">**</ept>, and then, in the cascading menu, select <bpt id="p2">**</bpt>Specific people...<ept id="p2">**</ept>.
 1. **[ネットワーク アクセス]** ウィンドウの **[名前を入力して [追加] をクリックするか、または、矢印をクリックして相手を検索してください]** テキスト ボックスに「**Users**」と入力して、**[追加]** をクリックします。
 1. **[ネットワーク アクセス]** ウィンドウで **[共有]** を選択し、**[ユーザーのフォルダーは共有されています]** ウィンドウが表示されたら、**[完了]** を選択します。
 1. **[サーバー マネージャー]** ウィンドウに戻り、**[Add Roles and Features Wizard installation succeeded]\(役割と機能の追加ウィザードのインストールが成功しました\)** ページで **[閉じる]** を選択します。
@@ -57,8 +52,8 @@ ms.locfileid: "147039378"
 
 #### <a name="task-2-enable-and-configure-data-deduplication"></a>タスク 2: データ重複除去を有効にして構成する
 
-1. **SEA-ADM1** へのコンソール セッションに戻り、コンソール セッション内で **サーバー マネージャー** に切り替えます。
-1. **サーバー マネージャー** のツリー ペインで、**[ファイル サービスと記憶域サービス]** を選択し、**[ディスク]** を選択します。
+1. **SEA-ADM1** へのコンソール セッションに戻り、コンソール セッション内で**サーバー マネージャー**に切り替えます。
+1. **サーバー マネージャー**のツリー ペインで、**[ファイル サービスと記憶域サービス]** を選択し、**[ディスク]** を選択します。
 1. [ディスク] ペインで、**SEA-SVR3** のディスクの一覧を参照し、前のタスクで構成したディスク番号 **1** を表すエントリを選択します。
 1. [ボリューム] ペインで、**M:** ボリュームの状況依存メニューを表示し、メニューの **[データ重複除去の構成]** を選択します。
 1. **[ボリューム (M:\\) 重複除去設定]** ウィンドウの **[データ重複除去]** ドロップダウン リストのリストで、 **[汎用ファイル サーバー]** の設定を選択します。
@@ -84,7 +79,7 @@ ms.locfileid: "147039378"
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
 1. **SEA-ADM1** で Microsoft Edge を起動してから、`https://SEA-ADM1.contoso.com` に移動します。 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
@@ -124,7 +119,7 @@ ms.locfileid: "147039378"
    Get-DedupVolume –Volume M: |fl
    Get-DedupMetadata –Volume M: |fl
    ```
-1. **SEA-ADM1** で、**サーバー マネージャー** の [ディスク] ペインに切り替えてから、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
+1. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインに切り替えてから、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
 1. **[ボリューム]** セクションで **M:** ボリュームを選択して状況依存メニューを表示し、メニューから **[プロパティ]** を選択します。 
 1. **[ボリューム (M:\\) のプロパティ]** ウィンドウで、 **[重複除去率]** と **[重複除去による節約量]** の値を確認します。
 
@@ -170,22 +165,22 @@ ms.locfileid: "147039378"
    $partition3.DriveLetter
    ```
 
-   > **注**: この手順では、ドライブ文字がそれぞれ **E** および **F** であるとしています。 ドライブ文字の割り当てが異なる場合は、この演習の手順に従うときにそれを考慮してください。
+   > **注**: 各演習の間で、仮想マシン (VM) を必ず元に戻してください。
 
 #### <a name="task-2-connect-to-and-configure-iscsi-targets"></a>タスク 2: iSCSI ターゲットに接続して構成する
 
-1. **SEA-ADM1** で、**サーバー マネージャー** に切り替えます。
-1. **SEA-ADM1** で、**サーバー マネージャー** の [ディスク] ペインに切り替えてから、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
-1. **サーバー マネージャー** のツリー ウィンドウで **[ファイル サービスと記憶域サービス]** の **[ディスク]** を選択し、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** をクリックします。
+1. **SEA-ADM1** で、**サーバー マネージャー**に切り替えます。
+1. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインに切り替えてから、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
+1. **サーバー マネージャー**のツリー ウィンドウで **[ファイル サービスと記憶域サービス]** の **[ディスク]** を選択し、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** をクリックします。
 1. ディスク 2 と 3 がオンラインになっている更新された **SEA-SVR3** のディスク構成を確認します。
 1. **SEA-DC1** のエントリを参照し、ディスクの構成を確認します。
 
    > **注**: **SEA-DC1** には、ブートおよびシステム ボリュームをホストするディスクが 1 つだけあります。
 
-1. **サーバー マネージャー** の **[ファイル サービスと記憶域サービス]** で、**[iSCSI]** を選択し、**[タスク]** を選択してから、ドロップダウン メニューで **[新しい iSCSI 仮想ディスク]** を選択します。
-1. **新しい iSCSI 仮想ディスク ウィザード** の **[iSCSI 仮想ディスクの場所を選択]** ページで、**SEA-SVR3** サーバーの **E:** ボリュームを選択して、**[次へ]** を選択します。
+1. **サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** で、**[iSCSI]** を選択し、**[タスク]** を選択してから、ドロップダウン メニューで **[新しい iSCSI 仮想ディスク]** を選択します。
+1. **新しい iSCSI 仮想ディスク ウィザード**の **[iSCSI 仮想ディスクの場所を選択]** ページで、**SEA-SVR3** サーバーの **E:** ボリュームを選択して、**[次へ]** を選択します。
 1. **[iSCSI 仮想ディスク名の指定]** ページで、**[名前]** テキスト ボックスに「**iSCSIDisk1**」と入力し、**[次へ]** を選択します。
-1. **[iSCSI 仮想ディスクのサイズを指定]** ページで、**[サイズ]** テキスト ボックスに「**5**」と入力します。 その他の設定はすべて既定値のままにして、**[次へ]** を選択します。
+1. ほとんどの VM は Windows Server 2019 Server Core なので、演習で記憶域環境に行った変更を元に戻すより、VM を元に戻して再起動する方が時間がかかりません。
 1. **[iSCSI ターゲットの割り当て]** ページで、**[新しい iSCSI ターゲット]** オプションが選択されていることを確認し、**[次へ]** を選択します。
 1. **[ターゲット名の指定]** ページで、**[名前]** フィールドに「**iSCSIFarm**」と入力して、**[次へ]** を選択します。
 1. **[アクセス サーバーの指定]** ページで、**[追加]** ボタンを選択します。
@@ -221,8 +216,8 @@ ms.locfileid: "147039378"
 #### <a name="task-3-verify-iscsi-disk-configuration"></a>タスク 3: iSCSI ディスクの構成を確認する
 
 1. **[サーバー マネージャー]** ウィンドウをアクティブにして **SEA-ADM1** へのコンソール セッションに戻ります。
-1. **サーバー マネージャー** で **[ファイル サービスと記憶域サービス]** の [iSCSI] ウィンドウから [ディスク] ウィンドウに切り替え、右上隅の **[タスク]** メニューで **[最新の状態に更新]** を選択します。 
-1. **SEA-DC1** ディスクの構成を確認し、2 つの **5 GB** ディスクが含まれ、**オフライン** 状態であり、バスの種類が **iSCSI** であることを確認します。
+1. **サーバー マネージャー**で **[ファイル サービスと記憶域サービス]** の [iSCSI] ウィンドウから [ディスク] ウィンドウに切り替え、右上隅の **[タスク]** メニューで **[最新の状態に更新]** を選択します。 
+1. **SEA-DC1** ディスクの構成を確認し、2 つの **5 GB** ディスクが含まれ、**オフライン**状態であり、バスの種類が **iSCSI** であることを確認します。
 1. **SEA-DC1** のコンソール セッションに切り替えます。 
 1. **Windows PowerShell** プロンプトで、次のコマンドを入力して Enter キーを押し、ディスク構成の一覧を表示します。
 
@@ -230,7 +225,7 @@ ms.locfileid: "147039378"
    Get-Disk
    ```
 
-   > **注**: 両方のディスクが存在し、正常ですが、オフラインです。 それらを使用するには、初期化してフォーマットする必要があります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Both disks are present and healthy, but offline. To use them, you need to initialize and format them.
 
 1. 次のコマンドを入力してそれぞれの後で Enter キーを押し、ReFS でフォーマットされたドライブ文字 **E** のボリュームを作成します。
 
@@ -242,7 +237,7 @@ ms.locfileid: "147039378"
 1. 前のステップを繰り返して、ReFS でフォーマットされた新しいドライブを作成しますが、今回はディスク番号 **2** とドライブ文字 **F** を使用します。
 1. **[サーバー マネージャー]** ウィンドウをアクティブにして **SEA-ADM1** へのコンソール セッションに戻ります。
 1. **サーバー マネージャー** ウィンドウの右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択して、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。 
-1. **SEA-DC1** ディスクの構成を確認し、両方のドライブが **オンライン** になっていることを確認します。
+1. **SEA-DC1** ディスクの構成を確認し、両方のドライブが**オンライン**になっていることを確認します。
 
 #### <a name="task-4-revert-disk-configuration"></a>タスク 4: ディスクの構成を元に戻す 
 
@@ -264,20 +259,20 @@ ms.locfileid: "147039378"
 1. **サーバー マネージャー** ウィンドウの右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択して、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。 
 1. [ディスク] ペインで下にスクロールし、**SEA-SVR3** のディスク 1 から 4 が **[不明]** パーティションおよび **[オフライン]** 状態で一覧表示されることを確認します。 
 1. 4 つのディスクを順に選択して状況依存メニューを表示して、メニューの **[オンラインにする]** オプションを選択してから、**[ディスクをオンラインにする]** ウィンドウで **[はい]** を選択します。
-1. すべてのディスクが **[オンライン]** 状態で一覧に表示されていることを確認します。 **サーバー マネージャー** のナビゲーション ウィンドウで、**[記憶域プール]** を選択します。
-1. **サーバー マネージャー** の **[記憶域プール]** 領域で、**[タスク]** の一覧の **[記憶域プールの新規作成]** を選択します。 
-1. **記憶域プールの新規作成ウィザード** の **[開始する前に]** ページで、**[次へ]** を選択します。
-1. **[記憶域プールの名前とサブシステムの指定]** ページの **[名前]** テキスト ボックスに「**SP1**」と入力します。 **[説明]** テキスト ボックスに、「**記憶域プール 1**」と入力します。 **[使用する利用可能なディスクのグループ (ルート プール) を選択してください]** の一覧で **SEA-SVR3** のエントリを選択し、**[次へ]** を選択します。
+1. Verify that all disks are listed with the <bpt id="p1">**</bpt>Online<ept id="p1">**</ept> status. In <bpt id="p1">**</bpt>Server Manager<ept id="p1">**</ept>, in the navigation pane, select <bpt id="p2">**</bpt>Storage Pools<ept id="p2">**</ept>.
+1. **サーバー マネージャー**の **[記憶域プール]** 領域で、**[タスク]** の一覧の **[記憶域プールの新規作成]** を選択します。 
+1. **記憶域プールの新規作成ウィザード**の **[開始する前に]** ページで、**[次へ]** を選択します。
+1. On the <bpt id="p1">**</bpt>Specify a storage pool name and subsystem<ept id="p1">**</ept> page, in the <bpt id="p2">**</bpt>Name<ept id="p2">**</ept> text box, enter <bpt id="p3">**</bpt>SP1<ept id="p3">**</ept>. In the <bpt id="p1">**</bpt>Description<ept id="p1">**</ept> text box, enter <bpt id="p2">**</bpt>Storage Pool 1<ept id="p2">**</ept>. In the <bpt id="p1">**</bpt>Select the group of available disks (also known as a primordial pool) that you want to use<ept id="p1">**</ept> listing, select the <bpt id="p2">**</bpt>SEA-SVR3<ept id="p2">**</ept> entry, and then select <bpt id="p3">**</bpt>Next<ept id="p3">**</ept>.
 1. **[記憶域プールの物理ディスクを選択]** ページで、3 つのディスクの **127 GB** サイズの横にあるチェック ボックスをオンにして、**[次へ]** を選択します。
 1. **[選択内容の確認]** ページで設定を確認し、**[作成]** を選択します。
 1. **[閉じる]** を選択します。
 
 #### <a name="task-2-create-a-volume-based-on-a-three-way-mirrored-disk"></a>タスク 2: 3 方向ミラー ディスクを基にしてボリュームを作成する 
 
-1. **SEA-ADM1** の **サーバー マネージャー** の [記憶域プール] ペインで、**SP1** を選択します。
+1. **SEA-ADM1** の**サーバー マネージャー**の [記憶域プール] ペインで、**SP1** を選択します。
 1. **[仮想ディスク]** 領域で **[タスク]** を選択し、**[仮想ディスクの新規作成]** を選択します。
 1. **[記憶域プールの選択]** ダイアログ ボックスで **SP1** を選択して、**[OK]** を選択します。
-1. **仮想ディスクの新規作成ウィザード** の **[開始する前に]** ページで、**[次へ]** を選択します。
+1. **仮想ディスクの新規作成ウィザード**の **[開始する前に]** ページで、**[次へ]** を選択します。
 1. **[仮想ディスク名の指定]** ページで、**[名前]** テキスト ボックスに「**Three-Mirror**」と入力し、**[次へ]** を選択します。
 1. **[エンクロージャの回復性の指定]** ページで、**[次へ]** を選択します。
 1. **[記憶域のレイアウトの選択]** ページで **[ミラー]** を選択して、 **[次へ]** を選択します。
@@ -285,13 +280,13 @@ ms.locfileid: "147039378"
 1. **[仮想ディスクのサイズの指定]** ページの **[サイズの指定]** テキスト ボックスに「**25**」と入力して、**[次へ]** を選択します。
 1. **[選択内容の確認]** ページで設定を確認し、**[作成]** を選択します。
 1. **[結果の表示]** ページで、**[Create a volume when this wizard closes]\(このウィザードが閉じるときにボリュームを作成する\)** チェック ボックスをオフにして、**[閉じる]** を選択します。
-1. **サーバー マネージャー** のナビゲーション ウィンドウで、**[ボリューム]** エントリが選択されていることを確認します。
+1. **サーバー マネージャー**のナビゲーション ウィンドウで、**[ボリューム]** エントリが選択されていることを確認します。
 1. **[ボリューム]** 領域で **[タスク]** を選択し、**[ボリュームの新規作成]** を選択します。
-1. **新しいボリューム ウィザード** の **[開始する前に]** ページで、**[次へ]** を選択します。
+1. **新しいボリューム ウィザード**の **[開始する前に]** ページで、**[次へ]** を選択します。
 1. **[サーバーとディスクの選択]** ページで、**SEA-SVR3** と **Three-Mirror** を選択して、**[次へ]** を選択します。
 1. **[ボリューム サイズの指定]** ページで、**[次へ]** を選択します。
 1. **[ドライブ文字またはフォルダーへの割り当て]** ページで、**[ドライブ文字]** を選択し、**T** を選択して、**[次へ]** を選択します。
-1. **[ファイル システム形式の選択]** ページで、**[ファイル システム]** ドロップダウン リストの **[ReFS]** を選択します。 **[ボリューム ラベル]** テキスト ボックスに「**TestData**」と入力して、**[次へ]** を選択します。
+1. On the <bpt id="p1">**</bpt>Select file system settings<ept id="p1">**</ept> page, in the <bpt id="p2">**</bpt>File system<ept id="p2">**</ept> drop-down list, select <bpt id="p3">**</bpt>ReFS<ept id="p3">**</ept>. In the <bpt id="p1">**</bpt>Volume label<ept id="p1">**</ept> text box, enter <bpt id="p2">**</bpt>TestData<ept id="p2">**</ept>, and then select <bpt id="p3">**</bpt>Next<ept id="p3">**</ept>.
 1. **[データ重複除去を有効にする]** ページで、**[次へ]** を選択します。
 1. **[選択内容の確認]** ページで、**[作成]** を選択します。
 1. **[完了]** ページで **[閉じる]** を選択します。
@@ -306,28 +301,28 @@ ms.locfileid: "147039378"
    ```
 
 1. **SEA-ADM1** のタスク バーで、**エクスプローラー** アイコンを選択します。
-1. **エクスプローラー** ウィンドウの **アドレス バー** に「**\\\\SEA-SVR3.contoso.com\\t$**」と入力します。
-1. エクスプローラーの [詳細] ペインで状況依存メニューを表示し、メニューの **[新規フォルダー]** を選択します。 新しいフォルダーに割り当てられた既定の名前を **TestData** に置き換えて、Enter キーを押します。
+1. **エクスプローラー** ウィンドウの**アドレス バー**に「**\\\\SEA-SVR3.contoso.com\\t$**」と入力します。
+1. In File Explorer, in the Details pane, display the context-sensitive menu, and then, in the menu, select <bpt id="p1">**</bpt>New Folder<ept id="p1">**</ept>. Replace the default name assigned to the new folder with <bpt id="p1">**</bpt>TestData<ept id="p1">**</ept>, and then press Enter.
 1. エクスプローラーで、新しく作成した **TestData** フォルダーをダブルクリックします。
-1. エクスプローラーの [詳細] ペインで状況依存メニューを表示し、メニューの **[新規]** を選択して、**[テキスト ドキュメント]** を選択します。 新しいファイルに割り当てられた既定の名前を **TestDocument** に置き換えて、Enter キーを押します。
+1. In File Explorer, in the Details pane, display context-sensitive menu, and then, in the menu, select <bpt id="p1">**</bpt>New<ept id="p1">**</ept>, and then select <bpt id="p2">**</bpt>Text Document<ept id="p2">**</ept>. Replace the default name assigned to the new file with <bpt id="p1">**</bpt>TestDocument<ept id="p1">**</ept>, and then press Enter.
 
 #### <a name="task-4-disconnect-a-disk-from-the-storage-pool-and-verify-volume-availability"></a>タスク 4: 記憶域プールからディスクを切断し、ボリュームの可用性を確認する 
 
-1. **SEA-ADM1** で、**サーバー マネージャー** に切り替えます。 **[ファイル サービスと記憶域サービス]** のツリー ペインで、**[記憶域プール]** を選択してから、**SP1** を選択します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, switch to <bpt id="p2">**</bpt>Server Manager<ept id="p2">**</ept>. In the <bpt id="p1">**</bpt>File and Storage Services<ept id="p1">**</ept> tree pane, select <bpt id="p2">**</bpt>Storage Pools<ept id="p2">**</ept>, and then select <bpt id="p3">**</bpt>SP1<ept id="p3">**</ept>.
 1. [物理ディスク] ペインで、**[タスク]** ドロップダウン リストを選択し、**[物理ディスクの追加]** を選択します。
-1. **[物理ディスクの追加]** ダイアログ ボックスの、プールに追加する 4 番目のディスクを表す行で、ディスク名の横にあるチェック ボックスをオンにします。 **[割り当て]** ドロップダウン リストで、**[自動]** エントリが選択されていることを確認し、**[OK]** を選択します。
+1. In the <bpt id="p1">**</bpt>Add Physical Disk<ept id="p1">**</ept> dialog box, in the row representing the fourth disk to be added to the pool, select the check box next to the disk name. In the <bpt id="p1">**</bpt>Allocation<ept id="p1">**</ept> drop-down list, ensure that the <bpt id="p2">**</bpt>Automatic<ept id="p2">**</ept> entry is selected, and then select <bpt id="p3">**</bpt>OK<ept id="p3">**</ept>.
 1. [物理ディスク] ペインで、一覧の先頭のディスクを右クリックして、**[ディスクの削除]** を選択します。
 1. **[物理ディスクの削除]** ウィンドウで、**[はい]** を選択します。
-1. **[物理ディスクの削除]** ダイアログ ボックスで、**影響を受ける仮想ディスクを Windows が修復している** ことを示すメッセージを確認して、**[OK]** を選択します。
-1. **TestData** フォルダーの内容が表示されている **エクスプローラー** ウィンドウに戻ります。
+1. **[物理ディスクの削除]** ダイアログ ボックスで、**影響を受ける仮想ディスクを Windows が修復している**ことを示すメッセージを確認して、**[OK]** を選択します。
+1. **TestData** フォルダーの内容が表示されている**エクスプローラー** ウィンドウに戻ります。
 1. **TestDocument.txt** を開き、その内容がまだ使用可能な状態であることを確認します。
 
 #### <a name="task-5-add-a-disk-to-the-storage-pool-and-verify-volume-availability"></a>タスク 5: 記憶域プールにディスクを追加し、ボリュームの可用性を確認する 
 
-1. **SEA-ADM1** で、**サーバー マネージャー** に切り替えます。 **[ファイル サービスと記憶域サービス]** ツリー ペインの **[記憶域プール]** エントリを選択し、右上隅の **[タスク]** メニューで **[記憶域の再スキャン]** を選択します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, switch to <bpt id="p2">**</bpt>Server Manager<ept id="p2">**</ept>. In <bpt id="p1">**</bpt>File and Storage Services<ept id="p1">**</ept> tree pane, with the <bpt id="p2">**</bpt>Storage Pools<ept id="p2">**</ept> entry selected, in the <bpt id="p3">**</bpt>TASKS<ept id="p3">**</ept> menu in the upper right corner, select <bpt id="p4">**</bpt>Rescan Storage<ept id="p4">**</ept>.
 1. プロンプトが表示されたら、**[記憶域の再スキャン]** ダイアログ ボックスで **[はい]** を選択します。
 1. [物理ディスク] ペインで **[タスク]** を選択し、ドロップダウン メニューの **[物理ディスクの追加]** を選択します。
-1. **[物理ディスクの追加]** ウィンドウの、プールに追加する 4 番目のディスクを表す行で、ディスク名の横にあるチェック ボックスをオンにします。 **[割り当て]** ドロップダウン リストで、**[自動]** エントリが選択されていることを確認し、**[OK]** を選択します。
+1. In the <bpt id="p1">**</bpt>Add Physical Disk<ept id="p1">**</ept> window, in the row representing the fourth disk to be added to the pool, select the check box next to the disk name. In the <bpt id="p1">**</bpt>Allocation<ept id="p1">**</ept> drop-down list, ensure that the <bpt id="p2">**</bpt>Automatic<ept id="p2">**</ept> entry is selected, and then select <bpt id="p3">**</bpt>OK<ept id="p3">**</ept>.
 1. **SEA-ADM1** で **エクスプローラー** ウィンドウに切り替えて、**TestData** フォルダーとその内容がまだ使用可能な状態であることを確認します。
 
 #### <a name="task-6-revert-disk-configuration"></a>タスク 6: ディスクの構成を元に戻す 
@@ -349,21 +344,21 @@ ms.locfileid: "147039378"
 #### <a name="task-1-prepare-for-installation-of-storage-spaces-direct"></a>タスク 1: 記憶域スペース ダイレクトのインストールを準備する 
 
 1. **SEA-ADM1** へのコンソール セッションに戻り、**[すべてのサーバー]** を選択します。
-1. **SEA-ADM1** の **サーバー マネージャー** のコンソール ツリーで、**[すべてのサーバー]** を選択し、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** の **[管理状態]** が **[オンライン - パフォーマンス カウンターが開始されていません]** 状態であることを確認してから、次に進みます。
-1. **サーバー マネージャー** のナビゲーション ウィンドウで、**[ファイル サービスと記憶域サービス]** を選択し、**[ディスク]** を選択します。
+1. **SEA-ADM1** の**サーバー マネージャー**のコンソール ツリーで、**[すべてのサーバー]** を選択し、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** の **[管理状態]** が **[オンライン - パフォーマンス カウンターが開始されていません]** 状態であることを確認してから、次に進みます。
+1. **サーバー マネージャー**のナビゲーション ウィンドウで、**[ファイル サービスと記憶域サービス]** を選択し、**[ディスク]** を選択します。
 1. [ディスク] ペインが選択された状態で、右上隅の **[タスク]** メニューの **[最新の状態に更新]** を選択します。
 1. [ディスク] ペインで、**SEA-SVR3** のディスク 1 から 4 の一覧まで下にスクロールし、**[パーティション]** 列のそれぞれのエントリが **[不明]** と表示されていることを確認します。
-1. 4 つのディスクを順番に選択し、状況依存メニューを表示します。 メニューで **[オンラインにする]** オプションを選択し、**[ディスクをオンラインにする]** ウィンドウで **[はい]** を選択します。
+1. Select each of the four disks in sequence, and then display its context-sensitive menu. In the menu, select the <bpt id="p1">**</bpt>Bring Online<ept id="p1">**</ept> option, and then in the <bpt id="p2">**</bpt>Bring Disk Online<ept id="p2">**</ept> window, select <bpt id="p3">**</bpt>Yes<ept id="p3">**</ept>.
 1. 同じ方法を使用して、**SEA-SVR1** と **SEA-SVR2** のすべてのディスクをオンラインにします。
 1. **SEA-ADM1** で **[スタート]** を選択し、**[スタート]** メニューの **[Windows PowerShell ISE]** を選択します。
-1. **Windows PowerShell ISE** で、**[ファイル]** メニューを選択します。 **[ファイル]** メニューの **[開く]** を選択し、**[開く]** ダイアログ ボックスで **C:\Labfiles\Lab09** に移動します。
+1. In <bpt id="p1">**</bpt>Windows PowerShell ISE<ept id="p1">**</ept>, select the <bpt id="p2">**</bpt>File<ept id="p2">**</ept> menu. In the <bpt id="p1">**</bpt>File<ept id="p1">**</ept> menu, select <bpt id="p2">**</bpt>Open<ept id="p2">**</ept>, and then, in the <bpt id="p3">**</bpt>Open<ept id="p3">**</ept> dialog box, go to <bpt id="p4">**</bpt>C:\Labfiles\Lab09<ept id="p4">**</ept>.
 1. **Implement-StorageSpacesDirect.ps1** を選択して、**[開く]** を選択します。
 
-   > **注**: スクリプトは、番号付きのステップに分かれています。 8 つのステップがあり、各ステップには多数のコマンドがあります。 個々の行を実行するには、その行のどこかにカーソルを置いて、F8 キーを押すか、**Windows PowerShell ISE** ウィンドウのツール バーで **[選択項目を実行]** を選択します。 複数の行を実行するには、それらすべての全体を選択して、F8 キーまたは **[選択項目を実行]** ツール バー アイコンを使用します。 一連の手順については、この演習の手順で説明されています。 各ステップが完了したことを確認してから、次のステップを始めます。
+   > **Labfiles** ディレクトリを選択し、状況依存のメニューを表示します。
 
-1. ステップ 1 の最初の行を選択し、F8 キーを押して、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** に **ファイル サーバーの役割とフェールオーバー クラスタリング** 機能をインストールします。
+1. ステップ 1 の最初の行を選択し、F8 キーを押して、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** に**ファイル サーバーの役割とフェールオーバー クラスタリング**機能をインストールします。
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。 各コマンドの出力で、**Success** プロパティが **True** に設定されていることを確認します。
+   > メニューで **[アクセスを付与する対象]** を選択し、カスケードメニューで **[特定のユーザー]** を選択します。
 
 1. ステップ 1 の 2 行目を選択し、F8 キーを押して **SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** を再起動します。
 
@@ -376,32 +371,32 @@ ms.locfileid: "147039378"
 #### <a name="task-2-create-and-validate-a-failover-cluster"></a>タスク 2: フェールオーバー クラスターを作成して検証する 
 
 1. **SEA-ADM1** で、**[サーバー マネージャー]** ウィンドウに切り替えます。
-1. **サーバー マネージャー** で **[ツール]** を選択し、**[フェールオーバー クラスター マネージャー]** を選択して、インストールが正常に完了したことを確認します。
+1. **サーバー マネージャー**で **[ツール]** を選択し、**[フェールオーバー クラスター マネージャー]** を選択して、インストールが正常に完了したことを確認します。
 1. **SEA-ADM1** で **[管理者: Windows PowerShell ISE]** ウィンドウに切り替えて、ステップ 2 の **Test-Cluster** で始まる行を選択し、F8 キーを押してクラスター検証テストを起動します。
 
-   > **注**: テストが完了するまで待ちます。 これには 2 分ほどかかります。 テストが失敗していないことを確認します。 警告は、想定されているため無視します。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the tests complete. This should take about 2 minutes. Verify that none of the tests fail. Ignore any warnings since these are expected. 
 
 1. **[管理者: Windows PowerShell ISE]** ウィンドウで、ステップ 3 の **New-Cluster** で始まる行を選択し、F8 キーを押してクラスターを作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これには 2 分ほどかかります。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take about 2 minutes. 
 
-1. **SEA-ADM1** で、**[フェールオーバー クラスター マネージャー]** ウィンドウに切り替えます。 [操作] ペインで **[クラスターに接続する]** を選択し、「**S2DCluster.Contoso.com**」と入力して、**[OK]** を選択します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, switch to the <bpt id="p2">**</bpt>Failover Cluster Manager<ept id="p2">**</ept> window. In the Actions pane, select <bpt id="p1">**</bpt>Connect to Cluster<ept id="p1">**</ept>, enter <bpt id="p2">**</bpt>S2DCluster.Contoso.com<ept id="p2">**</ept>, and then select <bpt id="p3">**</bpt>OK<ept id="p3">**</ept>.
 
 #### <a name="task-3-enable-storage-spaces-direct"></a>タスク 3: 記憶域スペース ダイレクトを有効にする
 
 1. **SEA-ADM1** で **[管理者: Windows PowerShell ISE]** ウィンドウに切り替え、ステップ 4 の **Invoke-Command** で始まる行を選択してから、F8 キーを押して、新しくインストールしたクラスターで記憶域スペース ダイレクトを有効にします。
 
-   > **注**: ステップが完了するまで待ちます。 これには 1 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take about 1 minute.
 
 1. **[管理者: Windows PowerShell ISE]** ウィンドウで、ステップ 5 の **Invoke-Command** で始まる行を選択し、F8 キーを押して **S2DStoragePool** を作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 コマンドの出力で、**FriendlyName** 属性の値が **S2DStoragePool** であることを確認します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. In the output of the command, verify that the <bpt id="p1">**</bpt>FriendlyName<ept id="p1">**</ept> attribute has a value of <bpt id="p2">**</bpt>S2DStoragePool<ept id="p2">**</ept>.
 
 1. **[フェールオーバー クラスター マネージャー]** ウィンドウに切り替え、**S2DCluster.Contoso.com**、**[記憶域]** の順に展開して、**[プール]** を選択します。
 1. **クラスター プール 1** が存在することを確認します。
 1. **[管理者: Windows PowerShell ISE]** ウィンドウで、ステップ 6 の **Invoke-Command** で始まる行を選択し、F8 キーを押して仮想ディスクを作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. 
 
 1. **[フェールオーバー クラスター マネージャー]** ウィンドウに切り替えて、**[記憶域]** ノードで **[ディスク]** を選択します。
 1. **[クラスター仮想ディスク (CSV)]** が存在することを確認します。
@@ -410,24 +405,24 @@ ms.locfileid: "147039378"
 
 1. **[管理者: Windows PowerShell ISE]** ウィンドウで、ステップ 7 の **Invoke-Command** で始まる行を選択し、F8 キーを押してファイル サーバー クラスターの役割を作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. 
 
-1. コマンドの出力に、属性 **FriendlyName** が **S2D-SOFS** に設定された役割の定義が含まれていることを確認します。 これは、コマンドが成功したことを示します。
+1. Verify that the output of the command includes the role definition, with the attribute <bpt id="p1">**</bpt>FriendlyName<ept id="p1">**</ept> set to <bpt id="p2">**</bpt>S2D-SOFS<ept id="p2">**</ept>. This validates that the command was successful.
 1. **[フェールオーバー クラスター マネージャー]** ウィンドウに切り替えて、**[役割]** を選択します。
-1. 役割 S2D-SOFS が存在することを確認します。 これは、コマンドが正常に完了したことも示します。
+1. Verify the existence of the S2D-SOFS role. This also verifies that the command completed successfully.
 1. **[管理者: Windows PowerShell ISE]** ウィンドウで、ステップ 8 の **Invoke-Command** で始まる 3 つの行を選択し、F8 キーを押してファイル共有を作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. 
 
-1. コマンドの出力に、属性 **Path** が **C:\\ClusterStorage\\CSV\\VM01** に設定されたファイル共有の定義が含まれていることを確認します。 これは、コマンドが正常に完了したことを示します。
+1. Verify that the output of the command includes definition of a file share, with the attribute <bpt id="p1">**</bpt>Path<ept id="p1">**</ept> set to <bpt id="p2">**</bpt>C:<ph id="ph1">\\</ph>ClusterStorage<ph id="ph2">\\</ph>CSV<ph id="ph3">\\</ph>VM01<ept id="p2">**</ept>. This validates that the command completed successfully.
 1. **[フェールオーバー クラスター マネージャー]** ウィンドウの **[役割]** ウィンドウで、 **[名前]** 列の下にある **[S2D-SOFS]** を選択し、 **[共有]** タブを選択します。
-1. **VM01** という名前の共有が存在することを確認します。 これは、コマンドが正常に完了したことも示します。
+1. Verify the existence of the share named <bpt id="p1">**</bpt>VM01<ept id="p1">**</ept>. This also verifies that the command completed successfully.
 
 #### <a name="task-5-verify-storage-spaces-direct-functionality"></a>タスク 5: 記憶域スペース ダイレクトの機能を確認する
 
 1. **SEA-ADM1** のタスク バーで、**エクスプローラー** アイコンを選択します。
-1. **エクスプローラー** のアドレス バーに「**\\\\S2D-SOFS.contoso.com\\VM01**」と入力し、Enter キーを押して、ターゲットのファイル共有を開きます。
-1. **エクスプローラー** の詳細ペインで状況依存メニューを表示し、メニューの **[新規フォルダー]** を選択します。 新しいフォルダーに割り当てられた既定の名前を **VMFolder** に置き換えて、Enter キーを押します。
+1. **エクスプローラー**のアドレス バーに「**\\\\S2D-SOFS.contoso.com\\VM01**」と入力し、Enter キーを押して、ターゲットのファイル共有を開きます。
+1. In <bpt id="p1">**</bpt>File Explorer<ept id="p1">**</ept>, in the details pane, display the context-sensitive menu, and then, in the menu, select <bpt id="p2">**</bpt>New Folder<ept id="p2">**</ept>. Replace the default name assigned to the new folder with <bpt id="p1">**</bpt>VMFolder<ept id="p1">**</ept>, and then press Enter.
 1. **SEA-ADM1** で、**[管理者: Windows PowerShell ISE]** ウィンドウに切り替えます。
 1. **[管理者: Windows PowerShell ISE]** ウィンドウのコンソール ペインで、次のコマンドを入力して Enter キーを押し、**SEA-SVR3** をシャットダウンします。
 
@@ -438,7 +433,7 @@ ms.locfileid: "147039378"
 1. **SEA-ADM1** で **[サーバー マネージャー]** ウィンドウに切り替えて、**[すべてのサーバー]** を選択し、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
 1. **SEA-SVR3** のエントリの **[管理状態]** 列が **[ターゲット コンピューターにアクセスできません]** となっていることを確認します。
 1. **[エクスプローラー]** ウィンドウに戻り、**VMFolder** にまだアクセスできることを確認します。
-1. **フェールオーバー クラスター マネージャー** に切り替えて、**[ディスク]** を選択し、**[クラスター仮想ディスク (CSV)]** を選択します。
+1. **フェールオーバー クラスター マネージャー**に切り替えて、**[ディスク]** を選択し、**[クラスター仮想ディスク (CSV)]** を選択します。
 1. **[クラスター仮想ディスク (CSV)]** で、**[正常性状態]** が **[警告]** に設定され、**[動作状態]** が **[低下]** に設定されていることを確認します (**[動作状態]** は **[不完全]** になっている場合もあります)。
 1. **SEA-ADM1** で、Windows Admin Center が表示されている **Microsoft Edge** ウィンドウに切り替えます。 
 1. [すべての接続] ペインを参照し、 **[+ 追加]** を選択します。

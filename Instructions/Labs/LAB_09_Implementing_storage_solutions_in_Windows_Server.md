@@ -2,18 +2,13 @@
 lab:
   title: 'ラボ: Windows Server での記憶域ソリューションの実装'
   module: 'Module 9: File servers and storage management in Windows Server'
-ms.openlocfilehash: 934803ee453372faa68572a289154e7c89f4b416
-ms.sourcegitcommit: d34dce53481b0263d0ff82913b3f49cb173d5c06
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2022
-ms.locfileid: "147039435"
 ---
+
 # <a name="lab-implementing-storage-solutions-in-windows-server"></a>ラボ: Windows Server での記憶域ソリューションの実装
 
 ## <a name="scenario"></a>シナリオ
 
-Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレージ レベルで冗長性を提供するために、Windows Server サーバーに記憶域スペース機能を実装する必要があります。 あなたは経営陣から、記憶域を節約するためのデータ重複排除をテストするよう求められています。 また、Internet Small Computer System Interface (iSCSI) 記憶域を実装して、組織内に記憶域を展開するためのより簡単なソリューションを提供することも望んでいます。 さらに、組織は、記憶域を高可用性にするためのオプションと、高可用性のために満たす必要がある要件を調べています。 あなたは、高可用性記憶域 (特に記憶域スペース ダイレクト) を使用する実現可能性をテストする必要があります。
+At Contoso, Ltd., you need to implement the Storage Spaces feature on the Windows Server servers to simplify storage access and provide redundancy at the storage level. Management wants you to test Data Deduplication to save storage. They also want you to implement Internet Small Computer System Interface (iSCSI) storage to provide a simpler solution for deploying storage in the organization. Additionally, the organization is exploring options for making storage highly available and researching the requirements that it must meet for high availability. You want to test the feasibility of using highly available storage, specifically Storage Spaces Direct.
 
 ## <a name="objectives"></a>目標
 
@@ -48,7 +43,7 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 
 ### <a name="scenario"></a>シナリオ
 
-あなたは、サーバー マネージャーを使用してデータ重複除去役割サービスをインストールすることにします。 ドライブ **M** は使用量が多く、一部のフォルダーには重複するファイルが含まれる可能性があると判断します。 データ重複除去の役割を有効にして構成し、このボリュームで使用されているスペースを減らすことにします。
+You decide to install the Data Deduplication role service by using Server Manager. You determine that drive <bpt id="p1">**</bpt>M<ept id="p1">**</ept> is heavily used, and you suspect that it contains duplicate files in some folders. You decide to enable and configure the Data Deduplication role to reduce the consumed space on this volume.
 
 この演習の主なタスクは次のとおりです。
 
@@ -58,8 +53,8 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 
 #### <a name="task-1-install-the-data-deduplication-role-service"></a>タスク 1: データ重複除去役割サービスをインストールする
 
-1. **SEA-ADM1** で、**サーバー マネージャー** を使用して **SEA-SVR3** にデータ重複除去役割サービスをインストールします。
-1. **SEA-ADM1** で、**Users** グループに **読み取り** アクセス許可を付与して **C:\Labfiles** フォルダーを共有します。
+1. **SEA-ADM1** で、**サーバー マネージャー**を使用して **SEA-SVR3** にデータ重複除去役割サービスをインストールします。
+1. **SEA-ADM1** で、**Users** グループに**読み取り**アクセス許可を付与して **C:\Labfiles** フォルダーを共有します。
 1. **SEA-SVR3** のコンソール セッションに切り替え、必要に応じて、**Pa55w.rd** のパスワードを使用して **CONTOSO\\Administrator** としてサインインします。
 1. **SEA-SVR3** で **Windows PowerShell** セッションを開始し、**Windows PowerShell** コンソールで次のコマンドを実行して、ReFS でフォーマットされ、ドライブ文字 **M** が割り当てられたボリュームを作成します。
 
@@ -86,7 +81,7 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 #### <a name="task-2-enable-and-configure-data-deduplication"></a>タスク 2: データ重複除去を有効にして構成する
 
 1. **SEA-ADM1** へのコンソール セッションに切り替えます。
-1. **サーバー マネージャー** の **[ファイル サービスと記憶域サービス]** インターフェイスを使用して、**SEA-SVR3** 上のディスクを表示します。
+1. **サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** インターフェイスを使用して、**SEA-SVR3** 上のディスクを表示します。
 1. 次の設定を使用して、**SEA-SVR3** 上のディスク番号 **1** の **M** ボリュームでデータ重複除去を有効にします。
 
    - 重複除去オプション: **汎用ファイル サーバー**
@@ -110,7 +105,7 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
@@ -142,14 +137,14 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    Get-DedupVolume –Volume M: |fl
    Get-DedupMetadata –Volume M: |fl
    ```
-1. **SEA-ADM1** で、**サーバー マネージャー** の [ディスク] ペインを更新し、**M:** ボリュームのプロパティを表示します。
+1. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインを更新し、**M:** ボリュームのプロパティを表示します。
 1. **[ボリューム (M:\\) のプロパティ]** ウィンドウで、 **[重複除去率]** と **[重複除去による節約量]** の値を確認します。
 
 ## <a name="lab-exercise-2-configuring-iscsi-storage"></a>ラボ演習 2: iSCSI 記憶域の構成
 
 ### <a name="scenario"></a>シナリオ
 
-Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を構成するコストと複雑さを軽減するオプションを探っています。 これをテストするため、あなたは iSCSI ターゲットをインストールして構成し、ターゲットへのアクセスを提供する iSCSI イニシエーターを構成する必要があります。
+Executives at Contoso are exploring the option of using iSCSI to decrease the cost and complexity of configuring centralized storage. To test this, you must install and configure the iSCSI targets, and configure the iSCSI initiators to provide access to the targets.
 
 この演習の主なタスクは次のとおりです。
 
@@ -197,12 +192,12 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    $partition3.DriveLetter
    ```
 
-   > **注**: この手順では、ドライブ文字がそれぞれ **E** および **F** であるとしています。 ドライブ文字の割り当てが異なる場合は、この演習の手順に従うときにそれを考慮してください。
+   > Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレージ レベルで冗長性を提供するために、Windows Server サーバーに記憶域スペース機能を実装する必要があります。
 
 #### <a name="task-2-connect-to-and-configure-iscsi-targets"></a>タスク 2: iSCSI ターゲットに接続して構成する
 
-1. **SEA-ADM1** で、**サーバー マネージャー** の [ディスク] ペインを更新し、**SEA-DC1** のディスク構成を表示します。 ブート ボリュームとシステム ボリュームのドライブ **C** だけが含まれていることに注意してください。
-1. **サーバー マネージャー** の **[ファイル サービスと記憶域サービス]** で、[iSCSI] ペインに切り替えます。 
+1. あなたは経営陣から、記憶域を節約するためのデータ重複排除をテストするよう求められています。
+1. **サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** で、[iSCSI] ペインに切り替えます。 
 1. [iSCSI] ペインで、次の設定を使用して iSCSI 仮想ディスクを作成します。
 
    - 記憶域の場所: **E:**
@@ -237,15 +232,15 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 #### <a name="task-3-verify-iscsi-disk-configuration"></a>タスク 3: iSCSI ディスクの構成を確認する 
 
 1. **SEA-ADM1** へのコンソール セッションに切り替えます。
-1. **サーバー マネージャー** で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを参照し、その表示を更新します。 
-1. **SEA-DC1** ディスクの構成を確認し、2 つの **5 GB** ディスクが含まれ、**オフライン** 状態であり、バスの種類が **iSCSI** であることを確認します。
+1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを参照し、その表示を更新します。 
+1. **SEA-DC1** ディスクの構成を確認し、2 つの **5 GB** ディスクが含まれ、**オフライン**状態であり、バスの種類が **iSCSI** であることを確認します。
 1. **SEA-DC1** のコンソール セッションに切り替えます。 
 1. **Windows PowerShell** のプロンプトで次のコマンドを実行して、ディスクの構成を表示します。
 
    ```powershell
    Get-Disk
    ```
-   > **注**: 両方のディスクが存在し、正常ですが、オフラインです。 それらを使用するには、初期化してフォーマットする必要があります。
+   > また、Internet Small Computer System Interface (iSCSI) 記憶域を実装して、組織内に記憶域を展開するためのより簡単なソリューションを提供することも望んでいます。
 
 1. **SEA-DC1** で、**Windows PowerShell** のプロンプトから次のコマンドを実行して、ReFS でフォーマットされたドライブ文字 **E** のボリュームを作成します。
 
@@ -256,8 +251,8 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    ```
 1. 前のステップを繰り返して、ReFS でフォーマットされた新しいドライブを作成しますが、今回はディスク番号 **2** とドライブ文字 **F** を使用します。
 1. **[サーバー マネージャー]** ウィンドウをアクティブにして **SEA-ADM1** へのコンソール セッションに戻ります。
-1. **サーバー マネージャー** で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。
-1. **SEA-DC1** ディスクの構成を確認し、両方のドライブが **オンライン** になっていることを確認します。
+1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。
+1. **SEA-DC1** ディスクの構成を確認し、両方のドライブが**オンライン**になっていることを確認します。
 
 #### <a name="task-4-revert-disk-configuration"></a>タスク 4: ディスクの構成を元に戻す 
 
@@ -275,7 +270,7 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
 ### <a name="scenario"></a>シナリオ
 
-高可用性のいくつかの要件を満たすため、あなたは記憶域スペースでの冗長性オプションを評価することにします。 さらに、記憶域プールへの新しいディスクのプロビジョニングをテストする必要があります。
+さらに、組織は、記憶域を高可用性にするためのオプションと、高可用性のために満たす必要がある要件を調べています。
 
 この演習の主なタスクは次のとおりです。
 
@@ -286,17 +281,17 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 1. 記憶域プールにディスクを追加し、ボリュームの可用性を確認します。
 1. ディスクの構成を元に戻します。
 
-> **注:** Windows Server では、記憶域プール内のディスクを切断できません。 削除することだけができます。 また、先に新しいディスクを追加してからでないと、3 方向ミラーからディスクを削除することはできません。 
+> あなたは、高可用性記憶域 (特に記憶域スペース ダイレクト) を使用する実現可能性をテストする必要があります。 
 
 #### <a name="task-1-create-a-storage-pool"></a>タスク 1: 記憶域プールを作成する 
 
-1. **SEA-ADM1** に切り替えて、**サーバー マネージャー** の **[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。
-1. **SEA-SVR3** のディスク 1 から 4 の状態を **オンライン** に設定します。
-1. **SEA-SVR3** の記憶域を構成するための **サーバー マネージャー** で、サイズが **127 GB** の 3 つのディスクで構成される **SP1** という名前の新しい記憶域プールを作成します。
+1. **SEA-ADM1** に切り替えて、**サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。
+1. **SEA-SVR3** のディスク 1 から 4 の状態を**オンライン**に設定します。
+1. **SEA-SVR3** の記憶域を構成するための**サーバー マネージャー**で、サイズが **127 GB** の 3 つのディスクで構成される **SP1** という名前の新しい記憶域プールを作成します。
 
 #### <a name="task-2-create-a-volume-based-on-a-three-way-mirrored-disk"></a>タスク 2: 3 方向ミラー ディスクを基にしてボリュームを作成する 
 
-1. **SEA-ADM1** の **サーバー マネージャー** から、新しく作成した記憶域プール **SP1** を使用して、ミラー記憶域レイアウトと仮想プロビジョニングを使用し、サイズが **25 GB** の、**Three-Mirror** という名前の仮想ディスクを作成します。
+1. **SEA-ADM1** の**サーバー マネージャー**から、新しく作成した記憶域プール **SP1** を使用して、ミラー記憶域レイアウトと仮想プロビジョニングを使用し、サイズが **25 GB** の、**Three-Mirror** という名前の仮想ディスクを作成します。
 1. 新しくプロビジョニングした仮想ディスクを使用して、**TestData** という名前の ReFS ボリュームを作成し、そのサイズをすべての使用可能なディスク領域に設定して、ドライブ文字 **T** を割り当てます。
 
 #### <a name="task-3-manage-a-volume-in-file-explorer"></a>タスク 3: エクスプローラーでボリュームを管理する 
@@ -308,18 +303,18 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    Enable-NetFirewallRule -Group "@FirewallAPI.dll,-28502"
    ```
 
-1. **SEA-ADM1** で **エクスプローラー** を開始し、**\\\\SEA-SVR3.contoso.com\\t$** 共有を参照します。
+1. **SEA-ADM1** で**エクスプローラー**を開始し、**\\\\SEA-SVR3.contoso.com\\t$** 共有を参照します。
 1. **TestData** という名前のフォルダーを作成した後、そのフォルダー内に **TestDocument.txt** という名前のドキュメントを作成します。
 
 #### <a name="task-4-disconnect-a-disk-from-the-storage-pool-and-verify-volume-availability"></a>タスク 4: 記憶域プールからディスクを切断し、ボリュームの可用性を確認する 
 
-1. **SEA-ADM1** で **サーバー マネージャー** を使用して、**SEA-SVR3** にアタッチされている残りの使用可能なディスクを記憶域プール **SP1** に追加します。 ディスクで自動割り当てが使用されていることを確認します。
-1. **サーバー マネージャー** を使用して、**SP1** プールに割り当てられた最初の 3 つのディスクのいずれかを削除します。
+1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, use <bpt id="p2">**</bpt>Server Manager<ept id="p2">**</ept> to add the remaining available disk attached to <bpt id="p3">**</bpt>SEA-SVR3<ept id="p3">**</ept> to the storage pool <bpt id="p4">**</bpt>SP1<ept id="p4">**</ept>. Ensure the disk uses automatic allocation.
+1. **サーバー マネージャー**を使用して、**SP1** プールに割り当てられた最初の 3 つのディスクのいずれかを削除します。
 1. **SEA-ADM1** でエクスプローラーを使用して、**TestDocument.txt** がまだ使用可能であることを確認します。 
 
 #### <a name="task-5-add-a-disk-to-the-storage-pool-and-verify-volume-availability"></a>タスク 5: 記憶域プールにディスクを追加し、ボリュームの可用性を確認する 
 
-1. **SEA-ADM1** の **サーバー マネージャー** で、**SP1** 記憶域プールを再スキャンします。
+1. **SEA-ADM1** の**サーバー マネージャー**で、**SP1** 記憶域プールを再スキャンします。
 1. 前のタスクで削除したディスクを追加して戻し、自動割り当てが使用されることを確認します。
 1. **SEA-ADM1** でエクスプローラーを使用して、**TestDocument.txt** がまだ使用可能であることを確認します。 
 1. **SEA-SVR3** に切り替えて戻ります。
@@ -342,7 +337,7 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
 ### <a name="scenario"></a>シナリオ
 
-あなたは、ローカル記憶域を高可用性記憶域として使用する方法が、組織で実行可能なソリューションかどうかをテストする必要があります。 これまで、組織は VM の格納に記憶域ネットワーク (SAN) のみを使用してきました。 Windows Server の機能ではローカル記憶域しか使用できないので、テスト用の実装として記憶域スペース ダイレクトを実装する必要があります。
+You want to test whether using local storage as highly available storage is a viable solution for your organization. Previously, your organization has only used storage area networks (SANs) for storing VMs. The features in Windows Server make it possible to use only local storage, so you want to implement Storage Spaces Direct as a test implementation.
 
 この演習の主なタスクは次のとおりです。
 
@@ -354,17 +349,17 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
 #### <a name="task-1-prepare-for-installation-of-storage-spaces-direct"></a>タスク 1: 記憶域スペース ダイレクトのインストールを準備する 
 
-1. 先に進む前に、**SEA-ADM1** の **サーバー マネージャー** で、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** の **[管理状態]** が **[オンライン - パフォーマンス カウンターが開始されていません]** 状態であることを確認します。
-1. **サーバー マネージャー** で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを参照します。
+1. 先に進む前に、**SEA-ADM1** の**サーバー マネージャー**で、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** の **[管理状態]** が **[オンライン - パフォーマンス カウンターが開始されていません]** 状態であることを確認します。
+1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを参照します。
 1. [ディスク] ペインで **SEA-SVR3** ノードを参照し、ディスク 1 から 4 が **[不明]** と表示されていることを確認します。
-1. **サーバー マネージャー** の [ディスク] ペインで、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** にアタッチされているすべてのディスクをオンラインにします。
+1. **サーバー マネージャー**の [ディスク] ペインで、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** にアタッチされているすべてのディスクをオンラインにします。
 1. **SEA-ADM1** で、**Windows PowerShell ISE** を開始し、スクリプト ペインで **C:\\Labfiles\\Lab09\\Implement-StorageSpacesDirect.ps1** を開きます。
 
-   > **注**: スクリプトは、番号付きのステップに分かれています。 8 つのステップがあり、各ステップには多数のコマンドがあります。 個々の行を実行するには、その行のどこかにカーソルを置いて、F8 キーを押すか、**Windows PowerShell ISE** ウィンドウのツール バーで **[選択項目を実行]** を選択します。 複数の行を実行するには、それらすべての全体を選択して、F8 キーまたは **[選択項目を実行]** ツール バー アイコンを使用します。 一連の手順については、この演習の手順で説明されています。 各ステップが完了したことを確認してから、次のステップを始めます。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The script is divided into numbered steps. There are eight steps, and each step has a number of commands. To execute an individual line, you can place the cursor anywhere within that line and press F8 or select the <bpt id="p1">**</bpt>Run Selection<ept id="p1">**</ept> in the toolbar of the <bpt id="p2">**</bpt>Windows PowerShell ISE<ept id="p2">**</ept> window. To execute multiple lines, select all of them in their entirety, and then use either F8 or the <bpt id="p1">**</bpt>Run Selection<ept id="p1">**</ept> toolbar icon. The sequence of steps is described in the instructions of this exercise. Ensure that each step completes before starting the next one.
 
 1. ステップ 1 の最初のコマンドを実行して、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** にファイル サーバーの役割とフェールオーバー クラスタリング機能をインストールします。
 
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。 各コマンドの出力で、**Success** プロパティが **True** に設定されていることを確認します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation finishes. This should take about 2 minutes. Verify that, in the output of each command, the <bpt id="p1">**</bpt>Success<ept id="p1">**</ept> property is set to <bpt id="p2">**</bpt>True<ept id="p2">**</ept>.
 
 1. ステップ 1 の 2 番目のコマンドを実行して、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3** を再起動します。
 
@@ -379,40 +374,40 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 1. **SEA-ADM1** で、**フェールオーバー クラスター マネージャー** コンソールを開始します。
 1. **SEA-ADM1** の **Windows PowerShell ISE** で、ステップ 2 のコマンドを実行してクラスター検証テストを呼び出します。
 
-   > **注**: テストが完了するまで待ちます。 これには 2 分ほどかかります。 テストが失敗していないことを確認します。 警告は、想定されているため無視します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the tests complete. This should take about 2 minutes. Verify that none of the tests fail. Ignore any warnings since these are expected.
 
 1. **Windows PowerShell ISE** で、ステップ 3 のコマンドを実行してクラスターを作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これには 2 分ほどかかります。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take about 2 minutes. 
 
-1. コマンドが完了したら、**フェールオーバー クラスター マネージャー** に切り替えて、新しく作成した **S2DCluster.Contoso.com** という名前のクラスターを追加します。
+1. コマンドが完了したら、**フェールオーバー クラスター マネージャー**に切り替えて、新しく作成した **S2DCluster.Contoso.com** という名前のクラスターを追加します。
 
 #### <a name="task-3-enable-storage-spaces-direct"></a>タスク 3: 記憶域スペース ダイレクトを有効にする
 
 1. **SEA-ADM1** の **Windows PowerShell ISE** で、ステップ 4 のコマンドを実行して、新しくインストールしたクラスターで記憶域スペース ダイレクトを有効にします。
 
-   > **注**: ステップが完了するまで待ちます。 これには 1 分ほどかかります。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take about 1 minute.
 
 1. **Windows PowerShell ISE** で、ステップ 5 のコマンドを実行して、**S2DStoragePool** という名前の記憶域プールを作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 コマンドの出力で、**FriendlyName** 属性の値が **S2DStoragePool** であることを確認します。
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. In the output of the command, verify that the <bpt id="p1">**</bpt>FriendlyName<ept id="p1">**</ept> attribute has a value of <bpt id="p2">**</bpt>S2DStoragePool<ept id="p2">**</ept>.
 
-1. **フェールオーバー クラスター マネージャー** に切り替えて、クラスターに **クラスター プール 1** という名前の記憶域プールが含まれていることを確認します。
+1. **フェールオーバー クラスター マネージャー**に切り替えて、クラスターに**クラスター プール 1** という名前の記憶域プールが含まれていることを確認します。
 1. **Windows PowerShell ISE** に切り替えて、ステップ 6 のコマンドを実行して仮想ディスクを作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. 
 
-1. **フェールオーバー クラスター マネージャー** に切り替えて、**[クラスター仮想ディスク (CSV)]** オブジェクトが [ディスク] ペインに表示されることを確認します。
+1. **フェールオーバー クラスター マネージャー**に切り替えて、**[クラスター仮想ディスク (CSV)]** オブジェクトが [ディスク] ペインに表示されることを確認します。
 
 #### <a name="task-4-create-a-storage-pool-a-virtual-disk-and-a-share"></a>タスク 4: 記憶域プール、仮想ディスク、共有を作成する
 
 1. **SEA-ADM1** の **Windows PowerShell ISE** で、ステップ 7 のコマンドを実行して S2D-SOFS の役割を作成します。
 
-   > **注**: ステップが完了するまで待ちます。 これにかかる時間は 1 分未満です。 
+   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the step completes. This should take less than 1 minute. 
 
-1. **フェールオーバー クラスター マネージャー** に切り替えて、**S2D-SOFS** オブジェクトが [役割] ペインに表示されることを確認します。
+1. **フェールオーバー クラスター マネージャー**に切り替えて、**S2D-SOFS** オブジェクトが [役割] ペインに表示されることを確認します。
 1. **Windows PowerShell ISE** に切り替えて、ステップ 8 の 3 つのコマンドをすべて実行して **VM01** 共有を作成します。 
-1. **フェールオーバー クラスター マネージャー** に切り替えて、**VM01** 共有が [共有] ペインに表示されることを確認します。
+1. **フェールオーバー クラスター マネージャー**に切り替えて、**VM01** 共有が [共有] ペインに表示されることを確認します。
 
 #### <a name="task-5-verify-storage-spaces-direct-functionality"></a>タスク 5: 記憶域スペース ダイレクトの機能を確認する
 
@@ -422,8 +417,8 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    ```powershell
    Stop-Computer -ComputerName SEA-SVR3 -Force
    ```
-1. **サーバー マネージャー** に切り替えて、**[すべてのサーバー]** ビューを更新し、**SEA-SVR3** にアクセスできなくなったことを確認します。
-1. **フェールオーバー クラスター マネージャー** に切り替えて、**[ディスク]** ノードで **[クラスター仮想ディスク (CSV)]** の情報を確認します。 
+1. **サーバー マネージャー**に切り替えて、**[すべてのサーバー]** ビューを更新し、**SEA-SVR3** にアクセスできなくなったことを確認します。
+1. **フェールオーバー クラスター マネージャー**に切り替えて、**[ディスク]** ノードで **[クラスター仮想ディスク (CSV)]** の情報を確認します。 
 1. **[クラスター仮想ディスク (CSV)]** で、**[正常性状態]** が **[警告]** に設定され、**[動作状態]** が **[低下]** に設定されていることを確認します (**[動作状態]** は **[不完全]** になっている場合もあります)。
 1. **SEA-ADM1** で、Windows Admin Center が表示されている Microsoft Edge ウィンドウに切り替えます。 
 1. Windows Admin Center で、**S2DCluster.Contoso.com** クラスターへの接続を追加します。 
