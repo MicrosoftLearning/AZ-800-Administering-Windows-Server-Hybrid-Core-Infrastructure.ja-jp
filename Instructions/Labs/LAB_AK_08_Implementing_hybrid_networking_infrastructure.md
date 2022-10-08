@@ -37,7 +37,7 @@ lab:
       -TemplateParameterFile $HOME/L08-rg_template.parameters.json
    ```
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the deployment to complete before proceeding to the next step. This should take about 3 minutes.
+    >**注**: デプロイが完了するまで待ってから、次の手順に進んでください。 これには 3 分ほどかかります。
 
 1. [Cloud Shell] ペインで以下のコマンドを実行し、前の手順でデプロイした Azure VM に Network Watcher 拡張機能をインストールします。
 
@@ -58,7 +58,7 @@ lab:
    }
    ```
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Do not wait for the deployment to complete but instead proceed to the next step. The installation of the Network Watcher extension should take about 5 minutes.
+    >**注**: デプロイが完了するのを待たず、代わりに次の手順に進んでください。 Network Watcher 拡張機能のインストールには 5 分ほどかかります。
 
 #### <a name="task-2-configure-the-hub-and-spoke-network-topology"></a>タスク 2: ハブ アンド スポーク ネットワーク トポロジを構成する
 
@@ -103,7 +103,7 @@ lab:
     | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **許可 (既定)** |
     | 仮想ネットワーク ゲートウェイ | **なし (既定値)** |
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: This step establishes two peerings - one from <bpt id="p2">**</bpt>az800l08-vnet0<ept id="p2">**</ept> to <bpt id="p3">**</bpt>az800l08-vnet2<ept id="p3">**</ept> and the other from <bpt id="p4">**</bpt>az800l08-vnet2<ept id="p4">**</ept> to <bpt id="p5">**</bpt>az800l08-vnet0<ept id="p5">**</ept>. This completes setting up the hub and spoke topology (with the <bpt id="p1">**</bpt>az800l08-vnet0<ept id="p1">**</ept> virtual network serving the role of the hub, while <bpt id="p2">**</bpt>az800l08-vnet1<ept id="p2">**</ept> and <bpt id="p3">**</bpt>az800l08-vnet2<ept id="p3">**</ept> are its spokes).
+    >**注**: この手順で、2 つのピアリング (1 つは **az800l08-vnet0** から **az800l08-vnet2** へ、もう 1 つは **az800l08-vnet2** から **az800l08-vnet0**へ) を確立します。 これでハブ アンド スポーク トポロジの設定は完了です (**az800l08-vnet0** 仮想ネットワークがハブの役割を果たし、**az800l08-vnet1** と **az800l08-vnet2** はそのスポークです)。
 
 #### <a name="task-3-test-transitivity-of-virtual-network-peering"></a>タスク 3: 仮想ネットワーク ピアリングの推移性をテストする
 
@@ -119,14 +119,14 @@ lab:
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm0** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.81.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-    > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: <bpt id="p2">**</bpt>10.81.0.4<ept id="p2">**</ept> represents the private IP address of <bpt id="p3">**</bpt>az800l08-vm1<ept id="p3">**</ept>. The test uses the <bpt id="p1">**</bpt>TCP<ept id="p1">**</ept> port <bpt id="p2">**</bpt>3389<ept id="p2">**</ept> because Remote Desktop is by default enabled on Azure virtual machines and accessible within and between virtual networks.
+    > **注**: **10.81.0.4** は、**az800l08-vm1** のプライベート IP アドレスを表します。 このテストでは **TCP** ポート **3389** を使っています。これは、Azure 仮想マシンではリモート デスクトップが既定で有効であり、仮想ネットワーク内および仮想ネットワーク間でアクセスできるためです。
 
-1. Select <bpt id="p1">**</bpt>Check<ept id="p1">**</ept> and wait until results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. Review the network path and note that the connection was direct, with no intermediate hops in between the VMs.
+1. **[チェック]** を選び、接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。接続が直接であり、仮想マシン間に中間ホップがないことに注意してください。
 
     > **注**: ハブ仮想ネットワークが最初のスポーク仮想ネットワークと直接ピアリングされていることから、このようになります。
 
@@ -138,14 +138,14 @@ lab:
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm0** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
     > **注**: **10.82.0.4** は、**az800l08-vm2** のプライベート IP アドレスを表します。 
 
-1. Select <bpt id="p1">**</bpt>Check<ept id="p1">**</ept> and wait until results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. Review the network path and note that the connection was direct, with no intermediate hops in between the VMs.
+1. **[チェック]** を選び、接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。接続が直接であり、仮想マシン間に中間ホップがないことに注意してください。
 
     > **注**: ハブ仮想ネットワークが 2 つ目のスポーク仮想ネットワークと直接ピアリングされていることから、このようになります。
 
@@ -159,12 +159,12 @@ lab:
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-1. Select <bpt id="p1">**</bpt>Check<ept id="p1">**</ept> and wait until results of the connectivity check are returned. Note that the status is <bpt id="p1">**</bpt>Unreachable<ept id="p1">**</ept>.
+1. **[チェック]** を選び、接続チェックの結果が返されるまで待ちます。 状態が "**到達不能**" であることに注意してください。
 
     > **注**: 2 つのスポーク仮想ネットワークが相互にピアリングされておらず、仮想ネットワーク ピアリングが推移的ではないことから、このようになります。
 
@@ -216,7 +216,7 @@ lab:
 
 1. **[確認と作成]** を選択し、次に **[作成]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the route table to be created. This should take about 1 minute.
+   > **注**: ルートテーブルが作成されるまで待ちます。 これには 1 分ほどかかります。
 
 1. **[リソースに移動]** を選択します。
 1. **az800l08-rt12** ルート テーブル ページの **[設定]** セクションで、**[ルート]**、**[+ 追加]** の順に選びます。
@@ -254,7 +254,7 @@ lab:
 
 1. **[確認と作成]** を選択し、次に **[作成]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the route table to be created. This should take about 3 minutes.
+   > **注**: ルートテーブルが作成されるまで待ちます。 これには 3 分ほどかかります。
 
 1. **[リソースに移動]** を選択します。
 1. **az800l08-rt21** ルート テーブル ページの **[設定]** セクションで、**[ルート]**、**[+ 追加]** の順に選びます。
@@ -286,12 +286,12 @@ lab:
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-1. Select <bpt id="p1">**</bpt>Check<ept id="p1">**</ept> and wait until results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. Review the network path and note that the traffic was routed via <bpt id="p1">**</bpt>10.80.0.4<ept id="p1">**</ept>, assigned to the <bpt id="p2">**</bpt>az800l08-nic0<ept id="p2">**</ept> network adapter. 
+1. **[チェック]** を選び、接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。トラフィックが **az800l08-nic0** ネットワーク アダプターに割り当てられた **10.80.0.4** を経由してルーティングされていることに注意してください。 
 
     > **注**: スポーク仮想ネットワーク間のトラフィックが、ルーターとして機能するハブ仮想ネットワーク内にある仮想マシンを経由するようになったことから、このようになります。
 
@@ -312,7 +312,7 @@ lab:
 
 1. **[確認と作成]** を選択し、次に **[作成]** を選択します。
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the private DNS zone to be created. This should take about 2 minutes.
+    >**注**: プライベート DNS ゾーンが作成されるまで待ちます。 これには 2 分ほどかかります。
 
 1. **[リソースに移動]** を選んで **contoso.org** DNS プライベート ゾーン ページを開きます。
 1. **contoso.org** プライベート DNS ゾーン ページの **[設定]** セクションで、**[仮想ネットワーク リンク]** を選びます。
@@ -325,7 +325,7 @@ lab:
     | 仮想ネットワーク | **az800l08-vnet0 (AZ800-L0801-RG)** |
     | 自動登録を有効にする | オン |
 
-    ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> Wait for the virtual network link to be created. This should take less than 1 minute.
+    >**注:** 仮想ネットワーク リンクが作成されるまで待ちます。 これにかかる時間は 1 分未満です。
 
 1. 前の手順を繰り返し、(自動登録を有効にして) 仮想ネットワーク **az800l08-vnet1** と **az800l08-vnet2** に対して、それぞれ **az800l08-vnet1-link** と **az800l08-vnet2-link** という仮想ネットワーク リンクを作成します。
 1. **contoso.org** プライベート DNS ゾーン ページで、左側にある縦表示のメニューから **[概要]** を選びます。
@@ -344,13 +344,13 @@ lab:
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **az800l08-vm2.contoso.org** |
     | 優先 IP バージョン | **IPv4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-1. Select <bpt id="p1">**</bpt>Check<ept id="p1">**</ept> and wait until the results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. 
+1. **[チェック]** を選び、接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 
 
     > **注**: ターゲットの完全修飾ドメイン名 (FQDN) が Azure プライベート DNS ゾーンを介して解決可能であることから、このようになります。 
 
@@ -369,7 +369,7 @@ lab:
 
 1. **[確認と作成]** を選択し、次に **[作成]** を選択します。
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the DNS zone to be created. This should take about 1 minute.
+    >**注**: DNS ゾーンが作成されるまで待ちます。 これには 1 分ほどかかります。
 
 1. **[リソースに移動]** を選び、新しく作成した DNS ゾーンのページを開きます。
 1. DNS ゾーン ページで、 **[+ レコード セット]** を選びます。
@@ -384,12 +384,12 @@ lab:
     | TTL の単位 | **Hours** |
     | IP アドレス | 20.30.40.50 |
 
-    >**注**: デプロイが完了するまで待ってから、次の手順に進んでください。 
+    >**注**: IP アドレスとそれに対応する名前は完全に任意です。 これらは、パブリック DNS レコードの実装を示す非常にシンプルな例を示すためのものです。DNS レジストラーから名前空間を購入する必要があるような現実のシナリオをエミュレートするものではありません。 
 
 1. **[OK]** を選択します。
 1. DNS ゾーン ページで、**ネーム サーバー 1** の完全な名前を確認します。
 
-    >これには 3 分ほどかかります。
+    >**注**: **ネームサーバー 1** の完全な名前をメモします。 これは、次のタスクで必要になります。
 
 #### <a name="task-4-validate-azure-public-dns-name-resolution"></a>タスク 4: Azure パブリック DNS 名前解決を検証する
 
@@ -402,7 +402,7 @@ lab:
 
 1. コマンドの出力に **20.30.40.50** のパブリック IP アドレスが含まれていることを確認します。
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The name resolution works as expected because the <bpt id="p2">**</bpt>nslookup<ept id="p2">**</ept> command allows you to specify the IP address of the DNS server to query for a record (which, in this case, is <ph id="ph1">`&lt;Name server 1&gt;`</ph>). For the name resolution to work when querying any publicly accessible DNS server, you would need to register the domain name with a DNS registrar and configure the name servers listed on the public DNS zone page in the Azure portal as authoritative for the namespace corresponding to that domain.
+    >**注**: **nslookup** コマンドでは、レコードのクエリを実行する DNS サーバーの IP アドレスを指定できるため、名前解決は期待どおりに動作します (ここでは `<Name server 1>` とします)。 一般にアクセス可能な DNS サーバーに対してクエリを実行して名前解決を行うには、DNS レジストラーにドメイン名を登録し、Azure portal のパブリック DNS ゾーン ページに記載されているネーム サーバーを、そのドメインに対応する名前空間の権限として構成する必要があります。
 
 ## <a name="exercise-3-deprovisioning-the-azure-environment"></a>演習 3: Azure 環境のプロビジョニング解除
 
@@ -425,4 +425,4 @@ lab:
    Get-AzResourceGroup -Name 'AZ800-L08*' | Remove-AzResourceGroup -Force -AsJob
    ```
 
-   >**注**: このコマンドは非同期で実行されるため (*-AsJob* パラメーターによって決定されます)、同じ PowerShell セッション内で直後に別の PowerShell コマンドを実行できますが、リソース グループが実際に削除されるまでに数分かかります。
+   >**注**: このコマンドは非同期で実行されるため ( *-AsJob* パラメーターによって決定されます)、同じ PowerShell セッション内で直後に別の PowerShell コマンドを実行できますが、リソース グループが実際に削除されるまでに数分かかります。

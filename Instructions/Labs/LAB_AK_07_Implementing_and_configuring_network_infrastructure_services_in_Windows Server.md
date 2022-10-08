@@ -27,11 +27,11 @@ lab:
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
+   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` にアクセスします。
 
-   ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: If the link does not work, on <bpt id="p2">**</bpt>SEA-ADM1<ept id="p2">**</ept>, browse to the <bpt id="p3">**</bpt>WindowsAdminCenter.msi<ept id="p3">**</ept> file, open the context menu for it, and then select <bpt id="p4">**</bpt>Repair<ept id="p4">**</ept>. After the repair completes, refresh Microsoft Edge. 
+   >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルにアクセスし、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
@@ -52,13 +52,13 @@ lab:
 1. [役割と機能] ペインで、**[DHCP サーバー]** チェックボックスをオンにし、**[+ インストール]** を選択します。
 1. [Install Roles and Features]\(役割と機能のインストール\) ペインで、**[はい]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the notification indicating that the DHCP role is installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
+   > **注**: DHCP 役割がインストールされていることを示す通知が行われるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
 
 1. **Microsoft Edge** ページを更新して **[sea-svr1.contoso.com]** ページに戻り、**[ツール]** リストで **[DHCP]** を選んでから、詳細ペインで **[インストール]** を選択して DHCP PowerShell ツールをインストールします。 
 
    > **注**: **sea-svr1.contoso.com** の **[ツール]** リストで **DHCP** エントリを利用できない場合は、**Microsoft Edge** ページを更新して、もう一度やり直してください。
 
-1. Wait for a notification that the DHCP PowerShell tools are installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
+1. DHCP PowerShell ツールがインストールされていることを知らせる通知を待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
 
 #### <a name="task-2-authorize-the-dhcp-server"></a>タスク 2: DHCP サーバーを承認する
 
@@ -72,7 +72,7 @@ lab:
 
 1. **SEA-ADM1** で、**SEA-SVR1** の **[DHCP]** 設定が表示されている Microsoft Edge ウィンドウの Windows Admin Center に切り替えます。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: It might take a few minutes for the DHCP option to appear in the menu. If necessary, refresh the connection to sea-svr1. If prompted to install the DHCP Powershell tools, select <bpt id="p1">**</bpt>Install<ept id="p1">**</ept>.
+   > **注**:メニューに DHCP オプションが表示されるまでに数分かかる場合があります。 必要に応じて、sea-svr1 への接続を更新します。 DHCP PowerShell ツールのインストールを求められたら、**[インストール]** を選択します。
 
 1. **[DHCP]** ページで、 **[+ 新しいスコープ]** を選択します。
 1. 新しいスコープの作成ペインで、次の設定を指定してから、**[作成]** を選択します。
@@ -123,7 +123,7 @@ lab:
 1. **[フェールオーバーに使用するパートナー サーバーの指定]** 画面で、**[パートナー サーバー]** ボックスに「**172.16.10.12**」と入力し、**[このサーバーで構成された既存のフェールオーバー リレーションシップを再利用する (存在する場合)]** チェックボックスをオンにしてから、**[次へ]** を選択します。
 1. **[このサーバーで既に構成されているフェールオーバー リレーションシップから選択]** 画面で、**[次へ]** を選択してから、**[完了]** を選択します。
 1. **[フェールオーバーの構成]** ダイアログ ボックスで、**[閉じる]** を選択します。
-1. Under <bpt id="p1">**</bpt>172.16.10.12<ept id="p1">**</ept>, select <bpt id="p2">**</bpt>IPv4<ept id="p2">**</ept>, and then verify that both scopes are listed. If necessary, press the <bpt id="p1">**</bpt>F5<ept id="p1">**</ept> key to refresh.
+1. **[172.16.10.12]** で **[IPv4]** を選択してから、両方のスコープが一覧表示されていることを確認します。 必要に応じて、**F5** キーを押して更新します。
 
 #### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
 
@@ -156,7 +156,7 @@ lab:
 
 1. **[インターネット プロトコル バージョン 4 (TCP/IPv4) のプロパティ]** ダイアログ ボックスで、**[次の DNS サーバーのアドレスを使用する]** を選択し、**[優先 DNS サーバー]** を **172.16.10.10** に設定してから **[OK]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Leave the <bpt id="p2">**</bpt>Ethernet Status<ept id="p2">**</ept> window open. You will need it later in this lab. 
+   > **注**: **[イーサネットの状態]** ウィンドウは開いたままにしておきます。 このラボで後ほど必要になります。 
 
 ## <a name="exercise-2-deploying-and-configuring-dns"></a>演習 2: DNS の展開と構成
 
@@ -167,13 +167,13 @@ lab:
 1. [役割と機能] ペインで、**[DNS サーバー]** チェックボックスをオンにし、**[+ インストール]** を選択します。
 1. [Install Roles and Features]\(役割と機能のインストール\) ペインで、**[はい]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the notification indicating that the DNS role is installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
+   > **注**: DNS 役割がインストールされていることを示す通知が行われるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
 
 1. **[Microsoft Edge]** ページを更新し、**[sea-svr1.contoso.com]** ページに戻り、**[ツール]** リストで **[DNS]** を選んでから、詳細ペインで **[インストール]** を選択して DNS PowerShell ツールをインストールします。 
 
    > **注**: **sea-svr1.contoso.com** の **[ツール]** リストで **DNS** エントリを利用できない場合は、**Microsoft Edge** ページを更新して、もう一度試してください。
 
-1. Wait until a notification appears indicating that the DNS PowerShell tools are installed. If necessary, select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> icon to verify the current status.
+1. DNS PowerShell ツールがインストールされていることを示す通知が表示されるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
 
 #### <a name="task-2-create-a-dns-zone"></a>タスク 2: DNS ゾーンを作成する
 
@@ -280,7 +280,7 @@ lab:
    Resolve-DnsName -Server sea-svr1.contoso.com -Name testapp.treyresearch.net
    ```
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Verify that the name resolves to <bpt id="p2">**</bpt>172.30.99.234<ept id="p2">**</ept>. This is expected, because the IP address of <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept> is no longer within the <bpt id="p2">**</bpt>HeadOfficeSubnet<ept id="p2">**</ept>. DNS queries originating from the <bpt id="p1">**</bpt>HeadOfficeSubnet<ept id="p1">**</ept> of <bpt id="p2">**</bpt>(172.16.10.0/24)<ept id="p2">**</ept> targeting <ph id="ph1">`testapp.treyresearch.net`</ph> resolve to <bpt id="p3">**</bpt>172.30.99.100<ept id="p3">**</ept>. DNS queries from outside of this subnet targeting <ph id="ph1">`testapp.treyresearch.net`</ph> resolve to <bpt id="p1">**</bpt>172.30.99.234<ept id="p1">**</ept>.
+   > **注**: 名前が **172.30.99.234** に解決されることを確認します。 **SEA-ADM1** の IP アドレスが **HeadOfficeSubnet** 内に存在しなくなったため、これは想定内です。 `testapp.treyresearch.net` をターゲットとする **(172.16.10.0/24)** の **HeadOfficeSubnet** からの DNS クエリは、**172.30.99.100** に解決されます。 `testapp.treyresearch.net` をターゲットとするこのサブネット外からの DNS クエリは、**172.30.99.234** に解決されます。
 
    > **注**: ここで、**SEA-ADM1** の IP アドレスをその元の値に戻します。
 

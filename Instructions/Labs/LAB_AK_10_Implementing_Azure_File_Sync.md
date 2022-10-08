@@ -40,9 +40,9 @@ lab:
 
    >**注:** DFS レプリケーションにより、**SEA-SVR1** と **SEA-SVR2** 上の **S:\\Data** フォルダー間で内容がレプリケートされます。
 
-1. Open two instances of File Explorer. In the first File Explorer instance, connect to <bpt id="p1">**</bpt><ph id="ph1">\\</ph><ph id="ph2">\\</ph>SEA-SVR1<ph id="ph3">\\</ph>Data<ept id="p1">**</ept>, and then in the second File Explorer instance, connect to <bpt id="p2">**</bpt><ph id="ph4">\\</ph><ph id="ph5">\\</ph>SEA-SVR2<ph id="ph6">\\</ph>Data<ept id="p2">**</ept>.
+1. エクスプローラーの 2 つのインスタンスを開きます。 最初のエクスプローラー インスタンスで、**\\\\SEA-SVR1\\Data**に接続し、2 番目のエクスプローラー インスタンスで、**\\\\SEA-SVR2\\Data** に接続します。
 1. **\\\\SEA-SVR1\\Data** に自分の名前を付けた新しいファイルを作成します。
-1. Verify that the file with your name replicates to <bpt id="p1">**</bpt><ph id="ph1">\\</ph><ph id="ph2">\\</ph>SEA-SVR2<ph id="ph3">\\</ph>Data<ept id="p1">**</ept> after a few seconds. This confirms that DFS Replication is working.
+1. 数秒後、自分の名前が付いたファイルが **\\\\SEA-SVR2\\Data** にレプリケートされることを確認します。 これにより、DFS レプリケーションが機能していることが確認されます。
 
    >**注:** ファイルがレプリケートされ、両方のエクスプローラー ウィンドウに同じ内容が記録されるのを待ちます。
 
@@ -58,7 +58,7 @@ lab:
    - [リソース グループ]: **[新規作成]** を選択し、リソース グループ名として「**AZ800-L1001-RG**」と入力し、**[OK]** を選択します。
    - [ストレージ アカウント名]: 小文字で始まり、小文字と数字の任意の組み合わせが続く文字列を入力します。合計長は 3 から 24 文字です。 
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> Choose the name which is likely to be globally unique. For example, you can specify the storage account name in the following format: <ph id="ph1">\&lt;*yourlowercaseinitials*&gt;</ph><bpt id="p1">*</bpt>DDMMYY<ept id="p1">*</ept>; for example, if your name is Devon Torres and you're creating a storage account on January 30, 2022, the storage account name will be <bpt id="p2">**</bpt>dt013022<ept id="p2">**</ept>. If that name is already taken, add another character to the name until the name is available. 
+   >**注:** グローバルに一意である可能性が高い名前を選択してください。 たとえば、ストレージ アカウント名を、\<*yourlowercaseinitials*>*DDMMYY* の形式で指定できます。また、たとえば、名前が Devon Torres で、2022 年 1 月 30 日にストレージ アカウントを作成する場合、ストレージ アカウント名を **dt013022** にします。 その名前が既に使用されている場合は、名前が使用できるようになるまで名前に別の文字を追加します。 
 
    - [リージョン]: ストレージ アカウントを作成できる地理的地域内の Azure リージョン。
 
@@ -84,12 +84,12 @@ lab:
    >**注:** スクリプトによって、Azure ファイル共有がドライブ文字 **Z** にマウントされました。
 
 1. タスク バーで、右クリックするか、エクスプローラーのコンテキスト メニューにアクセスして、**[エクスプローラー]** を選択し、**[クイック アクセス]** テキスト ボックスに「**Z:\**」と入力して Enter キーを押します。
-1. Verify that the file <bpt id="p1">**</bpt>File1.txt<ept id="p1">**</ept> appears in the details pane. This is the file that you uploaded to the Azure file share.
+1. ファイル **File1.txt** が詳細ウィンドウに表示されることを確認します。 これは、Azure ファイル共有にアップロードしたファイルです。
 1. **File1.txt**をダブルクリックするか、選択し、Enter キーを押して、メモ帳でファイルを開きます。 
 1. メモ帳を使用して、最後の行に自分の名前を追加してファイルの内容を変更し、変更を保存してメモ帳を閉じます。
 1. **[File1]** を右クリックするかコンテキスト メニューにアクセスして **[プロパティ]** を選択し、 **[File1 のプロパティ]** ウィンドウで **[以前のバージョン]** タブを選択します。
-1. Verify that one previous file version is available. Select that version (<bpt id="p1">**</bpt>File1.txt<ept id="p1">**</ept>), select <bpt id="p2">**</bpt>Restore<ept id="p2">**</ept> twice, and then select <bpt id="p3">**</bpt>OK<ept id="p3">**</ept> twice.
-1. Double-click or select <bpt id="p1">**</bpt>File1.txt<ept id="p1">**</ept>, select Enter, and then confirm that it doesn't include your name. This is because you restored the snapshot created before you modified the file.
+1. 以前のバージョンのファイルが 1 つ使用できることを確認します。 そのバージョン (**File1.txt**) を選択し、**[復元]** を 2 回選択して、**[OK]** を 2 回選択します。
+1. **File1.txt**をダブルクリックするか、選択し、Enter キーを押して、それに自分の名前が含まれていないことを確認します。 これは、ファイルを変更する前に作成したスナップショットを復元したためです。
 1. **[メモ帳]** を閉じます。
 
 ### <a name="task-3-deploy-storage-sync-service-and-a-file-sync-group"></a>タスク 3: ストレージ同期サービスと File Sync グループをデプロイする
@@ -104,7 +104,7 @@ lab:
 1. **[同期グループ]** ページで、**[同期グループ名]** テキスト ボックスに「**Sync1**」と入力します。
 1. **[ストレージ アカウントの選択]** を選択し、**[ストレージ アカウントの変更]** ページで、作成したストレージ アカウントを選択します。 
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> If you can't find the storage account, it was probably deployed to a different Azure region. You need to ensure that the storage account resides in the same region as the Storage Sync Service.
+   >**注:** ストレージ アカウントが見つからない場合は、別の Azure リージョンにデプロイされている可能性があります。 ストレージ アカウントが、ストレージ同期サービスと同じリージョンにあることを確認する必要があります。
 
 1. **[Azure ファイル共有]** ドロップダウン リストで、**[share1]** を選択し、**[作成]** を選択します。
 1. **[ストレージ同期サービス]** ページで、**[登録済みサーバー]** を選択し、現在登録されているサーバーがないことを確認します。
@@ -114,7 +114,7 @@ lab:
 ### <a name="task-1-add-sea-svr1-as-a-server-endpoint"></a>タスク 1: SEA-SVR1 をサーバー エンドポイントとして追加する
 
 1. **SEA-ADM1** 上の Azure portal の **[FileSync1 \| 登録済みサーバー]** ページで、**[Azure File Sync エージェント]** リンクを選択して、**[Azure File Sync エージェント]** Microsoft ダウンロード ページに移動します。  
-1. On the <bpt id="p1">**</bpt>Azure File Sync Agent<ept id="p1">**</ept> Microsoft Downloads page, select <bpt id="p2">**</bpt>Download<ept id="p2">**</ept>, select the checkbox next to the entry for File Sync agent for Windows Server 2022 (<bpt id="p3">**</bpt>StorageSyncAgent_WS2022.msi<ept id="p3">**</ept>), and select <bpt id="p4">**</bpt>Next<ept id="p4">**</ept> to start the download. After the download is complete, close the Microsoft Edge tab that opened for the download.
+1. **[Azure File Sync エージェント]** Microsoft ダウンロード ページで、**[ダウンロード]** を選択し、File Sync agent for Windows Server 2022 のエントリ (**StorageSyncAgent_WS2022.msi**) の横にあるチェックボックスをオンにし、**[次へ]** を選択してダウンロードを開始します。 ダウンロードが完了したら、ダウンロードのために開いた Microsoft Edge のタブを閉じます。
 1. エクスプローラーを使用して、ダウンロードしたファイルを **C:\\Labfiles\\Lab10** フォルダーにコピーします。
 1. **C:\\Labfiles\\Lab10** フォルダーの内容が表示されているエクスプローラーの詳細ウィンドウで、ファイル **[Install-FileSyncServerCore.ps1]** を選択して、その状況依存メニューを表示し、そのメニューで、**[編集]** を選択します。
 
@@ -122,7 +122,7 @@ lab:
 
 1. **[Windows PowerShell ISE]** のスクリプト ペインでスクリプトを確認した後、ツール バーで **[スクリプトの実行]** アイコンを選択するか、F5 キーを押してスクリプトを実行します。 
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> Monitor the script execution. This should take about 3 minutes.
+   >**注:** スクリプトの実行を監視します。 これには、約 3 分かかります。
 
 1. サインインを求める**警告**メッセージを含むプロンプトが表示されたら、警告メッセージ内の 9 桁のコードをクリップボードにコピーします。
 1. Azure portal が表示されている Microsoft Edge ウィンドウに切り替えて、**+** を選択して新しいタブを開き、新しいタブで **https://microsoft.com/devicelogin** にアクセスします。
@@ -143,7 +143,7 @@ lab:
 1. **SEA-ADM1** で、**[Windows PowerShell ISE]** ウィンドウに切り替えて、**Install-FileSyncServerCore.ps1** ファイルの内容が表示されているスクリプト ペインのタブに移動します。
 1. **[Windows PowerShell ISE]** のスクリプト ペインで、最初の行の `SEA-SVR1` を `SEA-SVR2` に置き換えて、変更を保存し、ツール バーで **[スクリプトの実行]** アイコンを選択するか、F5 キーを押してスクリプトを実行します。 
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> Monitor the script execution. This should take about 3 minutes.
+   >**注:** スクリプトの実行を監視します。 これには、約 3 分かかります。
 
 1. サインインを求める**警告**メッセージを含むプロンプトが表示されたら、警告メッセージ内の 9 桁のコードをクリップボードにコピーします。
 1. Azure portal が表示されている Microsoft Edge ウィンドウに切り替えて、**+** を選択して新しいタブを開き、新しいタブで **https://microsoft.com/devicelogin** にアクセスします。
@@ -173,9 +173,9 @@ lab:
 
 1. **SEA-ADM1**上の Azure portal の **[Sync1]** 同期グループ ページにある **[サーバー エンドポイント]** セクションで、**[SEA-SVR2.Contoso.com]** を選択します。
 1. [サーバー エンドポイントのプロパティ] ウィンドウの **[クラウドを使った階層化]** セクションで、**[有効]** を選択します。
-1. In the <bpt id="p1">**</bpt>Always preserve the specified percentage of free space on the volume<ept id="p1">**</ept> text box, enter <bpt id="p2">**</bpt>90<ept id="p2">**</ept> and set <bpt id="p3">**</bpt>Date policy<ept id="p3">**</ept> to <bpt id="p4">**</bpt>Enabled<ept id="p4">**</ept>. In the <bpt id="p1">**</bpt>Only cache files that were accessed or modified within the specified number of days<ept id="p1">**</ept> text box, enter <bpt id="p2">**</bpt>14<ept id="p2">**</ept>, and then select <bpt id="p3">**</bpt>Save<ept id="p3">**</ept>.
+1. **[指定した割合の空きスペースをボリュームに常時残す]** テキスト ボックスに「**90**」と入力し、**[日付ポリシー]** を **[有効]** に設定します。 **[指定した日数内にアクセスまたは変更されたファイルのみをキャッシュする]** テキスト ボックスに「**14**」と入力し、**[保存]** を選択します。
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> After some time, files on <bpt id="p2">**</bpt>SEA-SVR2<ept id="p2">**</ept> would be automatically tiered. You will trigger this process by using PowerShell.
+   >**注:** しばらくすると、**SEA-SVR2** 上のファイルが自動的に階層化されます。 このプロセスは、PowerShell を使用してトリガーします。
 
 1. **SEA-ADM1**で、**[Windows PowerShell ISE]** ウィンドウに切り替えます。
 1. **[Windows PowerShell ISE]** のコンソール ウィンドウで、次のコマンドを入力し、各コマンドの後に Enter キーを押すと、階層化が即座にトリガーされます。
@@ -198,13 +198,13 @@ lab:
 
 ### <a name="task-1-monitor-file-sync-replication"></a>タスク 1: File Sync レプリケーションを監視する
 
-1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, use File Explorer to copy the <bpt id="p2">**</bpt>C:<ph id="ph1">\\</ph>Windows<ph id="ph2">\\</ph>INF<ept id="p2">**</ept> folder to <bpt id="p3">**</bpt><ph id="ph3">\\</ph><ph id="ph4">\\</ph>SEA-SVR2<ph id="ph5">\\</ph>Data<ph id="ph6">\\</ph><ept id="p3">**</ept>. The folder will sync to the cloud endpoint, which will cause sync traffic.
+1. **SEA-ADM1**で、エクスプローラーを使用して **C:\\Windows\\INF** フォルダーを **\\\\SEA-SVR2\\Data\\** にコピーします。 このフォルダーはクラウド エンドポイントと同期され、同期トラフィックが発生します。
 1. **SEA-ADM1** で、**FileSync1** ストレージ同期サービスの **Sync1** 同期グループ ページが表示されている Azure portal に切り替えます。
 1. **[サーバー エンドポイント]** セクションで、両方のエンドポイントの **[正常性]** に緑色のチェック マークが付いていることを確認します。
 1. [サーバー エンドポイントのプロパティ] ウィンドウで **[SEA-SVR2.Contoso.com]** エンドポイントを選択し、 **[同期アクティビティ]** を確認し、ウィンドウを閉じます。
 1. **[同期されたファイル数]** グラフを選択し、フィルターを使用してグラフをカスタマイズする方法を調べます。
 1. Azure ファイル共有にマップされたドライブ **Z** の内容が表示されているエクスプローラー ウィンドウに切り替えて、ドライブに **\\\\SEA-SVR2\\Data** から同期された **INF** フォルダーの内容が含まれていることを確認します。
-1. Switch to the Azure portal and verify that the <bpt id="p1">**</bpt>INF<ept id="p1">**</ept> sync traffic is reflected in the <bpt id="p2">**</bpt>Files Synced<ept id="p2">**</ept> and <bpt id="p3">**</bpt>Bytes Synced<ept id="p3">**</ept> graphs. The <bpt id="p1">**</bpt>INF<ept id="p1">**</ept> folder has more than 800 files, and its size is more than 40 MB.
+1. Azure portal に切り替えて、**INF** 同期トラフィックが、**[同期されたファイル数]** および **[同期されたバイト数]** のグラフに反映されていることを確認します。 **INF** フォルダーには 800 個以上のファイルが含まれており、そのサイズは 40 MB を超えます。
 
    >**注:** 更新された統計を確認するには、Azure portal が表示されているページを更新することが必要な場合があります。
 
@@ -216,7 +216,7 @@ lab:
 1. 最初の **Demo.txt** ファイルに任意のテキストを追加し、変更を保存します。
 1. その後すぐに、2 番目の **Demo.txt** ファイルに任意のテキスト (前の手順で使用したものとは異なるテキスト) を追加し、変更を保存します。
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> Make sure to save the change to the second file as soon as possible. You're creating files with the same name but different content to intentionally trigger a sync conflict.
+   >**注:** 2 番目のファイルに対する変更をできる限り早く保存してください。 同期の競合を意図的にトリガーするために、名前は同一で、内容が異なるファイルを作成しています。
 
 1. 各エクスプローラー ウィンドウで、内容を確認し、**Demo.txt** ファイルだけでなく、**Demo-SEA-SVR2.txt** (および場合によっては **Demo-Cloud.txt**) も含まれていることを確認します。 
 

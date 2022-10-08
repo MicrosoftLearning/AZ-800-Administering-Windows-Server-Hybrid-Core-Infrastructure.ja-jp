@@ -23,11 +23,11 @@ lab:
    ```powershell
    Get-WindowsFeature –ComputerName SEA-SVR1
    ```
-1. In the output of the previous command, search for the <bpt id="p1">**</bpt>Active Directory Domain Services<ept id="p1">**</ept> checkbox, and then verify that it is selected. Then, search for <bpt id="p1">**</bpt>Remote Server Administration Tools<ept id="p1">**</ept>. Notice the <bpt id="p1">**</bpt>Role Administration Tools<ept id="p1">**</ept> node below it, and then verify that the <bpt id="p2">**</bpt>AD DS and AD LDS Tools<ept id="p2">**</ept> node is also selected.
+1. 前のコマンドの出力で、**Active Directory Domain Services** チェックボックスを探し、それが選択されていることを確認します。 その後、**リモート サーバー管理ツール**を探します。 その下の **[役割管理ツール]** ノードに注目してください。その後、**[AD DS および AD LDS ツール]** ノードも選択されていることを確認します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Under the <bpt id="p2">**</bpt>AD DS and AD LDS Tools<ept id="p2">**</ept> node, only <bpt id="p3">**</bpt>Active Directory module for Windows PowerShell<ept id="p3">**</ept> has been installed and not the graphical tools, such as the Active Directory Administrative Center. If you centrally manage your servers, you will not usually need these on each server. If you want to install them, you must specify the AD DS tools by running the <bpt id="p1">**</bpt>Add-WindowsFeature<ept id="p1">**</ept> cmdlet with the <bpt id="p2">**</bpt>RSAT-ADDS<ept id="p2">**</ept> command.
+   > **注**: **[AD DS および AD LDS ツール]** ノードでは、**Windows PowerShell 用 Active Directory モジュール**のみがインストールされ、Active Directory 管理センターなどのグラフィカル ツールはインストールされていません。 サーバーを中央管理する場合、通常は各サーバーにこれらは必要ありません。 それらをインストールする場合は、**RSAT-ADDS** コマンドを使用して **Add-WindowsFeature** コマンドレットを実行し、AD DS ツールを指定する必要があります。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: You might need to wait a brief time after the installation process is complete before verifying that the AD DS role has installed. If you do not observe the expected results from the <bpt id="p1">**</bpt>Get-WindowsFeature<ept id="p1">**</ept> command, you can try again after a few minutes.
+   > **注**: インストール プロセスが完了してから、AD DS 役割がインストールされていることを確認する前に、しばらく待つ必要がある場合があります。 **Get-WindowsFeature** コマンドから予想される結果が得られない場合は、数分後に再度試すことができます。
 
 #### <a name="task-2-prepare-the-ad-ds-installation-and-promote-a-remote-server"></a>タスク 2: AD DS インストールの準備をして、リモート サーバーを昇格させる
 
@@ -35,13 +35,13 @@ lab:
 1. **[管理]** メニューで、**[サーバーの追加]** を選択します。
 1. **[サーバーの追加]** ダイアログ ボックスで、既定の設定を維持し、**[今すぐ検索]** を選択します。
 1. サーバーの **[Active Directory]** リストで **[SEA-SVR1]** を選び、矢印を選択して **[選択済み]** リストに追加してから、**[OK]** を選択します。
-1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, ensure that the installation of the AD DS role on <bpt id="p2">**</bpt>SEA-SRV1<ept id="p2">**</ept> is complete and that the server was added to <bpt id="p3">**</bpt>Server Manager<ept id="p3">**</ept>. Then select the <bpt id="p1">**</bpt>Notifications<ept id="p1">**</ept> flag symbol.
+1. **SEA-ADM1** で、**SEA-SRV1** への AD DS 役割のインストールが完了していること、およびサーバーが**サーバー マネージャー**に追加されたことを確かめます。 その後、**[通知]** フラグ シンボルを選択します。
 1. **SEA-SVR1** の展開後の構成に注意してください。その後、**[このサーバーをドメイン コントローラーに昇格する]** リンクを選択します。
 1. **[Active Directory Domain Services 構成ウィザード]** の **[展開構成]** ページの **[展開操作の選択]** の下で、**[既存のドメインにドメイン コントローラーを追加する]** が選択されていることを確認します。
 1. `Contoso.com` ドメインが指定されていることを確かめてから、**[この操作を実行する資格情報を指定する]** セクションで **[変更]** を選択します。
 1. **[展開操作の資格情報]** ダイアログ ボックスの **[ユーザー名]** ボックスに「**CONTOSO\\Administrator**」と入力してから、**[パスワード]** ボックスに「**Pa55w.rd**」と入力します。
 1. **[OK]** を選択し、 **[次へ]** を選択します。
-1. On the <bpt id="p1">**</bpt>Domain Controller Options<ept id="p1">**</ept> page, ensure that the <bpt id="p2">**</bpt>Domain Name System (DNS) server<ept id="p2">**</ept> and <bpt id="p3">**</bpt>Global Catalog (GC)<ept id="p3">**</ept> checkboxes are selected. Ensure that the <bpt id="p1">**</bpt>Read-only domain controller (RODC)<ept id="p1">**</ept> checkbox is cleared.
+1. **[ドメイン コントローラーのオプション]** ページで、**[ドメイン ネーム システム (DNS) サーバー]** と **[グローバル カタログ (GC)]** チェックボックスがオンになっていることを確かめます。 **[読み取り専用ドメイン コントローラー (RODC)]** チェック ボックスがオフになっていることを確かめます。
 1. **[ディレクトリ サービス復元モード (DSRM) パスワードの入力]** セクションで、パスワード「**Pa55w.rd**」を入力して確認し、**[次へ]** を選択します。
 1. **[DNS オプション]** ページで、**[次へ]** を選択します。
 1. **[追加オプション]** ページで、**[次へ]** を選択します。
@@ -54,7 +54,7 @@ lab:
    - 各行の末尾にあるアクサン グラーブ (**`**) を削除します。
    - 改行を削除します。
 
-1. Now the <bpt id="p1">**</bpt>Install-ADDSDomainController<ept id="p1">**</ept> command and all the parameters are on one line. Place the cursor in front of the line, and then, on the <bpt id="p1">**</bpt>Edit<ept id="p1">**</ept> menu, select <bpt id="p2">**</bpt>Select All<ept id="p2">**</ept> to select the whole line. On the menu, select <bpt id="p1">**</bpt>Edit<ept id="p1">**</ept>, and then select <bpt id="p2">**</bpt>Copy<ept id="p2">**</ept>.
+1. これで、**Install-ADDSDomainController** コマンドとすべてのパラメーターが 1 行に収まりました。 その行の前にカーソルを置き、**[編集]** メニューで、**[すべて選択]** を選んで行全体を選択します。 メニューの **[編集]** を選んでから、**[コピー]** を選択します。
 1. **[Active Directory Domain Services 構成ウィザード]** に切り替えてから、**[キャンセル]** を選択します。
 1. 確認を求めるメッセージが表示されたら、**[はい]** を選択してウィザードをキャンセルします。
 1. Windows PowerShell のコマンド プロンプトで、次のコマンドを入力します。
@@ -62,7 +62,7 @@ lab:
    ```powershell
    Invoke-Command –ComputerName SEA-SVR1 { }
    ```
-1. Place the cursor between the braces (<bpt id="p1">**</bpt>{ }<ept id="p1">**</ept>), and then paste the content of the copied script line from the clipboard. The complete command should have the following format:
+1. 中かっこ (**{ }**) の間にカーソルを置き、クリップボードからコピーされたスクリプト行の内容を貼り付けます。 完全なコマンドは次の形式になるはずです。
     
    ```powershell
    Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:\$false -Credential (Get-Credential) -CriticalReplicationOnly:\$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:\$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:\$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
@@ -71,9 +71,9 @@ lab:
 1. **[Windows PowerShell 資格情報要求]** ダイアログ ボックスの **[ユーザー名]** ボックスに「**CONTOSO\\Administrator**」と入力し、**[パスワード]** ボックスに「**Pa55w.rd**」と入力して、**[OK]** を選択します。
 1. パスワードの入力を求めるメッセージが表示されたら、**[SafeModeAdministratorPassword]** テキスト ボックスに「**Pa55w.rd**」と入力し、Enter キーを押します。
 1. 確認を求めるメッセージが表示されたら、**[SafeModeAdministratorPassword の確認]** テキスト ボックスに「**Pa55w.rd**」と入力し、Enter キーを押します。
-1. Wait until the command runs and the <bpt id="p1">**</bpt>Status Success<ept id="p1">**</ept> message is returned. The <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> virtual machine restarts.
+1. コマンドが実行され、**正常な状態**というメッセージが返されるまで待ちます。 **SEA-SVR1** 仮想マシンが再起動します。
 1. ファイルを保存せずにメモ帳を閉じます。
-1. After <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> restarts, on <bpt id="p2">**</bpt>SEA-ADM1<ept id="p2">**</ept>, switch to <bpt id="p3">**</bpt>Server Manager<ept id="p3">**</ept>, and on the left side, select the <bpt id="p4">**</bpt>AD DS<ept id="p4">**</ept> node. Note that <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> has been added as a server and that the warning notification has disappeared.
+1. **SEA-SVR1** が再起動した後、**SEA-ADM1** で **[サーバー マネージャー]** に切り替え、左側の **[AD DS]** ノードを選択します。 **SEA-SVR1** がサーバーとして追加されたこと、および警告通知が表示されなくなったことに注意してください。
 
    > **注**: **[更新]** を選択する必要がある場合があります。
 
@@ -144,7 +144,7 @@ lab:
 1. **[レジストリ編集ツールへアクセスできないようにする]** ダイアログ ボックスで、**[有効]**、**[OK]** の順に選択します。
 1. ナビゲーション ペインで、**[ユーザーの****構成]**、**[ポリシー]**、**[管理用テンプレート]** の順に展開し、**[コントロール パネル]** を展開してから **[個人用設定]** を選択します。
 1. 詳細ペインで、**[スクリーン セーバーのタイムアウト]** ポリシー設定をダブルクリックまたは選択してから、Enter キーを押します。
-1. 前のコマンドの出力で、**Active Directory Domain Services** チェックボックスを探し、それが選択されていることを確認します。 
+1. **[スクリーン セーバーのタイムアウト]** ダイアログ ボックスで、**[有効]** を選択します。 **[秒]** テキスト ボックスに「**600**」と入力してから、**[OK]** を選択します。 
 1. **[パスワードでスクリーン セーバーを保護する]** ポリシー設定をダブルクリックまたは選択してから、Enter キーを押します。
 1. **[スクリーン セーバーをパスワードで保護する]** ダイアログ ボックスで、**[有効]** を選んでから、**[OK]** を選択します。
 1. **[グループ ポリシー管理エディター]** ウィンドウを閉じます。
@@ -163,13 +163,13 @@ lab:
 1. サインアウトしてから、パスワード **Pa55w.rd** を使用して **CONTOSO\\Ty** としてサインインします。
 1. タスク バーの検索ボックスに、「**コントロール パネル**」と入力します。
 1. **[最も一致する検索結果]** リストで、**[コントロール パネル]** を選択します。
-1. その後、**リモート サーバー管理ツール**を探します。
-1. その下の **[役割管理ツール]** ノードに注目してください。その後、**[AD DS および AD LDS ツール]** ノードも選択されていることを確認します。
+1. [コントロール パネル] の検索ボックスに「**スクリーン セーバー**」と入力し、**[スクリーン セーバーの変更]** を選択します  (オプションが表示されるまでに数分かかる場合があります)。
+1. **[スクリーン セーバーの設定]** ダイアログ ボックスで、**[待ち時間]** オプションが淡色表示になっていることに注目してください。 タイムアウトを変更することはできません。**[再開時にログオン画面に戻る]** オプションが選択されて淡色表示になっており、設定を変更できないことに注目にしてください。
 
    > **注**: **[再開時にログオン画面に戻る]** オプションが選択されて淡色表示になっていない場合は、コマンド プロンプトを開いて `gpupdate /force` を実行し、前の手順を繰り返します。
 
 1. **[スタート]** のコンテキスト メニューを右クリックまたはそこにアクセスし、**[ファイル名を指定して実行]** を選択します。
-1. In the <bpt id="p1">**</bpt>Run<ept id="p1">**</ept> dialog box, in the <bpt id="p2">**</bpt>Open<ept id="p2">**</ept> text box, enter <bpt id="p3">**</bpt>regedit<ept id="p3">**</ept>, and then select <bpt id="p4">**</bpt>OK<ept id="p4">**</ept>. Note the error message stating <bpt id="p1">**</bpt>Registry editing has been disabled by your administrator<ept id="p1">**</ept>.
+1. **[ファイル名を指定して実行]** ダイアログ ボックスの **[名前]** ボックスに「**regedit**」と入力し、**[OK]** を選択します。 **レジストリ編集は、管理者によって使用不可にされています**というエラー メッセージに注意してください。
 1. **[レジストリエディター]** ダイアログ ボックスで、**[OK]** を選択します。
 1. サインアウトしてから、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてもう一度サインインします。
 
@@ -191,7 +191,7 @@ lab:
 1. **[グループ ポリシー管理コンソール]** ツリーに戻り、**Seattle** OU が選択されていることを確かめます。
 1. **[グループ ポリシーの継承]** タブを選択し、その内容を確認します。
 
-   > **注**: **[AD DS および AD LDS ツール]** ノードでは、**Windows PowerShell 用 Active Directory モジュール**のみがインストールされ、Active Directory 管理センターなどのグラフィカル ツールはインストールされていません。
+   > **注**: Seattle Application Override GPO は CONTOSO Standards GPO より優先順位が高くなります。 Seattle Application Override GPO で先ほど構成したスクリーン セーバーのタイムアウト ポリシー設定は、CONTOSO Standards GPO の設定の後に適用されます。 そのため、新しい設定で CONTOSO Standards GPO 設定が上書きされます。 Seattle Application Override GPO のスコープ内のユーザーに対して、スクリーン セーバーのタイムアウトが無効になります。
 
 #### <a name="task-6-configure-the-scope-of-a-gpo-with-security-filtering"></a>タスク 6: セキュリティ フィルター処理を使用して GPO のスコープを構成する
 
@@ -202,7 +202,7 @@ lab:
 1. **[セキュリティ フィルター処理]** セクションで、**[認証されたユーザー]** を選んでから **[削除]** を選択します。
 1. **[グループ ポリシーの管理]** ダイアログ ボックスで **[OK]** を選択し、**[グループ ポリシーの管理]** の警告を確認してからもう一度 **[OK]** を選択します。
 
-   > サーバーを中央管理する場合、通常は各サーバーにこれらは必要ありません。
+   > **注**: グループ ポリシーでは、ユーザーの GPO 設定を正常に適用するために、各コンピューター アカウントにドメイン コントローラーから GPO データを読み取るアクセス許可が求められます。 GPO のセキュリティ フィルター処理設定を変更する場合は、これに注意してください。
 
 1. 詳細ペインで、**[追加]** を選択します。
 1. **[ユーザー、コンピューター、またはグループの選択]** ダイアログ ボックスで、**[選択するオブジェクト名を入力してください (例):]** テキスト ボックスに「**SeattleBranchUsers**」と入力してから、**[OK]** を選択します。
@@ -229,7 +229,7 @@ lab:
 1. **[選択の要約]** ページで、**[次へ]** を選択します。
 1. メッセージが表示されたら、**[完了]** を選択します。
 1. 詳細ペインで、**[詳細]** タブを選択し、**[すべて表示]** を選びます。
-1. それらをインストールする場合は、**RSAT-ADDS** コマンドを使用して **Add-WindowsFeature** コマンドレットを実行し、AD DS ツールを指定する必要があります。
+1. レポートで、**[ユーザーの詳細]** セクションが見つかるまで下にスクロールし、**[コントロールパネル] の [個人用設定]** セクションを見つけます。 **[スクリーン セーバーのタイムアウト]** 設定が無効になっており、優勢な GPO がSeattle Application Override GPO に設定されていることに注意してください。
 1. **[グループ ポリシーの管理]** コンソールを閉じます。
 
 **結果**: この演習が完了すると、GPO を正常に作成して構成したことになります。

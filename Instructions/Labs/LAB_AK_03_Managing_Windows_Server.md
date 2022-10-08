@@ -24,9 +24,9 @@ lab:
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait until the installation completes. This should take about 2 minutes.
+   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
    
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: After installation completes, you may encounter the error message 'ERR_Connection_Refused'. If this occurs, restart SEA-ADM1 to correct the issue.
+   > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
 
 #### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
 
@@ -46,15 +46,15 @@ lab:
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: After performing step 7, if an error message that says <bpt id="p2">**</bpt>You can add this server to your list of connections, but we can't confirm it's available.<ept id="p2">**</ept> appears, select <bpt id="p1">**</bpt>Add<ept id="p1">**</ept>. In the All Connections pane,  select <bpt id="p1">**</bpt>sea-svr1.contoso.com<ept id="p1">**</ept>, and then select <bpt id="p2">**</bpt>Manage as<ept id="p2">**</ept>. In the <bpt id="p1">**</bpt>Specify your credentials<ept id="p1">**</ept> dialog box, ensure that the <bpt id="p2">**</bpt>Use another account for this connection<ept id="p2">**</ept> option is selected, enter the Administrator credentials, and then select <bpt id="p3">**</bpt>Continue<ept id="p3">**</ept>.
+   > **注**: 手順 7 を実行した後、**お客様はこのサーバーを自分の接続リストに追加できますが、Microsoft 側でそれが利用可能であることを確認できません。** という内容のエラー メッセージが表示された場合、 **[追加]** を選択します。 [すべての接続] ペインで、**[sea-svr1.contoso.com]** を選んでから、**[管理に使用する資格情報]** を選択します。 **[資格情報の指定]** ダイアログ ボックスで、**[この接続に別のアカウントを使用する]** オプションが選択されていることを確かめ、管理者の資格情報を入力してから **[続行]** を選択します。
 
    > **注**: シングル サインオンを実行するには、Kerberos の制約付き委任を設定する必要があります。
 
 #### <a name="task-3-configure-windows-admin-center-extensions"></a>タスク 3: Windows Admin Center 拡張機能を構成する
 
 1. **SEA-ADM1** 上の、Windows Admin Center を表示している Microsoft Edge ウィンドウの右上隅で、**[設定]** アイコン (歯車ホイール) を選択します。
-1. In the left pane, select <bpt id="p1">**</bpt>Extensions<ept id="p1">**</ept>. Review the available extensions.
-1. Select the <bpt id="p1">**</bpt>Security (Preview)<ept id="p1">**</ept> extension, and then select <bpt id="p2">**</bpt>Install<ept id="p2">**</ept>. The extension will install and Windows Admin Center will refresh.
+1. 左側のウィンドウで、**[拡張機能]** を選択します。 使用可能な拡張機能を確認します。
+1. **[セキュリティ (プレビュー)]** 拡張機能を選択して、**[インストール]** を選択します。 拡張機能がインストールされ Windows Admin Center が更新されます。
 
    > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 
@@ -66,13 +66,13 @@ lab:
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
-1. To install the DNS PowerShell tools, in the left pane, in the list of <bpt id="p1">**</bpt>Tools<ept id="p1">**</ept>, select <bpt id="p2">**</bpt>DNS<ept id="p2">**</ept>, and then select <bpt id="p3">**</bpt>Install<ept id="p3">**</ept>. The tools will take less than a minute to install.
+1. DNS PowerShell ツールをインストールするには、左側のウィンドウの **[ツール]** の一覧で **[DNS]** を選択してから、**[インストール]** を選択します。 ツールのインストールには 1 分もかかりません。
 1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。
 
 #### <a name="task-4-verify-remote-administration"></a>タスク 4: リモート管理を確認する
 
-1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, in Windows Admin Center, in the left pane, in the list of <bpt id="p2">**</bpt>Tools<ept id="p2">**</ept>, select <bpt id="p3">**</bpt>Overview<ept id="p3">**</ept>. Note that the details pane of Windows Admin Center displays basic server information and performance monitoring.
-1. In the left pane, in the list of <bpt id="p1">**</bpt>Tools<ept id="p1">**</ept>, scroll down and review the basic administration tools available. Select <bpt id="p1">**</bpt>Roles &amp; features<ept id="p1">**</ept> and note which roles and features are listed as installed and which ones are available to install. Scroll down, select the <bpt id="p1">**</bpt>Telnet Client<ept id="p1">**</ept> checkbox, and then select <bpt id="p2">**</bpt>+ Install<ept id="p2">**</ept> at the top of the pane.
+1. **SEA-ADM1** 上の Windows Admin Center の左側のウィンドウにある **[ツール]** の一覧で、**[概要]** を選択します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。
+1. 左側のウィンドウの **[ツール]** の一覧を下にスクロールし、使用可能な基本的な管理ツールを確認します。 **[ロールと機能]** を選択し、どのロールと機能がインストール済みとして表示されているか、またはインストール可能であるかを確認します。 下にスクロールし、 **[Telnet クライアント]** チェック ボックスをオンにしてから、ウィンドウの上部にある **[+ インストール]** を選択します。
 1. **[Install Roles and Features]\(役割と機能のインストール\)** ペインで **[はい]** を選び、Telnet クライアントが正常にインストールされたことを確認するメッセージが表示されるのを待ちます。
 1. 左側のウィンドウの一番下にある、 **[ツール]** の一覧の下で、 **[設定]** を選択します。
 1. 右側の **[設定]** セクションで、**[リモート デスクトップ]** を選択します。
@@ -115,4 +115,4 @@ lab:
 
 ### <a name="results"></a>結果
 
-After completing this exercise, you will have installed Windows Admin Center and connected it to the servers in your lab environment. You performed a number of remote management tasks including installing a feature as well as enabling and testing Remote Desktop connectivity. Finally, you used PowerShell Remoting to check the status of a service and then to start it.
+この演習を完了すると、Windows Admin Center がインストールされ、ラボ環境内のサーバーに接続されます。 機能のインストールや、リモート デスクトップ接続の有効化およびテストなどのリモート管理タスクを複数実行しました。 最後に、PowerShell リモート処理を使用してサービスの状態を確認して、開始しました。

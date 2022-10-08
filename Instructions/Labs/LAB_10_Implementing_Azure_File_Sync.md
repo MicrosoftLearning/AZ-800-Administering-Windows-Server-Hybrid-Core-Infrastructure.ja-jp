@@ -35,7 +35,7 @@ Contoso のロンドン本社とシアトルを拠点とするブランチ オ�
    - パスワード: **Pa55w.rd**
    - ドメイン: **CONTOSO**
 
-For this lab, you'll use the available VM environment and an Azure subscription. Before you begin the lab, ensure that you have an Azure subscription and a user account with the Owner or Contributor role in that subscription.
+このラボでは、使用可能な VM 環境と Azure サブスクリプションを使用します。 ラボを開始する前に、Azure サブスクリプションと、そのサブスクリプションの所有者または共同作成者ロールを持つユーザー アカウントがあることを確認してください。
 
 ## <a name="exercise-1-implementing-dfs-replication-in-your-on-premises-environment"></a>演習 1: オンプレミス環境での DFS レプリケーションの実装
 
@@ -61,16 +61,16 @@ For this lab, you'll use the available VM environment and an Azure subscription.
 #### <a name="task-2-test-dfs-deployment"></a>タスク 2: DFS のデプロイをテストする
 
 1. **SEA-ADM1**で、 **[DFS 管理]** コンソールを起動し、前のタスクで作成した **\\\\Contoso.com\\Root\\** 名前空間と **Branch1** レプリケーション グループの両方を追加します。 
-1. Verify that the <bpt id="p1">**</bpt><ph id="ph1">\\</ph><ph id="ph2">\\</ph>Contoso.com<ph id="ph3">\\</ph>Root<ph id="ph4">\\</ph>Data<ept id="p1">**</ept> folder has targets on <bpt id="p2">**</bpt>SEA-SVR1<ept id="p2">**</ept> and <bpt id="p3">**</bpt>SEA-SVR2<ept id="p3">**</ept>. Note the folders configured as the targets.
-1. Verify that the <bpt id="p1">**</bpt>Branch1<ept id="p1">**</ept> replication group has two members, <bpt id="p2">**</bpt>SEA-SVR1<ept id="p2">**</ept> and <bpt id="p3">**</bpt>SEA-SVR2<ept id="p3">**</ept>. Note the folders replicated on each server.
-1. Open two instances of File Explorer. In the first instance, connect to <bpt id="p1">**</bpt><ph id="ph1">\\</ph><ph id="ph2">\\</ph>SEA-SVR1<ph id="ph3">\\</ph>Data<ept id="p1">**</ept>, and then in the second instance, connect to <bpt id="p2">**</bpt><ph id="ph4">\\</ph><ph id="ph5">\\</ph>SEA-SVR2<ph id="ph6">\\</ph>Data<ept id="p2">**</ept>.
-1. Create a new file with your name in <bpt id="p1">**</bpt><ph id="ph1">\\</ph><ph id="ph2">\\</ph>SEA-SVR1<ph id="ph3">\\</ph>Data<ept id="p1">**</ept>, and then confirm that the file replicates to <bpt id="p2">**</bpt><ph id="ph4">\\</ph><ph id="ph5">\\</ph>SEA-SVR2<ph id="ph6">\\</ph>Data<ept id="p2">**</ept> after a few seconds. This confirms that DFS Replication is working.
+1. **\\\\Contoso.com\\Root\\Data** フォルダーのターゲットが、**SEA-SVR1** と **SEA-SVR2** 上にあることを確認します。 ターゲットとして構成されているフォルダーに注意してください。
+1. **Branch1** レプリケーション メンバーに 2 つのメンバー (**SEA-SVR1** と **SEA-SVR2**) が含まれていることを確認します。 各サーバーにレプリケートされるフォルダーに注意してください。
+1. エクスプローラーの 2 つのインスタンスを開きます。 最初のインスタンスで **\\\\SEA-SVR1\\Data** に接続し、2 番目のインスタンスで **\\\\SEA-SVR2\\Data** に接続します。
+1. **\\\\SEA-SVR1\\Data** に自分の名前を付けた新しいファイルを作成し、数秒後、そのファイルが **\\\\SEA-SVR2\\Data** にレプリケートされることを確認します。 これにより、DFS レプリケーションが機能していることが確認されます。
 
    >**注:** ファイルがレプリケートされ、両方のエクスプローラー ウィンドウに同じ内容が記録されるのを待ちます。
 
 ### <a name="results"></a>結果
 
-After completing this exercise, you'll have created a working DFS infrastructure. This includes DFS Replication, which replicates content between <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> and <bpt id="p2">**</bpt>SEA-SVR2<ept id="p2">**</ept>.
+この演習を完了すると、機能する DFS インフラストラクチャが作成されます。 これには、**SEA-SVR1** と **SEA-SVR2** の間で内容をレプリケートする DFS レプリケーションが含まれます。
 
 ## <a name="exercise-2-creating-and-configuring-a-sync-group"></a>演習 2: 同期グループの作成と構成
 
@@ -104,16 +104,16 @@ DFS レプリケーション環境を File Sync に移行するための準備�
 
 #### <a name="task-3-deploy-storage-sync-service-and-a-file-sync-group"></a>タスク 3: ストレージ同期サービスと File Sync グループをデプロイする
 
-1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, use the Azure portal to create an Azure File Sync resource named <bpt id="p2">**</bpt>FileSync1<ept id="p2">**</ept>. Use the same region and Resource Group as you used when deploying the storage account.
+1. **SEA-ADM1** で、Azure portal を使用して、**FileSync1** という名前の Azure File Sync リソースを作成します。 ストレージ アカウントをデプロイするときに使用したものと同じリージョンとリソース グループを使用します。
 
    >**注:** File Sync をデプロイすると、ストレージ同期サービス リソースが作成されます。
 
-1. Create a sync group named <bpt id="p1">**</bpt>Sync1<ept id="p1">**</ept> in the <bpt id="p2">**</bpt>FileSync1<ept id="p2">**</ept> Storage Sync Service. Use the storage account that you created earlier and <bpt id="p1">**</bpt>share1<ept id="p1">**</ept> as the Azure file share when creating <bpt id="p2">**</bpt>Sync1<ept id="p2">**</ept>.
+1. **FileSync1** ストレージ同期サービスで、**Sync1** という名前の同期グループを作成します。 **Sync1** を作成するときに、前に作成したストレージ アカウントと **share1** を Azure ファイル共有として使用します。
 1. 現在、**FileSync1**に登録されているサーバーがないことを確認します。
 
 ### <a name="results"></a>結果
 
-After completing this exercise, you will have created a File Sync group. You also have created the cloud endpoint mapped on <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept> so that you can inspect the Azure file share content.
+この演習を完了すると、File Sync グループが作成されます。 また、**SEA-ADM1** にマップされたクラウド エンドポイントも作成され、Azure ファイル共有の内容を調べることができます。
 
 ## <a name="exercise-3-replacing-dfs-replication-with-file-sync-based-replication"></a>演習 3: DFS レプリケーションを File Sync ベースのレプリケーションに置き換える
 
@@ -178,10 +178,10 @@ After completing this exercise, you will have created a File Sync group. You als
 #### <a name="task-2-enable-cloud-tiering"></a>タスク 2: クラウドを使った階層化を有効にする
 
 1. **SEA-ADM1** で、Azure portal を使用して、**FileSync1** ストレージ同期サービス内の **Sync1** 同期グループにアクセスします。
-1. In the Azure portal, enable cloud tiering for the <bpt id="p1">**</bpt>SEA-SVR1.Contoso.com<ept id="p1">**</ept> endpoint in <bpt id="p2">**</bpt>Sync1<ept id="p2">**</ept>. Set the <bpt id="p1">**</bpt>free disk space<ept id="p1">**</ept> policy to <bpt id="p2">**</bpt>80<ept id="p2">**</ept> percent and the <bpt id="p3">**</bpt>date policy<ept id="p3">**</ept> to cache files that were accessed in the last <bpt id="p4">**</bpt>7<ept id="p4">**</ept> days.
+1. Azure portal で、**Sync1** 内の **SEA-SVR1.Contoso.com** エンドポイントに対してクラウドを使った階層化を有効にします。 **空きディスク領域**ポリシーを **80**% に設定し、**日付ポリシー**を、最近 **7** 日間にアクセスされたファイルをキャッシュするように設定します。
 1. **\\\\SEA-SVR1\\Data** フォルダーに接続されているエクスプローラー インスタンスの詳細ウィンドウで、右クリックするか、**タイトル** 列のコンテキスト メニューにアクセスして、 **[属性]** 列を追加します。たとえば、 **[名前]** 列で、 **[その他]** 、 **[属性]** の順に選択します。
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> After some time, files on <bpt id="p2">**</bpt>SEA-SVR2<ept id="p2">**</ept> would be automatically tiered. You will trigger this process by using PowerShell.
+   >**注:** しばらくすると、**SEA-SVR2** 上のファイルが自動的に階層化されます。 このプロセスは、PowerShell を使用してトリガーします。
 
 1. **SEA-ADM1** で、 **[Windows PowerShell ISE]** のコンソール ウィンドウから、次のコマンドを実行すると、階層化が即座にトリガーされます。
 
@@ -204,7 +204,7 @@ After completing this exercise, you will have created a File Sync group. You als
 
 ### <a name="scenario"></a>シナリオ
 
-Exercise scenario: Contoso relies heavily on its DFS Replication implementation. You must ensure that any replication issues, including replication conflicts, can be quickly identified and resolved. To do so, you'll simulate the most common replication issues in your proof-of-concept environment and test their resolutions.
+演習シナリオ: Contoso では、DFS レプリケーションの実装に大きく依存します。 あなたは、レプリケーションの競合など、レプリケーションの問題を迅速に特定して解決する必要があります。 このためには、最も一般的なレプリケーションの問題を概念実証環境でシミュレートし、その解決策をテストします。
 
 この演習の主なタスクは次のとおりです。
 
@@ -213,13 +213,13 @@ Exercise scenario: Contoso relies heavily on its DFS Replication implementation.
 
 #### <a name="task-1-monitor-file-sync-replication"></a>タスク 1: File Sync レプリケーションを監視する
 
-1. On <bpt id="p1">**</bpt>SEA-ADM1<ept id="p1">**</ept>, use File Explorer to copy the <bpt id="p2">**</bpt>C:<ph id="ph1">\\</ph>Windows<ph id="ph2">\\</ph>INF<ept id="p2">**</ept> folder to <bpt id="p3">**</bpt><ph id="ph3">\\</ph><ph id="ph4">\\</ph>SEA-SVR1\Data<ph id="ph5">\\</ph><ept id="p3">**</ept>. The folder will sync to the cloud endpoint, causing sync traffic.
+1. **SEA-ADM1** でエクスプローラーを使用して、**C:\\Windows\\INF** フォルダーを **\\\\SEA-SVR1\Data\\** にコピーします。 フォルダーがクラウド エンドポイントに同期され、それによって同期トラフィックが発生します。
 1. Azure portal で、**FileSync1** ストレージ同期サービスの **Sync1** 同期グループにアクセスします。
 1. **[サーバー エンドポイント]** セクションで、両方のエンドポイントの **[正常性]** を確認します。
 1. **SEA-SVR1.Contoso.com** エンドポイントを選択し、[サーバー エンドポイントのプロパティ] ウィンドウで、 **[同期アクティビティ]** を確認します。
 1. **[同期されたファイル数]** グラフを選択し、フィルターを使用してグラフをカスタマイズする方法を調べます。
 1. **INF** フォルダーがドライブ **Z**に同期中であることを確認します。
-1. In the Azure portal, verify that the <bpt id="p1">**</bpt>INF<ept id="p1">**</ept> sync traffic is reflected in the <bpt id="p2">**</bpt>Files Synced<ept id="p2">**</ept> and <bpt id="p3">**</bpt>Bytes Synced<ept id="p3">**</ept> graphs. The <bpt id="p1">**</bpt>INF<ept id="p1">**</ept> folder has more than 800 files, and its size is more than 40 megabytes (MB).
+1. Azure portal で、**INF** 同期トラフィックが、 **[同期されたファイル数]** および **[同期されたバイト数]** のグラフに反映されていることを確認します。 **INF** フォルダーには 800 個以上のファイルが含まれており、そのサイズは 40 MB を超えます。
 
    >**注:** 更新された統計を確認するには、Azure portal が表示されているページを更新することが必要な場合があります。
 
@@ -231,7 +231,7 @@ Exercise scenario: Contoso relies heavily on its DFS Replication implementation.
 1. 最初の **Demo.txt** ファイルに任意のテキストを追加し、変更を保存します。
 1. その後すぐに、2 番目の **Demo.txt** ファイルに任意のテキスト (前の手順で使用したものとは異なるテキスト) を追加し、変更を保存します。
 
-   ><bpt id="p1">**</bpt>Note:<ept id="p1">**</ept> Make sure to save the change to the second file as soon as possible. You're creating files with the same name but different content to intentionally trigger a sync conflict.
+   >**注:** 2 番目のファイルに対する変更をできる限り早く保存してください。 同期の競合を意図的にトリガーするために、名前は同一で、内容が異なるファイルを作成しています。
 
 1. 各エクスプローラー ウィンドウで、内容を確認し、**Demo.txt** ファイルだけでなく、**Demo-SEA-SVR2.txt** ファイル (および場合によっては **Demo-Cloud.txt**) も含まれていることを確認します。 
 
