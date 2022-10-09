@@ -8,7 +8,7 @@ lab:
 
 ## <a name="scenario"></a>シナリオ
 
-You were tasked with building a test environment in Azure, consisting of Microsoft Azure virtual machines deployed into separate virtual networks configured in the hub and spoke topology. This testing must include implementing connectivity between spokes by using user-defined routes that force traffic to flow via the hub. You also need to implement DNS name resolution for Azure virtual machines between virtual networks by using Azure private DNS zones and evaluate the use of Azure DNS zones for external name resolution.
+あなたは Azure 内にテスト環境を構築する仕事を任されました。これは、ハブ アンド スポーク トポロジに構成した個別の仮想ネットワークへとデプロイした Microsoft Azure 仮想マシンから成る環境です。 このテストには、トラフィックをハブ経由で流すように強制するユーザー定義ルートを使って、スポーク間の接続を実装することを含める必要があります。 また、Azure プライベート DNS ゾーンを使って仮想ネットワーク間の Azure 仮想マシンの DNS 名前解決を実装し、外部の名前解決のために Azure DNS ゾーンの使用を評価する必要があります。
 
 ## <a name="objectives"></a>目標
 
@@ -22,7 +22,7 @@ You were tasked with building a test environment in Azure, consisting of Microso
 
 ## <a name="lab-setup"></a>ラボのセットアップ
 
-Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept> and <bpt id="p2">**</bpt>AZ-800T00A-ADM1<ept id="p2">**</ept> must be running. Other VMs can be running, but they aren't required for this lab.
+仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
 
 > **注**: **AZ-800T00A-SEA-DC1** と **AZ-800T00A-SEA-ADM1** の各仮想マシンが **SEA-DC1** と **SEA-ADM1** のインストールをホストしています
 
@@ -33,9 +33,9 @@ Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept> a
    - パスワード: **Pa55w.rd**
    - ドメイン: **CONTOSO**
 
-For this lab, you'll use the available VM environment and an Azure subscription. Before you begin the lab, ensure that you have an Azure subscription and a user account with the Owner or Contributor role in that subscription.
+このラボでは、使用可能な VM 環境と Azure サブスクリプションを使用します。 ラボを開始する前に、Azure サブスクリプションと、そのサブスクリプションの所有者または共同作成者ロールを持つユーザー アカウントがあることを確認してください。
 
-><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: This lab, by default, requires a total of 6 vCPUs available in the Standard_Dsv3 series in the region you choose for deployment because it involves deployment of three Azure VMs of Standard_D2s_v3 SKU. If you are using a free Azure account, with the limit of 4 vCPUs, you can use a VM size that requires only one vCPU (such as Standard_B1s).
+>**注**: このラボの既定では、Standard_D2s_v3 SKU の 3 つの Azure VM をデプロイするので、デプロイに選んだリージョンに Standard_Dsv3 シリーズで使用できる合計 6 つの vCPU が必要です。 無料の Azure アカウントを使っていて、4 つの vCPU の制限がある場合は、必要な vCPU 数が 1 つのみである VM サイズ (Standard_B1s など) を使用できます。
 
 ### <a name="exercise-1-implement-virtual-network-routing-in-azure"></a>演習 1: Azure で仮想ネットワーク ルーティングを実装する
 
@@ -52,7 +52,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
 
 #### <a name="task-1-provision-lab-infrastructure-resources"></a>タスク 1: ラボ インフラストラクチャ リソースをプロビジョニングする
 
-あなたは Azure 内にテスト環境を構築する仕事を任されました。これは、ハブ アンド スポーク トポロジに構成した個別の仮想ネットワークへとデプロイした Microsoft Azure 仮想マシンから成る環境です。
+このタスクでは、3 つの仮想マシンを同じ Azure リージョン内の個別の仮想ネットワークにデプロイします。 1 つ目の仮想ネットワークはハブとして機能し、残りの 2 つの仮想ネットワークはスポークとなります。 これらのリソースは、ラボ インフラストラクチャの基礎として機能します。
 
 1. **SEA-ADM1** に接続し、必要であればパスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてサインインします。
 1. **SEA-ADM1** で Microsoft Edge を起動し、 **[Azure portal](https://portal.azure.com)** にアクセスし、このラボで使うサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使ってサインインします。
@@ -76,7 +76,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
       -TemplateParameterFile $HOME/L08-rg_template.parameters.json
    ```
 
-    >このテストには、トラフィックをハブ経由で流すように強制するユーザー定義ルートを使って、スポーク間の接続を実装することを含める必要があります。
+    >**注**: デプロイが完了するまで待ってから、次の手順に進んでください。 これには 3 分ほどかかります。
 
 1. [Cloud Shell] ペインで以下のコマンドを実行し、前の手順でデプロイした Azure VM に Network Watcher 拡張機能をインストールします。
 
@@ -97,7 +97,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
    }
    ```
 
-    >また、Azure プライベート DNS ゾーンを使って仮想ネットワーク間の Azure 仮想マシンの DNS 名前解決を実装し、外部の名前解決のために Azure DNS ゾーンの使用を評価する必要があります。
+    >**注**: デプロイが完了するのを待たず、代わりに次の手順に進んでください。 Network Watcher 拡張機能のインストールには 5 分ほどかかります。
 
 #### <a name="task-2-configure-the-hub-and-spoke-network-topology"></a>タスク 2: ハブ アンド スポーク ネットワーク トポロジを構成する
 
@@ -141,7 +141,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **許可 (既定)** |
     | 仮想ネットワーク ゲートウェイ | **なし (既定値)** |
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: This step establishes two peerings - one from <bpt id="p2">**</bpt>az800l08-vnet0<ept id="p2">**</ept> to <bpt id="p3">**</bpt>az800l08-vnet2<ept id="p3">**</ept> and the other from <bpt id="p4">**</bpt>az800l08-vnet2<ept id="p4">**</ept> to <bpt id="p5">**</bpt>az800l08-vnet0<ept id="p5">**</ept>. This completes setting up the hub and spoke topology (with the <bpt id="p1">**</bpt>az800l08-vnet0<ept id="p1">**</ept> virtual network serving the role of the hub, while <bpt id="p2">**</bpt>az800l08-vnet1<ept id="p2">**</ept> and <bpt id="p3">**</bpt>az800l08-vnet2<ept id="p3">**</ept> are its spokes).
+    >**注**: この手順で、2 つのピアリング (1 つは **az800l08-vnet0** から **az800l08-vnet2** へ、もう 1 つは **az800l08-vnet2** から **az800l08-vnet0**へ) を確立します。 これでハブ アンド スポーク トポロジの設定は完了です (**az800l08-vnet0** 仮想ネットワークがハブの役割を果たし、**az800l08-vnet1** と **az800l08-vnet2** はそのスポークです)。
 
 #### <a name="task-3-test-transitivity-of-virtual-network-peering"></a>タスク 3: 仮想ネットワーク ピアリングの推移性をテストする
 
@@ -158,14 +158,14 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm0** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.81.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-    > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: <bpt id="p2">**</bpt>10.81.0.4<ept id="p2">**</ept> represents the private IP address of <bpt id="p3">**</bpt>az800l08-vm1<ept id="p3">**</ept>. The test uses the <bpt id="p1">**</bpt>TCP<ept id="p1">**</ept> port <bpt id="p2">**</bpt>3389<ept id="p2">**</ept> because Remote Desktop is by default enabled on Azure virtual machines and accessible within and between virtual networks.
+    > **注**: **10.81.0.4** は、**az800l08-vm1** のプライベート IP アドレスを表します。 このテストでは **TCP** ポート **3389** を使っています。これは、Azure 仮想マシンではリモート デスクトップが既定で有効であり、仮想ネットワーク内および仮想ネットワーク間でアクセスできるためです。
 
-1. Wait until results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. Review the network path and note that the connection was direct, with no intermediate hops in between the VMs.
+1. 接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。接続が直接であり、仮想マシン間に中間ホップがないことに注意してください。
 
     > **注**: ハブ仮想ネットワークが最初のスポーク仮想ネットワークと直接ピアリングされていることから、このようになります。
 
@@ -177,14 +177,14 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm0** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
     > **注**: **10.82.0.4** は、**az800l08-vm2** のプライベート IP アドレスを表します。 
 
-1. Select <bpt id="p1">**</bpt>Check<ept id="p1">**</ept> and wait until results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. Review the network path and note that the connection was direct, with no intermediate hops in between the VMs.
+1. **[チェック]** を選び、接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。接続が直接であり、仮想マシン間に中間ホップがないことに注意してください。
 
     > **注**: ハブ仮想ネットワークが 2 つ目のスポーク仮想ネットワークと直接ピアリングされていることから、このようになります。
 
@@ -198,12 +198,12 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-1. Wait until results of the connectivity check are returned. Note that the status is <bpt id="p1">**</bpt>Unreachable<ept id="p1">**</ept>.
+1. 接続チェックの結果が返されるまで待ちます。 状態が "**到達不能**" であることに注意してください。
 
     > **注**: 2 つのスポーク仮想ネットワークが相互にピアリングされておらず、仮想ネットワーク ピアリングが推移的ではないことから、このようになります。
 
@@ -250,7 +250,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | 名前 | **az800l08-rt12** |
     | ゲートウェイのルートを伝達する | **No** |
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the route table to be created. This should take about 1 minute.
+   > **注**: ルートテーブルが作成されるまで待ちます。 これには 1 分ほどかかります。
 
 1. 新しく作成されたルート テーブル **az800l08-rt12** のページに移動し、次の設定でルートを追加します。
 
@@ -280,7 +280,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | 名前 | **az800l08-rt21** |
     | ゲートウェイのルートを伝達する | **No** |
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the route table to be created. This should take about 3 minutes.
+   > **注**: ルートテーブルが作成されるまで待ちます。 これには 3 分ほどかかります。
 
 1. **az800l08-rt21** ルート テーブル ページを開き、次の設定でルートを追加します。
 
@@ -306,12 +306,12 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **10.82.0.4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-1. Wait until the results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. Review the network path and note that the traffic was routed via <bpt id="p1">**</bpt>10.80.0.4<ept id="p1">**</ept>, assigned to the <bpt id="p2">**</bpt>az800l08-nic0<ept id="p2">**</ept> network adapter. 
+1. 接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。トラフィックが **az800l08-nic0** ネットワーク アダプターに割り当てられた **10.80.0.4** を経由してルーティングされていることに注意してください。 
 
     > **注**: スポーク仮想ネットワーク間のトラフィックが、ルーターとして機能するハブ仮想ネットワーク内にある仮想マシンを経由するようになったことから、このようになります。
 
@@ -343,7 +343,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | 名前 | **contoso.org** |
     | リソース グループの場所 | このラボの前の演習でリソースをデプロイしたものと同じ Azure リージョン |
 
-    >仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。
+    >**注**: プライベート DNS ゾーンが作成されるまで待ちます。 これには 2 分ほどかかります。
 
 1. **contoso.org** DNS プライベート ゾーン ページに移動します。
 1. **contoso.org** プライベート DNS ゾーン ページで、前の演習で作成した最初の仮想ネットワークに、次の設定で仮想ネットワーク リンクを追加します (その他は既定値のままにします)。
@@ -355,7 +355,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | 仮想ネットワーク | **az800l08-vnet0 (AZ800-L0801-RG)** |
     | 自動登録を有効にする | オン |
 
-    >他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
+    >**注:** 仮想ネットワーク リンクが作成されるまで待ちます。 これにかかる時間は 1 分未満です。
 
 1. 前の手順を繰り返し、(自動登録を有効にして) 仮想ネットワーク **az800l08-vnet1** と **az800l08-vnet2** に対して、それぞれ **az800l08-vnet1-link** と **az800l08-vnet2-link** という仮想ネットワーク リンクを作成します。
 1. **contoso.org** プライベート DNS ゾーン ページで、**contoso.org** プライベート DNS ゾーンの **[概要]** ペインに移動します。DNS レコード セットの一覧を確認し、**A** レコードの **az800l08-vm0**、**az800l08-vm1**、**az800l08-vm2** が "**自動登録**" として一覧に表示されていることを確認します。
@@ -375,13 +375,13 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | リソース グループ | **AZ800-L0801-RG** |
     | 送信元の種類 | **仮想マシン** |
     | 仮想マシン | **az800l08-vm1** |
-    | 宛先 | **手動で指定** |
+    | 到着地 | **手動で指定** |
     | URI、FQDN、または IPv4 | **az800l08-vm2.contoso.org** |
     | 優先 IP バージョン | **IPv4** |
     | Protocol | **TCP** |
     | 宛先ポート | **3389** |
 
-1. Wait until the results of the connectivity check are returned. Verify that the status is <bpt id="p1">**</bpt>Reachable<ept id="p1">**</ept>. 
+1. 接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 
 
     > **注**: ターゲットの完全修飾ドメイン名 (FQDN) が Azure プライベート DNS ゾーンを介して解決可能であることから、このようになります。 
 
@@ -400,7 +400,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | リソース グループ | **AZ800-L0802-RG** |
     | 名前 | このタスクの先ほど確認した DNS ドメイン名 |
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Wait for the DNS zone to be created. This should take about 1 minute.
+    >**注**: DNS ゾーンが作成されるまで待ちます。 これには 1 分ほどかかります。
 
 1. 新しく作成された DNS ゾーンのページに移動します。
 1. 次の設定でレコード セットを追加します (その他は既定値のままにします)。
@@ -414,11 +414,11 @@ For this lab, you'll use the available VM environment and an Azure subscription.
     | TTL の単位 | **Hours** |
     | IP アドレス | 20.30.40.50 |
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The IP address and the corresponding name are entirely arbitrary. They are meant to provide a very simple example illustrating implementing public DNS records, rather than emulate a real world scenario, which would require purchasing a namespace from a DNS registrar. 
+    >**注**: IP アドレスとそれに対応する名前は完全に任意です。 これらは、パブリック DNS レコードの実装を示す非常にシンプルな例を示すためのものです。DNS レジストラーから名前空間を購入する必要があるような現実のシナリオをエミュレートするものではありません。 
 
 1. DNS ゾーン ページで、**ネーム サーバー 1** の完全な名前を確認します。
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Record the full name of <bpt id="p2">**</bpt>Name server 1<ept id="p2">**</ept>. You will need it in the next task.
+    >**注**: **ネームサーバー 1** の完全な名前をメモします。 これは、次のタスクで必要になります。
 
 #### <a name="task-4-validate-azure-public-dns-name-resolution"></a>タスク 4: Azure パブリック DNS 名前解決を検証する
 
@@ -433,7 +433,7 @@ For this lab, you'll use the available VM environment and an Azure subscription.
 
 1. コマンドの出力に **20.30.40.50** のパブリック IP アドレスが含まれていることを確認します。
 
-    ><bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The name resolution works as expected because the <bpt id="p2">**</bpt>nslookup<ept id="p2">**</ept> command allows you to specify the IP address of the DNS server to query for a record (which, in this case, is <ph id="ph1">`&lt;Name server 1&gt;`</ph>. For the name resolution to work when querying any publicly accessible DNS server, you would need to register the domain name with a DNS registrar and configure the name servers listed on the public DNS zone page in the Azure portal as authoritative for the namespace corresponding to that domain.
+    >**注**: **nslookup** コマンドでは、レコードのクエリを実行する DNS サーバーの IP アドレスを指定できるため、名前解決は期待どおりに動作します (ここでは `<Name server 1>` とします。 一般にアクセス可能な DNS サーバーに対してクエリを実行して名前解決を行うには、DNS レジストラーにドメイン名を登録し、Azure portal のパブリック DNS ゾーン ページに記載されているネーム サーバーを、そのドメインに対応する名前空間の権限として構成する必要があります。
 
 ## <a name="exercise-3-deprovisioning-the-azure-environment"></a>演習 3: Azure 環境のプロビジョニング解除
 

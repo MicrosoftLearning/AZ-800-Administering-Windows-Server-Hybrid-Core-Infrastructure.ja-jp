@@ -30,7 +30,7 @@ lab:
 
    > **注**: **[ユーザー名]** の [ドメイン名] ドロップダウンメニューに、`onmicrosoft.com` で終わる既定のドメイン名が表示されていることを確認します。
 
-1. Under <bpt id="p1">**</bpt>Password<ept id="p1">**</ept>, select the <bpt id="p2">**</bpt>Show Password<ept id="p2">**</ept> checkbox. Record the password as you'll use it later in this lab.
+1. **[パスワード]** で、**[パスワードを表示する]** チェックボックスをオンにします。 このラボで後ほど使用するので、パスワードを記録しておきます。
 1. **[グループとロール]** の **[ロール]** の横にある **[ユーザー]** を選択します。
 1. **[ディレクトリ ロール]** ページで、ロールの一覧から **[グローバル管理者]** を選択し、**[選択]** を選びます。
 1. **[新しいユーザー]** ページに戻り、**[使用場所]** ドロップダウン リストの **[米国]** を選択します。
@@ -60,7 +60,7 @@ lab:
 
 1. **IdFix** ウィンドウで、**[クエリ]** を選択します。
 1. **[スキーマの警告]** ダイアログ ボックスが表示されたら、**[はい]** を選択します。
-1. Review the list of objects from Active Directory, and observe the <bpt id="p1">**</bpt>ERROR<ept id="p1">**</ept> and <bpt id="p2">**</bpt>ATTRIBUTE<ept id="p2">**</ept> columns. In this scenario, the value of <bpt id="p1">**</bpt>displayName<ept id="p1">**</ept> for <bpt id="p2">**</bpt>ContosoAdmin<ept id="p2">**</ept> is blank, and the tool's recommended new value appears in the <bpt id="p3">**</bpt>UPDATE<ept id="p3">**</ept> column.
+1. Active Directory でオブジェクトの一覧を確認し、**[エラー]** および **[属性]** 列に注目します。 このシナリオでは、**ContosoAdmin** の **displayName** の値が空白で、ツールの推奨される新しい値が**更新**列に表示されます。
 1. **IdFix** ウィンドウで、**[アクション] **ドロップダウン メニューから **[編集]** を選択し、**[適用]** を選択すると、推奨される変更が自動的に実装されます。
 1. **[保留の適用]** ダイアログ ボックスで、**[はい]** を選択します。
 1. IdFix ツールを閉じます。
@@ -84,7 +84,7 @@ lab:
 
 1. **[Azure AD のサインイン構成]** ページで、追加した新しいドメインが Active Directory UPN サフィックスの一覧に表示されていますが、その状態は **[未検証]** と表示されていることに注目してください。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: The domain name provided does not have to be a verified domain. While you typically would verify a domain prior to installing Azure AD Connect, this lab doesn't require that verification step.
+   > **注**: 指定されたドメイン名は、検証済みドメインである必要はありません。 通常は Azure AD Connect をインストールする前にドメインを検証しますが、このラボでは検証手順は必要ありません。
 
 1. **[一部の UPN サフィックスが検証済みドメインに一致していなくても続行する]** チェックボックスをオンにし、**[次へ]** を選択します。
 1. **[構成の準備完了]** ページで、アクションの一覧を確認し、**[インストール]** を選択します。
@@ -188,7 +188,7 @@ lab:
 1. **[ドメインと OU のフィルタリング]** ページで、 **[次へ]** を選択します。
 1. **[オプション機能]** ページで、**[パスワード ライトバック]** の横にあるチェック ボックスをオンにし、**[次へ]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Password writeback is required for self-service password reset of Active Directory users. This allows passwords changed by users in Azure AD to sync to the Active Directory.
+   > **注**: Active Directory ユーザーのセルフサービス パスワード リセットには、パスワード ライトバックが必要です。 これにより、Azure AD 内のユーザーによってパスワードが変更され、Active Directory に同期されます。
 
 1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、**[構成]** を選択します。
 1. **[構成が完了しました]** ページで、 **[終了]** を選択します。
@@ -231,7 +231,7 @@ lab:
 1. **[Download]** を選択します。
 1. **[複数のファイルのダウンロード]** ダイアログ ボックスで、**[許可]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: We recommend installing the proxy service on a server that isn't a domain controller. In addition, the proxy service should not be installed on the same server as the Azure AD Connect agent. You will install the proxy service on <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> and the Password Protection DC Agent on <bpt id="p2">**</bpt>SEA-DC1<ept id="p2">**</ept>.
+   > **注**: ドメイン コントローラーではないサーバーにプロキシ サービスをインストールすることをお勧めします。 さらに、プロキシ サービスは、Azure AD Connect エージェントと同じサーバーにはインストールできません。 プロキシ サービスは **SEA-SVR1** に、パスワード保護 DC エージェントは **SEA-DC1** にインストールします。
 
 1. **SEA-ADM1** 上で、**Windows PowerShell** コンソール ウィンドウに切り替えます。
 1. **Windows PowerShell** コンソールで、次のコマンドを入力し、Enter キーを押して、インターネットからファイルがダウンロードされたことを示す Zone.Identifier 代替データ ストリームを削除します。

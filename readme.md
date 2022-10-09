@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 7ab2e8d2fa79dd55b5207ddc0c99088b379b6012
-ms.sourcegitcommit: bd43c7961e93ef200b92fb1d6f09d9ad153dd082
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 01/28/2022
-ms.locfileid: "137907011"
----
 # <a name="az-800t00-administering-windows-server-hybrid-core-infrastructure"></a>AZ-800T00: Windows Server ハイブリッド コア アーキテクチャの管理
 
 - **[最新の学生ハンドブックと AllFiles コンテンツをダウンロードする](../../releases/latest)**
@@ -24,7 +16,7 @@ ms.locfileid: "137907011"
 
 - GitHub 上のこれらのファイルは学生ハンドブックと組み合わせて使用するように設計されています。ただし、中央リポジトリとして GitHub 内にあるので、MCT とコース作成者が最新のラボ ファイルの共有ソースを持っている可能性があります。
 
-- すべての配信について、トレーナーは最新の Azure サービスをサポートするために行われた可能性がある変更を GitHub で確認し、配信用の最新のファイルを取得することをお勧めします。
+- 講師は、ラボを行うたびに、最新の Azure サービスに合わせて修正された個所がないか GitHub を確認し、最新のラボ用ファイルを取得してください。
 
 ## <a name="what-about-changes-to-the-student-handbook"></a>受講者ハンドブックの変更については?
 
@@ -34,7 +26,7 @@ ms.locfileid: "137907011"
 
 - すべての MCT は、GitHub repro のコードまたはコンテンツに pull request を送信できます。Microsoft とコース作成者は、必要に応じてコンテンツとラボ コードの変更をトリアージして追加します。
 
-- バグ、変更、改善、アイデアを送信できます。  新しい Azure 機能を先に見つけたら、  新しいデモを提出しましょう。
+- バグ、変更、改善、アイデアを送信できます。  新しい Azure 機能を先に見つけたら、  新しいデモを送信してください!
 
 ## <a name="notes"></a>Notes
 

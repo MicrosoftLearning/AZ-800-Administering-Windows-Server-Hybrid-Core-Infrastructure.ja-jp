@@ -10,7 +10,7 @@ lab:
 
 Microsoft Azure Active Directory (Azure AD) を使用して Azure リソースへのアクセスを認証および承認したことで生じる管理と監視のオーバーヘッドについての懸念に対応するために、あなたは、オンプレミスの Active Directory Domain Services (AD DS) と Azure AD の間の統合をテストし、複数のユーザー アカウントの管理に、オンプレミスとクラウド リソースを組み合わせて使用することに関するビジネス上の懸念に対処できることを検証することにしました。
 
-Additionally, you want to make sure that your approach addresses the Information Security team's concerns and preserves existing controls applied to Active Directory users, such as sign-in hours and password policies. Finally, you want to identify Azure AD integration features that allow you to further enhance on-premises Active Directory security and minimize its management overhead, including Azure AD Password Protection for Windows Server Active Directory and Self-Service Password Reset (SSPR) with password writeback.
+さらに、あなたは、自分のアプローチが情報セキュリティ チームの懸念事項に対応し、サインイン時間やパスワード ポリシーなどの、Active Directory ユーザーに適用される既存のコントロールを保持することを確認する必要があると考えています。 最後に、オンプレミスの Active Directory のセキュリティを一層強化し、管理オーバーヘッドを最小限に抑える Azure AD 統合機能を特定する必要があります。これには、Windows Server Active Directory 用の Azure AD パスワード保護や、パスワード ライトバックを使用したセルフサービス パスワード リセット (SSPR) が含まれます。
 
 あなたの目標は、オンプレミスの AD DS と Azure AD の間でパススルー認証を実装することです。
 
@@ -28,7 +28,7 @@ Additionally, you want to make sure that your approach addresses the Information
 
 ## <a name="lab-setup"></a>ラボのセットアップ
 
-Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept>, <bpt id="p2">**</bpt>AZ-800T00A-SEA-SVR1<ept id="p2">**</ept>, and <bpt id="p3">**</bpt>AZ-800T00A-ADM1<ept id="p3">**</ept> must be running. Other VMs can be running, but they aren't required for this lab. 
+仮想マシン: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。 
 
 > **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-SEA-ADM1** 仮想マシンによって、**SEA-DC1**、**SEA-SVR1**、**SEA-ADM1** のインストールがホストされます。
 
@@ -39,13 +39,13 @@ Virtual machines: <bpt id="p1">**</bpt>AZ-800T00A-SEA-DC1<ept id="p1">**</ept>, 
    - パスワード: **Pa55w.rd**
    - ドメイン: **CONTOSO**
 
-For this lab, you'll use the available VM environment and an Azure AD tenant. Before you begin the lab, ensure that you have an Azure AD tenant and a user account with the Global Administrator role in that tenant.
+このラボでは、使用可能な VM 環境と Azure AD テナントを使用します。 ラボを開始する前に、Azure AD テナントと、そのテナントのグローバル管理者ロールがあるユーザー アカウントを持っていることを確認します。
 
 ## <a name="exercise-1-preparing-azure-ad-for-ad-ds-integration"></a>演習 1: AD DS 統合のための Azure AD の準備
 
 ### <a name="scenario"></a>シナリオ
 
-You need to ensure that your Azure AD environment is ready for integration with your on-premises AD DS. Therefore, you'll create and verify a custom Azure AD domain name and an account with the Global Administrator role.
+ご自分の Azure AD の環境で、オンプレミスの AD DS と統合する準備ができている必要があります。 そのため、カスタムの Azure AD ドメイン名とグローバル管理者ロールのあるアカウントを作成して検証します。
 
 この演習の主なタスクは次のとおりです。
 
@@ -88,7 +88,7 @@ You need to ensure that your Azure AD environment is ready for integration with 
 
 ### <a name="scenario"></a>シナリオ
 
-You need to ensure that your existing Active Directory environment is ready for Azure AD integration. Therefore, you'll run the IdFix tool, and then ensure that the UPNs of the Active Directory users match the Azure AD tenant's custom domain name.
+あなたは、既存の Active Directory 環境で Azure AD との統合の準備ができていることを確認する必要があります。 そのため、IdFix ツールを実行し、Active Directory ユーザーの UPN が Azure AD テナントのカスタム ドメイン名と一致することを確保します。
 
 この演習の主なタスクは次のとおりです。
 
@@ -104,7 +104,7 @@ You need to ensure that your existing Active Directory environment is ready for 
 #### <a name="task-2-run-idfix"></a>タスク 2: IdFix を実行する
 
 1. **IdFix** ウィンドウで、**[クエリ]** を選択します。
-1. さらに、あなたは、自分のアプローチが情報セキュリティ チームの懸念事項に対応し、サインイン時間やパスワード ポリシーなどの、Active Directory ユーザーに適用される既存のコントロールを保持することを確認する必要があると考えています。
+1. オンプレミスの Active Directory でオブジェクトの一覧を確認して、**[エラー]** および **[属性]** 列を確認します。 このシナリオでは、**ContosoAdmin** の **displayName** の値が空白で、ツールの推奨される新しい値が**更新**列に表示されます。
 1. **IdFix** ウィンドウの、**[アクション] **ドロップダウン メニューで **[編集]** を選択し、**[適用]** を選択すると、推奨される変更が自動的に実装されます。
 1. **[保留中の適用]** ダイアログ ボックスで **[はい]** を選択し、IdFix ツールを閉じます。
 
@@ -133,7 +133,7 @@ You need to ensure that your existing Active Directory environment is ready for 
 
 1. **[Azure AD サインイン構成]** ページで、追加した新しいドメインが Active Directory UPN サフィックスの一覧に含まれていることを確認します。
 
-   > 最後に、オンプレミスの Active Directory のセキュリティを一層強化し、管理オーバーヘッドを最小限に抑える Azure AD 統合機能を特定する必要があります。これには、Windows Server Active Directory 用の Azure AD パスワード保護や、パスワード ライトバックを使用したセルフサービス パスワード リセット (SSPR) が含まれます。
+   > **注**: 指定されたドメイン名は、検証済みドメインである必要はありません。 通常は Azure AD Connect をインストールする前にドメインを検証しますが、このラボでは検証手順は必要ありません。
 
 1. **[一部の UPN サフィックスが検証済みドメインに一致していなくても続行する]** チェックボックスをオンにします。
 1. **[構成の準備完了]** ページが表示された後、アクションの一覧を確認し、インストールを開始します。
@@ -142,7 +142,7 @@ You need to ensure that your existing Active Directory environment is ready for 
 
 ### <a name="scenario"></a>シナリオ
 
-Now that you have installed and configured Azure AD Connect, you must verify its synchronization mechanism. You plan to make changes to an on-premises user account, which will trigger synchronization. Then, you'll verify that the change is replicated to the corresponding Azure AD user object.
+あなたは、Azure AD Connect をインストールして構成したので、同期のメカニズムを確認する必要があります。 あなたは、同期をトリガーするオンプレミスのユーザー アカウントに変更を加える予定です。 次に、対応する Azure AD ユーザー オブジェクトに変更がレプリケートされていることを確認します。
 
 この演習の主なタスクは次のとおりです。
 
@@ -215,7 +215,7 @@ Now that you have installed and configured Azure AD Connect, you must verify its
 
 ### <a name="scenario"></a>シナリオ
 
-You want to identify Azure AD integration features that will allow you to further enhance your on-premises Active Directory security and minimize its management overhead. You also want to implement Azure AD Password Protection for Windows Server Active Directory and self-service password reset with password writeback.
+あなたは、オンプレミスの Azure Active Directory のセキュリティをさらに強化し、管理オーバーヘッドを最小限に抑えることができる Azure AD 統合機能を特定する必要があると考えています。 また、Windows Server Active Directory 用の Azure AD パスワード保護と、パスワード ライトバックを使用するセルフサービス パスワード リセットを実装することも希望しています。
 
 この演習の主なタスクは次のとおりです。
 
@@ -243,7 +243,7 @@ You want to identify Azure AD integration features that will allow you to furthe
 1. **[Azure AD への接続]** ページで、演習 1 で作成した Azure AD グローバル管理者ユーザー アカウントのユーザー名とパスワードを入力します。
 1. **[オプション機能]** ページで、**[パスワード ライトバック]** を選択します。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: Password writeback is required for self-service password reset of Active Directory users. This allows passwords changed by users in Azure AD to sync to the Active Directory.
+   > **注**: Active Directory ユーザーのセルフサービス パスワード リセットには、パスワード ライトバックが必要です。 これにより、Azure AD 内のユーザーによってパスワードが変更され、Active Directory に同期されます。
 
 1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、**[構成]** を選択します。
 1. 構成が完了したら、**[Microsoft Azure Active Directory Connect]** ウィンドウを閉じます。
@@ -282,7 +282,7 @@ You want to identify Azure AD integration features that will allow you to furthe
 1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトを参照し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、**[ダウンロード]** を選択します。
 1. **AzureADPasswordProtectionProxySetup.exe** と **AzureADPasswordProtectionDCAgentSetup.msi** を **SEA-ADM1** にダウンロードします。
 
-   > <bpt id="p1">**</bpt>Note<ept id="p1">**</ept>: We recommend installing the proxy service on a server that isn't a domain controller. In addition, the proxy service should not be installed on the same server as the Azure AD Connect agent. You will install the proxy service on <bpt id="p1">**</bpt>SEA-SVR1<ept id="p1">**</ept> and the Password Protection DC Agent on <bpt id="p2">**</bpt>SEA-DC1<ept id="p2">**</ept>.
+   > **注**: ドメイン コントローラーではないサーバーにプロキシ サービスをインストールすることをお勧めします。 さらに、プロキシ サービスは、Azure AD Connect エージェントと同じサーバーにはインストールできません。 プロキシ サービスは **SEA-SVR1** に、パスワード保護 DC エージェントは **SEA-DC1** にインストールします。
 
 1. **SEA-ADM1** の **Windows PowerShell** コンソールで、次のコマンドを入力し、インターネットからファイルがダウンロードされたことを示す Zone.Identifier 代替データ ストリームを削除します。
 
@@ -362,7 +362,7 @@ You want to identify Azure AD integration features that will allow you to furthe
 
 ### <a name="scenario"></a>シナリオ
 
-You want to disable synchronization from the on-premises Active Directory to Azure. This will involve removing Azure AD Connect and disabling synchronization with Azure.
+オンプレミスの Active Directory から Azure への同期を無効にします。 これには、Azure AD Connect の削除と Azure との同期の無効化が含まれます。
 
 この演習の主なタスクは次のとおりです。
 
