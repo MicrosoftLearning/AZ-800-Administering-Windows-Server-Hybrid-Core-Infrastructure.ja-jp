@@ -46,41 +46,46 @@ lab:
 #### <a name="task-1-deploy-ad-ds-on-a-new-windows-server-core-server"></a>タスク 1: 新しい Windows Server Core サーバーに AD DS を展開する
 
 1. **SEA-ADM1** に切り替え、 **[サーバー マネージャー]** から Windows PowerShell を開きます。
-1. Windows PowerShell で **Install-WindowsFeature** コマンドレットを使用して、**SEA-SVR1** に AD DS 役割をインストールします。
-1. **Get-WindowsFeature** コマンドレットを使用してインストールを確認します。
-1. **[Active Directory Domain Services]** 、 **[リモート サーバー管理ツール]** 、および **[役割管理ツール]** チェックボックスをオンにしていることを確かめます。 **[AD DS** および **AD LDS ツール]** ノードの場合は、**Windows PowerShell 用 Active Directory モジュール**のみをインストールし、Active Directory 管理センターなどのグラフィカル ツールをインストールする必要はありません。
+1. Windows PowerShell を管理者で起動し、**Install-WindowsFeature** コマンドレットを使用して、**SEA-SVR1** に AD DS 役割をインストールします。   
 
-> **注**: サーバーを中央管理する場合、通常は各サーバーに GUI ツールは必要ありません。 それらをインストールする場合は、**RSAT-ADDS** コマンドを使用して **Add-WindowsFeature** コマンドレットを実行し、AD DS ツールを指定する必要があります。
+   ```powershell
+   Install-WindowsFeature –Name "AD-Domain-Services" -ComputerName SEA-SVR1
+   ```
+
+1. **Get-WindowsFeature** コマンドレットを使用して **SEA-SVR1** のインストールを確認します。
+1. **[Active Directory Domain Services]** 、 **[Remote Server Administration Tool]** 、および **[Role Administration Tool]** チェックボックスをオンにしていることを確かめます。 **[AD DS and  AD LDS Tools]** ノードでは、**Active Directory module for Windows PowerShell**のみがインストールされていればよく、Active Directory 管理センターなどのグラフィカル ツールがインストールされている必要はありません。
+
+> **注**: サーバーを集中管理する場合、通常は各サーバーに GUI ツールは必要ありません。 それらをインストールする場合は、**Add-WindowsFeature** コマンドレットで **RSAT-ADDS** を使用して実行する必要があります。
 
 > **注**: インストール プロセスが完了してから、AD DS 役割がインストールされていることを確認する前に待つ必要がある場合があります。 **Get-WindowsFeature** コマンドから予想される結果が得られない場合は、数分後に再度試すことができます。
 
 #### <a name="task-2-prepare-the-ad-ds-installation-and-promote-a-remote-server"></a>タスク 2: AD DS インストールの準備をして、リモート サーバーを昇格させる
 
-1. **SEA-ADM1** の **[サーバー マネージャー]** の **[すべてのサーバー]** ノードで、**SEA-SVR1** をマネージド サーバーとして追加します。
-1. **SEA-ADM1** の **[サーバー マネージャー]** から、次の設定を使用して AD DS ドメイン コントローラーとして **SEA-SVR1** を構成します。
+1. **SEA-ADM1** の **[サーバー マネージャー]** の **[All Servers]** ノードで、**SEA-SVR1** がマネージド サーバーとして追加されていることを確認します。
+1. **SEA-ADM1** の **[サーバー マネージャー]** の右上の「旗マーク」をクリックし、「**Promote this server to a domain controller**」をクリックして、次の設定を使用して AD DS ドメイン コントローラーとして **SEA-SVR1** を構成します。
 
-   - 種類: 既存のドメインの追加ドメイン コントローラー
+   - 種類: Add a domain controller to an existing domain(既存のドメインの追加ドメイン コントローラー)
    - ドメイン: `contoso.com`
    - 資格情報: パスワード **Pa55w.rd** を持つ **CONTOSO\\Administrator**
    - ディレクトリ サービス復元モード (DSRM) パスワード: **Pa55w.rd**
-   - DNS とグローバル カタログの選択を削除しない
+   - DNS とグローバル カタログは選択されたままにする
 
 1. **[オプションの確認]** ページで、 **[スクリプトの表示]** を選択します。
 1. メモ帳で、次のように生成された Windows PowerShell スクリプトを編集します。
 
-   - 番号記号 (#)で始まるコメント行を削除します。
+   - **#** で始まるコメント行を削除します。
    - Import-Module 行を削除します。
    - 各行の末尾にあるアクサン グラーブ (`) を削除します。
-   - 改行を削除します。
+   - **改行** を削除して１行にします
 
 1. これで、**Install-ADDSDomainController** コマンドとすべてのパラメーターが 1 行に収まったので、コマンドをコピーします。
-1. **[Active Directory Domain Services 構成ウィザード]** に切り替えてから、 **[キャンセル]** を選択します。
+1. **[Active Directory Domain Services 構成ウィザード]** に戻ってから、 **[Cancel]** を選択します。
 1. Windows PowerShell に切り替えてから、コマンド プロンプトで次のコマンドを入力します。
 
    ```powershell
    Invoke-Command –ComputerName SEA-SVR1 { }
    ```
-1. コピーしたコマンドを中かっこ ({ }) の間に貼り付け、結果のコマンドを実行してインストールを開始します。 完全なコマンドは次の形式になるはずです。
+1. コピーしたコマンドを中かっこ ({ }) の間に貼り付け、結果のコマンドを実行してインストールを開始します。 完全なコマンドは次のような形式になるはずです。
 
    ```powershell
    Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:\$false -Credential (Get-Credential) -CriticalReplicationOnly:\$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:\$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:\$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
@@ -92,12 +97,12 @@ lab:
    - パスワード: **Pa55w.rd**
 
 1. **SafeModeAdministratorPassword** を **Pa55w.rd** として設定します。
-1. **SEA-SVR1** が再起動した後、**SEA-ADM1** で **[サーバー マネージャー]** に切り替えてから **[AD DS]** ノードを選択します。 **SEA-SVR1** がドメイン コントローラーとして追加されたこと、および警告通知が表示されなくなったことに注意してください。 **[更新]** を選択する必要がある場合があります。
+1. **SEA-SVR1** が再起動した後、**SEA-ADM1** で **[サーバー マネージャー]** に切り替えてから **[AD DS]** ノードを選択します。 **SEA-SVR1** がドメイン コントローラーとして追加されたこと、およびサーバーマネージャーの右上の「旗マーク」に警告通知が表示されなくなったことに注意してください。 **[更新]** を選択する必要がある場合があります。
 
 #### <a name="task-3-manage-objects-in-ad-ds"></a>タスク 3: AD DS でオブジェクトを管理する
 
 1. **SEA-ADM1** で、**Windows PowerShell** コンソールに切り替えます。
-1. **Seattle** という組織単位 (OU) を作成するには、**Windows PowerShell** コンソールで次のコマンドを実行します。
+1. **Seattle** という組織単位 (OU) を作成するには、管理者モードで実行した **Windows PowerShell** コンソールで次のコマンドを実行します。
 
    ```powershell
    New-ADOrganizationalUnit -Name "Seattle" -Path "DC=contoso,DC=com" -ProtectedFromAccidentalDeletion $true -Server SEA-DC1.contoso.com
@@ -113,7 +118,7 @@ lab:
    Set-ADAccountPassword Ty
    ```
 
-> **注**: 現在のパスワードは空白です。
+> **注**: 現在のパスワードは空白（何も入力しない）です。
 
 1. ユーザー アカウントを有効にするには、次のコマンドを実行します。
 
@@ -160,36 +165,53 @@ lab:
 
 #### <a name="task-1-create-and-edit-a-gpo"></a>タスク 1: GPO を作成および編集する
 
-1. **SEA-ADM1** で、 **[サーバー マネージャー]** から **[グループ ポリシーの管理]** コンソールを開きます。
-1. **Contoso Standards** という名前の GPO を **[グループ ポリシー オブジェクト]** コンテナーに作成します。
-1. **Contoso Standards** GPO をグループ ポリシー管理エディターで開いてから、 **[ユーザーの構成]、[ポリシー]、[管理用テンプレート]、[システム]** の順に移動します。
-1. **[レジストリ編集ツールへアクセスできないようにする]** ポリシー設定を有効にします。
-1. **[ユーザーの構成]、[ポリシー]、[管理用テンプレート]、[コントロール パネル]、[個人用設定]** フォルダーの順に移動し、**スクリーン セーバー**のタイムアウト ポリシーを **600** 秒になるように構成します。
-1. **[パスワードでスクリーン セーバーを保護する]** ポリシー設定を有効にしてから、 **[グループ ポリシー管理エディター]** ウィンドウを閉じます。
+1. **SEA-ADM1** で、 **[サーバー マネージャー]** から **[Group Policy Management]** コンソールを開きます。
+
+1. **Contoso Standards** という名前の GPO を **[Group Policy Object]** コンテナーに作成します。
+
+1. **Contoso Standards** GPO を右クリックして **Edit** を選択してグループ ポリシー管理エディターで開いてから、 **[ユーザーの構成]、[ポリシー]、[管理用テンプレート]、[システム]** の順に移動します。
+
+1. **[Prevent access to registry editing tools (レジストリ編集ツールへアクセスできないようにする)]** ポリシー設定を有効にします。
+
+1. **[ユーザーの構成]、[ポリシー]、[管理用テンプレート]、[コントロール パネル]、[Personalization (個人用設定)]** フォルダーの順に移動し、**Screen saver timeout (スクリーン セーバーのタイムアウト) ** ポリシー を有効にし、**600** 秒になるように構成します。
+
+1. **[グループ ポリシー管理エディター]** ウィンドウを閉じます。
 
 #### <a name="task-2-link-the-gpo"></a>タスク 2: GPO をリンクする
 
   - **Contoso Standards** GPO を `contoso.com` ドメインにリンクします。
 
+1. **[Group Policy Management]** コンソールで **contoso.com** を右クリックして **link to existing GPO** を選択
+
+1. **Contoso Standards** を選択して **OK**
+
 #### <a name="task-3-review-the-effects-of-the-gpos-settings"></a>タスク 3: GPO の設定の効果を確認する
 
 1. **SEA-ADM1** で、 **[コントロール パネル]** を開きます。
-1. **Windows Defender ファイアウォール** インターフェイスを使用して、 **[リモート イベントのログ管理]** ドメイン トラフィックを有効にします。 
+
+1. **Windows Defender Firewall** インターフェイスを使用して、 **[Remote Event Log Management]** の Domain トラフィックを有効にします。 
+
 1. サインアウトしてから、パスワード **Pa55w.rd** を使用して **CONTOSO\\Ty** としてサインインします。
-1. スクリーン セーバーの待機時間を変更し、設定を再開してみます。 グループ ポリシーによりこれらの操作がブロックされていることを確認します。
-1. レジストリ エディターを実行してみます。 グループ ポリシーによりこの操作がブロックされていることを確認します。 
+
+1. スクリーン セーバーの**Wait (待機時間)** の変更がブロックされていることを確認します。
+
+1. レジストリ エディター **regedit** を実行してみます。 グループ ポリシーによりこの操作がブロックされていることを確認します。 
+
 1. サインアウトしてから、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてサインインします。
 
 #### <a name="task-4-create-and-link-the-required-gpos"></a>タスク 4: 必要な GPO を作成してリンクする
 
-1. **SEA-ADM1** の **[グループ ポリシーの管理]** コンソールで、**Seattle** OU にリンクされている **Seattle Application Override** という名前の新しい GPO を作成します。
-1. **[スクリーン セーバーのタイムアウト]** ポリシー設定が無効になるように構成してから、 **[グループ ポリシー管理エディター]** ウィンドウを閉じます。
+1. **SEA-ADM1** の **[Group Policy Management]** コンソールで、**Seattle** OU にリンクされている **Seattle Application Override** という名前の新しい GPO を作成します。
+
+1. **[Screen saver timeout]** ポリシー設定が **Disabled (無効)** になるように構成します。
 
 #### <a name="task-5-verify-the-order-of-precedence"></a>タスク 5: 優先順位を確認する
 
-1. **SEA-ADM1** で、 **[サーバー マネージャー]** から **[グループ ポリシーの管理]** コンソールを開きます。
-1. **[グループ ポリシー管理コンソール]** ツリーで、**Seattle** OU を選択します。
-1. **[グループ ポリシーの継承]** タブを選択し、その内容を確認します。
+1. **SEA-ADM1** で、 **[サーバー マネージャー]** から **[Group Policy Management]** コンソールを開きます。
+
+1. **Seattle** OU を選択します。
+
+1. **Group Policy Inheritance (グループ ポリシーの継承)** タブを選択し、その内容を確認します。
 
    > **注**: Seattle Application Override GPO は CONTOSO Standards GPO より優先順位が高くなります。 Seattle Application Override GPO で先ほど構成したスクリーン セーバーのタイムアウト ポリシー設定は、CONTOSO Standards GPO の設定の後に適用されます。 そのため、新しい設定で CONTOSO Standards GPO 設定が上書きされます。 Seattle Application Override GPO のスコープ内のユーザーに対して、スクリーン セーバーのタイムアウトが無効になります。
 
@@ -200,13 +222,19 @@ lab:
 
 #### <a name="task-7-verify-the-application-of-settings"></a>タスク 7: 設定の適用を確認する
 
-1. [グループ ポリシーの管理] のナビゲーション ペインで、 **[グループ ポリシーのモデル作成]** を選択します。
-1. **[グループ ポリシーのモデル作成ウィザード]** を起動します。
-1. ターゲット ユーザーとコンピューターをそれぞれ **CONTOSO\\Ty** ユーザー アカウントと **SEA-ADM1** コンピューターに設定します。
-1. ウィザードの残りのページをステップ実行し、既定の設定を変更せずに確認し、ウィザードを完了すると、その結果を含むレポートが生成されます。
-1. レポートが作成された後、詳細ペインで **[詳細]** タブを選択してから、 **[すべて表示]** を選びます。
-1. レポートで、 **[ユーザーの詳細]** セクションが見つかるまで下にスクロールし、 **[コントロールパネル] の [個人用設定]** セクションを見つけます。 **[スクリーン セーバーのタイムアウト]** 設定が、Seattle Application Override GPO から取得されていることがわかるはずです。
-1. **[グループ ポリシーの管理]** コンソールを閉じます。
+1. [Group Policy Management] のナビゲーション ペインで、 **[Group Policy Modeling]** を右クリックして **Group Policy Modeling Wizard** を選択します。
+
+1. **[グループ ポリシーのモデル作成ウィザード]** が起動します。
+
+1. **User and Computer Selection** ページで、ターゲット ユーザーとコンピューターをそれぞれ **CONTOSO\\Ty** ユーザー アカウントと **SEA-ADM1** コンピューターに設定します。
+
+1. ウィザードの残りのページで既定の設定を変更せずに **Next** を選択し、ウィザードを完了すると、その結果を含むレポートが生成されます。
+
+1. レポートが作成された後、詳細ペインで **[Details (詳細)]** タブを選択してから、 右端の **[Show All (すべて表示)]** を選びます。
+
+1. レポートで、 **[User Details (ユーザーの詳細)]** セクションが見つかるまで下にスクロールし、 **[Control Panel/Personalization]** セクションを見つけます。 **[Screen saver timeout]** 設定が、Seattle Application Override GPO から取得されていることがわかるはずです。
+
+1. **[Gruop Plicy Management]** コンソールを閉じます。
 
 ### <a name="results"></a>結果
 
