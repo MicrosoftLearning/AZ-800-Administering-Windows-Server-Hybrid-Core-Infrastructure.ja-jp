@@ -55,7 +55,7 @@ lab:
    - 改行を削除します。
 
 1. これで、**Install-ADDSDomainController** コマンドとすべてのパラメーターが 1 行に収まりました。 その行の前にカーソルを置き、**[編集]** メニューで、**[すべて選択]** を選んで行全体を選択します。 メニューの **[編集]** を選んでから、**[コピー]** を選択します。
-1. **[Active Directory Domain Services 構成ウィザード]** に切り替えてから、**[キャンセル]** を選択します。
+
 1. 確認を求めるメッセージが表示されたら、**[はい]** を選択してウィザードをキャンセルします。
 1. Windows PowerShell のコマンド プロンプトで、次のコマンドを入力します。
 
@@ -65,7 +65,7 @@ lab:
 1. 中かっこ (**{ }**) の間にカーソルを置き、クリップボードからコピーされたスクリプト行の内容を貼り付けます。 完全なコマンドは次の形式になるはずです。
     
    ```powershell
-   Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:\$false -Credential (Get-Credential) -CriticalReplicationOnly:\$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:\$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:\$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
+   Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:$false -Credential (Get-Credential) -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
    ```
 1. コマンドを呼び出すには、Enter キーを押します。
 1. **[Windows PowerShell 資格情報要求]** ダイアログ ボックスの **[ユーザー名]** ボックスに「**CONTOSO\\Administrator**」と入力し、**[パスワード]** ボックスに「**Pa55w.rd**」と入力して、**[OK]** を選択します。
