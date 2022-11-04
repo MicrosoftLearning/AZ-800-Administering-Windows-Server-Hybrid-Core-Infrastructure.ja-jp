@@ -110,133 +110,133 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。 
 1. **[ツール]** リストで、**[仮想マシン]** を選択し、**[要約]** ペインを確認します。
+1. **[インベントリ]** ペインで **SEA-VM1** を開き、 **[設定]** を確認します。
 1. Windows Admin Center を使用して、サイズが 5 GB の新しいディスクを作成します。
 1. Windows Admin Center を使用して **SEA-VM1** を起動してから、実行中の VM の統計情報を表示します。
 1. Windows Admin Center を使用して、**SEA-VM1** をシャットダウンします。
 1. **[ツール]** リストで、**[仮想スイッチ]** を選択し、既存のスイッチを特定します。
-1. 演習 1 の結果
 
-### <a name="exercise-1-results"></a>この演習が完了すると、Hyper-V マネージャーと Windows Admin Center を使用して、仮想スイッチ、仮想ハード ディスク、仮想マシンを作成し、その仮想マシンを管理したことになります。
+### <a name="exercise-1-results"></a>演習 1 の結果
 
-演習 2: コンテナーのインストールと構成
+この演習が完了すると、Hyper-V マネージャーと Windows Admin Center を使用して、仮想スイッチ、仮想ハード ディスク、仮想マシンを作成し、その仮想マシンを管理したことになります。
 
-## <a name="exercise-2-installing-and-configuring-containers"></a>シナリオ
+## <a name="exercise-2-installing-and-configuring-containers"></a>演習 2: コンテナーのインストールと構成
 
-### <a name="scenario"></a>この演習では、Docker を使用して Windows コンテナーをインストールして実行します。
+### <a name="scenario"></a>シナリオ
 
-また、Windows Admin Center を使用してコンテナーを管理します。 この演習の主なタスクは次のとおりです。
+この演習では、Docker を使用して Windows コンテナーをインストールして実行します。 また、Windows Admin Center を使用してコンテナーを管理します。
 
-Windows Server に Docker をインストールします
+この演習の主なタスクは次のとおりです。
 
+1. Windows Server に Docker をインストールします
 1. Windows コンテナーをインストールして実行します
 1. Windows Admin Center を使用してコンテナーを管理します
-1. タスク 1: Windows Server に Docker をインストールする
 
-#### <a name="task-1-install-docker-on-windows-server"></a>**SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**[ツール]** メニューを使用して、そのサーバーへの PowerShell リモート処理セッションを確立します。
+#### <a name="task-1-install-docker-on-windows-server"></a>タスク 1: Windows Server に Docker をインストールする
 
-1. **注**: Windows Admin Center での PowerShell 接続は、ラボで使用される入れ子になった仮想化が原因で比較的遅くなる可能性があります。そのため、**SEA-ADM1** の Windows Powershell コンソールから `Enter-PSSession -ComputerName SEA-SVR1` を実行する別の方法があります。 
+1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**[ツール]** メニューを使用して、そのサーバーへの PowerShell リモート処理セッションを確立します。 
 
-   > PowerShell コンソールで次のコマンドを実行して、TLS 1.2 を強制的に使用し、PowerShellGet モジュールをインストールします。
+   > **注**: Windows Admin Center での PowerShell 接続は、ラボで使用される入れ子になった仮想化が原因で比較的遅くなる可能性があります。そのため、**SEA-ADM1** の Windows Powershell コンソールから `Enter-PSSession -ComputerName SEA-SVR1` を実行する別の方法があります。
 
-1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。 
+1. PowerShell コンソールで次のコマンドを実行して、TLS 1.2 を強制的に使用し、PowerShellGet モジュールをインストールします。 
 
    ```powershell
    [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
    Install-PackageProvider -Name NuGet -Force
    Install-Module PowerShellGet -RequiredVersion 2.2.4 -SkipPublisherCheck
    ```
-1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
+1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
 
    ```powershell
    Restart-Computer -Force
    ```
-1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker Microsoft PackageManagement プロバイダーをインストールします。
+1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
 
-1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker ランタイムをインストールします。
+1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker Microsoft PackageManagement プロバイダーをインストールします。
 
    ```powershell
    Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
    ```
-1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
+1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker ランタイムをインストールします。
 
    ```powershell
    Install-Package -Name docker -ProviderName DockerMsftProvider
    ```
-1. タスク 2: Windows コンテナーをインストールして実行する
+1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
 
    ```powershell
    Restart-Computer -Force
    ```
 
-#### <a name="task-2-install-and-run-a-windows-container"></a>**SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
+#### <a name="task-2-install-and-run-a-windows-container"></a>タスク 2: Windows コンテナーをインストールして実行する
 
+1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
 1. **Windows PowerShell** コンソールで次のコマンドを実行し、インストールされた Docker のバージョンを確認します。
-1. 次のコマンドを実行して、現在 **SEA-SVR1** に存在する Docker イメージを特定します。
 
    ```powershell
    Get-Package -Name Docker -ProviderName DockerMsftProvider
    ```
-1. **注**: ローカル リポジトリ ストアにイメージがないことを確認してください。 
+1. 次のコマンドを実行して、現在 **SEA-SVR1** に存在する Docker イメージを特定します。 
 
    ```powershell
    docker images
    ```
 
-   > 次のコマンドを実行して、インターネット インフォメーション サービス (IIS) インストールを含む Nano Server イメージをダウンロードします。
+   > **注**: ローカル リポジトリ ストアにイメージがないことを確認してください。
 
-1. **注**: ダウンロードが完了するのにかかる時間は、ラボ VM から Microsoft コンテナー レジストリへのネットワーク接続の使用可能な帯域幅によって異なります。
+1. 次のコマンドを実行して、インターネット インフォメーション サービス (IIS) インストールを含む Nano Server イメージをダウンロードします。
 
    ```powershell
    docker pull nanoserver/iis
    ```
 
-   > 次のコマンドを実行して、Docker イメージが正常にダウンロードされたことを確認します。
+   > **注**: ダウンロードが完了するのにかかる時間は、ラボ VM から Microsoft コンテナー レジストリへのネットワーク接続の使用可能な帯域幅によって異なります。
 
-1. 次のコマンドを実行し、ダウンロードされたイメージに基づいてコンテナーを起動します。
+1. 次のコマンドを実行して、Docker イメージが正常にダウンロードされたことを確認します。
 
    ```powershell
    docker images
    ```
-1. **注**: docker コマンドでは、(ホスト オペレーティング システムの非互換性の問題に対処する) Hyper-V 分離モードのコンテナーをバックグラウンド サービスとして起動し (`-d`)、コンテナー ホストのポート 80 がコンテナーのポート 80 にマップされるようにネットワークが構成されます。
+1. 次のコマンドを実行し、ダウンロードされたイメージに基づいてコンテナーを起動します。
 
    ```powershell
    docker run --isolation=hyperv -d -t --name nano -p 80:80 nanoserver/iis 
    ```
 
-   > 次のコマンドを実行して、コンテナー ホストの IP アドレス情報を取得します。 
+   > **注**: docker コマンドでは、(ホスト オペレーティング システムの非互換性の問題に対処する) Hyper-V 分離モードのコンテナーをバックグラウンド サービスとして起動し (`-d`)、コンテナー ホストのポート 80 がコンテナーのポート 80 にマップされるようにネットワークが構成されます。 
 
-1. **注**: vEthernet (nat) という名前のイーサネット アダプターの IPv4 アドレスを特定します。
+1. 次のコマンドを実行して、コンテナー ホストの IP アドレス情報を取得します。
 
    ```powershell
    ipconfig
    ```
 
-   > これは、新しいコンテナーのアドレスです。 次に、**Ethernet** という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これはホスト (**SEA-SVR1**) の IP アドレスであり、**172.16.10.12** に設定されています。 **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替え、別のタブを開き、**http://172.16.10.12** に移動します。
+   > **注**: vEthernet (nat) という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これは、新しいコンテナーのアドレスです。 次に、**Ethernet** という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これはホスト (**SEA-SVR1**) の IP アドレスであり、**172.16.10.12** に設定されています。
 
-1. ブラウザーに既定の IIS ページが表示されていることを確認します。 **SEA-ADM1** で、**SEA-SVR1** への PowerShell リモート処理セッションに戻り、**Windows PowerShell** コンソールで次のコマンドを実行し、実行中のコンテナーを一覧表示します。
-1. **注**: このコマンドは、**SEA-SVR1** で現在実行されているコンテナーに関する情報を提供するものです。
+1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替え、別のタブを開き、**http://172.16.10.12** に移動します。 ブラウザーに既定の IIS ページが表示されていることを確認します。
+1. **SEA-ADM1** で、**SEA-SVR1** への PowerShell リモート処理セッションに戻り、**Windows PowerShell** コンソールで次のコマンドを実行し、実行中のコンテナーを一覧表示します。
 
    ```powershell
    docker ps
    ```
-   > コンテナーを停止するために使用するため、コンテナー ID を記録します。 次のコマンドを実行して、実行中のコンテナーを停止します (`<ContainerID>` プレースホルダーは、前の手順で特定したコンテナー ID に置き換えてください)。 
+   > **注**: このコマンドは、**SEA-SVR1** で現在実行されているコンテナーに関する情報を提供するものです。 コンテナーを停止するために使用するため、コンテナー ID を記録します。 
 
-1. 次のコマンドを実行して、コンテナーが停止したことを確認します。
+1. 次のコマンドを実行して、実行中のコンテナーを停止します (`<ContainerID>` プレースホルダーは、前の手順で特定したコンテナー ID に置き換えてください)。
 
    ```powershell
    docker stop <ContainerID>
    ```
-1. タスク 3: Windows Admin Center を使用してコンテナーを管理する
+1. 次のコマンドを実行して、コンテナーが停止したことを確認します。
 
    ```powershell
    docker ps
    ```
 
-#### <a name="task-3-use-windows-admin-center-to-manage-containers"></a>**SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** の **[ツール]** メニューの **[コンテナー]** を選択します。
+#### <a name="task-3-use-windows-admin-center-to-manage-containers"></a>タスク 3: Windows Admin Center を使用してコンテナーを管理する
 
-1. **PowerShell** セッションを閉じるように求められたら、 **[続行]** を選択します。 コンテナー ペインで、 **[要約]** 、 **[コンテナー]** 、 **[イメージ]** 、 **[ネットワーク]** 、 **[ボリューム]** の各タブを参照します。
-1. 演習 2 の結果
+1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** の **[ツール]** メニューの **[コンテナー]** を選択します。 **PowerShell** セッションを閉じるように求められたら、 **[続行]** を選択します。
+1. コンテナー ペインで、 **[要約]** 、 **[コンテナー]** 、 **[イメージ]** 、 **[ネットワーク]** 、 **[ボリューム]** の各タブを参照します。
 
-### <a name="exercise-2-results"></a>この演習が完了すると、Windows Server に Docker をインストールし、Web サービスを含む Windows コンテナー イメージをダウンロードして、その機能を確認したことになります。
+### <a name="exercise-2-results"></a>演習 2 の結果
 
-After this exercise, you should have installed Docker on Windows Server, downloaded a Windows container image containing web services, and verified its functionality.
+この演習が完了すると、Windows Server に Docker をインストールし、Web サービスを含む Windows コンテナー イメージをダウンロードして、その機能を確認したことになります。
