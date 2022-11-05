@@ -110,6 +110,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。 
 1. **[ツール]** リストで、**[仮想マシン]** を選択し、**[要約]** ペインを確認します。
+1. **[インベントリ]** ペインで **SEA-VM1** を開き、 **[設定]** を確認します。
 1. Windows Admin Center を使用して、サイズが 5 GB の新しいディスクを作成します。
 1. Windows Admin Center を使用して **SEA-VM1** を起動してから、実行中の VM の統計情報を表示します。
 1. Windows Admin Center を使用して、**SEA-VM1** をシャットダウンします。

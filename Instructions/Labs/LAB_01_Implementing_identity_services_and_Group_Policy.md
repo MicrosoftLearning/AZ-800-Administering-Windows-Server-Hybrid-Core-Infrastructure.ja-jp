@@ -74,7 +74,7 @@ lab:
    - 改行を削除します。
 
 1. これで、**Install-ADDSDomainController** コマンドとすべてのパラメーターが 1 行に収まったので、コマンドをコピーします。
-1. **[Active Directory Domain Services 構成ウィザード]** に切り替えてから、 **[キャンセル]** を選択します。
+
 1. Windows PowerShell に切り替えてから、コマンド プロンプトで次のコマンドを入力します。
 
    ```powershell
@@ -83,7 +83,7 @@ lab:
 1. コピーしたコマンドを中かっこ ({ }) の間に貼り付け、結果のコマンドを実行してインストールを開始します。 完全なコマンドは次の形式になるはずです。
 
    ```powershell
-   Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:\$false -Credential (Get-Credential) -CriticalReplicationOnly:\$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:\$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:\$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
+   Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:$false -CreateDnsDelegation:$false -Credential (Get-Credential) -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:$true}
    ```
 
 1. 次の資格情報を入力します。
@@ -202,7 +202,7 @@ lab:
 
 1. [グループ ポリシーの管理] のナビゲーション ペインで、 **[グループ ポリシーのモデル作成]** を選択します。
 1. **[グループ ポリシーのモデル作成ウィザード]** を起動します。
-1. ターゲット ユーザーとコンピューターをそれぞれ **CONTOSO\\Ty** ユーザー アカウントと **SEA-ADM1** コンピューターに設定します。
+1. ターゲット ユーザーとコンピューターをそれぞれ **CONTOSO\Ty** ユーザー アカウントと **CONTOSO\SEA-ADM1** コンピューターに設定します。
 1. ウィザードの残りのページをステップ実行し、既定の設定を変更せずに確認し、ウィザードを完了すると、その結果を含むレポートが生成されます。
 1. レポートが作成された後、詳細ペインで **[詳細]** タブを選択してから、 **[すべて表示]** を選びます。
 1. レポートで、 **[ユーザーの詳細]** セクションが見つかるまで下にスクロールし、 **[コントロールパネル] の [個人用設定]** セクションを見つけます。 **[スクリーン セーバーのタイムアウト]** 設定が、Seattle Application Override GPO から取得されていることがわかるはずです。
