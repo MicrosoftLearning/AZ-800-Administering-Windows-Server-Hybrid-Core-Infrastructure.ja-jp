@@ -7,6 +7,8 @@ lab:
 
 # <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ回答キー: Azure VM での Windows Server のデプロイと構成
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Deploying%20and%20configuring%20Windows%20Server%20on%20Azure%20VMs)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="exercise-1-authoring-azure-resource-manager-arm-templates-for-azure-vm-deployment"></a>演習 1: Azure VM デプロイ用の Azure Resource Manager (ARM) テンプレートの作成
 
 #### <a name="task-1-connect-to-your-azure-subscription-and-enable-enhanced-security-of-microsoft-defender-for-cloud"></a>タスク 1: Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化を有効にする
@@ -40,7 +42,7 @@ lab:
    |サイズ|**Standard_D2s_v3**|
    |ユーザー名|**学生**|
    |パスワード|**Pa55w.rd1234**|
-   |パブリック受信ポート|None|
+   |パブリック受信ポート|なし|
    |既存の Windows Server ライセンスを使用しますか|いいえ|
 
 1. **[次へ: ディスク >]** を選択し、「**仮想マシンの作成**」ページの **[ディスク]** タブで、次の設定を指定します。他のすべての設定は既定値のままにします。
@@ -63,7 +65,7 @@ lab:
 
    |設定|値|
    |---|---|
-   |パブリック IP|None|
+   |パブリック IP|なし|
    |NIC ネットワーク セキュリティ グループ|None|
    |Accelerated Networking|Off|
    |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|いいえ|

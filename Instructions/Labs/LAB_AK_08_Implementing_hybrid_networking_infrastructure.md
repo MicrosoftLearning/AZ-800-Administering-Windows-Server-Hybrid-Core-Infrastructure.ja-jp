@@ -7,6 +7,8 @@ lab:
 
 # <a name="lab-answer-key-implementing-hybrid-networking-infrastructure"></a>ラボの回答キー: ハイブリッド ネットワーク インフラストラクチャの実装
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20hybrid%20networking%20infrastructure)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ### <a name="exercise-1-implement-virtual-network-routing-in-azure"></a>演習 1: Azure で仮想ネットワーク ルーティングを実装する
 
 #### <a name="task-1-provision-lab-infrastructure-resources"></a>タスク 1: ラボ インフラストラクチャ リソースをプロビジョニングする

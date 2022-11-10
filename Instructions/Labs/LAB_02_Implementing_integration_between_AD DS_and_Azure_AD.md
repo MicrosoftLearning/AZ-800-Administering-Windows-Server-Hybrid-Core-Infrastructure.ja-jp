@@ -14,6 +14,8 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 あなたの目標は、オンプレミスの AD DS と Azure AD の間でパススルー認証を実装することです。
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20integration%20between%20AD%20DS%20and%20Azure%20AD)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="objectives"></a>目標
 
 このラボを完了すると、次のことができるようになります。
@@ -371,7 +373,7 @@ Microsoft Azure Active Directory (Azure AD) を使用して Azure リソース�
 
 #### <a name="task-1-uninstall-azure-ad-connect"></a>タスク 1 Azure AD Connect のアンインストール
 
-1. **SEA-ADM1** で、**[コントロール パネル]** を開きます。
+1. **SEA-ADM1** で、 **[コントロール パネル]** を開きます。
 1. **[プログラムのアンインストールまたは変更]** 機能を使用して、**[Microsoft Azure AD Connect]** をアンインストールします。
 
 #### <a name="task-2-disable-directory-synchronization-in-azure"></a>タスク 2: Azure でディレクトリ同期を無効にする

@@ -12,6 +12,8 @@ lab:
 
 目標は、マネージド システムの場所に関係なく、Windows Admin Center を一貫して使用できることの確認です。
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Using%20Windows%20Admin%20Center%20in%20hybrid%20scenarios)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="objectives"></a>目標
 
 このラボを完了すると、次のことができるようになります。
