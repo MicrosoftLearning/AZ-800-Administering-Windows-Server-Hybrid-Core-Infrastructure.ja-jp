@@ -7,6 +7,8 @@ lab:
 
 # <a name="lab-answer-key-implementing-identity-services-and-group-policy"></a>ラボの回答キー: ID サービスおよびグループ ポリシーの実装
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20identity%20services%20and%20Group%20Policy)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="exercise-1-deploying-a-new-domain-controller-on-server-core"></a>演習 1: Server Core への新しいドメイン コントローラーの展開
 
 #### <a name="task-1-deploy-ad-ds-on-a-new-windows-server-core-server"></a>タスク 1: 新しい Windows Server Core サーバーに AD DS を展開する
@@ -229,7 +231,7 @@ lab:
 1. **[選択の要約]** ページで、**[次へ]** を選択します。
 1. メッセージが表示されたら、**[完了]** を選択します。
 1. 詳細ペインで、**[詳細]** タブを選択し、**[すべて表示]** を選びます。
-1. レポートで、**[ユーザーの詳細]** セクションが見つかるまで下にスクロールし、**[コントロールパネル] の [個人用設定]** セクションを見つけます。 **[スクリーン セーバーのタイムアウト]** 設定が無効になっており、優勢な GPO がSeattle Application Override GPO に設定されていることに注意してください。
+1. レポートで、 **[ユーザーの詳細]** セクションが見つかるまで下にスクロールし、 **[コントロールパネル] の [個人用設定]** セクションを見つけます。 **[スクリーン セーバーのタイムアウト]** 設定が無効になっており、優勢な GPO がSeattle Application Override GPO に設定されていることに注意してください。
 1. **[グループ ポリシーの管理]** コンソールを閉じます。
 
 **結果**: この演習が完了すると、GPO を正常に作成して構成したことになります。

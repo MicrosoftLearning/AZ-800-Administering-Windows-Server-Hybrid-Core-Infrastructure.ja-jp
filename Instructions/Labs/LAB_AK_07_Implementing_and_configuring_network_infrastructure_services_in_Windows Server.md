@@ -7,6 +7,8 @@ lab:
 
 # <a name="lab-answer-key-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20network%20infrastructure%20services%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="exercise-1-deploying-and-configuring-dhcp"></a>演習 1: DHCP の展開と構成
 
 #### <a name="task-1-install-the-dhcp-role"></a>タスク 1: DHCP 役割をインストールする

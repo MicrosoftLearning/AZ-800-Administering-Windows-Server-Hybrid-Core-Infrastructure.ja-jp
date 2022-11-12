@@ -7,6 +7,8 @@ lab:
 
 # <a name="lab-answer-key-managing-windows-server"></a>ラボの回答キー: Windows Server の管理
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Managing%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="exercise-1-implementing-and-using-remote-server-administration"></a>演習 1: リモート サーバー管理の実装と使用
 
 #### <a name="task-1-install-windows-admin-center"></a>タスク 1: Windows Admin Center をインストールする

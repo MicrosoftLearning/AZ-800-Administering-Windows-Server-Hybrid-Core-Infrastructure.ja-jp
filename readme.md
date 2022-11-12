@@ -3,6 +3,7 @@
 - **[最新の学生ハンドブックと AllFiles コンテンツをダウンロードする](../../releases/latest)**
 - **あなたは MCT ですか?** - [MCT 向けの GitHub ユーザー ガイド](https://microsoftlearning.github.io/MCT-User-Guide/)をご覧ください
 - **ラボの手順を手動で作成する必要がありますか?** - 手順は、[MicrosoftLearning/Docker-Build](https://github.com/MicrosoftLearning/Docker-Build) リポジトリで確認できます
+- ご自分のペースでこのコースをプレビューするには、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulations%20-%20Administering%20Windows%20Server%20Hybrid%20Core%20Infrastructure)** を参照してください。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。
 
 ## <a name="what-are-we-doing"></a>ここでの内容
 

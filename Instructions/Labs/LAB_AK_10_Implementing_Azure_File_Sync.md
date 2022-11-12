@@ -7,6 +7,8 @@ lab:
 
 # <a name="lab-answer-key-implementing-azure-file-sync"></a>ラボの回答キー: Azure File Sync の実装
 
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20Azure%20File%20Sync)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+
 ## <a name="exercise-1-implementing-distributed-file-system-dfs-replication-in-your-on-premises-environment"></a>演習 1: オンプレミス環境への分散ファイル システム (DFS) レプリケーションの実装
 
 ### <a name="task-1-deploy-dfs"></a>タスク 1: DFS をデプロイする
