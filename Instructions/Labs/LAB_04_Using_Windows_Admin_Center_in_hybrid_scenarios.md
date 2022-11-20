@@ -262,9 +262,9 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 
 #### <a name="task-1-connect-to-the-windows-admin-center-gateway-running-in-azure-vm"></a>タスク 1: Azure VM で実行されている Windows Admin Center ゲートウェイに接続する
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、前の演習で特定したURL（https://az800l104-vmac-xxxxxx.eastus.cloudapp.azure.com)、Azure VM を実行している Windows Admin Center ゲートウェイに接続します。
+1. **SEA-ADM1** で Microsoft Edge を起動し、前の演習で特定したURL（https://az800l104-vmac-xxxxxx.eastus.cloudapp.azure.com) に接続し、Azure VM で実行されている Windows Admin Center ゲートウェイに接続します。
 1. メッセージが表示されたら、ユーザー名 **Student** とパスワード **Pa55w.rd1234** でサインインします。
-1. Windows Admin Center の [All Connections] ペインで、**az800l04-vmwac [Gateway]** を選択します。
+1. Windows Admin Center の [All Connections] ペインで、**az800l04-vmwac[Gateway]** を選択します。
 1. Windows Admin Center の [Overview] ペインを確認します。
 
 #### <a name="task-2-enable-powershell-remoting-on-an-azure-vm"></a>タスク 2: Azure VM の PowerShell リモート処理を有効にする
