@@ -158,7 +158,7 @@ lab:
 1. 左上の **Windows Admin Center** をクリックします。
 2. **SEA-ADM1.contoso.com** に接続します。
 3. Tools メニューから**Networks**を選択します
-4. **「＋Add Azyre Network Adapter**」をクリックします
+4. **「＋Add Azure Network Adapter**」をクリックします
 10. 次の設定で Azure ネットワーク ゲートウェイを作成します。
 
    |設定|値|
