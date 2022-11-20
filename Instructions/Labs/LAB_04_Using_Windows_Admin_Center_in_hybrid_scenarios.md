@@ -50,41 +50,51 @@ lab:
 
 #### <a name="task-1-create-an-azure-resource-group-by-using-an-azure-resource-manager-template"></a>タスク 1: Azure Resource Manager テンプレートを使用して Azure リソース グループを作成する
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal を参照して、Azure 資格情報で認証します。
-1. Azure portal の ［Cloud Shell］ ペインで PowerShell セッションを開きます。
-1. **C:\\Labfiles\\Lab04\\L04-sub_template.json** ファイルを Cloud Shell ホーム ディレクトリにアップロードします。
-1. [Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。 (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 （**eastus** など) に置き換えます)。
+1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal を参照して、**Microsoft Account**(このコースの冒頭で新規に作成した outlook.jp アカウント)で認証します。
+1. Azure portal の ［Cloud Shell］ を起動します（ポータル右上にあるコマンドプロンプトマーク）
+1. PowerShell をクリックします
+1. **ストレージの作成** をクリックします（３分程度かかります）
+1. Cloud Shell で以下のコマンドを実行して、必要なファイルをGitHubからクローンします
+  ```
+  git clone https://github.com/MicrosoftLearning/AZ-800-Administering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp.git
+  ```
 
-   >**注**: このラボは、米国東部を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
+1. ls コマンドを使用して AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp が作成されていることを確認してください。
+1. **AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\Allfiles\Labfiles\Lab04** に移動します。
+1 [Cloud Shell］ ペインで、次のコマンドを実行して、このラボでプロビジョニングするリソースが入ることになるリソース グループを作成します。
+
+   >**注**: このラボは、米国東部 East US を使用しています。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
 
    ```powershell
-   $location = '<Azure region>'
+   $location = 'East US'
    $rgName = 'AZ800-L0401-RG'
    New-AzSubscriptionDeployment `
      -Location $location `
      -Name az800l04subDeployment `
-     -TemplateFile $HOME/L04-sub_template.json `
+     -TemplateFile ./L04-sub_template.json `
      -rgLocation $location `
      -rgName $rgName
    ```
 
 #### <a name="task-2-create-an-azure-vm-by-using-an-azure-resource-manager-template"></a>タスク 2: Azure Resource Manager テンプレートを使用して Azure VM を作成する
 
-1. [Cloud Shell] ペインで、Azure Resource Manager テンプレート **C:\\Labfiles\\Lab04\\L04-rg_template.json**、および対応する Azure Resource Manager パラメーター ファイル **C:\\Labfiles\\Lab04\\L04-rg_template.parameters.json** をアップロードします。
 1. [Cloud Shell] ペインで、次のコマンドを実行して、このラボで使用する、Windows Server を実行している Azure VM をデプロイします。
 
    ```powershell
    New-AzResourceGroupDeployment `
      -Name az800l04rgDeployment `
      -ResourceGroupName $rgName `
-     -TemplateFile $HOME/L04-rg_template.json `
-     -TemplateParameterFile $HOME/L04-rg_template.parameters.json
+     -TemplateFile ./L04-rg_template.json `
+     -TemplateParameterFile ./L04-rg_template.parameters.json
    ```
 
    >**注**: このデプロイが完了するまで待ってから、次の演習に進んでください。 デプロイには約 5 分かかります。
 
 1. Azure portal の [Cloud Shell] ペインを閉じます。
-1. Azure portal で、**az800l04-vnet** 仮想ネットワークに対して、IP アドレスの範囲が **10.4.3.224/27** の **GatewaySubnet** を追加します。
+1. Azure Portal で **VNET/仮想ネットワーク** の管理画面移動します。
+1. Azure portal で、**az800l04-vnet** 仮想ネットワークを開きます。
+1. **サブネット** をクリックし、**「＋ゲートウェイサブネット**」をクリックします。
+1. IP アドレスの範囲を **10.4.3.224/27** に設定し、**GatewaySubnet** を作成します。
 
 ## <a name="exercise-2-implementing-hybrid-connectivity-by-using-the-azure-network-adapter"></a>演習 2: Azure ネットワーク アダプターを使用したハイブリッド接続の実装
 
@@ -116,6 +126,7 @@ lab:
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
+1. **SEA-ADM1** を再起動します（10分程度かかる場合があります）
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 
    >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
@@ -125,27 +136,44 @@ lab:
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
-1. Windows Admin Center ページで、Azure ネットワーク アダプターの追加を試します。
-1. メッセージが表示されたら、前の演習で使用した Azure サブスクリプションに Windows Admin Center を登録します。
+1. Windows Admin Center の右上にある「Setting（ギア アイコン）」をクリックします。
+1. Account ページが表示されたら **「Register with Azure」** をクリックします
+1. **Register** をクリックします
+1. 画面右側に表示された**Getting started with Azure in Windows Admin Center** で **Copy** をクリックしてコードをコピーします
+1. **Enter the Code** をクリックします。
+1. コードをペーストして「Next」をクリックします
+1. マイクロソフトアカウントでサインインします
+1. **Continue** をクリックします
+1. タブを閉じてAdmin Center に戻ります。
+1. **Connect** をクリックします
+1. **Sign in** をクリックします。
+
+>いくつかのエラーが表示されますが、ここでは無視してください。この後のステップで解決します
+
+1. **View in Azure** リンクをクリックします
+1. **Default Directory に管理者の同意を与えます** をクリックし、「はい」を選択します
 
 #### <a name="task-2-create-an-azure-network-adapter"></a>タスク 2: Azure ネットワーク アダプターを作成する
 
-1. **SEA-ADM1** で、Windows Admin Center が表示されている Microsoft Edge ウィンドウを使用して、もう一度 Azure ネットワーク アダプターの作成を試みます。
-1. 次の設定で Azure ネットワーク アダプターを作成します。
+1. 左上の **Windows Admin Center** をクリックします。
+2. **SEA-ADM1.contoso.com** に接続します。
+3. Tools メニューから**Networks**を選択します
+4. **「＋Add Azyre Network Adapter**」をクリックします
+10. 次の設定で Azure ネットワーク ゲートウェイを作成します。
 
    |設定|値|
    |---|---|
-   |サブスクリプション|このラボで使用している Azure サブスクリプションの名前|
-   |場所|eastus|
-   |仮想ネットワーク|az800l04-vnet|
-   |ゲートウェイ サブネット|10.4.3.224/27|
-   |ゲートウェイ SKU|VpnGw1|
-   |クライアント アドレス空間|192.168.0.0/24|
-   |認証証明書|自動生成された自己署名ルート証明書とクライアント証明書|
+   |Subscription|このラボで使用している Azure サブスクリプションの名前|
+   |Location|East US|
+   |Virtual Network|az800l04-vnet|
+   |Gateway Subnet|10.4.3.224/27|
+   |Gateway SKU|VpnGw1|
+   |Client Address Space|192.168.0.0/24|
+   |Authentication Certificate|Auto-Generated Self-signed root and client Certificate/自動生成された自己署名ルート証明書とクライアント証明書|
+
+   >**注**: Azure 仮想ネットワーク ゲートウェイのプロビジョニングには最大 45 分かかります。 プロビジョニングが完了するのを待たずに、次の**演習3**に進んでください。
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替え、**WAC-Created-vpngw-** で始まる名前の新しい仮想ネットワーク ゲートウェイがプロビジョニングされていることを確認します。
-
-   >**注**: Azure 仮想ネットワーク ゲートウェイのプロビジョニングには最大 45 分かかります。 プロビジョニングが完了するのを待たずに、次の演習に進んでください。
 
 ## <a name="exercise-3-deploying-windows-admin-center-gateway-in-azure"></a>演習 3: Azure での Windows Admin Center ゲートウェイのデプロイ
 
@@ -162,20 +190,20 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 
 1. **SEA-ADM1** で、Azure portal が表示されているブラウザー ウィンドウに切り替えます。
 1. Azure portal の ［Cloud Shell］ ペインで PowerShell セッションを開始します。
-1. [Cloud Shell] ペインで、**C:\\Labfiles\\Lab04\\Deploy-WACAzVM.ps1** ファイルを Cloud Shell ホーム ディレクトリにアップロードします。
+1. **AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\Allfiles\Labfiles\Lab04** に移動します。
 1. [Cloud Shell] ペインで、次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトが使用する **AzureRm** PowerShell コマンドレットの互換性を有効にします。
 
    ```powershell
    Enable-AzureRmAlias -Scope Process
    ```
-1. 次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトを実行するために必要な変数の値を設定します (`<Azure region>` プレースホルダーは、このラボで先ほどリソースをデプロイした Azure リージョンの名前 (**eastus** など) に置き換えてください)。
+1. 次のコマンドを実行して、Windows Admin Center プロビジョニング スクリプトを実行するために必要な変数の値を設定します。
 
    ```powershell
    $rgName = 'AZ800-L0401-RG'
    $vnetName = 'az800l04-vnet'
    $nsgName = 'az800l04-web-nsg'
    $subnetName = 'subnet1'
-   $location = '<Azure region>'
+   $location = 'East US'
    $pipName = 'wac-public-ip'
    $size = 'Standard_D2s_v3'
    ```
@@ -208,7 +236,7 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 
     >**注**: プロビジョニング スクリプトが完了するまで待ちます。 これには 5 分ほどかかる場合があります。
 
-1. スクリプトが正常に完了したことを確認し、Windows Admin Center インストールをホストする Azure VM の完全修飾名を含む URL を示す最後のメッセージに注意してください。
+1. スクリプトが正常に完了したことを確認し、Windows Admin Center インストールをホストする **Azure VM の完全修飾名を含む URL** を示す最後のメッセージに注意してください。
 
    >**注**: Azure VM の完全修飾名を記録します。 このラボで後ほど必要になります。
 
@@ -217,8 +245,8 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 #### <a name="task-2-review-results-of-the-script-provisioning"></a>タスク 2: スクリプト プロビジョニングの結果を確認する
 
 1. Azure portal で、**AZ800-L0401-RG** リソース グループのページを参照します。
-1. **AZ800-L0401-RG** ページの **[概要]** ページで、Azure VM **az800l04-vmwac** が含まれるリソースのリストを確認します。
-1. **az800l04-vmwac | Networking** ページの **[受信ポートの規則]** タブで、TCP ポート 5986 で接続を許可する受信ポートの規則、および TCP ポート 443 で接続を許可する受信規則をそれぞれ示すエントリに注目します。
+1. **AZ800-L0401-RG** ページの **[概要]** ページで、リソース一覧にある 仮想マシン **az800l04-vmwac** をクリックします
+1. **az800l04-vmwac | ネットワーク** ページの **[受信ポートの規則]** タブで、TCP ポート 5986 で接続を許可する受信ポートの規則、および TCP ポート 443 で接続を許可する受信規則をそれぞれ示すエントリを確認します。
 
 ## <a name="exercise-4-verifying-functionality-of-the-windows-admin-center-gateway-in-azure"></a>演習 4: Azure での Windows Admin Center ゲートウェイの機能の確認
 
@@ -234,27 +262,29 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 
 #### <a name="task-1-connect-to-the-windows-admin-center-gateway-running-in-azure-vm"></a>タスク 1: Azure VM で実行されている Windows Admin Center ゲートウェイに接続する
 
-1. **SEA-ADM1** で Microsoft Edge を起動し、前の演習で特定した、Azure VM を実行している Windows Admin Center ゲートウェイに接続します。
+1. **SEA-ADM1** で Microsoft Edge を起動し、前の演習で特定したURL（https://az800l104-vmac-xxxxxx.eastus.cloudapp.azure.com)、Azure VM を実行している Windows Admin Center ゲートウェイに接続します。
 1. メッセージが表示されたら、ユーザー名 **Student** とパスワード **Pa55w.rd1234** でサインインします。
-1. Windows Admin Center の [すべての接続] ペインで、**az800l04-vmwac [ゲートウェイ]** を選択します。
-1. Windows Admin Center の [概要] ペインを確認します。
+1. Windows Admin Center の [All Connections] ペインで、**az800l04-vmwac [Gateway]** を選択します。
+1. Windows Admin Center の [Overview] ペインを確認します。
 
 #### <a name="task-2-enable-powershell-remoting-on-an-azure-vm"></a>タスク 2: Azure VM の PowerShell リモート処理を有効にする
 
-1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウで、**az800l04-vm0** Azure VM のページを参照します。
-1. **az800l04-vm0** ページで、Windows リモート管理が無効な場合には **[ファイル名を指定して実行]** 機能で以下のコマンドを実行して有効にします。
+1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウで、**az800l04-vm0** Azure VM のページを表示します。
+
+1. **az800l04-vm0** ページで、 **[実行コマンド]** で **RunPowerShell** を選択します。
+1. 以下のコマンドを実行して WinRM を有効にします。
 
    ```powershell
    winrm quickconfig -quiet
    ```
 
-1. **[ファイル名を指定して実行]** 機能で以下のコマンドを実行して、Windows リモート管理受信ポートを開きます。
+1. 同様に、以下のコマンドを実行して、Windows リモート管理受信ポートを開きます。
 
    ```powershell
    Set-NetFirewallRule -Name WINRM-HTTP-In-TCP-PUBLIC -RemoteAddress Any
    ```
 
-1. **[ファイル名を指定して実行]** 機能で以下のコマンドを実行して、PowerShell リモート処理を有効にします。
+1. 同様に以下のコマンドを実行して、PowerShell リモート処理を有効にします。
 
    ```powershell
    Enable-PSRemoting -Force -SkipNetworkProfileCheck
@@ -262,9 +292,14 @@ Windows Admin Center を使用して、Windows Server OS を実行している A
 
 #### <a name="task-3-connect-to-an-azure-vm-by-using-the-windows-admin-center-gateway-running-in-azure-vm"></a>タスク 3: Azure VM で実行されている Windows Admin Center ゲートウェイを使用して、Azure VM に接続する
 
-1. **SEA-ADM1** で、**az800l04-vmwac** Azure VM で実行されている Windows Admin Center ゲートウェイのインターフェイスが表示されている Microsoft Edge ウィンドウで、**az800l04-vm0** という名前を使用してこの Azure VM への接続を追加します。
-1. メッセージが表示されたら、ユーザー名 **Student**、パスワード **Pa55w.rd1234** を使用して認証します。
-1. VM に正常に接続されたら、Windows Admin Center の **az800l04-vmwac** Azure VM の [概要] ペインを確認します。
+1. **az800l04-vmwac** で実行されている Windows Admin Center ゲートウェイで、**All Connections** ページを開き、**「＋Add」** をクリックします
+1. **Sign in** が表示されている場合は、マイクロソフトアカウントでサインインします。
+1. リソースグループとして AZ800-L0401-RG を選択します。
+1. AZ800l04-vm0 を選択します。
+1. IP Address として、プライベートIPアドレスを選択します。 
+1. **Add** をクリックします。
+1. ユーザー名 **Student**、パスワード **Pa55w.rd1234** を使用して認証します。
+1. [Overview] ペインを確認します
 
 ## <a name="exercise-5-deprovisioning-the-azure-environment"></a>演習 5: Azure 環境のプロビジョニング解除
 
