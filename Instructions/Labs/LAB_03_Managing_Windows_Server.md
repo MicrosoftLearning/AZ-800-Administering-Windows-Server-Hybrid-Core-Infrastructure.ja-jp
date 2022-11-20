@@ -63,12 +63,14 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
    > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
 
+1. インストールが完了したら サーバーを再起動してください。再起動には少し時間がかかことがあります（15分程度）。
+
 #### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
 
-1. **SEA-ADM1** で Microsoft Edge を開始して、`https://SEA-ADM1.contoso.com` にアクセスします。 
+1. **SEA-ADM1** にログインし、Microsoft Edge を開始して、`https://SEA-ADM1.contoso.com` にアクセスします。 
 1. メッセージが表示されたら、ユーザー名として **CONTOSO\\Administrator** を、パスワードとして **Pa55w.rd** を使用してサインインします。
-1. **[すべての接続]** ページを確認します。**sea-adm1.contoso.com** エントリが含まれていることに注目します。 
-1. [すべての接続] ウィンドウで、`sea-dc1.contoso.com` に接続を追加します。
+1. **[All Connections/すべての接続]** ページを確認します。**sea-adm1.contoso.com** エントリ（自分自身）が含まれていることに注目します。 
+1. [All Connections/すべての接続] ウィンドウで、**Add** をクリックして **Servers** の **Add** から `sea-dc1.contoso.com` に接続を追加します。
 1. メッセージが表示されたら、ユーザー名として **CONTOSO\\Administrator** を、パスワードとして **Pa55w.rd** を使用してサインインします。
 
    > **注**: シングル サインオンを実行するには、Kerberos の制約付き委任を設定する必要があります。
@@ -76,25 +78,27 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 #### <a name="task-3-configure-windows-admin-center-extensions"></a>タスク 3: Windows Admin Center 拡張機能を構成する
 
 1. **SEA-ADM1** の右上隅にある **[設定]** アイコン (歯車) を選択します。
-1. 使用可能な拡張機能を確認します。
-1. **セキュリティ (プレビュー)** 拡張機能をインストールします。 拡張機能がインストールされ Windows Admin Center が更新されます。
+1. **Extentions** をクリックして、使用可能な拡張機能を確認します。
+1. **Security(Preview)** 拡張機能を選択し、上にある **Install** をクリックしてインストールします。 拡張機能がインストールされ Windows Admin Center が更新されます。
 
-   > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
+   > **注**: **Security(Preview)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 
-1. インストールされている拡張機能の一覧に DNS (プレビュー) 拡張機能が含まれていることを確認します。
-1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、**[サーバー マネージャー]** を選択します。
-1. Windows Admin Center 内で、`sea-dc1.contoso.com` に接続し、必要に応じて、ユーザー名として **CONTOSO\\Administrator** を、パスワードとして **Pa55w.rd** を使用してサインインします。
-1. `sea-dc1.contoso.com` 上の DNS サーバーに接続し、DNS PowerShell ツールをインストールします。
+1. **Installed extentions** タブを開いて、一覧に DNS (プレビュー) 拡張機能が含まれていることを確認します。
+1. 上部左側にあるメニューの **[Settings/設定]** の横にあるドロップダウン矢印を選択してから、**[サーバー マネージャー]** を選択します。
+1. Windows Admin Center 内で、`sea-dc1.contoso.com` をクリックして接続し、必要に応じて、ユーザー名として **CONTOSO\\Administrator** を、パスワードとして **Pa55w.rd** を使用してサインインします。
+1. `sea-dc1.contoso.com` 上の左側のアイコン一覧から**DNS** サーバーアイコンをクリックし、**Install**をクリックして DNS PowerShell ツールをインストールします。
 1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。
 
 #### <a name="task-4-verify-remote-administration"></a>タスク 4: リモート管理を確認する
 
-1. **SEA-ADM1** の Windows Admin Center で、`sea-dc1.contoso.com` に接続されている間に [概要] ペインを確認します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。
-1. Windows Admin Center で、ロールおよび機能ツールを使用して、**Telnet Client** を `sea-dc1.contoso.com` にインストールします。 
+1. **SEA-ADM1** の Windows Admin Center で、`sea-dc1.contoso.com` に接続されていることを確認して [Overview/概要] ペインを確認します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。
+1. Windows Admin Center で、左側のメニューから **Roles ＆ Features** ツールを選択jして、**Telnet Client** を `sea-dc1.contoso.com` にインストールします。 
 1. Windows Admin Center で、 **[設定]** インターフェイスを使用して `sea-dc1.contoso.com` 上の [リモート デスクトップ] を有効にします。
-1. Windows Admin Center で、リモート デスクトップ経由で `sea-dc1.contoso.com` に接続します。
-1. リモート デスクトップ セッションから切断します。 
-1. Microsoft Edge ウィンドウを閉じます。
+1. Windows Admin Center で、左側のメニュー一覧の一番下にある **Settings** を選択し、**Remote Desktop** をクリックします。
+1. **Allow Remote connections to this computer** を選択し、**Save** します。
+2. リモート デスクトップクライアント（mstsc)を起動して、リモートデスクトップ経由で `sea-dc1.contoso.com` に接続できることを確認します。
+3. リモート デスクトップ セッションを切断します。 
+4. Microsoft Edge ウィンドウを閉じます。
 
 #### <a name="task-5-administer-servers-with-remote-powershell"></a>タスク 5: リモート PowerShell を使用してサーバーを管理する
 
@@ -110,7 +114,7 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
    Get-Service -Name AppIDSvc
    ```
 
-   > **注**: サービスが現在停止中であることを確認します。
+   > **注**: サービスが現在停止中(Stopped)であることを確認します。
 
 1. **[SEA-DC1]** プロンプトから、次のコマンドを実行して Application Identity サービスを開始します。
 
@@ -123,7 +127,7 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
    Get-Service -Name AppIDSvc
    ```
 
-   > **注**: サービスが現在実行中であることを確認します。
+   > **注**: サービスが現在実行中(Running) であることを確認します。
 
 ### <a name="results"></a>結果
 
