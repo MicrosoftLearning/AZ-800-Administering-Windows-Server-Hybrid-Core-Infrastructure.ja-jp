@@ -93,9 +93,33 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 1. **SEA-VM1** をシャットダウンします。
 
-### <a name="exercise-1-results"></a>演習 1 の結果
+#### <a name="task-4-manage-virtual-machines-using-windows-admin-center"></a>タスク 4: Windows Admin Center をインストールする
 
-この演習が完了すると、Hyper-V マネージャーと Windows Admin Center を使用して、仮想スイッチ、仮想ハード ディスク、仮想マシンを作成し、その仮想マシンを管理したことになります。
+1. **SEA-ADM1** で、管理者として **Windows PowerShell** を起動します。
+
+   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
+
+1. **Windows PowerShell** コンソールで、次のコマンドを実行してから Enter キーを押し、最新バージョンの Windows Admin Center をダウンロードします。
+    
+   ```powershell
+   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   ```
+1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
+    
+   ```powershell
+   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+   ```
+
+   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+
+1. インストールが完了したら、サーバーを再起動します。（5分程度時間がかかります）
+
+1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
+
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
+
+   - ユーザー名: **CONTOSO\\Administrator**
+   - パスワード: **Pa55w.rd**
 
 ## <a name="exercise-2-installing-and-configuring-containers"></a>演習 2: コンテナーのインストールと構成
 
@@ -111,7 +135,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 #### <a name="task-1-install-docker-on-windows-server"></a>タスク 1: Windows Server に Docker をインストールする
 
-1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**[ツール]** メニューを使用して、そのサーバーへの PowerShell リモート処理セッションを確立します。 
+1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続して、**[Tools]** から、PowerShell を選択します。
 
    > **注**: Windows Admin Center での PowerShell 接続は、ラボで使用される入れ子になった仮想化が原因で比較的遅くなる可能性があります。そのため、**SEA-ADM1** の Windows Powershell コンソールから `Enter-PSSession -ComputerName SEA-SVR1` を実行する別の方法があります。
 
@@ -127,7 +151,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
    ```powershell
    Restart-Computer -Force
    ```
-1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
+1. **SEA-SVR1** を再起動した後、再度、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
 
 1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker Microsoft PackageManagement プロバイダーをインストールします。
 
@@ -139,7 +163,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
    ```powershell
    Install-Package -Name docker -ProviderName DockerMsftProvider
    ```
-1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
+1. インストールが完了した後、再度、次のコマンドを実行して **SEA-SVR1** を再起動します。
 
    ```powershell
    Restart-Computer -Force
@@ -148,6 +172,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 #### <a name="task-2-install-and-run-a-windows-container"></a>タスク 2: Windows コンテナーをインストールして実行する
 
 1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
+
 1. **Windows PowerShell** コンソールで次のコマンドを実行し、インストールされた Docker のバージョンを確認します。
 
    ```powershell
@@ -179,6 +204,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
    ```powershell
    docker run --isolation=hyperv -d -t --name nano -p 80:80 nanoserver/iis 
    ```
+  >もし The container name "/nano" is already in use by container というエラーが出た場合は、**docker rm nano** を実行して、コンテナを削除してください。
 
    > **注**: docker コマンドでは、(ホスト オペレーティング システムの非互換性の問題に対処する) Hyper-V 分離モードのコンテナーをバックグラウンド サービスとして起動し (`-d`)、コンテナー ホストのポート 80 がコンテナーのポート 80 にマップされるようにネットワークが構成されます。 
 
