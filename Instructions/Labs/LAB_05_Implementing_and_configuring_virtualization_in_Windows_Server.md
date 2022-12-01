@@ -52,68 +52,49 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 #### <a name="task-1-create-a-hyper-v-virtual-switch"></a>タスク 1: Hyper-V 仮想スイッチを作成する
 
 1. **SEA-ADM1** で、**サーバー マネージャー**を開きます。 
-1. サーバー マネージャーで、**[すべてのサーバー]** を選択します。 
-1. [サーバー] リストで **SEA-SVR1** を選択し、状況依存のメニューを使用して、そのサーバーをターゲットとする **Hyper-V マネージャー**を起動します。 
-1. **Hyper-V マネージャー**で、**仮想スイッチ マネージャー**を使用して、**SEA-SVR1** に次の設定で仮想スイッチを作成します。
+1. サーバー マネージャーで、**[All Servers/すべてのサーバー]** を選択します。 
+1. [サーバー] リストで **SEA-SVR1** を右クリックして、**Hyper-V Manager**を起動します。 
+1. **Hyper-V Manager**で、**Virtual Switch Manager/仮想スイッチ マネージャー**を使用して、**SEA-SVR1** に次の設定で仮想スイッチを作成します。
 
-   - 名前: **Contoso Private Switch**
-   - 接続の種類: **プライベート ネットワーク**
+   - Name: **Contoso Private Switch**
+   - Connection Type: **Private Network**
 
 #### <a name="task-2-create-a-virtual-hard-disk"></a>タスク 2: 仮想ハード ディスクを作成する
 
-1. **SEA-ADM1** の Hyper-V マネージャーで、**[仮想ハード ディスクの新規作成ウィザード]** を使用して、**SEA-SVR1** に次の設定で新しい仮想ハード ディスクを作成します。 
+1. **SEA-ADM1** の Hyper-V マネージャーで、右側の **Actions** から **New** を選択します。
 
-   - ディスク フォーマット: **VHD**
-   - ディスクの種類: **差分**
-   - 名前: **SEA-VM1**
-   - 場所: **C:\Base**
-   - 親ディスク: **C:\Base\BaseImage.vhd**
+1. **Hard Disk** を選択し、次の設定で新しい仮想ハード ディスクを作成します。 
+
+   - Choose Disk Format: **VHD**
+   - Choose Disk Type: **Differencing**
+   - Spacify Name and Location - Name: **SEA-VM1**
+   - Spacify Name and Location - Location: **C:\Base**
+   - Configure Disk - Parent disk: **C:\Base\BaseImage.vhd**
 
 #### <a name="task-3-create-a-virtual-machine"></a>タスク 3: 仮想マシンを作成する
 
-1. **SEA-ADM1** の Hyper-V マネージャーで、**SVR1** に、次の設定で新しい仮想マシンを作成します。 
+1. **SEA-ADM1** の Hyper-V マネージャーで、右側の **Actions** から **New** を選択します。
 
-   - 名前: **SEA-VM1**
-   - 場所: **C:\Base**
-   - 世代: **第 1 世代**
-   - メモリ: **4096**
-   - ネットワーク: **Contoso Private Switch**
-   - ハード ディスク: **C:\Base\SEA-VM1.vhd**
+1. **Virtual Machine** を選択し、次の設定で新しい仮想ハード ディスクを作成します。 
+   - Name: **SEA-VM1**
+   - **Store the virtual machine in a different location** をチェックする
+   - Location: **C:\Base**
+   - 世代: **Generation 1**
+   - Assign Memory: **4096**
+   - Configure Networking - connection: **Contoso Private Switch**
+   - **Use an existing virtual hard disk** をチェック
+   - Location: **C:\Base\SEA-VM1.vhd**
 
 1. **SEA-VM1** の **[設定]** ウィンドウを開き、最大 RAM 値が **4096** の**動的メモリ**を有効にします。
-1. Hyper-V マネージャーを閉じます。
 
-#### <a name="task-4-manage-virtual-machines-using-windows-admin-center"></a>タスク 4: Windows Admin Center を使用して仮想マシンを管理する
-
-1. **SEA-ADM1** で、管理者として **Windows PowerShell** を起動します。
-
-   >**注**: **SEA-ADM1** にまだ Windows Admin Center をインストールしていない場合は、次の 2 つの手順を行います。
-
-1. **Windows PowerShell** コンソールで、次のコマンドを実行してから Enter キーを押し、最新バージョンの Windows Admin Center をダウンロードします。
-    
-   ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
-   ```
-1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
-    
-   ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
-   ```
-
-   > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
-
-1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
-1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
-
-   - ユーザー名: **CONTOSO\\Administrator**
-   - パスワード: **Pa55w.rd**
-
-1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。 
 1. **[ツール]** リストで、**[仮想マシン]** を選択し、**[要約]** ペインを確認します。
 1. Windows Admin Center を使用して、サイズが 5 GB の新しいディスクを作成します。
 1. Windows Admin Center を使用して **SEA-VM1** を起動してから、実行中の VM の統計情報を表示します。
 1. Windows Admin Center を使用して、**SEA-VM1** をシャットダウンします。
 1. **[ツール]** リストで、**[仮想スイッチ]** を選択し、既存のスイッチを特定します。
+
+
+
 
 ### <a name="exercise-1-results"></a>演習 1 の結果
 
