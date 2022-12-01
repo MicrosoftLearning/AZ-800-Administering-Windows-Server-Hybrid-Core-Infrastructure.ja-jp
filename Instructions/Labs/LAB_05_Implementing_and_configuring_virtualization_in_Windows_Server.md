@@ -79,22 +79,19 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
    - Name: **SEA-VM1**
    - **Store the virtual machine in a different location** をチェックする
    - Location: **C:\Base**
-   - 世代: **Generation 1**
+   - Generation: **Generation 1**
    - Assign Memory: **4096**
    - Configure Networking - connection: **Contoso Private Switch**
    - **Use an existing virtual hard disk** をチェック
    - Location: **C:\Base\SEA-VM1.vhd**
 
-1. **SEA-VM1** の **[設定]** ウィンドウを開き、最大 RAM 値が **4096** の**動的メモリ**を有効にします。
+1. Hyper-V Manager で、**SEA-VM1** を選択し、右側から **Settings** を選択
 
-1. **[ツール]** リストで、**[仮想マシン]** を選択し、**[要約]** ペインを確認します。
-1. Windows Admin Center を使用して、サイズが 5 GB の新しいディスクを作成します。
-1. Windows Admin Center を使用して **SEA-VM1** を起動してから、実行中の VM の統計情報を表示します。
-1. Windows Admin Center を使用して、**SEA-VM1** をシャットダウンします。
-1. **[ツール]** リストで、**[仮想スイッチ]** を選択し、既存のスイッチを特定します。
+1. **Memory** を選択して、**Enable Dynamic Memory** を有効にします。
 
+1. **SEA-VM1** を起動します。
 
-
+1. **SEA-VM1** をシャットダウンします。
 
 ### <a name="exercise-1-results"></a>演習 1 の結果
 
