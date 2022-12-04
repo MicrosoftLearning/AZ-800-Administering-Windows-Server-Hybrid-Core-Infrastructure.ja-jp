@@ -59,50 +59,69 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
 このタスクでは、Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化機能を有効にします。
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\\Administrator** としてサインインします。
+
 1. **SEA-ADM1** で Microsoft Edge を起動し、[Azure portal](https://portal.azure.com) に移動し、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
+
+以下の手順で、Microsoft Defender for Cloud のセキュリティを強化し、Microsoft Defender for Cloud エージェントの自動インストールを有効にします。
 
 >**注**: Azure サブスクリプションで Microsoft Defender for Cloud を既に有効にしている場合は、このタスクの残りのステップをスキップし、次に直接進みます。
 
 1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
-1. **[Microsoft Defender for Cloud \| の使用開始]** ページで、Microsoft Defender for Cloud のセキュリティを強化し、Microsoft Defender for Cloud エージェントの自動インストールを有効にしてください。
+
+1. **[Microsoft Defender for Cloud | はじめに]** ページで、**アップグレード** をクリックします。
+
+1. **エージェントのインストール** ページに移動し（表示されない場合は画面をリフレッシュしてください）、**エージェントのインストール** ボタンをクリックしてください。
+
+1. **Microsoft Defender for Cloud** ページで **環境設定** をクリックしてください。
+
+1. 画面に表示されているサブスクリプション（Azure Pass - Sponsorship）をクリックします。
+
+1. **設定|Defender プラン** の画面で、**すべてを有効にする** をクリックして、**保存** します。
+
+1. **自動プロビジョニング-拡張機能** をクリックして、**Azure VM のLog Analytics エージェント/Azure VM の Azure Monitor エージェント** が **オン** になっていることを確認してください。
 
 #### <a name="task-2-generate-an-arm-template-and-parameters-files-by-using-the-azure-portal"></a>タスク 2: Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する
 
-1. Azure portal から、次の設定を使用して新しい Azure VM を作成するプロセスをステップ実行します (それ以外はすべて既定値のままにします)。ただし、デプロイは行いません。
+1. Azure Portal で仮想マシンページに移動します。
+
+1. 次の設定を使用して新しい Azure VM を作成します (それ以外はすべて既定値のままにします)。ただし、デプロイは行いません。
 
    |設定|値|
    |---|---|
    |サブスクリプション|このラボで使用する Azure サブスクリプションの名前。|
    |リソース グループ|新しいリソース グループの名前 **AZ800-L0601-RG**|
    |仮想マシン名|**az800l06-vm0**|
-   |リージョン|Azure 仮想マシンをプロビジョニングできる Azure リージョンの名前を使用します|
+   |リージョン|**East US**|
    |可用性のオプション|インフラストラクチャの冗長性は必要ありません|
-   |Image|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
-   |Azure Spot インスタンス|いいえ|
+   |イメージ|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
+   |Azure Spot |いいえ|
    |サイズ|**Standard_D2s_v3**|
-   |ユーザー名|**学生**|
+   |ユーザー名|**student**|
    |パスワード|**Pa55w.rd1234**|
-   |パブリック受信ポート|None|
+   |パブリック受信ポート|なし|
    |既存の Windows Server ライセンスを使用しますか|いいえ|
    |OS ディスクの種類|**Standard HDD**|
-   |名前|**az800l06-vnet**|
+   |仮想ネットワークの名前|**az800l06-vnet**|
    |アドレス範囲|**10.60.0.0/20**|
    |サブネット名|**subnet0**|
    |サブネット範囲|**10.60.0.0/24**|
-   |パブリック IP|None|
+   |パブリック IP|なし|
    |NIC ネットワーク セキュリティ グループ|None|
-   |Accelerated Networking|Off|
+   |高速ネットワークを有効にする|Off|
    |この仮想マシンを既存の負荷分散ソリューションの後ろに配置しますか?|いいえ|
-   |ブート診断|**マネージド ストレージ アカウントで有効にする (推奨)**|
+   |Boot Diagnostics/ブート診断|**Enable with managed storage account/マネージド ストレージ アカウントで有効にする (推奨)**|
 
-1. **[仮想マシンの作成]** ページの **[確認と作成]** タブまで移動したら、タスク 3 に進みます。
+1. **[仮想マシンの作成]** ページの **[確認と作成]** ボタンをクリックしますが、**「作成」**はクリックせず、タスク 3 に進みます。
 
-   >**注**: 仮想マシンは作成しないでください。 この目的で、自動生成されたテンプレートを使用します。
+   >**注**: **仮想マシンは作成しないでください。 この目的で、自動生成されたテンプレートを使用します**。
 
 #### <a name="task-3-download-the-arm-template-and-parameters-files-from-the-azure-portal"></a>タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
 
-1. **[仮想マシンの作成]** ページの **[確認と作成]** タブから、自動化のためのテンプレートをダウンロードして、ラボ VM の **C:\\Labfiles\\Mod06** フォルダーにコピーします。
-1. Azure portal で、**[仮想マシンの作成]** ページを閉じます。
+1. **[仮想マシンの作成]** ページの **[確認と作成]** 画面の下にある **Automation のテンプレートをダウンロードする** をクリックして、**ダウンロード** をクリックしてダウンロードします。
+
+1. ダウンロードした template.zip を展開し、ラボ VM の **C:\\Labfiles\\Mod06** フォルダーに格納します。**C:\\Labfiles\\Mod06** が存在しない場合は作成してください。
+
+1. Azure portal の、**[仮想マシンの作成]** ページを閉じます。
 
 ## <a name="exercise-2-modifying-arm-templates-to-include-vm-extension-based-configuration"></a>演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
 
@@ -117,13 +136,15 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
 
 #### <a name="task-1-review-the-arm-template-and-parameters-files-for-azure-vm-deployment"></a>タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
 
-1. ダウンロードしたアーカイブの内容を **C:\\Labfiles\\Mod06** フォルダーに抽出します。
+1. **C:\\Labfiles\\Mod06** を開きます
+
 1. メモ帳で **template.json** ファイルを開き、内容を確認します。 メモ帳ウィンドウは開いたままにしておきます。
-1. メモ帳で **C:\\Labfiles\\Mod06\\parameters.json** ファイルを開き、確認して、メモ帳ウィンドウを閉じます。
+
+1. メモ帳で **C:\\Labfiles\\Mod06\\parameters.json** ファイルを開き、先ほど仮想マシンの作成画面で入力した内容が記載されていることを確認し、何も変更せずにメモ帳ウィンドウを閉じます。
 
 #### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
-1. ラボ VM の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
+1. ラボ VM の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の次の行に以下のコードを挿入します。
 
    >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
 
@@ -153,7 +174,7 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
 
 ### <a name="scenario"></a>シナリオ
 
-ARM テンプレートが構成された状態で、概念実証 Azure サブスクリプションへのデプロイを実行して、その機能を確認します。
+ARM テンプレートが構成された状態で、Azure サブスクリプションへのデプロイを実行して、その機能を確認します。
 
 この演習の主なタスクは次のとおりです。
 
@@ -162,16 +183,20 @@ ARM テンプレートが構成された状態で、概念実証 Azure サブス
 
 #### <a name="task-1-deploy-an-azure-vm-by-using-an-arm-template"></a>タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
 
-1. **SEA-ADM1** の Azure portal で、**[カスタム デプロイ]** ページを参照し、**[エディターで独自のテンプレートを作成する]** オプションを選択します。
-1. テンプレート ファイルとパラメーター ファイルを **[カスタム デプロイ]** ページに読み込みます。
+1. **SEA-ADM1** の Azure portal で、**[カスタムテンプレートのデプロイ]** ページに移動します。
+
+1. **ファイルの読み込み** をクリックして、template.json を読み込み、保存します。
+
+1. **パラメーターの編集** ボタンをクリックし、**ファイルの読み込み** をクリックして、parameters.json を読み込み保存します。
+
 1. 次の設定でテンプレートをデプロイし、他のすべての設定は既定値のままにします。
 
    |設定|値|
    |---|---|
    |サブスクリプション|このラボで使用している Azure サブスクリプションの名前|
    |リソース グループ|**AZ800-L0601-RG**|
-   |リージョン|Azure VM をプロビジョニングできる Azure リージョンの名前|
-   |管理パスワード|**Pa55w.rd1234**|
+   |リージョン|East US|
+   |Admin Password/管理パスワード|**Pa55w.rd1234**|
 
    >**注**: デプロイには約 10 分かかります。
 
