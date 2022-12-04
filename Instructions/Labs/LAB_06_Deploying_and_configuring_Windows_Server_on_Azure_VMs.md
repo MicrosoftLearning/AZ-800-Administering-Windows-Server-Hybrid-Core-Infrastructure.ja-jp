@@ -294,7 +294,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 1. Azure Microsoft Defender for Cloud の状態を確認する。
 1. Just-In-Time VM アクセスの設定を確認する。
 
-**これ以降の演習ができるまでに、ここまでの作業が終了後、１日程度が必要です**
+**これ以降の演習ができるまでに、ここまでの作業が終了後、１時間程度必要です**
 
 #### <a name="task-1-verify-the-status-of-azure-microsoft-defender-for-cloud"></a>タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
 
@@ -306,8 +306,11 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
 #### <a name="task-2-review-the-just-in-time-vm-access-settings"></a>タスク 2:Just-In-Time VM アクセスの設定を確認する
 
-1. Azure portal で、**[Microsoft Defender for Cloud\| ワークロード保護]** ページを参照し、**[Just In Time VM アクセス]** 設定を確認します。
-1. **[Just In Time VM アクセス]** ページで、**[構成済み]**、**[未構成]**、**[サポート対象外]** のタブを確認します。
+1. Azure portal で、**[Microsoft Defender for Cloud]** ページを表示します。
+
+1. **ワークロード保護** ページを参照し、**[Just In Time VM アクセス]** をクリックします。
+
+1. **[Just In Time VM アクセス]** ページで、**[構成済み]**、**[構成されていません]**、**[サポートなし]** のタブを確認します。**構成されていません**タブに、作成した **az800l06-vm0** が表示されていることを確認します。
 
    >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
 
@@ -316,14 +319,25 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 >**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
 
 1. Azure portal で、**[az800l06-vm0]** ページに戻ります。
+
 1. **[az800l06-vm0]** ページで、**[構成]** を選択します。 
-1. **[az800l06-vm0 \| 構成]** ページで、 **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Azure Security Center を開く]** リンクを選択します。
+
+1. **[Just-In-Time VM を有効にする]** を選択し、 **[Microsoft Defender for Cloud を開く]** リンクを選択します。
+
 1. **[Just In Time VM アクセス]** ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
+
+1. az800l06-vm0 の右端にある **･･･** をクリックし、**Edit** を選択します。
+
+1. 3389 ポートが 3 時間 許可されていることを確認して、ページを閉じてください。
 
 #### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する
 
-1. Azure portal の **[az800l06-vm0]** ページから、JIT VM アクセスを要求します。
-1. 要求が承認されると、ターゲット Azure VM へのリモート デスクトップ セッションが開始します。
+1. **[az800l06-vm0]** の概要ページで **接続** をクリックして、**RDP** を選択します。
+
+1. **アクセス権の要求** をクリックして、JIT VM アクセスを要求します。
+
+1. 要求が承認されたら、RDPファイルをダウンロードして、リモート デスクトップ セッションに接続します。
+
 1. 資格情報のプロンプトが表示されたら、次の値を指定します。
    
    |設定|値|
