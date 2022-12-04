@@ -208,30 +208,7 @@ ARM テンプレートが構成された状態で、Azure サブスクリプシ�
 1. **az800l06-vm0** Azure VM ページを参照し、**customScriptExtension** が正常にプロビジョニングされたことを確認します。
 1. **AZ800-L0601-RG** リソース グループ ページに戻り、そのデプロイを確認し、デプロイに使用された **Microsoft.Template** がデプロイに使用したテンプレートと一致することを確認します。
 
-## <a name="exercise-4-configuring-administrative-access-to-azure-vms-running-windows-server"></a>演習 4: Windows Server を実行している Azure VM への管理アクセスの構成
-
-### <a name="scenario"></a>シナリオ
-
-Azure VM が Windows Server を実行している状態で、オンプレミスの管理ワークステーションからリモートで管理する機能をテストする必要があります。
-
-この演習の主なタスクは次のとおりです。
-
-1. Azure Microsoft Defender for Cloud の状態を確認する。
-1. Just-In-Time VM アクセスの設定を確認する。
-
-#### <a name="task-1-verify-the-status-of-azure-microsoft-defender-for-cloud"></a>タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
-
-1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
-1. Microsoft Defender for Cloud のセキュリティ強化機能が有効になっていることを確認します。
-
-#### <a name="task-2-review-the-just-in-time-vm-access-settings"></a>タスク 2:Just-In-Time VM アクセスの設定を確認する
-
-1. Azure portal で、**[Microsoft Defender for Cloud\| ワークロード保護]** ページを参照し、**[Just In Time VM アクセス]** 設定を確認します。
-1. **[Just In Time VM アクセス]** ページで、**[構成済み]**、**[未構成]**、**[サポート対象外]** のタブを確認します。
-
-   >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
-
-## <a name="exercise-5-configuring-windows-server-security-in-azure-vms"></a>演習 5: Azure VM での Windows Server のセキュリティの構成
+## <a name="exercise-5-configuring-windows-server-security-in-azure-vms"></a>演習 4: Azure VM での Windows Server のセキュリティの構成
 
 ### <a name="scenario"></a>シナリオ
 
@@ -246,7 +223,9 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
 #### <a name="task-1-create-and-configure-an-nsg"></a>タスク 1: NSG を作成して構成する
 
-1. Azure portal で、次の設定で NSG を作成し、他のすべての設定は既定値のままにします。
+1. Azure portal で、NSG（ネットワークセキュリティグループ）画面に移動します。
+
+1. 次の設定で NSG を作成し、他のすべての設定は既定値のままにします。
 
    |設定|値|
    |---|---|
@@ -255,32 +234,82 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
    |名前|**az800l06-vm0-nsg1**|
    |リージョン|Azure VM **az800l06-vm0** をプロビジョニングした Azure リージョンの名前|
 
-1. 次の設定で、新しく作成されたネットワーク セキュリティ グループに受信セキュリティ規則を追加します。他のすべての設定は既定値のままにします。
+1. 次の設定で、新しく作成されたネットワーク セキュリティ グループに **受信セキュリティ規則** を追加します。他のすべての設定は既定値のままにします。
 
    |設定|値|
    |---|---|
-   |source|**[任意]**|
-   |Source port ranges|*|
-   |到着地|**[任意]**|
+   |ソース|**Any**|
+   |ソースポート範囲|*|
+   |宛先|**Any**|
    |サービス|**HTTP**|
    |アクション|**許可**|
-   |Priority|**300**|
+   |優先度|**300**|
    |名前|**AllowHTTPInBound**|
 
 #### <a name="task-2-configure-inbound-http-access-to-an-azure-vm"></a>タスク 2: Azure VM への受信 HTTP アクセスを構成する
 
-1. Azure portal で **az800l06-vm0** Azure VM にアタッチされているネットワーク インターフェイスのページを参照し、前のタスクで作成したネットワーク セキュリティ グループに関連付けます。
-1. Azure portal で **az800l06-vm0** Azure VM にアタッチされているネットワーク インターフェイスの IP 構成を参照し、それを次の設定で新しいパブリック IP アドレスと関連付け、それ以外はすべて既定値のままにします。
+1. Azure Portal で 仮想マシンの画面に移動します。
+
+1. 先ほど作成した仮想マシン **az800l06-vm0** を選択します。
+
+1. **ネットワーク** を選択します。
+
+1. **ネットワークインターフェース** の横に表示されているネットワークインターフェースをクリックします。
+
+1. **ネットワークセキュリティグループ** を選択し、先ほど作成した **az800l06-vm0-nsg1** を選択して **保存** します。
+
+1. **IP 構成** を選択します。
+
+1. **ipconfig1** をクリックします。
+
+1. パブリックIPアドレスで **関連付け** を選択します。
+
+1. パブリックIPアドレスの下に表示されている **新規作成** をクリックして、以下の値でパブリックIPアドレスを新規に作成し、関連付けて、**保存** します。
 
    |設定|値|
    |---|---|
    |名前|**az800l06-vm0-pip1**|
    |SKU|**Standard**|
 
-1. ラボ VM からブラウザー タブを開き、新しく作成されたパブリック IP アドレスを参照し、**Hello World from az800l06-vm0** のメッセージがページに表示されていることを確認します。
-1. ラボ VM から同じ IP アドレスへのリモート デスクトップ接続を確立し、接続試行が失敗することを確認します。
+1. 仮想マシンの概要ページで、パブリックIPアドレスを確認します。
+
+1. 新しいブラウザー タブを開き、確認したパブリック IP アドレスに接続し、**Hello World from az800l06-vm0** がページに表示されていることを確認します。
+
+1. 仮想マシンの概要ページで **接続** をクリックして、**RDP** を選択します。
+
+1. **RDPファイルのダウンロード** をクリックして、rdp ファイルを開き、リモートデスクトップでの接続を試みます。
+
+3. 接続試行が失敗することを確認します。
 
    >**注**: Azure VM は現在、TCP ポート 3389 経由でインターネットからアクセスできないので、これは想定されています。 TCP ポート 80 経由でのみアクセスできます。
+
+## <a name="exercise-4-configuring-administrative-access-to-azure-vms-running-windows-server"></a>演習 5: Windows Server を実行している Azure VM への管理アクセスの構成
+
+### <a name="scenario"></a>シナリオ
+
+Azure VM が Windows Server を実行している状態で、オンプレミスの管理ワークステーションからリモートで管理する機能をテストします。
+
+この演習の主なタスクは次のとおりです。
+
+1. Azure Microsoft Defender for Cloud の状態を確認する。
+1. Just-In-Time VM アクセスの設定を確認する。
+
+**これ以降の演習ができるまでに、ここまでの作業が終了後、１日程度が必要です**
+
+#### <a name="task-1-verify-the-status-of-azure-microsoft-defender-for-cloud"></a>タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
+
+1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
+
+1. **インベントリ** を選択して、作成した仮想マシンが表示されていることを確認します。
+
+  >Defender によって仮想マシンが検出されると、ここに VM が表示されます。**監視エージェント** 列を確認すると、エージェントがインストール済みかどうかを確認できます。
+
+#### <a name="task-2-review-the-just-in-time-vm-access-settings"></a>タスク 2:Just-In-Time VM アクセスの設定を確認する
+
+1. Azure portal で、**[Microsoft Defender for Cloud\| ワークロード保護]** ページを参照し、**[Just In Time VM アクセス]** 設定を確認します。
+1. **[Just In Time VM アクセス]** ページで、**[構成済み]**、**[未構成]**、**[サポート対象外]** のタブを確認します。
+
+   >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
 
 #### <a name="task-3-trigger-re-evaluation-of-the-jit-status-of-an-azure-vm"></a>タスク 3: Azure VM の JIT 状態の再評価をトリガーする
 
@@ -299,7 +328,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
    
    |設定|値|
    |---|---|
-   |ユーザー名|**学生**|
+   |ユーザー名|**student**|
    |パスワード|**Pa55w.rd1234**|
 
 1. Azure VM で実行されているオペレーティング システムがリモート デスクトップ経由で正常にアクセスできることを確認し、リモート デスクトップ セッションを閉じます。
