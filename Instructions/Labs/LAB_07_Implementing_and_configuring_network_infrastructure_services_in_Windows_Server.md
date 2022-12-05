@@ -67,6 +67,8 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
+1. SEA-ADM1 を再起動します。再起動には少し時間がかかります。
+
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。
 
    >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
@@ -76,20 +78,31 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
-1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
-1. **[ツール]** リストで、 **[役割と機能]** を使用して、**SEA-SVR1** に DHCP 役割をインストールします。
-1. **[ツール]** リストで、**DHCP** ツールを参照し、**DHCP PowerShell** ツールをインストールします。 
+1. Windows Admin Center で、**+Add** をクリックして、**Servers** で **Add** をクリックし、**sea-svr1.contoso.com** への接続を追加し、ユーザー名 **CONTOSO\\Administrator** パスワード **Pa55w.rd** を使用して **Add with credentials** をクリックします。
+
+1. **Add** をクリックしてサーバーを追加します。
+
+1. **SEA-SVR1** を選択します。
+
+1. **[Tools]** リストで、 **[Roles & Features/役割と機能]** を使用して、**SEA-SVR1** に **DHCP Server** 役割をインストールします。
+
+1. **[Tools]** リストで **Overview** を選択し、**Restart** をクリックして SEA-SVR1 を再起動します。
+
+1. Windows Admin Center で再度 SEA-SVR1 に接続します。
+
+1. **[Tools]** リストで、**DHCP** ツールを参照し、**Install** をクリックして、**DHCP PowerShell** ツールをインストールします。 
 
    > **注**: **sea-svr1.contoso.com** の [ツール] ペインで **DHCP** エントリを利用できない場合は、**Microsoft Edge** ページを更新して、もう一度やり直してください。
 
 ### <a name="task-2-authorize-the-dhcp-server"></a>タスク 2: DHCP サーバーを承認する
 
 1. **SEA-ADM1** で、サーバー マネージャーを開きます。
-1. サーバー マネージャーで、 **[通知]** を開き、 **[DHCP 構成を完了する]** を開いてから、既定のオプションを使用して **[DHCP インストール後の構成ウィザード]** を完了します。
+
+1. サーバー マネージャーで、 **[通知（赤い旗マーク）]** を開き、 **[Complete DHCP configuration/DHCP 構成を完了する]** を開いてから、既定のオプションを使用して **Commit** をクリックして、 **[DHCP インストール後の構成ウィザード]** を完了します。
 
 ### <a name="task-3-create-a-scope"></a>タスク 3: スコープを作成する
 
-1. **SEA-ADM1**  の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**DHCP** ツールを使用して、次の設定で新しいスコープを作成します。
+1. **SEA-ADM1**  の Windows Admin Center で、**sea-svr1.contoso.com** に接続して、**DHCP** ツールを使用して、次の設定で新しいスコープを作成します。
 
    - プロトコル: **IPv4**
    - 名前: **ContosoClients**
@@ -99,35 +112,62 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
    - ルーター (デフォルト ゲートウェイ): **10.100.150.1**
    - DHCP クライアントのリース期間: **4 日**
 
-1. サーバー マネージャーの **[ツール]** メニューで、 **[DHCP 管理コンソール]** を開きます。
-1. **[DHCP 管理コンソール]** で、すべての承認済みサーバー (**172.16.10.12** および **SEA-DC1.contoso.com**) を追加します。
-1. **[DHCP 管理コンソール]** で、DHCP サーバー **172.16.10.12** ノードを参照し、**ContosoClients** スコープで、値が **172.16.10.10** のスコープ オプション **006 DNS サーバー**を追加します。
+1. サーバー マネージャーの **[Tools/ツール]** メニューで、 **[DHCP 管理コンソール]** を開きます。
+
+1. **[DHCP 管理コンソール]** で、**This authorized DHCP server** から **SEA-DC1.contoso.com** と  **SEA-SVR1.contoso.com** を追加します。
+
+1. **[DHCP 管理コンソール]** で、DHCP サーバー **SEA-SVR1.contoso.com** ノードを参照し、**ContosoClients** スコープを展開します。
+
+1. **Scope Options** をクリックします。
+
+1. **Scope Options** を右クリックして、**Configure Options** を選択します。
+
+1. **006 DNS Servers** をチェックして、IP Address に **172.16.10.10** を **Add** して **OK** をクリックします。
 
 ### <a name="task-4-configure-dhcp-failover"></a>タスク 4: DHCP フェールオーバーを構成する
 
-1. **SEA-ADM1** の **DHCP** 管理コンソールで、DHCP サーバー **172.16.10.12** の **IPv4** ノードを参照し、次の設定を使用して **SEA-DC1.contoso.com** で **ContosoClients** スコープのフェールオーバーを構成します。
+1. **SEA-ADM1** の **DHCP** 管理コンソールで、DHCP サーバー **SEA-SVR1.contoso.com** の **IPv4** ノードを右クリックして、**Configure Failover** を選択します。
 
-   - リレーションシップ名: **SEA-SVR1 から SEA-DC1**
-   - クライアントの最大リード タイム: **1 時間**
-   - モード: **ホット スタンバイ**
-   - パートナー サーバーの役割: **スタンバイ**
-   - スタンバイ サーバー用に予約されているアドレス: **5%**
-   - 状態の切り替え間隔: **無効**
-   - メッセージ認証を有効にする: **有効**
-   - 共有シークレット: **DHCP フェールオーバー**
+1. Configure Failover ウィザードが起動するので、以下の設定で、**SEA-DC1.contoso.com** との **ContosoClients** スコープのフェールオーバースコープを構成します。
 
-1. **SEA-SVR1** のスコープが 1 つだけであることを確認します。
-1. **SEA-DC1** のスコープが 2 つになっていることを確認します。
-1. **SEA-ADM1** の **DHCP** 管理コンソールで、DHCP サーバー **SEA-DC1.contoso.com** の **IPv4** ノードを参照し、既存のフェールオーバー リレーションシップの設定を使用して、**172.16.10.12** で **Contoso** スコープのフェールオーバーを構成します。
-1. 両方のスコープが **172.16.10.12** (**SEA-SVR1**) の **IPV4** ノード内に表示されるようになったことを確認します。
+   - Patner Server : **SEA-DC1.contoso.com**
+   - Relationship Name/リレーションシップ名 : **Hot standby/ホット スタンバイ**
+   - Role of Parner Server/パートナー サーバーの役割: **スタンバイ**
+   - Addresses reserved for standby server/スタンバイ サーバー用に予約されているアドレス: **5%**
+   - State Switchover Interval/状態の切り替え間隔: **無効**
+   - Enable Message Authentication/メッセージ認証を有効にする: **有効**
+   - Shared Secret/共有シークレット: **DHCP-Failover**
+
+1. **SEA-SVR1** にはスコープが 1 つだけであることを確認します。
+
+1. **SEA-DC1** 側のスコープが 2 つになっていることを確認します。
+
+1. 同様の手順で、**SEA-DC1.contoso.com** と **SEA-SVR1** の間で、**172.16.10.12** のフェールオーバーを構成します。
+
+1. 両方のスコープが **SEA-SVR1** の **IPV4** ノード内に表示されるようになったことを確認します。
 
 ### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
 
-1. **SEA-ADM1** で、IP 構成を静的から動的に割り当てられるように変更します。
-1. 結果の IP 構成を調べ、DHCP リースが **SEA-SVR1 (172.16.10.12)** から取得されたことを確認します。
-1. **SEA-ADM1** の **DHCP 管理コンソール**で、両方の DHCP サーバーの **Contoso** スコープに **SEA-ADM1** のリースが一覧表示されていることを確認します。
-1. **SEA-ADM1** で、**DHCP 管理コンソール**を使用して、**SEA-SVR1 (172.16.10.12)** 上の **DHCP** サービスを停止します。
-1. **SEA-ADM1** のイーサネット ネットワーク接続を無効にしてから再度有効にして、リースを強制的に更新します。
+1. **SEA-ADM1** で Settings を開きます
+
+1. 検索ボックスに **IP** を入力し、**Ethernet Settings** を選択します。
+
+1. **Contoso.com** をクリックします。
+
+1. **IP Settings** の **Edit** をクリックします。
+
+1. **Edit IP settings** を **Automatic（DHCP）** に変更します。
+
+1. コマンドプロンプトで、**ipconfig /renew** を実行し、アドレスを再取得します。
+
+1. **ipconfig /all** を実行して、DHCP Server が **SEA-SVR1 (172.16.10.12)** であることを確認します。
+
+1. **DHCP 管理コンソール**で、**Address Leases** を参照して、両方の DHCP サーバーの **Contoso** スコープに **SEA-ADM1** のリースが一覧表示されていることを確認します。
+
+1. **DHCP 管理コンソール**を使用して、**SEA-SVR1 (172.16.10.12)** 上の **DHCP** サービスを停止します。
+
+1. **SEA-ADM1** のコマンドプロンプトで、**ipconfig /renew** を実行して、リースを強制的に更新します。
+
 1. **SEA-ADM1** で、同じ DHCP リースが **SEA-DC1 (172.16.10.10)** から取得されていることを確認します。
 
 ## <a name="exercise-2-deploying-and-configuring-dns"></a>演習 2: DNS の展開と構成
