@@ -187,22 +187,23 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
 
 ### <a name="task-1-install-the-dns-role"></a>タスク 1: DNS 役割をインストールする
 
-1. **SEA-ADM1** で、**sea-svr1.contoso.com** に接続されている Windows Admin Center の **[ツール]** リストの **[役割と機能]** を使用して、**SEA-SVR1** に DNS 役割をインストールします。
-1. **[ツール]** リストで、**DNS** ツールを参照し、**DNS PowerShell** ツールをインストールします。 
+1. **SEA-ADM1** で、**sea-svr1.contoso.com** に接続されている Windows Admin Center の **[Tools]** リストの **[Roles & Features]** を使用して、**SEA-SVR1** に DNS 役割をインストールします。
+
+1. **[Tools]** リストで、**DNS** ツールを参照し、**DNS PowerShell** ツールをインストールします。 
 
    > **注**: **sea-svr1.contoso.com** の **[ツール]** リストで **DNS** エントリを利用できない場合は、**Microsoft Edge** ページを更新して、もう一度試してください。
 
 ### <a name="task-2-create-a-dns-zone"></a>タスク 2: DNS ゾーンを作成する
 
-1. **SEA-ADM1**  の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**DNS** ツールを使用して、次の設定で新しい DNS ゾーンを作成します。
+1. **SEA-ADM1**  の Windows Admin Center で、**sea-svr1.contoso.com** に接続して、**DNS** ツールを使用して、次の設定で新しい DNS ゾーンを作成します。
 
    - ゾーンの種類: **プライマリ**
    - ゾーン名: **TreyResearch.net**
-   - ゾーン ファイル: **新しいファイルを作成**
+   - ゾーン ファイル: **Create a new file/新しいファイルを作成**
    - ゾーン ファイル名: **TreyResearch.net.dns**
    - 動的更新: **動的更新を許可しない**
 
-1. Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**DNS** ツールを使用して、次の設定で **TreyResearch.net** ゾーンに新しい DNS レコードを作成します。
+1. 作成したゾーンを選択し、下の画面で **Create a new DNS record** をクリックして、以下の設定を使用して **TreyResearch.net** ゾーンに新しい DNS レコードを作成します。
 
    - DNS レコードの種類: **ホスト (A)**
    - レコード名: **TestApp**
@@ -217,22 +218,28 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
 
 ### <a name="task-3-configure-forwarding"></a>タスク 3: 転送を構成する
 
-1. **SEA-ADM1** で、サーバー マネージャーの **[ツール]** メニューから、**DNS マネージャー コンソール**を開きます。
+1. **SEA-ADM1** で、サーバー マネージャーの **[Tools/ツール]** メニューから、**DNS マネージャー コンソール**を開きます。
+
 1. **[DNS マネージャー]** で、**SEA-SVR1.contoso.com** に接続します。
-1. **SEA-SVR1.contoso.com** のプロパティの **[フォワーダー]** タブで、フォワーダーとして **131.107.0.100** を構成します。
+
+1. **SEA-SVR1.contoso.com** を右クリックしてプロパティを開き、**[Forwarders/フォワーダー]** タブで、フォワーダーとして **131.107.0.100** を構成します。
 
 ### <a name="task-4-configure-conditional-forwarding"></a>タスク 4: 条件付き転送を構成する
 
-1. **SEA-ADM1** の **[DNS マネージャー]** で、**SEA-SVR1.contoso.com** に接続している間に、**SEA-DC1.contoso.com** (**172.16.10.10**) に要求を転送する **Contoso.com** の新しい条件付きフォワーダーを作成します。
-1. **SEA-ADM1** の **Windows PowerShell** コンソールで、次のコマンドを実行して条件付きフォワーダーが動作していることを確認します。
+1. **SEA-ADM1** の **[DNS マネージャー]** で、**SEA-SVR1.contoso.com** に接続し、**Conditional Forwarders** を右クリックして **New Conditional Forwarder** を選択します。
+
+1. ドメイン名に  **Contoso.com** を指定し、IP アドレスに **172.16.10.10** を指定して保存します。
+
+1. **SEA-ADM1** の **Windows PowerShell** コンソールで、次のコマンドを実行して条件付きフォワーダーが動作していることを確認します。このコマンドでは、Contoso.com の名前解決リクエストを SEA-SVR1 に送信し、それが条件付きフォーワーダーによって 172.16.10.10. に転送されることを確認します。
 
     ```powershell
-    Resolve-DnsName -Server sea-svr1.contoso.com -Name sea-dc1.contoso.com
+    Resolve-DnsName -Server sea-svr1.contoso.com -Name sea-svr3.contoso.com
     ```
 
 ### <a name="task-5-configure-dns-policies"></a>タスク 5: DNS ポリシーを構成する
 
-1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、 **[ツール]** リストの **PowerShell** を使用して PowerShell リモート処理セッションを確立します。
+1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続して、 **[Tools]** リストの **PowerShell** を使用して PowerShell リモート処理セッションを確立します。パスワードは **Pa55w.rd** を指定します。
+
 1. **Windows PowerShell** プロンプトで、次のコマンドを実行して本社のサブネットを作成します。
 
     ```powershell
@@ -259,8 +266,7 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
 
 ### <a name="task-6-verify-dns-policy-functionality"></a>タスク 6: DNS ポリシー機能を確認する
 
-1. **SEA-ADM1** の **Windows PowerShell** コンソールで、`ipconfig` を実行して、**SEA-ADM1** が **HeadOfficeSubnet (172.16.10.0)** 上にあることを確認します。
-1. **Windows PowerShell** コンソールで、次のコマンドを実行して DNS ポリシーをテストします。
+1. **SEA-ADM1** 上で **Windows PowerShell** を起動し、コンソールで、次のコマンドを実行して DNS ポリシーをテストします。
 
     ```powershell
     Resolve-DnsName -Server sea-svr1.contoso.com -Name testapp.treyresearch.net
@@ -268,12 +274,18 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
 
    > **注**: 名前が、**HeadOfficePolicy** で構成された IP アドレス **172.30.99.100** に解決されることを確認します。
 
-1. **SEA-ADM1** に割り当てられた IP アドレスを **172.16.10.11** から、**HeadOfficeSubnet** の IP アドレス範囲外の IP アドレス (**172.16.11.11**) に変更します。
+1. **SEA-ADM1** に割り当てられた IP アドレスを、**HeadOfficeSubnet** の 範囲外の以下の値に変更します。
+
+  - IP アドレス : **172.16.11.11**
+  - サブネットマスク : **255.255.0.0**
+  - デフォルトゲートウェイ : **172.16.10.1**
+  - DNSサーバー : **172.16.10.10**
+
 1. **Windows PowerShell** コンソールで、次のコマンドを実行して DNS ポリシーをテストします。
 
     ```powershell
     Resolve-DnsName -Server sea-svr1.contoso.com -Name testapp.treyresearch.net
     ```
-   > **注**: 名前が **172.30.99.234** に解決されることを確認します。 **SEA-ADM1** の IP アドレスが **HeadOfficeSubnet** 内に存在しなくなったため、これは想定内です。 `testapp.treyresearch.net` をターゲットとする **(172.16.10.0/24)** の **HeadOfficeSubnet** からの DNS クエリは、**172.30.99.100** に解決されます。 `testapp.treyresearch.net` をターゲットとするこのサブネット外からの DNS クエリは、**172.30.99.234** に解決されます。
+   > **注**: 名前が **172.30.99.234** に解決されることを確認します。 これは、**SEA-ADM1** の IP アドレスが **HeadOfficeSubnet** 内に存在しなくなったためです。 `testapp.treyresearch.net` をターゲットとする **HeadOfficeSubnet** からの DNS クエリは、**172.30.99.100** に解決されます。 `testapp.treyresearch.net` をターゲットとする **HeadOfficeSubnet** 外からの DNS クエリは、**172.30.99.234** に解決されます。
 
 1. **SEA-ADM1** の IP アドレスを元の値に戻します。
