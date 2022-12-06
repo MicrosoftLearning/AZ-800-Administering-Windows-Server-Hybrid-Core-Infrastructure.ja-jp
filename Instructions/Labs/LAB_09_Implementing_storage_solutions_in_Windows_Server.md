@@ -54,39 +54,68 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 #### <a name="task-1-install-the-data-deduplication-role-service"></a>タスク 1: データ重複除去役割サービスをインストールする
 
 1. **SEA-ADM1** で、**サーバー マネージャー**を使用して **SEA-SVR3** にデータ重複除去役割サービスをインストールします。
-1. **SEA-ADM1** で、**Users** グループに**読み取り**アクセス許可を付与して **C:\Labfiles** フォルダーを共有します。
-1. **SEA-SVR3** のコンソール セッションに切り替え、必要に応じて、**Pa55w.rd** のパスワードを使用して **CONTOSO\\Administrator** としてサインインします。
-1. **SEA-SVR3** で **Windows PowerShell** セッションを開始し、**Windows PowerShell** コンソールで次のコマンドを実行して、ReFS でフォーマットされ、ドライブ文字 **M** が割り当てられたボリュームを作成します。
+
+    **FIle and Storage Services** - **File and iSCSI Services** - **Data Duplication**
+
+1. **SEA-ADM1** で、**C:\Labfiles** フォルダーを作成します。
+
+1. コマンドプロンプトを起動します。
+
+1. コマンドプロンプトで、C:\Labfiles に移動します。
+
+1. 以下のコマンドを使用して、LabFilesにファイルをダウンロードします。
+
+    ```
+    git clone https://github.com/MicrosoftLearning/AZ-800-Administering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp.git
+    ```
+
+1. 作成した **C:\Labfiles** を共有し、**Users** グループに**読み取り**アクセス許可を付与します。
+
+1. **SEA-SVR3** サーバーに切り替えて、必要に応じて、**Pa55w.rd** のパスワードを使用して **CONTOSO\\Administrator** としてサインインします。
+
+1. **SEA-SVR3** で 15 を選択して**Windows PowerShell** セッションを開始し、**Windows PowerShell** コンソールで次のコマンドを実行して、新しいボリュームを作成し、ReFS でフォーマットし、ドライブ文字 **M** を割り当てます。
 
    ```powershell
    Get-Disk
+   ```
+   ```
    Initialize-Disk -Number 1
+   ```
+   ```
    New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter M
+   ```
+   ```
    Format-Volume -DriveLetter M -FileSystem ReFS
    ```
+
 1. **SEA-SVR3** の **Windows PowerShell** コンソールで、次のコマンドを入力して、**SEA-ADM1** から重複除去するサンプル ファイルを作成するスクリプトをコピーして実行し、結果を確認します。
 
    ```powershell
    New-PSDrive –Name 'X' –PSProvider FileSystem –Root '\\SEA-ADM1\Labfiles'
    New-Item -Type Directory -Path 'M:\Data' -Force
-   Copy-Item -Path X:\Lab09\CreateLabFiles.cmd -Destination M:\Data\ -PassThru
+   Copy-Item -Path X:\AZ-800-Administering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\Allfiles\Labfiles\Lab09\CreateLabFiles.cmd -Destination M:\Data\ -PassThru
    Start-Process -FilePath M:\Data\CreateLabFiles.cmd -PassThru
    Set-Location -Path M:\Data
    Get-ChildItem -Path .
    Get-PSDrive -Name M
    ```
 
-   > **注**: ドライブ **M** の空き領域を記録しておきます。
+1. 以下のコマンドで、ドライブ **M** の空き領域（**SizeRemaining**)を記録しておきます。
+
+   ```powershell
+   Get-Volume
+   ```
 
 #### <a name="task-2-enable-and-configure-data-deduplication"></a>タスク 2: データ重複除去を有効にして構成する
 
 1. **SEA-ADM1** へのコンソール セッションに切り替えます。
-1. **サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** インターフェイスを使用して、**SEA-SVR3** 上のディスクを表示します。
-1. 次の設定を使用して、**SEA-SVR3** 上のディスク番号 **1** の **M** ボリュームでデータ重複除去を有効にします。
 
-   - 重複除去オプション: **汎用ファイル サーバー**
-   - 次の期間経過したファイルを重複除去の対象とする (日数): **0**
-   - スループットの最適化を有効にする: オン
+1. **サーバー マネージャー**の **[File and Storage Services/ファイル サービスと記憶域サービス]** インターフェイスで、**Volumes** - **Disks** を使用して、**SEA-SVR3** 上のディスク一覧を表示します。
+
+1. **SEA-SVR3** 上のディスク番号 **1** を選択し、**Volumes** に表示される **M** ボリュームを右クリックして **Configure Data Deduplication** を選択し、以下の通り設定します。
+
+   - Data deduplication/重複除去オプション: **General purpose file server/汎用ファイル サーバー**
+   - Deduplicate files older than/次の期間経過したファイルを重複除去の対象とする (日数): **0**
 
 #### <a name="task-3-test-data-deduplication"></a>タスク 3: データ重複除去をテストする
 
@@ -108,18 +137,21 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
+
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
    - ユーザー名: **CONTOSO\\Administrator**
    - パスワード: **Pa55w.rd**
 
 1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
+
 1. **sea-svr3.contoso.com** に接続している間に、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。
 
    ```powershell
    Start-DedupJob -Volume M: -Type Optimization –Memory 50
    ```
 1. **SEA-SVR3** へのコンソール セッションに切り替えます。
+
 1. **SEA-SVR3** の **Windows PowerShell** プロンプトで次のコマンドを実行して、重複除去されているボリューム上で使用可能なスペースを確認します。
 
    ```powershell
