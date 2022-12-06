@@ -126,7 +126,7 @@ lab:
     | Virtual network/リモート仮想ネットワーク: 仮想ネットワーク | **az800l08-vnet1** |
     | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **Allow/許可 (既定)** |
     | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **Allow/許可 (既定)** |
-    | 仮想ネットワーク ゲートウェイ | **なし (既定値)** |
+    | [Virtual network gateway or Route Server](仮想ネットワーク ゲートウェイ) | **None/なし (既定値)** |
 
     >**注**: 操作が完了するまで待ちます。
 
@@ -138,27 +138,30 @@ lab:
 
     | 設定 | 値 |
     | --- | --- |
-    | この仮想ネットワーク: ピアリング リンク名 | **az800l08-vnet0_to_az800l08-vnet2** |
+    | [This virtual network peering link name](この仮想ネットワーク: ピアリング リンク名) | **az800l08-vnet0_to_az800l08-vnet2** |
     | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **許可 (既定)** |
     | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **許可 (既定)** |
-    | 仮想ネットワーク ゲートウェイ | **なし (既定値)** |
-    | リモート仮想ネットワーク: ピアリング リンク名 | **az800l08-vnet2_to_az800l08-vnet0** |
-    | 仮想ネットワークのデプロイ モデル | **リソース マネージャー** |
-    | リモート仮想ネットワーク: 仮想ネットワーク | **az800l08-vnet2** |
+    | [Virtual network gateway or Route Server](仮想ネットワーク ゲートウェイ) | **なし (既定値)** |
+    | [Remote Virtual network peering link name](リモート仮想ネットワーク: ピアリング リンク名) | **az800l08-vnet2_to_az800l08-vnet0** |
+    | [Virtual network deployment model](仮想ネットワークのデプロイ モデル) | **リソース マネージャー** |
+    | [Remote virtual network](リモート仮想ネットワーク: 仮想ネットワーク) | **az800l08-vnet2** |
     | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **許可 (既定)** |
     | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **許可 (既定)** |
-    | 仮想ネットワーク ゲートウェイ | **なし (既定値)** |
+    | [Virtual network gateway or Route Server](仮想ネットワーク ゲートウェイ) | **なし (既定値)** |
 
     >**注**: この手順で、2 つのピアリング (1 つは **az800l08-vnet0** から **az800l08-vnet2** へ、もう 1 つは **az800l08-vnet2** から **az800l08-vnet0**へ) を確立します。 これでハブ アンド スポーク トポロジの設定は完了です (**az800l08-vnet0** 仮想ネットワークがハブの役割を果たし、**az800l08-vnet1** と **az800l08-vnet2** はそのスポークです)。
 
 #### <a name="task-3-test-transitivity-of-virtual-network-peering"></a>タスク 3: 仮想ネットワーク ピアリングの推移性をテストする
 
-このタスクでは、Network Watcher を使って、仮想ネットワーク ピアリング間の接続をテストします。
-
 >**注**: このタスクを開始する前に、この演習の最初のタスクで呼び出したスクリプトが正常に完了したことを確認します。
 
+このタスクでは、Network Watcher を使って、仮想ネットワーク ピアリング間の接続をテストします。
+
+リソースを作成した直後では、リソースグループ等が正常に表示されないことがあります。その場合は **代替手段** を実行してください。
+
 1. Azure portal で **[Network Watcher]** ページに移動します。
-1. **[Network Watcher - 接続のトラブルシューティング]** ページから、次の設定でチェックを開始します (その他は既定値のままにします)。
+
+1. **[Network Watcher - Connection Troubleshoot/接続のトラブルシューティング]** ページから、次の設定でチェックを開始します (その他は既定値のままにします)。
 
     | 設定 | 値 |
     | --- | --- |
@@ -176,6 +179,12 @@ lab:
 1. 接続チェックの結果が返されるまで待ちます。 状態が "**到達可能**" であることを確認します。 ネットワーク パスを確認します。接続が直接であり、仮想マシン間に中間ホップがないことに注意してください。
 
     > **注**: ハブ仮想ネットワークが最初のスポーク仮想ネットワークと直接ピアリングされていることから、このようになります。
+
+  >**代替手段**
+  > 1. 仮想マシン **az800l08-vm0** の画面に移動し、**Run Command Script** を選択します。
+  > 2. **RunPowerShellScript** を選択します。
+  > 3. 以下のコマンドを実行して、到達可能であることを確認します
+  >    **Test-NetConnection -ComputerName 10.81.0.4 -Port 3389**
 
 1. **[Network Watcher - 接続のトラブルシューティング]** ページから、次の設定でもう一度チェックを開始します (その他は既定値のままにします)。
 
