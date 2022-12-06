@@ -55,25 +55,29 @@ lab:
 このタスクでは、3 つの仮想マシンを同じ Azure リージョン内の個別の仮想ネットワークにデプロイします。 1 つ目の仮想ネットワークはハブとして機能し、残りの 2 つの仮想ネットワークはスポークとなります。 これらのリソースは、ラボ インフラストラクチャの基礎として機能します。
 
 1. **SEA-ADM1** に接続し、必要であればパスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてサインインします。
+
 1. **SEA-ADM1** で Microsoft Edge を起動し、 **[Azure portal](https://portal.azure.com)** にアクセスし、このラボで使うサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使ってサインインします。
+
 1. Azure portal の [Cloud Shell] ペインで PowerShell セッションを開きます。
-1. ファイル **C:\\Labfiles\\Lab08\\L08-rg_template.json** と **C:\\Labfiles\\Lab08\\L08-rg_template.parameters.json** を Cloud Shell のホーム ディレクトリにアップロードします。
-1. [Cloud Shell] ペインで以下のコマンドを実行し、ラボ環境をホストする最初のリソース グループを作成します (`<Azure_region>` のプレースホルダーは、デプロイに使う予定の Azure リージョン名に置き換えてください)。
+
+1. **AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\Allfiles\Labfiles\Lab08** に移動します。
+
+1. [Cloud Shell] ペインで以下のコマンドを実行し、ラボ環境をホストする最初のリソース グループを作成します.
 
    >**注**: **(Get-AzLocation).Location** コマンドを実行すると、使用可能な Azure リージョンの名前を一覧表示できます。
 
     ```powershell 
-    $location = '<Azure_region>'
+    $location = 'EastUS'
     $rgName = 'AZ800-L0801-RG'
     New-AzResourceGroup -Name $rgName -Location $location
     ```
-1. [Cloud Shell] ペインで以下のコマンドを実行し、アップロードしたテンプレートとパラメーターのファイルを使って、3 つの仮想ネットワークと 4 つの Azure VM をそこに作成します。
+1. [Cloud Shell] ペインで以下のコマンドを実行し、3 つの仮想ネットワークと 4 つの Azure VM を作成します。
 
    ```powershell
-   New-AzResourceGroupDeployment `
+    New-AzResourceGroupDeployment `
       -ResourceGroupName $rgName `
-      -TemplateFile $HOME/L08-rg_template.json `
-      -TemplateParameterFile $HOME/L08-rg_template.parameters.json
+      -TemplateFile ./L08-rg_template.json `
+      -TemplateParameterFile ./L08-rg_template.parameters.json
    ```
 
     >**注**: デプロイが完了するまで待ってから、次の手順に進んでください。 これには 3 分ほどかかります。
@@ -103,21 +107,25 @@ lab:
 
 このタスクでは、前のタスクでデプロイした仮想ネットワーク間にローカル ピアリングを構成し、ハブ アンド スポーク ネットワーク トポロジを作成します。
 
-1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、 **[Azure portal](https://portal.azure.com)** に移動します。
-1. Azure portal で **az800l08-vnet0** 仮想ネットワーク ページに移動します。
+1. **SEA-ADM1** の Azure portal で、別のタブを開き、 **[Azure portal](https://portal.azure.com)** に移動します。
+
+1. Azure portal で **VNET** ページに移動し、**az800l08-vnet0** 仮想ネットワーク ページを表示します。
+
+1. **Peering/ピアリング** を選択し、**+Add** をクリックします。
+
 1. **az800l08-vnet0** 仮想ネットワーク ページから、次の設定でピアリングを作成します (その他は既定値のままにします)。
 
     | 設定 | 値 |
     | --- | --- |
-    | この仮想ネットワーク: ピアリング リンク名 | **az800l08-vnet0_to_az800l08-vnet1** |
-    | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **許可 (既定)** |
-    | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **許可 (既定)** |
-    | 仮想ネットワーク ゲートウェイまたは Route Server | **なし (既定値)** |
-    | リモート仮想ネットワーク: ピアリング リンク名 | **az800l08-vnet1_to_az800l08-vnet0** |
-    | 仮想ネットワークのデプロイ モデル | **リソース マネージャー** |
-    | リモート仮想ネットワーク: 仮想ネットワーク | **az800l08-vnet1** |
-    | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **許可 (既定)** |
-    | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **許可 (既定)** |
+    | Peering link name/この仮想ネットワーク: ピアリング リンク名 | **az800l08-vnet0_to_az800l08-vnet1** |
+    | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **Allow/許可 (既定)** |
+    | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **Allow/許可 (既定)** |
+    | [Virtual Network Gateway or Route Server](仮想ネットワーク ゲートウェイまたは Route Server) | **None/なし (既定値)** |
+    | Remote virtual network Peering link name(リモート仮想ネットワーク: ピアリング リンク名) | **az800l08-vnet1_to_az800l08-vnet0** |
+    | Virtual network deployment model/仮想ネットワークのデプロイ モデル | **Resource Manager/リソース マネージャー** |
+    | Virtual network/リモート仮想ネットワーク: 仮想ネットワーク | **az800l08-vnet1** |
+    | [Traffic to remote virtual network](リモート仮想ネットワークへのトラフィック) | **Allow/許可 (既定)** |
+    | [Traffic forwarded from remote virtual network](リモート仮想ネットワークから転送されるトラフィック) | **Allow/許可 (既定)** |
     | 仮想ネットワーク ゲートウェイ | **なし (既定値)** |
 
     >**注**: 操作が完了するまで待ちます。
