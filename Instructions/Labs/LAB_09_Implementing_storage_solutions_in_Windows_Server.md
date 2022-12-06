@@ -100,10 +100,10 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    Get-PSDrive -Name M
    ```
 
-1. 以下のコマンドで、ドライブ **M** の空き領域（**SizeRemaining**)を記録しておきます。
+1. 以下のコマンドで、ドライブ **M** の空き領域を記録しておきます。
 
    ```powershell
-   Get-Volume
+   Get-PSDrive -Name M
    ```
 
 #### <a name="task-2-enable-and-configure-data-deduplication"></a>タスク 2: データ重複除去を有効にして構成する
@@ -145,14 +145,13 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 
 1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
 
-1. **sea-svr3.contoso.com** に接続している間に、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。
+1. **sea-svr3.contoso.com** に接続して、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。
 
    ```powershell
    Start-DedupJob -Volume M: -Type Optimization –Memory 50
    ```
-1. **SEA-SVR3** へのコンソール セッションに切り替えます。
 
-1. **SEA-SVR3** の **Windows PowerShell** プロンプトで次のコマンドを実行して、重複除去されているボリューム上で使用可能なスペースを確認します。
+1. 次のコマンドを実行して、重複除去されているボリューム上で使用可能なスペースを確認します。
 
    ```powershell
    Get-PSDrive -Name M
@@ -161,7 +160,7 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    > **注**: 前に表示された値と現在の値を比較します。 
 
 1. 5 から 10 分待って重複除去ジョブが完了したら、前の手順を繰り返します。
-1. **SEA-ADM1** へのコンソール セッションに切り替えます。
+
 1. **SEA-ADM1** の **sea-svr3.contoso.com** に接続されている Windows Admin Center で、**PowerShell** ツールを使用して、重複除去ジョブの状態を確認する次のコマンドを実行します。
 
    ```powershell
@@ -169,8 +168,9 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    Get-DedupVolume –Volume M: |fl
    Get-DedupMetadata –Volume M: |fl
    ```
-1. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインを更新し、**M:** ボリュームのプロパティを表示します。
-1. **[ボリューム (M:\\) のプロパティ]** ウィンドウで、 **[重複除去率]** と **[重複除去による節約量]** の値を確認します。
+1. **SEA-ADM1** で、**サーバー マネージャー**の **[File and Storage Services/ファイル サービスと記憶域サービス]** インターフェイスで、**Volumes** - **Disks** ペインを表示し、**SEA-SVR3** のディスク番号1 を選択します。
+
+1. **[Volumes]** ウィンドウで、 Mドライブの、**[Deduplication Rate/重複除去率]** と **[Deduplication Saving/重複除去による節約量]** の値を確認します。
 
 ## <a name="lab-exercise-2-configuring-iscsi-storage"></a>ラボ演習 2: iSCSI 記憶域の構成
 
@@ -187,7 +187,7 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
 #### <a name="task-1-install-iscsi-and-configure-targets"></a>タスク 1: iSCSI をインストールしてターゲットを構成する
 
-1. **SEA-ADM1** の **Windows PowerShell** コンソールで次のコマンドを実行して、**SEA-SVR3** への PowerShell リモート処理セッションを確立します。
+1. **SEA-ADM1** の **Windows PowerShell** 管理者コンソールで次のコマンドを実行して、**SEA-SVR3** への PowerShell リモート処理セッションを確立します。
 
    ```powershell
    Enter-PSSession -ComputerName SEA-SVR3
@@ -201,26 +201,41 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
    ```powershell
    Initialize-Disk -Number 2
+   ```
+   ```   
    $partition2 = New-Partition -DiskNumber 2 -UseMaximumSize -AssignDriveLetter
+   ```
+   ```
    Format-Volume -DriveLetter $partition2.DriveLetter -FileSystem ReFS
    ```
+
 1. 次のコマンドを実行して、ReFS でフォーマットされた新しいボリュームをディスク 3 に作成します。
 
    ```powershell
    Initialize-Disk -Number 3
+   ```
+   ```
    $partition3 = New-Partition -DiskNumber 3 -UseMaximumSize -AssignDriveLetter
+   ```
+   ```
    Format-Volume -DriveLetter $partition3.DriveLetter -FileSystem ReFS
    ```
+
 1. 次のコマンドを実行して、iSCSI トラフィックを許可するセキュリティが強化された Windows Defender ファイアウォール規則を構成します。
 
    ```powershell
    New-NetFirewallRule -DisplayName "iSCSITargetIn" -Profile "Any" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 3260
+   ```
+   ```
    New-NetFirewallRule -DisplayName "iSCSITargetOut" -Profile "Any" -Direction Outbound -Action Allow -Protocol TCP -LocalPort 3260
    ```
+
 1. 次のコマンドを実行して、新しく作成したボリュームに割り当てられたドライブ文字を表示します。
 
    ```powershell
    $partition2.DriveLetter
+   ```
+   ```
    $partition3.DriveLetter
    ```
 
@@ -228,16 +243,21 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
 #### <a name="task-2-connect-to-and-configure-iscsi-targets"></a>タスク 2: iSCSI ターゲットに接続して構成する
 
-1. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインを更新し、**SEA-DC1** のディスク構成を表示します。 ブート ボリュームとシステム ボリュームのドライブ **C** だけが含まれていることに注意してください。
-1. **サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** で、[iSCSI] ペインに切り替えます。 
-1. [iSCSI] ペインで、次の設定を使用して iSCSI 仮想ディスクを作成します。
+1. **SEA-ADM1** で、**サーバー マネージャー**の**[ファイル サービスと記憶域サービス]** で [ディスク] ペインを更新し、**SEA-DC1** のディスク構成を表示します。 ブート ボリュームとシステム ボリュームのドライブ **C** だけが含まれていることに注意してください。
 
-   - 記憶域の場所: **E:**
+1. **SEA-ADM1** で、**SEA-SVR3** のディスク構成を表示し、ディスク番号２と３が E:ドライブとF:ドライブとして構成されていることを確認します。表示されない場合は、サーバーマネージャーをリフレッシュしてください。
+
+1. **サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** で、[iSCSI] ペインに切り替えます。 
+
+1. [iSCSI] ペインで、右側の **TASKS** から **New iSCSI Virtual Disk** を選択し、次の設定を使用して iSCSI 仮想ディスクを作成します。
+
+   - Storage Location/記憶域の場所: **E:**
    - 名前: **iSCSIDisk1**
-   - ディスク サイズ: **5 GB**、**可変容量**
-   - iSCSI ターゲット: **新規**
+   - ディスク サイズ: **5 GB**、**Dynamic expanding/可変容量**
+   - iSCSI ターゲット: **New iSCSI target/新規**
    - ターゲット名: **iSCSIFarm**
    - アクセス サーバー: **SEA-DC1**
+   - その他の設定は規定値のままにしてください
 
 1. 次の設定で 2 つ目の iSCSI 仮想ディスクを作成します。
 
@@ -247,6 +267,7 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    - iSCSI ターゲット: **iSCSIFarm**
 
 1. **SEA-DC1** のコンソール セッションに切り替え、必要に応じて、**Pa55w.rd** のパスワードを使用して **CONTOSO\\Administrator** としてサインインします。
+
 1. **SEA-SVR3** で **Windows PowerShell** セッションを開始した後、**Windows PowerShell** コンソールで次のコマンドを実行して、iSCSI イニシエーター サービスを開始し、iSCSI イニシエーターの構成を表示します。
 
    ```powershell
@@ -254,19 +275,26 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    iscsicpl
    ```
 
-   > **注**: **iscsicpl** コマンドを実行すると、**[iSCSI イニシエーターのプロパティ]** ウィンドウが開きます。
+   > **注**: **iscsicpl** コマンドを実行すると、**[iSCSI イニシエーターのプロパティ]** インターフェースが開きます。
 
-1. **[iSCSI イニシエーターのプロパティ]** インターフェイスを使用して、次の iSCSI ターゲットに接続します。
+1. **[iSCSI イニシエーターのプロパティ]** インターフェイスを使用して、Target に **SEA-SVR3** を指定して **Quick Connect** をクリックします。
 
-   - 名前: **SEA-SVR3**
-   - ターゲット名: **iqn.1991-05.com.microsoft:SEA-SVR3-fileserver-target**
+1. 次の iSCSI ターゲットに接続します。
+
+   - **iqn.1991-05.com.microsoft:SEA-SVR3-fileserver-target**
+
+1. **OK** をクリックして画面を閉じます
 
 #### <a name="task-3-verify-iscsi-disk-configuration"></a>タスク 3: iSCSI ディスクの構成を確認する 
 
 1. **SEA-ADM1** へのコンソール セッションに切り替えます。
-1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを参照し、その表示を更新します。 
-1. **SEA-DC1** ディスクの構成を確認し、2 つの **5 GB** ディスクが含まれ、**オフライン**状態であり、バスの種類が **iSCSI** であることを確認します。
+
+1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを参照し、表示を更新します。 
+
+1. **SEA-DC1** ディスクの構成を確認し、2 つの **5 GB** ディスクが含まれ、Status が **Offline/オフライン**状態であり、Bus Type が **iSCSI** であることを確認します。
+
 1. **SEA-DC1** のコンソール セッションに切り替えます。 
+
 1. **Windows PowerShell** のプロンプトで次のコマンドを実行して、ディスクの構成を表示します。
 
    ```powershell
@@ -278,12 +306,19 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
    ```powershell
    Initialize-Disk -Number 1
+   ```   
+   ```   
    New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter E
+   ```   
+   ```   
    Format-Volume -DriveLetter E -FileSystem ReFS
    ```
 1. 前のステップを繰り返して、ReFS でフォーマットされた新しいドライブを作成しますが、今回はディスク番号 **2** とドライブ文字 **F** を使用します。
-1. **[サーバー マネージャー]** ウィンドウをアクティブにして **SEA-ADM1** へのコンソール セッションに戻ります。
-1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。
+
+1. **SEA-ADM1** の **[サーバー マネージャー]** ウィンドウ に移動します
+
+1. **サーバー マネージャー**で、**[ファイル サービスと記憶域サービス]** の [ディスク] ペインをリフレッシュします。
+
 1. **SEA-DC1** ディスクの構成を確認し、両方のドライブが**オンライン**になっていることを確認します。
 
 #### <a name="task-4-revert-disk-configuration"></a>タスク 4: ディスクの構成を元に戻す 
@@ -318,37 +353,64 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 #### <a name="task-1-create-a-storage-pool"></a>タスク 1: 記憶域プールを作成する 
 
 1. **SEA-ADM1** に切り替えて、**サーバー マネージャー**の **[ファイル サービスと記憶域サービス]** の [ディスク] ペインを更新します。
-1. **SEA-SVR3** のディスク 1 から 4 の状態を**オンライン**に設定します。
-1. **SEA-SVR3** の記憶域を構成するための**サーバー マネージャー**で、サイズが **127 GB** の 3 つのディスクで構成される **SP1** という名前の新しい記憶域プールを作成します。
+
+1. **SEA-SVR3** のディスク 1 から 4 の状態を**を右クリックして **Bring Online** を選択して、**オンライン** に設定します。
+
+1. **Storage Pools** ペインに移動します。
+
+1. **STORAGE POOLS** の右端にある **TASKS** をクリックして、**New Storage Pool** を選択します。
+
+1. ウィザードで、名前に **SP1** を指定して、**SEA-SVR3** の 3つの **127 GB** ディスクを選択して、新しい記憶域プールを作成します。
 
 #### <a name="task-2-create-a-volume-based-on-a-three-way-mirrored-disk"></a>タスク 2: 3 方向ミラー ディスクを基にしてボリュームを作成する 
 
-1. **SEA-ADM1** の**サーバー マネージャー**から、新しく作成した記憶域プール **SP1** を使用して、ミラー記憶域レイアウトと仮想プロビジョニングを使用し、サイズが **25 GB** の、**Three-Mirror** という名前の仮想ディスクを作成します。
-1. 新しくプロビジョニングした仮想ディスクを使用して、**TestData** という名前の ReFS ボリュームを作成し、そのサイズをすべての使用可能なディスク領域に設定して、ドライブ文字 **T** を割り当てます。
+1. 新しく作成した **SP1** を右クリックして、 **New Virtual Disk** を選択し、**Select the storage pool** 画面で **OK** をクリックします。
+
+1. New Virtual Disk Wizard が起動するので、以下の設定で仮想ディスクを作成します。
+
+  - Name : **Three-Mirror**
+  - Storage Layout : **Mirror**
+  - Specify size : **25** GB
+
+1. 完了すると、New Volume Wizard が起動するので、今作成した **Three-Mirror** を使用して、以下のボリュームを作成します。
+
+  - Volume Size : **25GB**
+  - Drive Letter : **T**
+  - File System : **ReFS**
+  - Volume label : **TestData**
 
 #### <a name="task-3-manage-a-volume-in-file-explorer"></a>タスク 3: エクスプローラーでボリュームを管理する 
 
 1. **SEA-ADM1** で、**SEA-SVR3** への PowerShell リモート処理セッションをホストしている **Windows PowerShell** に切り替えます。
+
 1. PowerShell リモート処理セッションを使用して次のコマンドを実行し、セキュリティが強化された Windows Defender ファイアウォールのすべてのファイルとプリンターの共有規則を有効にします。
 
    ```
    Enable-NetFirewallRule -Group "@FirewallAPI.dll,-28502"
    ```
 
-1. **SEA-ADM1** で**エクスプローラー**を開始し、**\\\\SEA-SVR3.contoso.com\\t$** 共有を参照します。
-1. **TestData** という名前のフォルダーを作成した後、そのフォルダー内に **TestDocument.txt** という名前のドキュメントを作成します。
+1. **SEA-ADM1** で**ファイルエクスプローラー**を開始し、**\\\\SEA-SVR3.contoso.com\\t$** 共有を参照します。
+
+1. **\\\\SEA-SVR3.contoso.com\\t$** 配下に **TestData** という名前のフォルダーを作成し、そのフォルダー内に **TestDocument.txt** という名前の空のドキュメントを作成します。
 
 #### <a name="task-4-disconnect-a-disk-from-the-storage-pool-and-verify-volume-availability"></a>タスク 4: 記憶域プールからディスクを切断し、ボリュームの可用性を確認する 
 
-1. **SEA-ADM1** で**サーバー マネージャー**を使用して、**SEA-SVR3** にアタッチされている残りの使用可能なディスクを記憶域プール **SP1** に追加します。 ディスクで自動割り当てが使用されていることを確認します。
-1. **サーバー マネージャー**を使用して、**SP1** プールに割り当てられた最初の 3 つのディスクのいずれかを削除します。
+1. **SEA-ADM1** で**サーバー マネージャー** の **[ファイル サービスと記憶域サービス]** の画面で、**Storage Pool** を表示します。
+
+1. SP1 を右クリックして、**Add Phisical Disk** を選択し、**SEA-SVR3** にアタッチされている残りの使用可能なディスクを **SP1** に追加します。 ディスクで自動割り当てが使用されていることを確認します。
+
+1. **SP1** プールの **Phisical Disk** から、最初に割り当てた 127GB の 3 つのディスクのいずれかを **Remove Disk** します。
+
 1. **SEA-ADM1** でエクスプローラーを使用して、**TestDocument.txt** がまだ使用可能であることを確認します。 
 
 #### <a name="task-5-add-a-disk-to-the-storage-pool-and-verify-volume-availability"></a>タスク 5: 記憶域プールにディスクを追加し、ボリュームの可用性を確認する 
 
 1. **SEA-ADM1** の**サーバー マネージャー**で、**SP1** 記憶域プールを再スキャンします。
+
 1. 前のタスクで削除したディスクを追加して戻し、自動割り当てが使用されることを確認します。
+
 1. **SEA-ADM1** でエクスプローラーを使用して、**TestDocument.txt** がまだ使用可能であることを確認します。 
+
 1. **SEA-SVR3** に切り替えて戻ります。
 
 #### <a name="task-6-revert-disk-configuration"></a>タスク 6: ディスクの構成を元に戻す 
