@@ -104,8 +104,6 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
 1. Windows Admin Center で、左側のメニューから **Roles ＆ Features** ツールを選択jして、**Telnet Client** を `sea-dc1.contoso.com` にインストールします。 
 
-1. Windows Admin Center で、 **[設定]** インターフェイスを使用して `sea-dc1.contoso.com` 上の [リモート デスクトップ] を有効にします。
-
 1. Windows Admin Center で、左側のメニュー一覧の一番下にある **Settings** を選択し、**Remote Desktop** をクリックします。
 
 1. **Allow Remote connections to this computer** を選択し、**Save** します。
