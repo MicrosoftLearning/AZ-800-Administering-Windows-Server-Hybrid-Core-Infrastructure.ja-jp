@@ -55,16 +55,40 @@ Contoso のロンドン本社とシアトルを拠点とするブランチ オ�
    ```powershell
    Install-WindowsFeature -Name RSAT-DFS-Mgmt-Con -IncludeManagementTools
    ```
-1. **SEA-ADM1**で、エクスプローラーを開き、**C:\\Labfiles\\Lab10** フォルダーにアクセスして、新しい **[Windows PowerShell ISE]** ウィンドウで **L10-DeployDFS.ps1** を開きます。
-1. スクリプト ペインでスクリプトを確認し、それを実行して、サンプル DFS 名前空間と DFS レプリケーション グループを作成します。
+
+1. SEA-ADM1 で、C:\Labfiles フォルダーを作成します。
+
+1. コマンドプロンプトを起動します。
+
+1. コマンドプロンプトで、C:\Labfiles に移動します。
+
+1. 以下のコマンドを使用して、LabFilesにファイルをダウンロードします。
+
+    ```
+    git clone https://github.com/MicrosoftLearning/AZ-800-Administering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp.git 
+    ```
+
+1. **SEA-ADM1**で、PowerShell ISE を管理者で起動します。
+
+1. PowerShell ISE で、**C:\\Labfiles\\AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\\Allfiles\\Labfiles\\Lab10** フォルダーにアクセスして、**L10-DeployDFS.ps1** を開きます。
+
+1. スクリプトの内容を確認し、実行して、サンプル DFS 名前空間と DFS レプリケーション グループを作成します。
 
 #### <a name="task-2-test-dfs-deployment"></a>タスク 2: DFS のデプロイをテストする
 
-1. **SEA-ADM1**で、 **[DFS 管理]** コンソールを起動し、前のタスクで作成した **\\\\Contoso.com\\Root\\** 名前空間と **Branch1** レプリケーション グループの両方を追加します。 
-1. **\\\\Contoso.com\\Root\\Data** フォルダーのターゲットが、**SEA-SVR1** と **SEA-SVR2** 上にあることを確認します。 ターゲットとして構成されているフォルダーに注意してください。
+1. **SEA-ADM1**で、 サーバーマネージャーから **[DFS Manager]** コンソールを起動します。
+
+1. 右側のペインの **Add Namespaces to Display** をクリックして **\\\\Contoso.com\\Root\\** を選択し、**OK** をクリックします。
+
+1. 左側のペインで **Replication** を右クリックして **Add Replication Groups to Display** を選択し、**Branch1** を選択します。
+
+1. Namespaces ペインで、**\\\\Contoso.com\\Root\\Data** フォルダーのターゲットが、**SEA-SVR1** と **SEA-SVR2** 上にあることを確認します。 ターゲットとして構成されているフォルダーに注意してください。
+
 1. **Branch1** レプリケーション メンバーに 2 つのメンバー (**SEA-SVR1** と **SEA-SVR2**) が含まれていることを確認します。 各サーバーにレプリケートされるフォルダーに注意してください。
-1. エクスプローラーの 2 つのインスタンスを開きます。 最初のインスタンスで **\\\\SEA-SVR1\\Data** に接続し、2 番目のインスタンスで **\\\\SEA-SVR2\\Data** に接続します。
-1. **\\\\SEA-SVR1\\Data** に自分の名前を付けた新しいファイルを作成し、数秒後、そのファイルが **\\\\SEA-SVR2\\Data** にレプリケートされることを確認します。 これにより、DFS レプリケーションが機能していることが確認されます。
+
+1. エクスプローラーを 2 つ開きます。 最初のインスタンスで **\\\\SEA-SVR1\\Data** に接続し、2 番目のインスタンスで **\\\\SEA-SVR2\\Data** に接続します。
+
+1. **\\\\SEA-SVR1\\Data** に適当に新しいファイルを作成し、数秒後、そのファイルが **\\\\SEA-SVR2\\Data** にレプリケートされることを確認します。 これにより、DFS レプリケーションが機能していることが確認されます。
 
    >**注:** ファイルがレプリケートされ、両方のエクスプローラー ウィンドウに同じ内容が記録されるのを待ちます。
 
@@ -87,29 +111,63 @@ DFS レプリケーション環境を File Sync に移行するための準備�
 #### <a name="task-1-create-an-azure-file-share"></a>タスク 1: Azure ファイル共有を作成する
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal にアクセスして、Azure 資格情報で認証します。
-1. Azure portal で、**AZ800-L1001-RG** という名前のリソース グループ内に、**ローカル冗長ストレージ (LRS)** を指定して Azure ストレージ アカウントを作成します。
 
-   >**注:** このラボでは、すべての Azure リソースのデプロイに同じリージョンを使用します。
+1. Azure portal で、**AZ800-L1001-RG** という名前のリソース グループを、**East US** リージョンに作成します。
 
-1. ストレージ アカウントで、**share1** という名前のファイル共有を作成します。
+1. Azure portal で、ストレージアカウントページに移動します。
+
+1. **「＋作成」** をクリックして、以下のパラメタで新しいストレージアカウントを作成します。
+
+  - リソースグループ : **AZ800-L1001-RG**
+  - ストレージアカウント名 : 一意な名前を指定してください（例：AZ800Lab10<あなたのイニシャル> 等）
+  - 冗長性 : **ローカル冗長ストレージ (LRS)**
+
+1. 作成したストレージアカウントページに移動します。
+
+1. **ファイル共有** をクリックします。
+
+1. **「＋ファイル共有」** をクリックし、**share1** という名前のファイル共有を作成します。
 
 #### <a name="task-2-use-an-azure-file-share"></a>タスク 2: Azure ファイル共有を使用する
 
-1. **SEA-ADM1** で、**C:\\Labfiles\\Lab10\\File1.txt** ファイルを **share1** にアップロードします。
-1. Azure portal で、**share1** のスナップショットを作成します。
-1. **SEA-ADM1** で、Azure portal によって提供される接続スクリプトを使用して、**share1** をドライブ **Z** としてマウントします。
-1. エクスプローラーで、マウントされたドライブ上の **File1.txt** という名前のファイルを開き、自分の名前を入力し、ファイルを保存します。
-1. エクスプローラーの **[以前のバージョン]** を使用して、**File1.txt** の以前のバージョンを復元します。
+1. 作成した、Share1 ファイル共有をクリックして、share1 共有のページを開きます。
+
+1. **アップロード** をクリックして、**C:\\Labfiles\\AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\\Allfiles\\Labfiles\\Lab10\\File1.txt** ファイルを **share1** にアップロードします。
+
+1. 左側のメニューから **スナップショット** をクリックして、**share1** のスナップショットを作成します。
+
+1. **概要** ページ を開き、**接続** をクリックします。ドライブ名が **Z:** であることを覚えておいてください。
+
+1. **接続** で、**Show Script** をクリックし、スクリプト全体をクリップボードにコピーします。
+
+1. **SEA-ADM1** 上で PowerShell ウィンドウを開き、コピーしたスクリプトを実行します。
+
+1. エクスプローラーで、Z: ドライブを開きます。
+
+1. Z: ドライブの **File1.txt** ファイルを開き、自分の名前を入力し、ファイルを保存します。
+
+1. **File1.txt** を右クリックしてプロパティを開きます。
+
+1. **[Previous Versions]** タブを開き、使用して、**File1.txt** の以前のバージョンを選択して、**Restore** をクリックします。
+
 1. **File1.txt** を開き、自分の名前が含まれていないことを確認します。
 
 #### <a name="task-3-deploy-storage-sync-service-and-a-file-sync-group"></a>タスク 3: ストレージ同期サービスと File Sync グループをデプロイする
 
-1. **SEA-ADM1** で、Azure portal を使用して、**FileSync1** という名前の Azure File Sync リソースを作成します。 ストレージ アカウントをデプロイするときに使用したものと同じリージョンとリソース グループを使用します。
+1. **SEA-ADM1** で、Azure portal を使用して **ストレージ同期サービス** ページに移動します。
 
-   >**注:** File Sync をデプロイすると、ストレージ同期サービス リソースが作成されます。
+1. **＋作成** をクリックして、 以下の設定でストレージ同期サービスをデプロイします。
 
-1. **FileSync1** ストレージ同期サービスで、**Sync1** という名前の同期グループを作成します。 **Sync1** を作成するときに、前に作成したストレージ アカウントと **share1** を Azure ファイル共有として使用します。
-1. 現在、**FileSync1**に登録されているサーバーがないことを確認します。
+  - リソースグループ : **AZ800-L1001-RG** 
+  - ストレージ同期サービス名 : **FileSync1**
+  - リージョン : **East US**
+  
+1. **FileSync1** ストレージ同期サービスのページで、**「＋同期」** をクリックして、**Sync1** という名前の同期グループを作成します。 **Sync1** を作成するときに、前に作成したストレージ アカウントと **share1** を Azure ファイル共有として使用します。
+
+1. 作成した Sync1 をクリックして、以下を確認してください。
+
+    - クラウドエンドポイント : share1
+    - サーバーエンドポイント : なし
 
 ### <a name="results"></a>結果
 
@@ -129,32 +187,64 @@ DFS レプリケーション環境を File Sync に移行するための準備�
 
 #### <a name="task-1-add-sea-svr1-as-a-server-endpoint"></a>タスク 1: SEA-SVR1 をサーバー エンドポイントとして追加する
 
-1. **SEA-ADM1** の Azure portal で、File Sync agent for Windows Server 2022 (**StorageSyncAgent_WS2022.msi**) をダウンロードし、**C:\\\\Labfiles\\Lab10** フォルダーに保存します。
-1. **SEA-ADM1** のエクスプローラーで、**C:\\Labfiles\\Lab10** フォルダーにアクセスし、[Windows PowerShell ISE] ウィンドウのスクリプト ペインで **Install-FileSyncServerCore.ps1** を開きます。
-1. **[Windows PowerShell ISE]** のスクリプト ペインで、スクリプトを確認して実行し、File Sync エージェントを **SEA-SVR1**にインストールします。
-1. メッセージが表示されたら、Azure サブスクリプションに対する認証を行います。 
-1. Azure portal で、**FileSync1** ストレージ同期サービスの登録済みサーバーを更新し、**SEA-SVR1.Contoso.com** が登録されたことを示します。
-1. エクスプローラーで **\\\\SEA-SVR1\\Data** を開き、フォルダーに **File1.txt** が含まれていないことを示します。
-1. Azure portal を使用して、**SEA-SVR2.Contoso.com**  上の **S:\\Data** をサーバー エンドポイントとして **Sync1** に追加します。
+1. **SEA-ADM1** の Azure portal で、**FileSync1** ページを開き、**登録済みサーバー** を選択してください。
+
+1. 画面中央の **Azure File Sync エージェント** をクリックして、SEA-ADM1 上に **Azure File Sync Agent(StorageSyncAgent_WS2022.msi)** をダウンロードします。
+
+1. ダウンロードしたファイルを C:\\Labfiles\\AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\\Allfiles\\Labfiles\\Lab10 に移動します。
+
+1. PowerShell ISE を管理者で起動し、C:\\Labfiles\\AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\\Allfiles\\Labfiles\\Lab10\\**Install-FileSyncServerCore.ps1** を開きます。
+
+1. 6行目 を以下のように変更して保存します。
+
+    ```
+    Copy-Item -Path C:\\Labfiles\\AZ-800-Administratering-Windows-Server-Hybrid-Core-Infrastructure.ja-jp\\Allfiles\\Labfiles\\Lab10\\StorageSyncAgent_WS2022.msi -Destination "\\$srvName\c$\Temp\" -PassThru
+    ```
+1. スクリプトの内容を確認して実行し、File Sync エージェントを **SEA-SVR1**にインストールします。
+
+1. インストールの途中に、メッセージが表示されたら、指定されたURLにアクセスし、表示されている Code で認証を行います。 
+
+1. Azure portal で、ストレージ同期サービス の **FileSync1** ページで、**登録済みサーバー** を更新し、**SEA-SVR1.Contoso.com** が登録されたことを示します。
+
+1. エクスプローラーで **\\\\SEA-SVR1\\Data** を開き、フォルダーに **File1.txt** が含まれていないことを確認します。
+
+1. Azure portal を使用して、ストレージ同期サービス の **FileSync1** ページで **同期グループ** を開いて、**Sync1** を選択します。 
+
+1. **サーバーエンドポイントの追加** をクリックして、以下の設定でエンドポイントを追加します。
+
+    - 登録済みサーバー : **SEA-SVR1.Contoso.com**
+    - パス : **S:\Data**
+
 1. エクスプローラーを使用して、**File1.txt** が **\\\\SEA-SVR1\\Data\\** で使用できることを確認します。
 
-   >**注:** **File1.txt** を **File1.txtAzure** ファイル共有にアップロードしました。このファイルは、そこから File Sync によって **SEA-SVR2** に同期されました。
+1. エクスプローラーを使用して、**Z:\\** ドライブ（Azure Files の share1)に \\\\SEA-SVR1\\Data\\ のファイルが複製されていることを確認します。
 
 #### <a name="task-2-register-sea-svr2-with-file-sync"></a>タスク 2: SEA-SVR2 を File Sync に登録する
 
 1. **SEA-ADM1** の **Install-FileSyncServerCore.ps1** スクリプトが表示されている[Windows PowerShell ISE] ウィンドウで、`SEA-SVR1` を `SEA-SVR2` に置き換えて変更を保存します。
-1. **C:\\Labfiles\\Lab10\\Install-FileSyncServerCore.ps1** を実行して、File Sync エージェントを **SEA-SVR2** にインストールします。
+
+1. **Install-FileSyncServerCore.ps1** を実行して、File Sync エージェントを **SEA-SVR2** にインストールします。
+
 1. メッセージが表示されたら、Azure サブスクリプションに対する認証を行います。 
+
 1. Azure portal を使用して、**SEA-SVR2.Contoso.com** と **SEA-SVR1.Contoso.com** が **FileSync1** ストレージ同期サービスに登録されていることを確認します。
 
 #### <a name="task-3-remove-dfs-replication-and-add-sea-svr2-as-a-server-endpoint"></a>タスク 3: DFS レプリケーションを削除し、SEA-SVR2 をサーバー エンドポイントとして追加する
 
 1. **SEA-ADM1** で、**DFS 管理**を使用して **Branch1** レプリケーション グループを削除します。
-1. Azure portal を使用して、**SEA-SVR2.Contoso.com**  上の **S:\\Data** をサーバー エンドポイントとして **Sync1** に追加します。
+
+1. Azure portal を使用して、ストレージ同期サービス の **FileSync1** ページで **同期グループ** を開いて、**Sync1** を選択します。 
+
+1. **サーバーエンドポイントの追加** をクリックして、以下の設定でエンドポイントを追加します。
+
+    - 登録済みサーバー : **SEA-SVR2.Contoso.com**
+    - パス : **S:\Data**
+
+これで、SVR1 と share1 の間に双方向の同期が構成され、SVR2 と share1 の間にも双方向の同期が構成されました。結果として、SVR1 と SVR2 は share1 を介して双方向に同期していることになります。
 
 ### <a name="results"></a>結果
 
-この演習を完了すると、DFS レプリケーションが File Sync に置き換えられます。
+以上で、DFS レプリケーションが File Sync に置き換えられました。
 
 ## <a name="exercise-4-verifying-replication-and-enabling-cloud-tiering"></a>演習 4: レプリケーションの検証と、クラウドを使った階層化の有効化
 
