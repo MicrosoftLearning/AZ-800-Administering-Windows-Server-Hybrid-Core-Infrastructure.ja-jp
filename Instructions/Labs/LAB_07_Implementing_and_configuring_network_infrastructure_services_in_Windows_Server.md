@@ -164,7 +164,7 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 1. コマンドプロンプトで、**ipconfig /renew** を実行し、アドレスを再取得します。
 
-1. **ipconfig /all** を実行して、DHCP Server が **SEA-SVR1 (172.16.10.12)** であることを確認します。
+1. **ipconfig /all** を実行して、DHCP Server のアドレスを確認します（**SEA-SVR1 (172.16.10.12) または SEA-DC1（172.16.10.10）** 
 
 1. **DHCP 管理コンソール**で、**Address Leases** を参照して、両方の DHCP サーバーの **Contoso** スコープに **SEA-ADM1** のリースが一覧表示されていることを確認します。
 
@@ -172,7 +172,9 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 1. **SEA-ADM1** のコマンドプロンプトで、**ipconfig /renew** を実行して、リースを強制的に更新します。
 
-1. **SEA-ADM1** で、同じ DHCP リースが **SEA-DC1 (172.16.10.10)** から取得されていることを確認します。
+  > うまくいかない場合は、Ethernet Adapter を一度無効にして、再度有効にしてみてください
+
+1. **SEA-ADM1** で、同じ DHCP リースが もう一方のDHCPサーバーからリースされていることを確認します。
 
 ## <a name="exercise-2-deploying-and-configuring-dns"></a>演習 2: DNS の展開と構成
 
