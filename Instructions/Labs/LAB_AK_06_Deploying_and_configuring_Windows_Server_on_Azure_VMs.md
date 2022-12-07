@@ -5,7 +5,7 @@ lab:
   module: 'Module 6: Deploying and Configuring Azure VMs'
 ---
 
-# <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ回答キー: Azure VM での Windows Server のデプロイと構成
+# <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ: Azure VM での Windows Server のデプロイと構成
 
 ## <a name="exercise-1-authoring-azure-resource-manager-arm-templates-for-azure-vm-deployment"></a>演習 1: Azure VM デプロイ用の Azure Resource Manager (ARM) テンプレートの作成
 
