@@ -146,6 +146,8 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 1. 同様の手順で、**SEA-DC1.contoso.com** と **SEA-SVR1** の間で、**172.16.10.12** のフェールオーバーを構成します。
 
+    > **Reuse existing failover relationships configured with this server** の**チェックを外してください**。
+
 1. 両方のスコープが **SEA-SVR1** の **IPV4** ノード内に表示されるようになったことを確認します。
 
 ### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
