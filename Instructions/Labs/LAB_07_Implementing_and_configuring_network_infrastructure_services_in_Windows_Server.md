@@ -131,7 +131,9 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 1. Configure Failover ウィザードが起動するので、以下の設定で、**SEA-DC1.contoso.com** との **ContosoClients** スコープのフェールオーバースコープを構成します。
 
    - Patner Server : **SEA-DC1.contoso.com**
-   - Relationship Name/リレーションシップ名 : **Hot standby/ホット スタンバイ**
+   - Relationship Name/リレーションシップ名 : SEA-SVR1 to SEA-DC1
+   - Maximum Client Lead Time: **1 hour**
+   - Mode : **Hot standby/ホット スタンバイ**
    - Role of Parner Server/パートナー サーバーの役割: **スタンバイ**
    - Addresses reserved for standby server/スタンバイ サーバー用に予約されているアドレス: **5%**
    - State Switchover Interval/状態の切り替え間隔: **無効**
