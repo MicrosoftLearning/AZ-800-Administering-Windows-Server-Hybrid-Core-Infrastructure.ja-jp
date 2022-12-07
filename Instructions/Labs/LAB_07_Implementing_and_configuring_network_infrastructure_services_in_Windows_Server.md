@@ -152,7 +152,7 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 
 ### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
 
-1. **SEA-ADM1** で Settings を開きます
+1. **SEA-ADM1** で Settings（左下のWindowsメニューの設定のことです）を開きます
 
 1. 検索ボックスに **IP** を入力し、**Ethernet Settings** を選択します。
 
