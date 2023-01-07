@@ -265,7 +265,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
 1. Azure portal で、**[az800l06-vm0]** ページに戻ります。
 1. **[az800l06-vm0]** ページで、**[構成]** を選択します。 
-1. **[az800l06-vm0 \| 構成]** ページで、 **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Azure Security Center を開く]** リンクを選択します。
+1. **[az800l06-vm0 \| 構成]** ページで、 **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Microsoft Defender for Cloud を開く]** リンクを選択します。
 1. **[Just In Time VM アクセス]** ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
 #### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する

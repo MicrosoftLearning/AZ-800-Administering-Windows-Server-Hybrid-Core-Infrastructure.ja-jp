@@ -7,74 +7,79 @@ lab:
 
 # <a name="lab-answer-key-managing-windows-server"></a>ラボの回答キー: Windows Server の管理
 
-## <a name="exercise-1-implementing-and-using-remote-server-administration"></a>                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Managing%20Windows%20Server)** が用意されています。
+                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Managing%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-#### <a name="task-1-install-windows-admin-center"></a>対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。
+## <a name="exercise-1-implementing-and-using-remote-server-administration"></a>演習 1: リモート サーバー管理の実装と使用
 
-1. 演習 1: リモート サーバー管理の実装と使用
-1. タスク 1: Windows Admin Center をインストールする
-1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**Contoso\\Administrator** としてサインインします。
+#### <a name="task-1-install-windows-admin-center"></a>タスク 1: Windows Admin Center をインストールする
+
+1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
+1. **SEA-ADM1** 上で **[スタート]** を選択し、**[Windows PowerShell (管理者)]** を選択します。
+1. **Windows PowerShell** コンソールで、次のコマンドを入力してから Enter キーを押して、Windows Admin Center の最新バージョンをダウンロードします。
     
    ```powershell
    Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
    ```
-1. **SEA-ADM1** 上で **[スタート]** を選択し、**[Windows PowerShell (管理者)]** を選択します。
+1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
    Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
    ```
 
-   > **Windows PowerShell** コンソールで、次のコマンドを入力してから Enter キーを押して、Windows Admin Center の最新バージョンをダウンロードします。 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
-   
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
+   
+   > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
 
-#### <a name="task-2-add-servers-for-remote-administration"></a>**注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。
+#### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
 
-1. これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。 
-1. タスク 2: リモート管理用のサーバーを追加する
+1. **SEA-ADM1** で Microsoft Edge を開始して、`https://SEA-ADM1.contoso.com` にアクセスします。
 
-   - **SEA-ADM1** で Microsoft Edge を開始して、`https://SEA-ADM1.contoso.com` にアクセスします。
-   - ダイアログが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力して、**[OK]** を選択します。
+   >**注**: リンクが機能しない場合は、**SEA-ADM1** でエクスプローラー開き、ダウンロード フォルダーを選択し、ダウンロード フォルダー内の **WindowsAdminCenter.msi** ファイルを選択し、手動でインストールします。 インストールが完了したら、Microsoft Edge を更新します。
 
-1. ユーザー名: **CONTOSO\\Administrator**
-1. パスワード: **Pa55w.rd** 
-1. **[このリリースの新機能]** ポップアップ ウィンドウを確認し、右上隅の **[閉じる]** を選択します。 
-1. **[すべての接続]** ページを確認します。**sea-adm1.contoso.com** エントリが含まれていることに注目します。
-1. **[すべての接続]** ページで、**[+ 追加]** を選択します。
-1. リソースの追加または作成ペインの **[サーバー]** タイルで、 **[追加]** を選択します。
+   >**注**: **NET::ERR_CERT_DATE_INVALID** エラーが発生した場合は、Edge ブラウザー ページの **[詳細設定]** を選択し、ページの下部にある **[sea-adm1-contoso.com (アンセーフ) に移動]** を選択します。
 
-   - **[サーバー名]** テキスト ボックスに、「**sea-dc1.contoso.com**」と入力します。
-   - **[Use another account for this connection](この接続に別のアカウントを使用する)** オプションが選択されていることを確かめ、次の資格情報を入力してから、 **[Add with credentials](資格情報を使用して追加)** を選択します。
+2. ダイアログが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力して、**[OK]** を選択します。
 
-   > ユーザー名: **CONTOSO\\Administrator** パスワード: **Pa55w.rd** **注**: 手順 7 を実行した後、**お客様はこのサーバーを自分の接続リストに追加できますが、Microsoft 側でそれが利用可能であることを確認できません。** という内容のエラー メッセージが表示された場合、 **[追加]** を選択します。
+   - ユーザー名: **CONTOSO\Administrator**
+   - パスワード: **Pa55w.rd**
 
-   > [すべての接続] ペインで、**[sea-svr1.contoso.com]** を選んでから、**[管理に使用する資格情報]** を選択します。
+3. **[このリリースの新機能]** ポップアップ ウィンドウを確認し、右上隅の **[閉じる]** を選択します。
+4. **[すべての接続]** ページを確認します。**sea-adm1.contoso.com** エントリが含まれていることに注目します。 
+5. **[すべての接続]** ページで、**[+ 追加]** を選択します。 
+6. リソースの追加または作成ペインの **[サーバー]** タイルで、 **[追加]** を選択します。
+7. **[サーバー名]** テキスト ボックスに、「**sea-dc1.contoso.com**」と入力します。
+8. **[Use another account for this connection](この接続に別のアカウントを使用する)** オプションが選択されていることを確かめ、次の資格情報を入力してから、 **[Add with credentials](資格情報を使用して追加)** を選択します。
 
-#### <a name="task-3-configure-windows-admin-center-extensions"></a>**[資格情報の指定]** ダイアログ ボックスで、**[この接続に別のアカウントを使用する]** オプションが選択されていることを確かめ、管理者の資格情報を入力してから **[続行]** を選択します。
+   - ユーザー名: **CONTOSO\Administrator**
+   - パスワード: **Pa55w.rd**
 
-1. **注**: シングル サインオンを実行するには、Kerberos の制約付き委任を設定する必要があります。
-1. タスク 3: Windows Admin Center 拡張機能を構成する **SEA-ADM1** 上の、Windows Admin Center を表示している Microsoft Edge ウィンドウの右上隅で、**[設定]** アイコン (歯車ホイール) を選択します。
+   > **注**: 手順 7 を実行した後、**お客様はこのサーバーを自分の接続リストに追加できますが、Microsoft 側でそれが利用可能であることを確認できません。** という内容のエラー メッセージが表示された場合、 **[追加]** を選択します。 [すべての接続] ペインで、**[sea-svr1.contoso.com]** を選んでから、**[管理に使用する資格情報]** を選択します。 **[資格情報の指定]** ダイアログ ボックスで、**[この接続に別のアカウントを使用する]** オプションが選択されていることを確かめ、管理者の資格情報を入力してから **[続行]** を選択します。
+
+   > **注**: シングル サインオンを実行するには、Kerberos の制約付き委任を設定する必要があります。
+
+#### <a name="task-3-configure-windows-admin-center-extensions"></a>タスク 3: Windows Admin Center 拡張機能を構成する
+
+1. **SEA-ADM1** 上の、Windows Admin Center を表示している Microsoft Edge ウィンドウの右上隅で、**[設定]** アイコン (歯車ホイール) を選択します。
 1. 左側のウィンドウで、**[拡張機能]** を選択します。 使用可能な拡張機能を確認します。
+1. **[セキュリティ (プレビュー)]** 拡張機能を選択して、**[インストール]** を選択します。 拡張機能がインストールされ Windows Admin Center が更新されます。
 
-   > **[セキュリティ (プレビュー)]** 拡張機能を選択して、**[インストール]** を選択します。
+   > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 
-1. 拡張機能がインストールされ Windows Admin Center が更新されます。
-1. **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
 1. 詳細ペインで、 **[インストール済みの拡張機能]** を選択し、先ほどインストールした拡張機能が一覧に含まれていることを確認します。
 1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、**[サーバー マネージャー]** を選択します。
+1. **[サーバーの接続]** ページで、**[sea-dc1.contoso.com]** リンクを選択します。
+1. **[この接続に別のアカウントを使用する]** オプションを確実に選択し、**[すべての接続にこれらの資格情報を使用する]** を選択し、次の資格情報を入力してから、**[続行]** を選択します。
 
-   - **[サーバーの接続]** ページで、**[sea-dc1.contoso.com]** リンクを選択します。
-   - **[この接続に別のアカウントを使用する]** オプションを確実に選択し、**[すべての接続にこれらの資格情報を使用する]** を選択し、次の資格情報を入力してから、**[続行]** を選択します。
+   - ユーザー名: **CONTOSO\Administrator**
+   - パスワード: **Pa55w.rd**
 
-1. ユーザー名: **CONTOSO\\Administrator** パスワード: **Pa55w.rd**
-1. DNS PowerShell ツールをインストールするには、左側のウィンドウの **[ツール]** の一覧で **[DNS]** を選択してから、**[インストール]** を選択します。
+1. DNS PowerShell ツールをインストールするには、左側のウィンドウの **[ツール]** の一覧で **[DNS]** を選択してから、**[インストール]** を選択します。 ツールのインストールには 1 分もかかりません。
+1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。
 
-#### <a name="task-4-verify-remote-administration"></a>ツールのインストールには 1 分もかかりません。
+#### <a name="task-4-verify-remote-administration"></a>タスク 4: リモート管理を確認する
 
-1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。 タスク 4: リモート管理を確認する
-1. **SEA-ADM1** 上の Windows Admin Center の左側のウィンドウにある **[ツール]** の一覧で、**[概要]** を選択します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。 左側のウィンドウの **[ツール]** の一覧を下にスクロールし、使用可能な基本的な管理ツールを確認します。
-1. **[ロールと機能]** を選択し、どのロールと機能がインストール済みとして表示されているか、またはインストール可能であるかを確認します。
-1. 下にスクロールし、 **[Telnet クライアント]** チェック ボックスをオンにしてから、ウィンドウの上部にある **[+ インストール]** を選択します。
+1. **SEA-ADM1** 上の Windows Admin Center の左側のウィンドウにある **[ツール]** の一覧で、**[概要]** を選択します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。
+1. 左側のウィンドウの **[ツール]** の一覧を下にスクロールし、使用可能な基本的な管理ツールを確認します。 **[ロールと機能]** を選択し、どのロールと機能がインストール済みとして表示されているか、またはインストール可能であるかを確認します。 下にスクロールし、 **[Telnet クライアント]** チェック ボックスをオンにしてから、ウィンドウの上部にある **[+ インストール]** を選択します。
 1. **[Install Roles and Features](役割と機能のインストール)** ペインで **[はい]** を選び、Telnet クライアントが正常にインストールされたことを確認するメッセージが表示されるのを待ちます。
 1. 左側のウィンドウの一番下にある、 **[ツール]** の一覧の下で、 **[設定]** を選択します。
 1. 右側の **[設定]** セクションで、**[リモート デスクトップ]** を選択します。
@@ -83,36 +88,38 @@ lab:
 1. [リモート デスクトップ] ウィンドウで、**[このマシンによって提示された証明書に自動的に接続する]** チェックボックスをオンにし、**[接続]** を選択します。
 1. メッセージが表示されたら、 **[確認]** を選択してから、 **[接続]** を選択します。
 1. Windows Admin Center インターフェイス内で **SEA-DC1** にリモート デスクトップを介して正常に接続したことを確認します。
+1. **[切断]** を選択します。
+1. Microsoft Edge ウィンドウを閉じます。
 
-#### <a name="task-5-administer-servers-with-remote-powershell"></a>**[切断]** を選択します。
+#### <a name="task-5-administer-servers-with-remote-powershell"></a>タスク 5: リモート PowerShell を使用してサーバーを管理する
 
-1. Microsoft Edge ウィンドウを閉じます。 
-1. タスク 5: リモート PowerShell を使用してサーバーを管理する
+1. **SEA-ADM1** 上で、**PowerShell** コンソール セッションに切り替えます。 
+1. **Windows PowerShell** コンソールで、次のコマンドを入力してから、Enter キーを押して、**SEA-DC1** への PowerShell リモート処理セッションを開始します。
 
    ```powershell
    Enter-PSSession -ComputerName SEA-DC1
    ```
-1. **SEA-ADM1** 上で、**PowerShell** コンソール セッションに切り替えます。
+1. **[SEA-DC1]** プロンプトで、次のコマンドを入力し、Enter キーを押して、アプリケーション ID サービス (AppIDSvc) の状態を表示します。
 
    ```powershell
    Get-Service -Name AppIDSvc
    ```
 
-   > **Windows PowerShell** コンソールで、次のコマンドを入力してから、Enter キーを押して、**SEA-DC1** への PowerShell リモート処理セッションを開始します。
+   > **注**: サービスが現在停止中であることを確認します。
 
-1. **[SEA-DC1]** プロンプトで、次のコマンドを入力し、Enter キーを押して、アプリケーション ID サービス (AppIDSvc) の状態を表示します。
+1. **[SEA-DC1]** プロンプトで、次のコマンドを入力し、Enter キーを押すことで、アプリケーション ID サービスを開始します。
 
    ```powershell
    Start-Service -Name AppIDSvc
    ```
-1. **注**: サービスが現在停止中であることを確認します。
+1. **[SEA-DC1]** プロンプトで、次のコマンドを入力し、Enter キーを押して、アプリケーション ID サービス (AppIDSvc) の状態を表示します。
 
    ```powershell
    Get-Service -Name AppIDSvc
    ```
 
-   > **[SEA-DC1]** プロンプトで、次のコマンドを入力し、Enter キーを押すことで、アプリケーション ID サービスを開始します。
+   > **注**: サービスが現在実行中であることを確認します。
 
-### <a name="results"></a>**[SEA-DC1]** プロンプトで、次のコマンドを入力し、Enter キーを押して、アプリケーション ID サービス (AppIDSvc) の状態を表示します。
+### <a name="results"></a>結果
 
-**注**: サービスが現在実行中であることを確認します。 結果 この演習を完了すると、Windows Admin Center がインストールされ、ラボ環境内のサーバーに接続されます。
+この演習を完了すると、Windows Admin Center がインストールされ、ラボ環境内のサーバーに接続されます。 機能のインストールや、リモート デスクトップ接続の有効化およびテストなどのリモート管理タスクを複数実行しました。 最後に、PowerShell リモート処理を使用してサービスの状態を確認して、開始しました。
