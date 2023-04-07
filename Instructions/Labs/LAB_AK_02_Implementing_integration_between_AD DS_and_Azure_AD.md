@@ -5,13 +5,13 @@ lab:
   module: 'Module 2: Implementing Identity in Hybrid Scenarios'
 ---
 
-# <a name="lab-answer-key-implementing-integration-between-ad-ds-and-azure-ad"></a>ラボの回答キー: AD DS と Azure AD の統合の実装
+# ラボの回答キー: AD DS と Azure AD の統合の実装
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20integration%20between%20AD%20DS%20and%20Azure%20AD)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20integration%20between%20AD%20DS%20and%20Azure%20AD)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-## <a name="exercise-1-preparing-azure-ad-for-ad-ds-integration"></a>演習 1: AD DS 統合のための Azure AD の準備
+## 演習 1: AD DS 統合のための Azure AD の準備
 
-#### <a name="task-1-create-a-custom-domain-in-azure"></a>タスク 1: Azure でカスタム ドメインを作成する
+#### タスク 1: Azure でカスタム ドメインを作成する
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
 1. **SEA-ADM1** で Microsoft Edge を起動し、Azure portal を参照して、Azure 資格情報で認証します。
@@ -24,7 +24,7 @@ lab:
 
    > **注**: 一般には、DNS レコードを使用してドメインを確認しますが、このラボでは検証済みドメインを使用する必要はありません。
 
-#### <a name="task-2-create-a-user-with-the-global-administrator-role"></a>タスク 2: グローバル管理者ロールを持つユーザーを作成する
+#### タスク 2: グローバル管理者ロールを持つユーザーを作成する
 
 1. **SEA-ADM1** の Azure portal 内の **[Azure Active Directory]** ページで、**[ユーザー]** を選択します。
 1. **[すべてのユーザー]** ページで、**[新しいユーザー]** を選択します。
@@ -38,7 +38,7 @@ lab:
 1. **[新しいユーザー]** ページに戻り、**[使用場所]** ドロップダウン リストの **[米国]** を選択します。
 1. **[新しいユーザー]** ページで、**[作成]** を選択します。
 
-#### <a name="task-3-change-the-password-for-the-user-with-the-global-administrator-role"></a>タスク 3: グローバル管理者ロールを持つユーザーのパスワードを変更する
+#### タスク 3: グローバル管理者ロールを持つユーザーのパスワードを変更する
 
 1. Azure portal の右上でご自分のユーザー アカウントを選択して、**[サインアウト]** を選択します。
 1. **[アカウントの選択]** ページで、**[別のアカウントを使用する]** を選択します。
@@ -48,9 +48,9 @@ lab:
 
    > **注**: 使用した複雑なパスワードは、このラボで後ほど使用するので、記録しておきます。
 
-## <a name="exercise-2-preparing-on-premises-ad-ds-for-azure-ad-integration"></a>演習 2: Azure AD 統合のためのオンプレミス AD DS の準備
+## 演習 2: Azure AD 統合のためのオンプレミス AD DS の準備
 
-#### <a name="task-1-install-idfix"></a>タスク 1: IdFix をインストールする
+#### タスク 1: IdFix をインストールする
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、**https://github.com/microsoft/idfix** を参照します。
 1. **Github** ページの **[ClickOnce の起動]** で、**[起動]** を選択します。
@@ -58,7 +58,7 @@ lab:
 1. **[アプリケーションのインストール-セキュリティの警告]** ダイアログ ボックスで、**[インストール]** を選択します。
 1. **[IdFix プライバシーステートメント]** ダイアログ ボックスで、免責事項を確認し、**[OK]** を選択します。
 
-#### <a name="task-2-run-idfix"></a>タスク 2: IdFix を実行する
+#### タスク 2: IdFix を実行する
 
 1. **IdFix** ウィンドウで、**[クエリ]** を選択します。
 1. **[スキーマの警告]** ダイアログ ボックスが表示されたら、**[はい]** を選択します。
@@ -67,9 +67,9 @@ lab:
 1. **[保留の適用]** ダイアログ ボックスで、**[はい]** を選択します。
 1. IdFix ツールを閉じます。
 
-## <a name="exercise-3-downloading-installing-and-configuring-azure-ad-connect"></a>演習 3: Azure AD Connect のダウンロード、インストール、構成
+## 演習 3: Azure AD Connect のダウンロード、インストール、構成
 
-#### <a name="task-1-install-and-configure-azure-ad-connect"></a>タスク 1: Azure AD Connect のインストールと構成
+#### タスク 1: Azure AD Connect のインストールと構成
 
 1. **SEA-ADM1** 上の、Azure portal が表示されている Microsoft Edge ウィンドウで、**[Azure Active Directory]** を参照します。
 1. **[Azure Active Directory]** ページで、**[Azure AD Connect]** を選びます。
@@ -92,9 +92,9 @@ lab:
 1. **[構成の準備完了]** ページで、アクションの一覧を確認し、**[インストール]** を選択します。
 1. **[構成が完了しました]** ページで、 **[終了]** を選択します。
 
-## <a name="exercise-4-verifying-integration-between-ad-ds-and-azure-ad"></a>演習 4: AD DS と Azure AD の統合の検証
+## 演習 4: AD DS と Azure AD の統合の検証
 
-#### <a name="task-1-verify-synchronization-in-the-azure-portal"></a>タスク 1: Azure portal で同期を検証する
+#### タスク 1: Azure portal で同期を検証する
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えます。 
 1. **Azure AD Connect** ページを更新し、**[Active Directory からのプロビジョニング]** の下の情報を確認します。
@@ -107,7 +107,7 @@ lab:
 1. **[Azure Active Directory]** ページで、**[グループ]** を選びます。
 1. Active Directory から同期されたグループの一覧に注目します。 
 
-#### <a name="task-2-verify-synchronization-in-the-synchronization-service-manager"></a>タスク 2: Synchronization Service Manager で同期を検証する
+#### タスク 2: Synchronization Service Manager で同期を検証する
 
 1. **SEA-ADM1** の **[スタート]** メニューで、**[Azure AD Connect]** を展開し、**[同期サービス]** を選択します。
 1. **[Synchronization Service Manager]** ウィンドウの **[操作]** タブで、Active Directory オブジェクトを同期するために実行されたタスクを確認します。
@@ -117,14 +117,14 @@ lab:
 
 1. **[Synchronization Service Manager]** ウィンドウを閉じます。
 
-#### <a name="task-3-update-a-user-account-in-active-directory"></a>タスク 3: Active Directory でユーザー アカウントを更新する
+#### タスク 3: Active Directory でユーザー アカウントを更新する
 
 1. **SEA-ADM1** で、サーバー マネージャーの **[ツール]** メニューから **[Active Directory ユーザーとコンピューター]** を選択します。
 1. **[Active Directory ユーザーとコンピューター]** で、**Sales** 組織単位 (OU) を展開し、**Sumesh Rajan** のプロパティを開きます。
 1. ユーザーのプロパティで、 **[組織]** タブを選択します。
 1. **[役職]** テキストボックスに「**マネージャー**」と入力し、**[OK]** を選択します。
 
-#### <a name="task-4-create-a-user-account-in-active-directory"></a>タスク 4: Active Directory でユーザー アカウントを作成する
+#### タスク 4: Active Directory でユーザー アカウントを作成する
 
 1. **[Active Directory ユーザーとコンピューター]** で、**Sales** OU のコンテキスト メニューを右クリックするか、またはこれにアクセスして、**[新規作成]**、**[ユーザー]** の順に選択します。
 1. **[新しいオブジェクト - ユーザー]** ウィンドウで、各フィールドについて次のユーザーの詳細を入力し、**[次へ]** を選択します。
@@ -136,7 +136,7 @@ lab:
 1. **"パスワード"** および **"パスワードの確認"** フィールドに「**Pa55w.rd**」と入力し、**[次へ]** を選択します。
 1. **[完了]** を選択します。
 
-#### <a name="task-5-sync-changes-to-azure-ad"></a>タスク 5: Azure AD に対する変更を同期する
+#### タスク 5: Azure AD に対する変更を同期する
 
 1. **SEA-ADM1** の **[スタート]** メニューで、**Windows PowerShell** を選択します。
 1. **Windows PowerShell** コンソールで、次のコマンドを入力しから Enter キーを押して同期をトリガーします。
@@ -147,7 +147,7 @@ lab:
 
    > **注**: 同期サイクルが開始されると、Active Directory オブジェクトが Azure AD ポータルに表示されるまでに 15 分かかることがあります。
 
-#### <a name="task-6-verify-changes-in-azure-ad"></a>タスク 6: Azure AD での変更を検証する
+#### タスク 6: Azure AD での変更を検証する
 
 1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替えて Azure portal を表示し、**[Azure Active Directory]** ページに戻ります。
 1. **[Azure Active Directory]** ページで、 **[ユーザー]** を選びます。
@@ -157,9 +157,9 @@ lab:
 1. **[すべてのユーザー]** ページで、ユーザーを **Jordan** 検索します。
 1. ユーザー **Jordan Mitchell** の [プロパティ] ページを開き、Active Directory から同期されたユーザー アカウントの属性を確認します。
 
-## <a name="exercise-5-implementing-azure-ad-integration-features-in-ad-ds"></a>演習 5 AD DS での Azure AD 統合機能の実装
+## 演習 5 AD DS での Azure AD 統合機能の実装
 
-#### <a name="task-1-enable-self-service-password-reset-in-azure"></a>タスク 1: Azure でセルフサービス パスワード リセットを有効にする
+#### タスク 1: Azure でセルフサービス パスワード リセットを有効にする
 
 1. **SEA-ADM1** 上の、Azure portal が表示されている Microsoft Edge ウィンドウで、**[Azure Active Directory]** ページを参照します。
 1. **[Azure Active Directory]** ページで、**[ライセンス]** を選びます。
@@ -180,7 +180,7 @@ lab:
 
    > **注**: パスワード リセット機能は、このラボの後半で必要な構成手順が壊れるので、有効にしないでください。
 
-#### <a name="task-2-enable-password-writeback-in-azure-ad-connect"></a>タスク 2: Azure AD Connect でパスワード ライトバックを有効にする
+#### タスク 2: Azure AD Connect でパスワード ライトバックを有効にする
 
 1. **SEA-ADM1** の **[スタート]** メニューで、**[Azure AD Connect]** を展開し、**[Azure AD Connect]** を選択します。
 1. **[Microsoft Azure Active Directory Connect]** ウィンドウで、**[構成]** を選択します。
@@ -195,7 +195,7 @@ lab:
 1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、**[構成]** を選択します。
 1. **[構成が完了しました]** ページで、 **[終了]** を選択します。
 
-#### <a name="task-3-enable-pass-through-authentication-in-azure-ad-connect"></a>タスク 3: Azure AD Connect でパススルー認証を有効にする
+#### タスク 3: Azure AD Connect でパススルー認証を有効にする
 
 1. **SEA-ADM1** の **[スタート]** メニューで、**[Azure AD Connect]** を展開し、**[Azure AD Connect]** を選択します。
 1. **[Microsoft Azure Active Directory Connect]** ウィンドウで、**[構成]** を選択します。
@@ -213,7 +213,7 @@ lab:
 1. **[構成の準備完了]** ページで、実行するアクションの一覧を確認し、**[構成]** を選択します。
 1. **[構成が完了しました]** ページで、 **[終了]** を選択します。
 
-#### <a name="task-4-verify-pass-through-authentication-in-azure"></a>タスク 4: Azure でパススルー認証を検証する
+#### タスク 4: Azure でパススルー認証を検証する
 
 1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替えて Azure portal を表示し、**[Azure Active Directory]** ページに戻ります。
 1. Azure portal 内の** [Azure Active Directory]** ページで、**[Azure AD Connect]** を選択します。
@@ -226,7 +226,7 @@ lab:
 
    > **注**: Azure AD Authentication エージェントを環境内の複数のサーバーにインストールするには、Azure portal の **[パススルー認証]** ページからバイナリーをダウンロードします。 
 
-#### <a name="task-5-install-and-register-the-azure-ad-password-protection-proxy-service-and-dc-agent"></a>タスク 5: Azure AD パスワード保護プロキシ サービスと DC エージェントをインストールして登録する
+#### タスク 5: Azure AD パスワード保護プロキシ サービスと DC エージェントをインストールして登録する
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、Microsoft ダウンロード Web サイトに移動し、インストーラーをダウンロードできる「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページを参照して、**[ダウンロード]** を選択します。
 1. 「**Windows Server Active Directory 用 Azure AD パスワード保護**」のページで **AzureADPasswordProtectionProxySetup.exe** と **AzureADPasswordProtectionDCAgentSetup.msi** ファイルを選び、**[次へ]** を選択します。
@@ -305,7 +305,7 @@ lab:
    Exit-PSsession
    ```
 
-#### <a name="task-6-enable-password-protection-in-azure"></a>タスク 6: Azure でパスワード保護を有効にする
+#### タスク 6: Azure でパスワード保護を有効にする
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替え、**[Azure Active Directory]** ページに戻り、**[Azure Active Directory]** ページで **[セキュリティ]** を選択します。
 1. **[セキュリティ]** ページで、**[認証方法]** を選択します。
@@ -321,9 +321,9 @@ lab:
 1. **[Windows Server Active Directory でパスワード保護を有効にする]** のスライダーが **[はい]** に設定されていることを確認します。
 1. **[モード]** のスライダーが **[監査]** に設定されていることを確認し、**[保存]** を選択します。
 
-## <a name="exercise-6-cleaning-up"></a>演習 6: クリーンアップ
+## 演習 6: クリーンアップ
 
-#### <a name="task-1-uninstall-azure-ad-connect"></a>タスク 1 Azure AD Connect のアンインストール
+#### タスク 1 Azure AD Connect のアンインストール
 
 1. **SEA-ADM1** の **[スタート]** メニューで、**[コントロール パネル]** を選択します。
 1. **[コントロール パネル]** ウィンドウの **[プログラム]** で、**[プログラムのアンインストール]** をクリックします。
@@ -332,7 +332,7 @@ lab:
 1. **[Azure AD Connect のアンインストール]** ウィンドウで、**[削除]** を選択します。
 1. Azure AD Connect がアンインストールされたら、**[Azure AD Connect のアンインストール]** ウィンドウで **[終了]** を選択します。
 
-#### <a name="task-2-disable-directory-synchronization-in-azure"></a>タスク 2: Azure でディレクトリ同期を無効にする
+#### タスク 2: Azure でディレクトリ同期を無効にする
 
 1. **SEA-ADM1** 上で、**Windows PowerShell** コンソール ウィンドウに切り替えます。
 1. **Windows PowerShell** コンソールで、次のコマンドを入力し、Enter キーを押して、Azure AD 用の Microsoft Online モジュールをインストールします。

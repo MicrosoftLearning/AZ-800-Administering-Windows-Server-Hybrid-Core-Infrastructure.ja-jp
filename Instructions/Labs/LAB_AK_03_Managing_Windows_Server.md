@@ -5,13 +5,13 @@ lab:
   module: 'Module 3: Windows Server administration'
 ---
 
-# <a name="lab-answer-key-managing-windows-server"></a>ラボの回答キー: Windows Server の管理
+# ラボの回答キー: Windows Server の管理
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Managing%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Managing%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-## <a name="exercise-1-implementing-and-using-remote-server-administration"></a>演習 1: リモート サーバー管理の実装と使用
+## 演習 1: リモート サーバー管理の実装と使用
 
-#### <a name="task-1-install-windows-admin-center"></a>タスク 1: Windows Admin Center をインストールする
+#### タスク 1: Windows Admin Center をインストールする
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
 1. **SEA-ADM1** 上で **[スタート]** を選択し、**[Windows PowerShell (管理者)]** を選択します。
@@ -30,7 +30,7 @@ lab:
    
    > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
 
-#### <a name="task-2-add-servers-for-remote-administration"></a>タスク 2: リモート管理用のサーバーを追加する
+#### タスク 2: リモート管理用のサーバーを追加する
 
 1. **SEA-ADM1** で Microsoft Edge を開始して、`https://SEA-ADM1.contoso.com` にアクセスします。
 
@@ -57,7 +57,7 @@ lab:
 
    > **注**: シングル サインオンを実行するには、Kerberos の制約付き委任を設定する必要があります。
 
-#### <a name="task-3-configure-windows-admin-center-extensions"></a>タスク 3: Windows Admin Center 拡張機能を構成する
+#### タスク 3: Windows Admin Center 拡張機能を構成する
 
 1. **SEA-ADM1** 上の、Windows Admin Center を表示している Microsoft Edge ウィンドウの右上隅で、**[設定]** アイコン (歯車ホイール) を選択します。
 1. 左側のウィンドウで、**[拡張機能]** を選択します。 使用可能な拡張機能を確認します。
@@ -76,7 +76,7 @@ lab:
 1. DNS PowerShell ツールをインストールするには、左側のウィンドウの **[ツール]** の一覧で **[DNS]** を選択してから、**[インストール]** を選択します。 ツールのインストールには 1 分もかかりません。
 1. **Contoso.com** ゾーンを選択し、その DNS レコードの一覧を確認します。
 
-#### <a name="task-4-verify-remote-administration"></a>タスク 4: リモート管理を確認する
+#### タスク 4: リモート管理を確認する
 
 1. **SEA-ADM1** 上の Windows Admin Center の左側のウィンドウにある **[ツール]** の一覧で、**[概要]** を選択します。 Windows Admin Center の詳細ウィンドウには、基本的なサーバー情報とパフォーマンスの監視が表示されます。
 1. 左側のウィンドウの **[ツール]** の一覧を下にスクロールし、使用可能な基本的な管理ツールを確認します。 **[ロールと機能]** を選択し、どのロールと機能がインストール済みとして表示されているか、またはインストール可能であるかを確認します。 下にスクロールし、 **[Telnet クライアント]** チェック ボックスをオンにしてから、ウィンドウの上部にある **[+ インストール]** を選択します。
@@ -91,7 +91,7 @@ lab:
 1. **[切断]** を選択します。
 1. Microsoft Edge ウィンドウを閉じます。
 
-#### <a name="task-5-administer-servers-with-remote-powershell"></a>タスク 5: リモート PowerShell を使用してサーバーを管理する
+#### タスク 5: リモート PowerShell を使用してサーバーを管理する
 
 1. **SEA-ADM1** 上で、**PowerShell** コンソール セッションに切り替えます。 
 1. **Windows PowerShell** コンソールで、次のコマンドを入力してから、Enter キーを押して、**SEA-DC1** への PowerShell リモート処理セッションを開始します。
@@ -120,6 +120,6 @@ lab:
 
    > **注**: サービスが現在実行中であることを確認します。
 
-### <a name="results"></a>結果
+### 結果
 
 この演習を完了すると、Windows Admin Center がインストールされ、ラボ環境内のサーバーに接続されます。 機能のインストールや、リモート デスクトップ接続の有効化およびテストなどのリモート管理タスクを複数実行しました。 最後に、PowerShell リモート処理を使用してサービスの状態を確認して、開始しました。

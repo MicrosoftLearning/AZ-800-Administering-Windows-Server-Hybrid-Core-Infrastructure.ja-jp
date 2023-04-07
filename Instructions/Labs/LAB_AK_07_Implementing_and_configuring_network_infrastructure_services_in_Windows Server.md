@@ -5,13 +5,13 @@ lab:
   module: 'Module 7: Network Infrastructure services in Windows Server'
 ---
 
-# <a name="lab-answer-key-implementing-and-configuring-network-infrastructure-services-in-windows-server"></a>ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
+# ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20network%20infrastructure%20services%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20network%20infrastructure%20services%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-## <a name="exercise-1-deploying-and-configuring-dhcp"></a>演習 1: DHCP の展開と構成
+## 演習 1: DHCP の展開と構成
 
-#### <a name="task-1-install-the-dhcp-role"></a>タスク 1: DHCP 役割をインストールする
+#### タスク 1: DHCP 役割をインストールする
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
 1. **SEA-ADM1** 上で **[スタート]** を選択し、**[Windows PowerShell (管理者)]** を選択します。
@@ -65,7 +65,7 @@ lab:
 
 11. DHCP PowerShell ツールがインストールされていることを知らせる通知を待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
 
-#### <a name="task-2-authorize-the-dhcp-server"></a>タスク 2: DHCP サーバーを承認する
+#### タスク 2: DHCP サーバーを承認する
 
 1. **SEA-ADM1** で、**[スタート]** を選択してから、**[サーバー マネージャー]** を選びます。
 1. **[サーバー マネージャー]** で、メニューの **[通知]** を選択してから、**[DHCP 構成を完了する]** を選びます。
@@ -73,7 +73,7 @@ lab:
 1. **[承認]** 画面で、**CONTOSO\Administrator** オプションが選択されていることを確実にしてから **[コミット]** を選択します。
 1. 両方のタスクが完了したら、**[閉じる]** を選択します。
 
-#### <a name="task-3-create-a-scope"></a>タスク 3: スコープを作成する
+#### タスク 3: スコープを作成する
 
 1. **SEA-ADM1** で、**SEA-SVR1** の **[DHCP]** 設定が表示されている Microsoft Edge ウィンドウの Windows Admin Center に切り替えます。
 
@@ -100,7 +100,7 @@ lab:
 1. **[スコープ オプション]** ダイアログ ボックスで、**[006 DNS サーバー]** チェックボックスをオンにします。
 1. **[サーバー名]** テキスト ボックスに「**sea-dc1.contoso.com**」と入力し、**[解決]** を選択して、名前が **172.16.10.10** に解決されていることを確認し、**[追加]**、**[OK]** の順に選択します。
 
-#### <a name="task-4-configure-dhcp-failover"></a>タスク 4: DHCP フェールオーバーを構成する
+#### タスク 4: DHCP フェールオーバーを構成する
 
 1. **SEA-ADM1** の **[DHCP]** ウィンドウで、**[IPv4]** を選び、[操作] ペインで **[その他の操作]** を選択してから、**[フェールオーバーの構成]** を選びます。
 1. **[フェールオーバーの構成]** ウィンドウで、**[すべて選択]** チェックボックスがオンになっていることを確認してから **[次へ]** を選択します。
@@ -130,7 +130,7 @@ lab:
 1. **[フェールオーバーの構成]** ダイアログ ボックスで、**[閉じる]** を選択します。
 1. **sea-svr1 ** で **[IPv4]** を選択してから、両方のスコープが一覧表示されていることを確認します。 必要に応じて、**F5** キーを押して更新します。
 
-#### <a name="task-5-verify-dhcp-functionality"></a>タスク 5: DHCP 機能を確認する
+#### タスク 5: DHCP 機能を確認する
 
 1. **SEA-ADM1** で、**[スタート]** を選択してから、**[設定]** を選択します。
 1. **[設定]** ウィンドウで **[ネットワークとインターネット]** を選択し、**[ネットワークと共有センター]** を選びます。
@@ -163,9 +163,9 @@ lab:
 
    > **注**: **[イーサネットの状態]** ウィンドウは開いたままにしておきます。 このラボで後ほど必要になります。 
 
-## <a name="exercise-2-deploying-and-configuring-dns"></a>演習 2: DNS の展開と構成
+## 演習 2: DNS の展開と構成
 
-#### <a name="task-1-install-the-dns-role"></a>タスク 1: DNS 役割をインストールする
+#### タスク 1: DNS 役割をインストールする
 
 1. **SEA-ADM1** で、Windows Admin Center の **sea-svr1.contoso.com** への接続が表示されている Microsoft Edge ウィンドウに戻ります。 
 1. **[ツール]** リストで、**[役割と機能]** を選択します。
@@ -180,7 +180,7 @@ lab:
 
 1. DNS PowerShell ツールがインストールされていることを示す通知が表示されるまで待ちます。 必要に応じて、**[通知]** アイコンを選択して現在の状態を確認します。
 
-#### <a name="task-2-create-a-dns-zone"></a>タスク 2: DNS ゾーンを作成する
+#### タスク 2: DNS ゾーンを作成する
 
 1. **SEA-ADM1** の Windows Admin Center で、[DNS] ペインの **[操作]** を選択し、**[操作]** メニューの **[+ 新しい DNS ゾーンの作成]** を選択します。
 1. **[新しい DNS ゾーンの作成]** ダイアログ ボックスで、以下の設定を指定してから、**[作成]** を選択します。
@@ -206,7 +206,7 @@ lab:
    Resolve-DnsName -Server sea-svr1.contoso.com -Name testapp.treyresearch.net
    ```
 
-#### <a name="task-3-configure-forwarding"></a>タスク 3: 転送を構成する
+#### タスク 3: 転送を構成する
 
 1. **SEA-ADM1** で、サーバー マネージャーに切り替えます。
 1. サーバー マネージャーで、**[ツール]** を選択してから、**[DNS]** を選びます。
@@ -217,7 +217,7 @@ lab:
 1. **[フォワーダーの編集]** ダイアログ ボックスの **[転送サーバーの IP アドレス]** ボックスに「**131.107.0.100**」と入力ししてから、**[OK]** を選択します。
 1. **[SEA-SVR1.contoso.com のプロパティ]** ダイアログ ボックスで、**[OK]** を選択します。
 
-#### <a name="task-4-configure-conditional-forwarding"></a>タスク 4: 条件付き転送を構成する
+#### タスク 4: 条件付き転送を構成する
 
 1. **SEA-ADM1** の **[DNS マネージャー]** で、**[SEA-SVR1.contoso.com]** を展開し、**[条件付きフォワーダー]** を選択します。
 1. **[条件付きフォワーダー]** を選択し、その状況依存のメニューを表示してから、メニューで **[新しい条件付きフォワーダー]** を選択します。
@@ -234,7 +234,7 @@ lab:
    Resolve-DnsName -Server sea-svr1.contoso.com -Name sea-dc1.contoso.com
    ```
 
-#### <a name="task-5-configure-dns-policies"></a>タスク 5: DNS ポリシーを構成する
+#### タスク 5: DNS ポリシーを構成する
 
 1. **SEA-ADM1** で、Windows Admin Center の **sea-svr1.contoso.com** への接続が表示されている Microsoft Edge ウィンドウに戻ります。
 1. **[ツール]** リストで **[PowerShell]** を選択し、メッセージが表示されたら、パスワード **Pa55w.rd** を使用して **CONTOSO\Administrator** ユーザーとしてサインインします。
@@ -259,7 +259,7 @@ lab:
    Add-DnsServerQueryResolutionPolicy -Name 'HeadOfficePolicy' -Action ALLOW -ClientSubnet 'eq,HeadOfficeSubnet' -ZoneScope 'HeadOfficeScope,1' -ZoneName 'TreyResearch.net'
    ```
 
-#### <a name="task-6-verify-dns-policy-functionality"></a>タスク 6: DNS ポリシー機能を確認する
+#### タスク 6: DNS ポリシー機能を確認する
 
 1. **SEA-ADM1** で、**Windows PowerShell** コンソールに切り替えます。
 1. **Windows PowerShell**コンソールで、「`ipconfig`」と入力してから、Enter キーを押して現在の IP 構成を表示します。
