@@ -5,13 +5,13 @@ lab:
   module: 'Module 8: Implementing Windows Server IaaS VM networking'
 ---
 
-# <a name="lab-answer-key-implementing-hybrid-networking-infrastructure"></a>ラボの回答キー: ハイブリッド ネットワーク インフラストラクチャの実装
+# ラボの回答キー: ハイブリッド ネットワーク インフラストラクチャの実装
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20hybrid%20networking%20infrastructure)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20hybrid%20networking%20infrastructure)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-### <a name="exercise-1-implement-virtual-network-routing-in-azure"></a>演習 1: Azure で仮想ネットワーク ルーティングを実装する
+### 演習 1: Azure で仮想ネットワーク ルーティングを実装する
 
-#### <a name="task-1-provision-lab-infrastructure-resources"></a>タスク 1: ラボ インフラストラクチャ リソースをプロビジョニングする
+#### タスク 1: ラボ インフラストラクチャ リソースをプロビジョニングする
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
 1. **SEA-ADM1** で Microsoft Edge を起動し、**[Azure portal](https://portal.azure.com)** に移動し、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
@@ -62,7 +62,7 @@ lab:
 
     >**注**: デプロイが完了するのを待たず、代わりに次の手順に進んでください。 Network Watcher 拡張機能のインストールには 5 分ほどかかります。
 
-#### <a name="task-2-configure-the-hub-and-spoke-network-topology"></a>タスク 2: ハブ アンド スポーク ネットワーク トポロジを構成する
+#### タスク 2: ハブ アンド スポーク ネットワーク トポロジを構成する
 
 1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、**[Azure portal](https://portal.azure.com)** に移動します。
 1. Azure portal で、ツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、**[仮想ネットワーク]** を検索して選択します。
@@ -107,7 +107,7 @@ lab:
 
     >**注**: この手順で、2 つのピアリング (1 つは **az800l08-vnet0** から **az800l08-vnet2** へ、もう 1 つは **az800l08-vnet2** から **az800l08-vnet0**へ) を確立します。 これでハブ アンド スポーク トポロジの設定は完了です (**az800l08-vnet0** 仮想ネットワークがハブの役割を果たし、**az800l08-vnet1** と **az800l08-vnet2** はそのスポークです)。
 
-#### <a name="task-3-test-transitivity-of-virtual-network-peering"></a>タスク 3: 仮想ネットワーク ピアリングの推移性をテストする
+#### タスク 3: 仮想ネットワーク ピアリングの推移性をテストする
 
 >**注**: このタスクを開始する前に、この演習の最初のタスクで呼び出したスクリプトが正常に完了したことを確認します。
 
@@ -170,7 +170,7 @@ lab:
 
     > **注**: 2 つのスポーク仮想ネットワークが相互にピアリングされておらず、仮想ネットワーク ピアリングが推移的ではないことから、このようになります。
 
-#### <a name="task-4-configure-routing-in-the-hub-and-spoke-topology"></a>タスク 4: ハブ アンド スポーク トポロジでルーティングを構成する
+#### タスク 4: ハブ アンド スポーク トポロジでルーティングを構成する
 
 1. Azure portal で、「**仮想マシン**」を検索して選びます。
 1. **[仮想マシン]** ページで、仮想マシンの一覧から **az800l08-vm0** を選びます。
@@ -299,9 +299,9 @@ lab:
     > **注**: スポーク仮想ネットワーク間のトラフィックが、ルーターとして機能するハブ仮想ネットワーク内にある仮想マシンを経由するようになったことから、このようになります。
 
 
-### <a name="exercise-2-implement-dns-name-resolution-in-azure"></a>演習 2: Azure で DNS 名前解決を実装する
+### 演習 2: Azure で DNS 名前解決を実装する
 
-#### <a name="task-1-configure-azure-private-dns-name-resolution"></a>タスク 1: Azure プライベート DNS 名前解決を構成する
+#### タスク 1: Azure プライベート DNS 名前解決を構成する
 
 1. **SEA-ADM1** 上で Microsoft Edge ウィンドウに Azure portal を表示し、ツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**プライベート DNS ゾーン**」を検索して選び、**[プライベート DNS ゾーン]** ページで、**[+ 作成]** を選びます。
 1. 次の設定でプライベート DNS ゾーンを作成します。
@@ -336,7 +336,7 @@ lab:
 
     >**注:** レコード セットが一覧に表示されない場合は、必要に応じて数分待ってからページを更新してください。
 
-#### <a name="task-2-validate-azure-private-dns-name-resolution"></a>タスク 2: Azure プライベート DNS 名前解決を検証する
+#### タスク 2: Azure プライベート DNS 名前解決を検証する
 
 1. **SEA-ADM1** で、Azure portal を表示する Microsoft Edge ウィンドウで、**[Network Watcher - 接続のトラブルシューティング]** ページに戻ります。
 1. **[Network Watcher - 接続のトラブルシューティング]** ページで、次の設定でチェックを開始します (その他は既定値のままにします)。
@@ -357,7 +357,7 @@ lab:
 
     > **注**: ターゲットの完全修飾ドメイン名 (FQDN) が Azure プライベート DNS ゾーンを介して解決可能であることから、このようになります。 
 
-#### <a name="task-3-configure-azure-public-dns-name-resolution"></a>タスク 3: Azure パブリック DNS 名前解決を構成する
+#### タスク 3: Azure パブリック DNS 名前解決を構成する
 
 1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、新しいタブを開き、**https://www.godaddy.com/domains/domain-name-search** に移動します。
 1. ドメイン名検索を使って、現在使われていないドメイン名を特定します。
@@ -394,7 +394,7 @@ lab:
 
     >**注**: **ネームサーバー 1** の完全な名前をメモします。 これは、次のタスクで必要になります。
 
-#### <a name="task-4-validate-azure-public-dns-name-resolution"></a>タスク 4: Azure パブリック DNS 名前解決を検証する
+#### タスク 4: Azure パブリック DNS 名前解決を検証する
 
 1. **SEA-ADM1** の **[スタート]** メニューで、**Windows PowerShell** を選択します。
 1. **Windows PowerShell** コンソールで次のコマンドを入力し、Enter キーを押して新しく作成した DNS ゾーンの **www** DNS レコード セットの外部名前解決をテストします (プレースホルダー `<Name server 1>` は、このタスクで先ほどメモしたこのタスクの**ネーム サーバー 1** の名前に置き換えます。また、`<domain name>` プレースホルダーは、このタスクで先ほど作成した DNS ドメイン名に置き換えます)。
@@ -407,14 +407,14 @@ lab:
 
     >**注**: **nslookup** コマンドでは、レコードのクエリを実行する DNS サーバーの IP アドレスを指定できるため、名前解決は期待どおりに動作します (ここでは `<Name server 1>` とします)。 一般にアクセス可能な DNS サーバーに対してクエリを実行して名前解決を行うには、DNS レジストラーにドメイン名を登録し、Azure portal のパブリック DNS ゾーン ページに記載されているネーム サーバーを、そのドメインに対応する名前空間の権限として構成する必要があります。
 
-## <a name="exercise-3-deprovisioning-the-azure-environment"></a>演習 3: Azure 環境のプロビジョニング解除
+## 演習 3: Azure 環境のプロビジョニング解除
 
-#### <a name="task-1-start-a-powershell-session-in-cloud-shell"></a>タスク 1: Cloud Shell で PowerShell セッションを開始する
+#### タスク 1: Cloud Shell で PowerShell セッションを開始する
 
 1. **SEA-ADM1** で、Azure portal が表示されている Microsoft Edge ウィンドウに切り替えます。
 1. Azure portal が表示されている Microsoft Edge ウィンドウで、[Cloud Shell] アイコンを選択して [Cloud Shell] ウィンドウを開きます。
 
-#### <a name="task-2-identify-all-azure-resources-provisioned-in-the-lab"></a>タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
+#### タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
 
 1. [Cloud Shell] ページで次のコマンドを実行して、このラボで作成されたすべてのリソース グループのリストを表示します。
 

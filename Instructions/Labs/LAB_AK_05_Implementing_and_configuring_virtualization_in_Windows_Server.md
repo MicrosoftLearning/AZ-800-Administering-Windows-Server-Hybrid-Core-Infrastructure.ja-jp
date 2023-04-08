@@ -5,13 +5,13 @@ lab:
   module: 'Module 5: Hyper-V virtualization in Windows Server'
 ---
 
-# <a name="lab-answer-key-implementing-and-configuring-virtualization-in-windows-server"></a>ラボの回答キー: Windows Server での仮想化の実装と構成
+# ラボの回答キー: Windows Server での仮想化の実装と構成
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20virtualization%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20virtualization%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-### <a name="exercise-1-creating-and-configuring-vms"></a>演習 1: VM の作成と構成
+### 演習 1: VM の作成と構成
 
-#### <a name="task-1-create-a-hyper-v-virtual-switch"></a>タスク 1: Hyper-V 仮想スイッチを作成する
+#### タスク 1: Hyper-V 仮想スイッチを作成する
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
 1. **SEA-ADM1** で、**[スタート]** を選択してから、**[サーバー マネージャー]** を選びます。
@@ -25,7 +25,7 @@ lab:
    - 名前: **Contoso Private Switch**
    - 接続の種類: **プライベート ネットワーク**
 
-#### <a name="task-2-create-a-virtual-hard-disk"></a>タスク 2: 仮想ハード ディスクを作成する
+#### タスク 2: 仮想ハード ディスクを作成する
 
 1. **SEA-ADM1** の **SEA-SVR1** に接続されている Hyper-V マネージャーで、**[新規]** を選択してから、**[ハード ディスク]** を選びます。 **仮想ハード ディスクの新規作成ウィザード**が開始されます。
 1. **[開始する前に]** ページで、 **[次へ]** を選択します。
@@ -39,7 +39,7 @@ lab:
 1. **[ディスクの構成]** ページの **[場所]** ボックスに、「**C:\Base\BaseImage.vhd**」と入力してから **[次へ]** を選択します。
 1. **[要約]** ページで、**[完了]** を選択します。
 
-#### <a name="task-3-create-a-virtual-machine"></a>タスク 3: 仮想マシンを作成する
+#### タスク 3: 仮想マシンを作成する
 
 1. **SEA-ADM1** の Hyper-V マネージャーで、**[新規]** を選択し、**[仮想マシン]** を選びます。 **[仮想マシンの新規作成ウィザード]** が起動します。
 1. **[開始する前に]** ページで、 **[次へ]** を選択します。
@@ -57,7 +57,7 @@ lab:
 1. **[最大 RAM]** の横に「**4096**」と入力し、**[OK]** を選択します。
 1. Hyper-V マネージャーを閉じます。
 
-#### <a name="task-4-manage-virtual-machines-using-windows-admin-center"></a>タスク 4: Windows Admin Center を使用して仮想マシンを管理する
+#### タスク 4: Windows Admin Center を使用して仮想マシンを管理する
 
 1. **SEA-ADM1** で **[スタート]** を選択してから、**[Windows PowerShell (管理者)]** を選びます。
 
@@ -112,13 +112,13 @@ lab:
 17. ページを更新し、 **[電源]** を選び、 **[シャットダウン]** を選択してから、 **[はい]** を選んで確定します。
 18. **[ツール]** リストで、**[仮想スイッチ]** を選択し、既存のスイッチを特定します。
 
-### <a name="exercise-1-results"></a>演習 1 の結果
+### 演習 1 の結果
 
 この演習が完了すると、Hyper-V マネージャーと Windows Admin Center を使用して、仮想スイッチ、仮想ハード ディスク、仮想マシンを作成し、その仮想マシンを管理したことになります。
 
-### <a name="exercise-2-installing-and-configuring-containers"></a>演習 2: コンテナーのインストールと構成
+### 演習 2: コンテナーのインストールと構成
 
-#### <a name="task-1-install-docker-on-windows-server"></a>タスク 1: Windows Server に Docker をインストールする
+#### タスク 1: Windows Server に Docker をインストールする
 
 1. **SEA-ADM1** で、**SEA-SVR1** の **[ツール]** リストの **[PowerShell]** を選択します。 メッセージが表示されたら、「**Pa55w.rd**」と入力して **CONTOSO\Administrator** ユーザー アカウントを使用して認証してから、Enter キーを押します。 
 
@@ -158,7 +158,7 @@ lab:
    Restart-Computer -Force
    ```
 
-#### <a name="task-2-install-and-run-a-windows-container"></a>タスク 2: Windows コンテナーをインストールして実行する
+#### タスク 2: Windows コンテナーをインストールして実行する
 
 1. **SEA-SVR1** が再起動した後、PowerShell ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
 1. **Windows PowerShell** コンソールで次のコマンドを入力し、Enter キーを押して、インストールされている Docker のバージョンを確認します。
@@ -222,11 +222,11 @@ lab:
    docker ps
    ```
 
-#### <a name="task-3-use-windows-admin-center-to-manage-containers"></a>タスク 3: Windows Admin Center を使用してコンテナーを管理する
+#### タスク 3: Windows Admin Center を使用してコンテナーを管理する
 
 1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com**の [ツール] メニューの **[コンテナー]** を選択します。 **PowerShell** セッションを閉じるように求められたら、 **[続行]** を選択します。
 1. コンテナー ペインで、 **[要約]** 、 **[コンテナー]** 、 **[イメージ]** 、 **[ネットワーク]** 、 **[ボリューム]** の各タブを参照します。
 
-### <a name="exercise-2-results"></a>演習 2 の結果
+### 演習 2 の結果
 
 この演習が完了すると、Windows Server に Docker をインストールし、Web サービスを含む Windows コンテナー イメージをダウンロードして、その機能を確認したことになります。

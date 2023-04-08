@@ -5,13 +5,13 @@ lab:
   module: 'Module 6: Deploying and Configuring Azure VMs'
 ---
 
-# <a name="lab-answer-key-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ回答キー: Azure VM での Windows Server のデプロイと構成
+# ラボ回答キー: Azure VM での Windows Server のデプロイと構成
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Deploying%20and%20configuring%20Windows%20Server%20on%20Azure%20VMs)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Deploying%20and%20configuring%20Windows%20Server%20on%20Azure%20VMs)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-## <a name="exercise-1-authoring-azure-resource-manager-arm-templates-for-azure-vm-deployment"></a>演習 1: Azure VM デプロイ用の Azure Resource Manager (ARM) テンプレートの作成
+## 演習 1: Azure VM デプロイ用の Azure Resource Manager (ARM) テンプレートの作成
 
-#### <a name="task-1-connect-to-your-azure-subscription-and-enable-enhanced-security-of-microsoft-defender-for-cloud"></a>タスク 1: Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化を有効にする
+#### タスク 1: Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化を有効にする
 
 このタスクでは、Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化機能を有効にします。
 
@@ -23,7 +23,7 @@ lab:
 3. Azure portal のツール バーにある **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**Microsoft Defender for Cloud**」を検索して選択します。
 4. **[Microsoft Defender for Cloud \| 使用開始]** ページで、**[アップグレード]** を選択し、**[エージェントのインストール]** を選択します。
 
-#### <a name="task-2-generate-an-arm-template-and-parameters-files-by-using-the-azure-portal"></a>タスク 2: Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する
+#### タスク 2: Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する
 
 このタスクでは、Azure portal を使用してリソース グループを作成し、そのリソース グループにディスクを作成します。
 
@@ -82,7 +82,7 @@ lab:
 
    >**注**: 仮想マシンは作成しないでください。 この目的で、自動生成されたテンプレートを使用します。
 
-#### <a name="task-3-download-the-arm-template-and-parameters-files-from-the-azure-portal"></a>タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
+#### タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
 
 1. Azure portal の「**仮想マシンの作成**」ページで、**[オートメーション用のテンプレートをダウンロードする]** を選択します。
 1. 「**テンプレート**」ページで **[ダウンロード]** を選択します。
@@ -90,9 +90,9 @@ lab:
 1. エクスプローラーで、**template.zip** を **SEA-ADM1** の **C:\\Labfiles\\Lab06** フォルダーにコピーします (必要に応じて新しいフォルダーを作成します)。
 1. 「**テンプレート**」ページから「**仮想マシンの作成**」ページに戻り、デプロイを完了せずに閉じます。
 
-## <a name="exercise-2-modifying-arm-templates-to-include-vm-extension-based-configuration"></a>演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
+## 演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
 
-#### <a name="task-1-review-the-arm-template-and-parameters-files-for-azure-vm-deployment"></a>タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
+#### タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
 
 1. **SEA-ADM1** で、エクスプローラーを開始し、**C:\\Labfiles\\Lab06** フォルダーを参照します。
 1. **template.zip** ファイルの内容を同じフォルダーに抽出します。
@@ -100,7 +100,7 @@ lab:
 1. エクスプローラーから、メモ帳で **C:\\Labfiles\\Lab06\\parameters.json** ファイルを開き、その内容を確認します。
 1. **parameters.json** ファイルが表示されているメモ帳ウィンドウを閉じます。
 
-#### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
+#### タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
 1. **SEA-ADM1** の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
    >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
@@ -128,9 +128,9 @@ lab:
 
 1. 変更を保存して、ファイルを閉じます。
 
-## <a name="exercise-3-deploying-azure-vms-running-windows-server-by-using-arm-templates"></a>演習 3: ARM テンプレートを使用して Windows Server を実行している Azure VM をデプロイする
+## 演習 3: ARM テンプレートを使用して Windows Server を実行している Azure VM をデプロイする
 
-#### <a name="task-1-deploy-an-azure-vm-by-using-an-arm-template"></a>タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
+#### タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
 
 1. **SEA-ADM1** で、Azure portal が表示されているブラウザー ウィンドウに切り替えます。
 1. Azure portal のツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**カスタム テンプレートのデプロイ**」を検索して選択します。
@@ -153,7 +153,7 @@ lab:
 
 1. デプロイが正常に完了したことを確認します。
 
-#### <a name="task-2-review-results-of-the-azure-vm-deployment"></a>タスク 2: Azure VM のデプロイの結果を確認する
+#### タスク 2: Azure VM のデプロイの結果を確認する
 
 1. Azure portal のツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**リソース グループ**」を検索して選択します。
 1. 「**リソース グループ**」ページで、**[AZ800-L0601-RG]** エントリを選択します。
@@ -164,9 +164,9 @@ lab:
 1. 「**AZ800-L0601-RG \| デプロイ**」ページで、**[Microsoft.Template]** リンクを選択します。
 1. **[Microsoft.Template \| 概要]** ページで、**[テンプレート]** を選択します。これは、デプロイに使用したテンプレートと同じであることに注意してください。
 
-## <a name="exercise-4-configuring-administrative-access-to-azure-vms-running-windows-server"></a>演習 4: Windows Server を実行している Azure VM への管理アクセスの構成
+## 演習 4: Windows Server を実行している Azure VM への管理アクセスの構成
 
-#### <a name="task-1-verify-the-status-of-azure-microsoft-defender-for-cloud"></a>タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
+#### タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
 
 1. Azure portal のツール バーにある **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**Microsoft Defender for Cloud**」を検索して選択します。
 1. Microsoft Defender for Cloud の **[概要]** ページで、左側の垂直メニューの **[管理]** セクションの、**[環境設定]** を選択します。 
@@ -176,7 +176,7 @@ lab:
 4. **[自動プロビジョニング構成]** の**ワークスペースの選択**で、**既定のワークスペース** エントリが選択されていることを確実にし、 **[適用]** を選択し、 **[設定と監視]** ページに戻り、 **[続行]** を選択します。
 5. **[設定 \| Defender プラン]** ページで、 **[保存]** を選択します。
 
-#### <a name="task-2-review-the-just-in-time-vm-access-settings"></a>タスク 2:Just-In-Time VM アクセスの設定を確認する
+#### タスク 2:Just-In-Time VM アクセスの設定を確認する
 
 1. Microsoft Defender for Cloud の **[概要]** ページに戻り、**[クラウド セキュリティ]** セクションで、**[ワークロードの保護]** を選択します。
 1. **[Microsoft Defender for Cloud \| ワークロードの保護]** ページで、 **[Just In Time VM アクセス]** を選択します。
@@ -184,9 +184,9 @@ lab:
 
    >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
 
-## <a name="exercise-5-configuring-windows-server-security-in-azure-vms"></a>演習 5: Azure VM での Windows Server のセキュリティの構成
+## 演習 5: Azure VM での Windows Server のセキュリティの構成
 
-#### <a name="task-1-create-and-configure-an-nsg"></a>タスク 1: NSG を作成して構成する
+#### タスク 1: NSG を作成して構成する
 
 1. Azure portal のツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**ネットワーク セキュリティ グループ**」を検索して選択します。
 1. [**ネットワーク セキュリティ グループ**] ページで、 **[+ 作成]** を選択します。
@@ -215,7 +215,7 @@ lab:
    |Priority|**300**|
    |名前|**AllowHTTPInBound**|
 
-#### <a name="task-2-configure-inbound-http-access-to-an-azure-vm"></a>タスク 2: Azure VM への受信 HTTP アクセスを構成する
+#### タスク 2: Azure VM への受信 HTTP アクセスを構成する
 
 1. Azure portal で **AZ800-L0601-RG** のページに戻り、リソースの一覧で、Azure VM **az800l06-vm0** を表すエントリを選択します。
 1. **az800l06-vm0** のページで、**[ネットワーク]** を選択します。
@@ -238,7 +238,7 @@ lab:
 
    >**注**: Azure VM は現在、TCP ポート 3389 経由でインターネットからアクセスできないので、これは想定されています。 TCP ポート 80 経由でのみアクセスできます。
 
-#### <a name="task-3-trigger-re-evaluation-of-the-jit-status-of-an-azure-vm"></a>タスク 3: Azure VM の JIT 状態の再評価をトリガーする
+#### タスク 3: Azure VM の JIT 状態の再評価をトリガーする
 
 >**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
 
@@ -247,7 +247,7 @@ lab:
 1. **[az800l06-vm0 \| 構成]** ページで、 **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Microsoft Defender for Cloud を開く]** リンクを選択します。
 1. **[Just In Time VM アクセス]** ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
-#### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する
+#### タスク 4: JIT VM アクセス経由で Azure VM に接続する
 
 1. **az800l06-vm0** のページに戻り、**[接続]** を選択し、ドロップダウン リストで **[RDP]** を選択します。 
 1. **[az800l06-vm0 \| 接続]** ページの **[接続元 IP アドレス]** セクションで、**[自分の IP]** を選択し、**[アクセス権の要求]** を選択します。
@@ -261,16 +261,16 @@ lab:
 
 1. Azure VM で実行されているオペレーティング システムがリモート デスクトップ経由で正常にアクセスできることを確認し、リモート デスクトップ セッションを閉じます。
 
-## <a name="exercise-6-deprovisioning-the-azure-environment"></a>演習 6: Azure 環境のプロビジョニング解除
+## 演習 6: Azure 環境のプロビジョニング解除
 
-#### <a name="task-1-start-a-powershell-session-in-cloud-shell"></a>タスク 1: Cloud Shell で PowerShell セッションを開始する
+#### タスク 1: Cloud Shell で PowerShell セッションを開始する
 
 1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、Cloud Shell アイコンを選んで Azure Cloud Shell ウィンドウを開きます。
 1. **Bash** または **PowerShell** の選択を求めるプロンプトが表示されたら、**[PowerShell]** を選択します。
 
    >**注**: Cloud Shell を起動するのが初めてで、**ストレージがマウントされていません**というメッセージが表示される場合は、このラボで使用しているサブスクリプションを選択してから、**[ストレージの作成]** を選択します。
 
-#### <a name="task-2-identify-all-azure-resources-provisioned-in-the-lab"></a>タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
+#### タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
 
 1. [Cloud Shell] ウィンドウで次のコマンドを実行して、このラボで作成されたすべてのリソース グループのリストを表示します。
 
