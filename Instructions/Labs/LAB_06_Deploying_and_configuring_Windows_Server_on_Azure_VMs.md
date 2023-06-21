@@ -4,9 +4,9 @@ lab:
   module: 'Module 6: Deploying and Configuring Azure VMs'
 ---
 
-# <a name="lab-deploying-and-configuring-windows-server-on-azure-vms"></a>ラボ: Azure VM での Windows Server のデプロイと構成
+# ラボ: Azure VM での Windows Server のデプロイと構成
 
-## <a name="scenario"></a>シナリオ
+## シナリオ
 
 現在のインフラストラクチャに関する懸念事項に対処する必要があります。 Windows Server ベースのワークロードを実行している Azure VM に適用する必要がある追加の制御に関して、運用モデルが古い、自動化の使用が限定的、および情報セキュリティ チームの懸念があります。 あなたは、Windows Server で実行されている Azure VM の自動デプロイと構成プロセスを開発して実装することにしました。
 
@@ -16,7 +16,7 @@ lab:
 
                 **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Deploying%20and%20configuring%20Windows%20Server%20on%20Azure%20VMs)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
-## <a name="objectives"></a>目標
+## 目標
 
 このラボを完了すると、次のことができるようになります。
 
@@ -27,9 +27,9 @@ lab:
 - Azure VM で Windows Server のセキュリティを構成する。
 - Azure 環境をプロビジョニング解除する。
 
-## <a name="estimated-time-90-minutes"></a>予想所要時間: 90 分
+## 予想所要時間: 90 分
 
-## <a name="lab-setup"></a>ラボのセットアップ
+## ラボのセットアップ
 
 仮想マシン: **AZ-800T00A-SEA-DC1** および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
 
@@ -44,9 +44,9 @@ lab:
 
 このラボでは、使用可能な VM 環境と Azure サブスクリプションを使用します。 ラボを開始する前に、Azure サブスクリプションと、そのサブスクリプションの所有者または共同作成者ロールを持つユーザー アカウントがあることを確認してください。
 
-## <a name="exercise-1-authoring-arm-templates-for-azure-vm-deployment"></a>演習 1: Azure VM デプロイ用の ARM テンプレートの作成
+## 演習 1: Azure VM デプロイ用の ARM テンプレートの作成
 
-### <a name="scenario"></a>シナリオ
+### シナリオ
 
 Azure ベースの操作を効率化するために、Azure VM への Windows Server の自動デプロイと構成プロセスを開発して実装することにしました。 デプロイは、情報セキュリティ チームの要件に準拠し、高可用性を含む Contoso, Ltd. の意図されたターゲット運用モデルに準拠する必要があります。
 
@@ -56,7 +56,7 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
 1. Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する。
 1. Azure portal を使用して ARM テンプレートとパラメーター ファイルをダウンロードする。
 
-#### <a name="task-1-connect-to-your-azure-subscription-and-enable-enhanced-security-of-microsoft-defender-for-cloud"></a>タスク 1: Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化を有効にする
+#### タスク 1: Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化を有効にする
 
 このタスクでは、Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化機能を有効にします。
 
@@ -68,7 +68,7 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
 1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
 1. **[Microsoft Defender for Cloud \| の使用開始]** ページで、Microsoft Defender for Cloud のセキュリティを強化し、Microsoft Defender for Cloud エージェントの自動インストールを有効にしてください。
 
-#### <a name="task-2-generate-an-arm-template-and-parameters-files-by-using-the-azure-portal"></a>タスク 2: Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する
+#### タスク 2: Azure portal を使用して ARM テンプレートとパラメーター ファイルを生成する
 
 1. Azure portal から、次の設定を使用して新しい Azure VM を作成するプロセスをステップ実行します (それ以外はすべて既定値のままにします)。ただし、デプロイは行いません。
 
@@ -76,7 +76,7 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |---|---|
    |サブスクリプション|このラボで使用する Azure サブスクリプションの名前。|
    |リソース グループ|新しいリソース グループの名前 **AZ800-L0601-RG**|
-   |仮想マシン名|**az800l06-vm0**|
+   |仮想マシン名|**az800L06-vm0**|
    |リージョン|Azure 仮想マシンをプロビジョニングできる Azure リージョンの名前を使用します|
    |可用性のオプション|インフラストラクチャの冗長性は必要ありません|
    |Image|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
@@ -87,7 +87,7 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |パブリック受信ポート|なし|
    |既存の Windows Server ライセンスを使用しますか|いいえ|
    |OS ディスクの種類|**Standard HDD**|
-   |名前|**az800l06-vnet**|
+   |名前|**az800L06-vnet**|
    |アドレス範囲|**10.60.0.0/20**|
    |サブネット名|**subnet0**|
    |サブネット範囲|**10.60.0.0/24**|
@@ -101,14 +101,14 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
 
    >**注**: 仮想マシンは作成しないでください。 この目的で、自動生成されたテンプレートを使用します。
 
-#### <a name="task-3-download-the-arm-template-and-parameters-files-from-the-azure-portal"></a>タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
+#### タスク 3: Azure portal から ARM テンプレートとパラメーター ファイルをダウンロードする
 
 1. **[仮想マシンの作成]** ページの **[確認と作成]** タブから、自動化のためのテンプレートをダウンロードして、ラボ VM の **C:\\Labfiles\\Mod06** フォルダーにコピーします。
 1. Azure portal で、**[仮想マシンの作成]** ページを閉じます。
 
-## <a name="exercise-2-modifying-arm-templates-to-include-vm-extension-based-configuration"></a>演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
+## 演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
 
-### <a name="scenario"></a>シナリオ
+### シナリオ
 
 Azure リソースのデプロイの自動化に加えて、Azure VM で実行されている Windows サーバーを自動的に構成することもできます。 これを実現するには、Azure カスタム スクリプト拡張機能の使用をテストします。
 
@@ -117,13 +117,13 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
 1. Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する。
 1. 既存のテンプレートに Azure VM 拡張機能セクションを追加する。
 
-#### <a name="task-1-review-the-arm-template-and-parameters-files-for-azure-vm-deployment"></a>タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
+#### タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
 
 1. ダウンロードしたアーカイブの内容を **C:\\Labfiles\\Mod06** フォルダーに抽出します。
 1. メモ帳で **template.json** ファイルを開き、内容を確認します。 メモ帳ウィンドウは開いたままにしておきます。
 1. メモ帳で **C:\\Labfiles\\Mod06\\parameters.json** ファイルを開き、確認して、メモ帳ウィンドウを閉じます。
 
-#### <a name="task-2-add-an-azure-vm-extension-section-to-the-existing-template"></a>タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
+#### タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
 
 1. ラボ VM の **template.json** ファイルの内容が表示されているメモ帳ウィンドウで、`    "resources": [` 行の直後に次のコードを挿入します。
 
@@ -151,9 +151,9 @@ Azure リソースのデプロイの自動化に加えて、Azure VM で実行�
    ```
 1. 変更を保存して、ファイルを閉じます。
 
-## <a name="exercise-3-deploying-azure-vms-running-windows-server-by-using-arm-templates"></a>演習 3: ARM テンプレートを使用して Windows Server を実行している Azure VM をデプロイする
+## 演習 3: ARM テンプレートを使用して Windows Server を実行している Azure VM をデプロイする
 
-### <a name="scenario"></a>シナリオ
+### シナリオ
 
 ARM テンプレートが構成された状態で、概念実証 Azure サブスクリプションへのデプロイを実行して、その機能を確認します。
 
@@ -162,7 +162,7 @@ ARM テンプレートが構成された状態で、概念実証 Azure サブス
 1. ARM テンプレートを使用して Azure VM をデプロイする。
 1. Azure VM のデプロイの結果を確認する。
 
-#### <a name="task-1-deploy-an-azure-vm-by-using-an-arm-template"></a>タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
+#### タスク 1: ARM テンプレートを使用して Azure VM をデプロイする
 
 1. **SEA-ADM1** の Azure portal で、**[カスタム デプロイ]** ページを参照し、**[エディターで独自のテンプレートを作成する]** オプションを選択します。
 1. テンプレート ファイルとパラメーター ファイルを **[カスタム デプロイ]** ページに読み込みます。
@@ -179,15 +179,15 @@ ARM テンプレートが構成された状態で、概念実証 Azure サブス
 
 1. デプロイが正常に完了したことを確認します。
 
-#### <a name="task-2-review-results-of-the-azure-vm-deployment"></a>タスク 2: Azure VM のデプロイの結果を確認する
+#### タスク 2: Azure VM のデプロイの結果を確認する
 
 1. Azure portal で **AZ800-L0601-RG** リソース グループ ページを参照し、そのリソースの一覧 (特に Azure VM **az800l06-vm0**) を確認します。
 1. **az800l06-vm0** Azure VM ページを参照し、**customScriptExtension** が正常にプロビジョニングされたことを確認します。
 1. **AZ800-L0601-RG** リソース グループ ページに戻り、そのデプロイを確認し、デプロイに使用された **Microsoft.Template** がデプロイに使用したテンプレートと一致することを確認します。
 
-## <a name="exercise-4-configuring-administrative-access-to-azure-vms-running-windows-server"></a>演習 4: Windows Server を実行している Azure VM への管理アクセスの構成
+## 演習 4: Windows Server を実行している Azure VM への管理アクセスの構成
 
-### <a name="scenario"></a>シナリオ
+### シナリオ
 
 Azure VM が Windows Server を実行している状態で、オンプレミスの管理ワークステーションからリモートで管理する機能をテストする必要があります。
 
@@ -196,21 +196,21 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 1. Azure Microsoft Defender for Cloud の状態を確認する。
 1. Just-In-Time VM アクセスの設定を確認する。
 
-#### <a name="task-1-verify-the-status-of-azure-microsoft-defender-for-cloud"></a>タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
+#### タスク 1: Azure Microsoft Defender for Cloud の状態を確認する
 
 1. Azure portal で、**[Microsoft Defender for Cloud]** ページを参照します。
 1. Microsoft Defender for Cloud のセキュリティ強化機能が有効になっていることを確認します。
 
-#### <a name="task-2-review-the-just-in-time-vm-access-settings"></a>タスク 2:Just-In-Time VM アクセスの設定を確認する
+#### タスク 2:Just-In-Time VM アクセスの設定を確認する
 
 1. Azure portal で、**[Microsoft Defender for Cloud\| ワークロード保護]** ページを参照し、**[Just In Time VM アクセス]** 設定を確認します。
 1. **[Just In Time VM アクセス]** ページで、**[構成済み]**、**[未構成]**、**[サポート対象外]** のタブを確認します。
 
    >**注**: 新しくデプロイされた VM が **[サポート対象外]** タブに表示されるまで、最大で 24 時間かかる場合があります。待機するよりも、次の演習に進んでください。
 
-## <a name="exercise-5-configuring-windows-server-security-in-azure-vms"></a>演習 5: Azure VM での Windows Server のセキュリティの構成
+## 演習 5: Azure VM での Windows Server のセキュリティの構成
 
-### <a name="scenario"></a>シナリオ
+### シナリオ
 
 Azure VM が Windows Server を実行している状態で、オンプレミスの管理ワークステーションからリモートで管理する機能をテストする必要があります。
 
@@ -221,7 +221,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 1. Azure VM の JIT 状態の再評価をトリガーする。
 1. JIT VM アクセス経由で Azure VM に接続する。
 
-#### <a name="task-1-create-and-configure-an-nsg"></a>タスク 1: NSG を作成して構成する
+#### タスク 1: NSG を作成して構成する
 
 1. Azure portal で、次の設定で NSG を作成し、他のすべての設定は既定値のままにします。
 
@@ -244,7 +244,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
    |Priority|**300**|
    |名前|**AllowHTTPInBound**|
 
-#### <a name="task-2-configure-inbound-http-access-to-an-azure-vm"></a>タスク 2: Azure VM への受信 HTTP アクセスを構成する
+#### タスク 2: Azure VM への受信 HTTP アクセスを構成する
 
 1. Azure portal で **az800l06-vm0** Azure VM にアタッチされているネットワーク インターフェイスのページを参照し、前のタスクで作成したネットワーク セキュリティ グループに関連付けます。
 1. Azure portal で **az800l06-vm0** Azure VM にアタッチされているネットワーク インターフェイスの IP 構成を参照し、それを次の設定で新しいパブリック IP アドレスと関連付け、それ以外はすべて既定値のままにします。
@@ -259,7 +259,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 
    >**注**: Azure VM は現在、TCP ポート 3389 経由でインターネットからアクセスできないので、これは想定されています。 TCP ポート 80 経由でのみアクセスできます。
 
-#### <a name="task-3-trigger-re-evaluation-of-the-jit-status-of-an-azure-vm"></a>タスク 3: Azure VM の JIT 状態の再評価をトリガーする
+#### タスク 3: Azure VM の JIT 状態の再評価をトリガーする
 
 >**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
 
@@ -268,7 +268,7 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
 1. **[az800l06-vm0 \| 構成]** ページで、 **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Microsoft Defender for Cloud を開く]** リンクを選択します。
 1. **[Just In Time VM アクセス]** ページで、**az800l06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
-#### <a name="task-4-connect-to-the-azure-vm-via-jit-vm-access"></a>タスク 4: JIT VM アクセス経由で Azure VM に接続する
+#### タスク 4: JIT VM アクセス経由で Azure VM に接続する
 
 1. Azure portal の **[az800l06-vm0]** ページから、JIT VM アクセスを要求します。
 1. 要求が承認されると、ターゲット Azure VM へのリモート デスクトップ セッションが開始します。
@@ -276,14 +276,14 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
    
    |設定|値|
    |---|---|
-   |ユーザー名|**学生**|
+   |ユーザー名|**Student**|
    |パスワード|**Pa55w.rd1234**|
 
 1. Azure VM で実行されているオペレーティング システムがリモート デスクトップ経由で正常にアクセスできることを確認し、リモート デスクトップ セッションを閉じます。
 
-## <a name="exercise-6-deprovisioning-the-azure-environment"></a>演習 6: Azure 環境のプロビジョニング解除
+## 演習 6: Azure 環境のプロビジョニング解除
 
-### <a name="scenario"></a>シナリオ
+### シナリオ
 
 Azure 関連の料金を最小限に抑えるため、このラボでプロビジョニングした Azure リソースをプロビジョニング解除します。
 
@@ -292,12 +292,12 @@ Azure 関連の料金を最小限に抑えるため、このラボでプロビ�
 1. Cloud Shell で PowerShell セッションを開始する。
 1. ラボでプロビジョニングしたすべての Azure リソースを特定する。
 
-#### <a name="task-1-start-a-powershell-session-in-cloud-shell"></a>タスク 1: Cloud Shell で PowerShell セッションを開始する
+#### タスク 1: Cloud Shell で PowerShell セッションを開始する
 
 1. Azure portal の [Azure Cloud Shell] ウィンドウで PowerShell セッションを開きます。
 1. **Cloud Shell** を開始するのが初めての場合は、既定の設定を受け入れます。
 
-#### <a name="task-2-identify-all-azure-resources-provisioned-in-the-lab"></a>タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
+#### タスク 2: ラボでプロビジョニングしたすべての Azure リソースを特定する
 
 1. [Cloud Shell] ウィンドウで次のコマンドを実行して、このラボで作成されたすべてのリソース グループのリストを表示します。
 
@@ -310,6 +310,6 @@ Azure 関連の料金を最小限に抑えるため、このラボでプロビ�
    Get-AzResourceGroup -Name 'AZ800-L06*' | Remove-AzResourceGroup -Force -AsJob
    ```
 
-## <a name="results"></a>結果
+## 結果
 
 このラボを完了すると、Contoso, Ltd. の管理容易性とセキュリティの要件を満たす方法で Windows Server を実行している Azure VM がデプロイおよび構成されます。
