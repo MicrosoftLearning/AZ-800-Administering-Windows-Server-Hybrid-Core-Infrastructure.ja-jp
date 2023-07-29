@@ -157,12 +157,12 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker Microsoft PackageManagement プロバイダーをインストールします。
 
    ```powershell
-   Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
+   Install-Module -Name DockerProvider -Repository PSGallery -Force
    ```
 1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker ランタイムをインストールします。
 
    ```powershell
-   Install-Package -Name docker -ProviderName DockerMsftProvider
+   Install-Package -Name docker -ProviderName DockerProvider
    ```
 1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
 
@@ -176,7 +176,7 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 1. **Windows PowerShell** コンソールで次のコマンドを実行し、インストールされた Docker のバージョンを確認します。
 
    ```powershell
-   Get-Package -Name Docker -ProviderName DockerMsftProvider
+   Get-Package -Name Docker -ProviderName DockerProvider
    ```
 1. 次のコマンドを実行して、現在 **SEA-SVR1** に存在する Docker イメージを特定します。 
 
