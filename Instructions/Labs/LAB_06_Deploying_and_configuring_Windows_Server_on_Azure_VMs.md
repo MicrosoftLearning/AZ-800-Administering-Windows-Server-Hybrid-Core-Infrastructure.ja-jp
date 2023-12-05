@@ -14,7 +14,7 @@ lab:
 
 目標は、管理容易性とセキュリティの要件を満たす方法で、Windows Server を実行している Azure VM をデプロイして構成することです。
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Deploying%20and%20configuring%20Windows%20Server%20on%20Azure%20VMs)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Deploying%20and%20configuring%20Windows%20Server%20on%20Azure%20VMs)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
 ## 目標
 
@@ -78,11 +78,11 @@ Azure ベースの操作を効率化するために、Azure VM への Windows Se
    |リソース グループ|新しいリソース グループの名前 **AZ800-L0601-RG**|
    |仮想マシン名|**az800L06-vm0**|
    |リージョン|Azure 仮想マシンをプロビジョニングできる Azure リージョンの名前を使用します|
-   |可用性のオプション|インフラストラクチャの冗長性は必要ありません|
+   |可用性のオプション|インフラストラクチャ冗長は必要ありません|
    |Image|**Windows Server 2022 Datacenter: Azure Edition - Gen2**|
    |Azure Spot インスタンス|いいえ|
    |サイズ|**Standard_D2s_v3**|
-   |ユーザー名|**学生**|
+   |ユーザー名|**Student**|
    |パスワード|**Pa55w.rd1234**|
    |パブリック受信ポート|なし|
    |既存の Windows Server ライセンスを使用しますか|いいえ|
@@ -237,8 +237,8 @@ Azure VM が Windows Server を実行している状態で、オンプレミス�
    |設定|値|
    |---|---|
    |source|**[任意]**|
-   |Source port ranges|*|
-   |到着地|**[任意]**|
+   |ソース ポート範囲|*|
+   |宛先|**[任意]**|
    |サービス|**HTTP**|
    |アクション|**許可**|
    |Priority|**300**|
