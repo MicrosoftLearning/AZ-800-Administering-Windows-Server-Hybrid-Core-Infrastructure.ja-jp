@@ -14,7 +14,7 @@ lab:
 #### タスク 1: ラボ インフラストラクチャ リソースをプロビジョニングする
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
-1. **SEA-ADM1** で Microsoft Edge を起動し、**[Azure portal](https://portal.azure.com)** に移動し、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
+1. **SEA-ADM1** で Microsoft Edge を起動して `https://portal.azure.com` にある Azure portal を開き、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
 1. Azure portal で、[検索] テキストボックスの横にあるツール バー アイコンを選択して、[Cloud Shell] ペインを開きます。
 1. **Bash** または **PowerShell** の選択を求めるメッセージが表示されたら、 **[PowerShell]** を選択します。
 
@@ -64,7 +64,7 @@ lab:
 
 #### タスク 2: ハブ アンド スポーク ネットワーク トポロジを構成する
 
-1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、**[Azure portal](https://portal.azure.com)** に移動します。
+1. **SEA-ADM1** で Azure portal を表示する Microsoft Edge ウィンドウで、別のタブを開き、`https://portal.azure.com` で Azure portal に移動します。
 1. Azure portal で、ツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、**[仮想ネットワーク]** を検索して選択します。
 1. 仮想ネットワークの一覧で **az800l08-vnet0** を選びます。
 1. **az800l08-vnet0** 仮想ネットワーク ページの **[設定]** セクションで **[ピアリング]** を選び、 **[+ 追加]** を選びます。
@@ -359,7 +359,7 @@ lab:
 
 #### タスク 3: Azure パブリック DNS 名前解決を構成する
 
-1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、新しいタブを開き、**https://www.godaddy.com/domains/domain-name-search** に移動します。
+1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、新しいタブを開き、`https://www.godaddy.com/domains/domain-name-search` に移動します。
 1. ドメイン名検索を使って、現在使われていないドメイン名を特定します。
 1. **SEA-ADM1** 上で、Azure portal を表示している Microsoft Edge タブに切り替え、ツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、「**DNS ゾーン**」を検索して選び、**[DNS ゾーン]** ページで、**[+ 作成]** を選びます。
 1. **[DNS ゾーンの作成]** ページで、次の設定を指定します (他の設定は既定値のままにします)。

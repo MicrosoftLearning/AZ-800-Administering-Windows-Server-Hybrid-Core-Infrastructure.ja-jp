@@ -35,9 +35,9 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 1. **SEA-ADM1** を選択します。
 1. 次の資格情報を使用してサインインします。
 
-   - ユーザー名: **Administrator**
-   - パスワード: **Pa55w.rd**
-   - ドメイン: **CONTOSO**
+   - ユーザー名: `Administrator`
+   - パスワード: `Pa55w.rd`
+   - ドメイン: `CONTOSO`
 
 このラボでは、利用可能な VM 環境を使用します。
 
@@ -112,8 +112,8 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
-   - ユーザー名: **CONTOSO\\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\\Administrator`
+   - パスワード: `Pa55w.rd`
 
 1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
 1. **sea-svr3.contoso.com** に接続している間に、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。
