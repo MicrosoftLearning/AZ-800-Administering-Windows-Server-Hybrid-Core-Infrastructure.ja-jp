@@ -10,7 +10,7 @@ lab:
 
 Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレージ レベルで冗長性を提供するために、Windows Server サーバーに記憶域スペース機能を実装する必要があります。 あなたは経営陣から、記憶域を節約するためのデータ重複排除をテストするよう求められています。 また、Internet Small Computer System Interface (iSCSI) 記憶域を実装して、組織内に記憶域を展開するためのより簡単なソリューションを提供することも望んでいます。 さらに、組織は、記憶域を高可用性にするためのオプションと、高可用性のために満たす必要がある要件を調べています。 あなたは、高可用性記憶域 (特に記憶域スペース ダイレクト) を使用する実現可能性をテストする必要があります。
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20storage%20solutions%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20storage%20solutions%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
 ## 目標
 
@@ -35,9 +35,9 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 1. **SEA-ADM1** を選択します。
 1. 次の資格情報を使用してサインインします。
 
-   - ユーザー名: **Administrator**
-   - パスワード: **Pa55w.rd**
-   - ドメイン: **CONTOSO**
+   - ユーザー名: `Administrator`
+   - パスワード: `Pa55w.rd`
+   - ドメイン: `CONTOSO`
 
 このラボでは、利用可能な VM 環境を使用します。
 
@@ -112,8 +112,8 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
-   - ユーザー名: **CONTOSO\\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\\Administrator`
+   - パスワード: `Pa55w.rd`
 
 1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
 1. **sea-svr3.contoso.com** に接続している間に、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。

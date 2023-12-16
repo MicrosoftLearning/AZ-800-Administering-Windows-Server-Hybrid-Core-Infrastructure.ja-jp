@@ -10,7 +10,7 @@ lab:
 
 あなたは Azure 内にテスト環境を構築する仕事を任されました。これは、ハブ アンド スポーク トポロジに構成した個別の仮想ネットワークへとデプロイした Microsoft Azure 仮想マシンから成る環境です。 このテストには、トラフィックをハブ経由で流すように強制するユーザー定義ルートを使って、スポーク間の接続を実装することを含める必要があります。 また、Azure プライベート DNS ゾーンを使って仮想ネットワーク間の Azure 仮想マシンの DNS 名前解決を実装し、外部の名前解決のために Azure DNS ゾーンの使用を評価する必要があります。
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20hybrid%20networking%20infrastructure)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20hybrid%20networking%20infrastructure)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
 ## 目標
 
@@ -31,9 +31,9 @@ lab:
 1. **SEA-ADM1** を選択します。
 1. 次の資格情報を使用してサインインします。
 
-   - ユーザー名: **Administrator**
-   - パスワード: **Pa55w.rd**
-   - ドメイン: **CONTOSO**
+   - ユーザー名: `Administrator`
+   - パスワード: `Pa55w.rd`
+   - ドメイン: `CONTOSO`
 
 このラボでは、使用可能な VM 環境と Azure サブスクリプションを使用します。 ラボを開始する前に、Azure サブスクリプションと、そのサブスクリプションの所有者または共同作成者ロールを持つユーザー アカウントがあることを確認してください。
 
@@ -57,7 +57,7 @@ lab:
 このタスクでは、3 つの仮想マシンを同じ Azure リージョン内の個別の仮想ネットワークにデプロイします。 1 つ目の仮想ネットワークはハブとして機能し、残りの 2 つの仮想ネットワークはスポークとなります。 これらのリソースは、ラボ インフラストラクチャの基礎として機能します。
 
 1. **SEA-ADM1** に接続し、必要であればパスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてサインインします。
-1. **SEA-ADM1** で Microsoft Edge を起動し、 **[Azure portal](https://portal.azure.com)** にアクセスし、このラボで使うサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使ってサインインします。
+1. **SEA-ADM1** で Microsoft Edge を起動して `https://portal.azure.com` の Azure portal を開き、このラボで使うサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使ってサインインします。
 1. Azure portal の [Cloud Shell] ペインで PowerShell セッションを開きます。
 1. ファイル **C:\\Labfiles\\Lab08\\L08-rg_template.json** と **C:\\Labfiles\\Lab08\\L08-rg_template.parameters.json** を Cloud Shell のホーム ディレクトリにアップロードします。
 1. [Cloud Shell] ペインで以下のコマンドを実行し、ラボ環境をホストする最初のリソース グループを作成します (`<Azure_region>` のプレースホルダーは、デプロイに使う予定の Azure リージョン名に置き換えてください)。
@@ -105,7 +105,7 @@ lab:
 
 このタスクでは、前のタスクでデプロイした仮想ネットワーク間にローカル ピアリングを構成し、ハブ アンド スポーク ネットワーク トポロジを作成します。
 
-1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、 **[Azure portal](https://portal.azure.com)** に移動します。
+1. **SEA-ADM1** で Azure portal を表示している Microsoft Edge ウィンドウで、別のタブを開き、`https://portal.azure.com` にある Azure portal に移動します。
 1. Azure portal で **az800l08-vnet0** 仮想ネットワーク ページに移動します。
 1. **az800l08-vnet0** 仮想ネットワーク ページから、次の設定でピアリングを作成します (その他は既定値のままにします)。
 
@@ -391,7 +391,7 @@ lab:
 
 このタスクでは、Azure パブリック DNS ゾーンを使って外部 DNS 名前解決を構成します。
 
-1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、新しいタブを開き、 **https://www.godaddy.com/domains/domain-name-search** に移動します。
+1. **SEA-ADM1** の Azure portal を表示している Microsoft Edge ウィンドウで、新しいタブを開き、 `https://www.godaddy.com/domains/domain-name-search` に移動します。
 1. ドメイン名検索を使って、現在使われていないドメイン名を特定します。
 1. **SEA-ADM1** で、Azure portal を表示する Microsoft Edge タブに切り替え、 **[DNS ゾーン]** ページに移動します。
 1. 次の設定で DNS ゾーンを作成します (その他は既定値のままにします)。

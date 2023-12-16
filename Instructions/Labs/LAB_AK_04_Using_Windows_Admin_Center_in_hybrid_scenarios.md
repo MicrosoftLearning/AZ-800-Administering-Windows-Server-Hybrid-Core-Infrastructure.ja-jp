@@ -7,21 +7,21 @@ lab:
 
 # ラボの回答キー: ハイブリッド シナリオでの Windows Admin Center の使用
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Using%20Windows%20Admin%20Center%20in%20hybrid%20scenarios)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Using%20Windows%20Admin%20Center%20in%20hybrid%20scenarios)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
 ## 演習 1: Windows Server を実行する Azure VM のプロビジョニング
 
 #### タスク 1: Azure Resource Manager テンプレートを使用して Azure リソース グループを作成する
 
 1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
-1. **SEA-ADM1** で Microsoft Edge を起動し、[Azure portal](https://portal.azure.com) に移動し、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
+1. **SEA-ADM1** で Microsoft Edge を起動して `https://portal.azure.com` にある Azure portal を開き、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
 1. Azure portal で、[検索] テキスト ボックスの横にあるツール バー アイコンを選択して、[Cloud Shell] ウィンドウを開きます。
 1. **Bash** または **PowerShell** の選択を求めるプロンプトが表示されたら、**[PowerShell]** を選択します。
 
    >**注**: Cloud Shell を起動するのが初めてで、"**ストレージがマウントされていません**" というメッセージが表示される場合は、このラボで使用しているサブスクリプションを選択し、**[ストレージの作成]** を選択します。
 
 1. [Cloud Shell] ウィンドウのツールバーで、**[ファイルのアップロード/ダウンロード]** アイコンを選択し、ドロップダウン メニューで **[アップロード]** を選択し、**C:\\Labfiles\\Lab04\\L04-sub_template.json** ファイルを Cloud Shell のホーム ディレクトリにアップロードします。
-1. [Cloud Shell] ウィンドウで、次のコマンドを実行して、このラボでプロビジョニングするリソースを含めるリソース グループを作成します  (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 (**eastus** など) に置き換えます)。
+1. [Cloud Shell] ウィンドウで、次のコマンドを実行して、このラボでプロビジョニングするリソースを含めるリソース グループを作成します (`<Azure region>` プレースホルダーを、Azure 仮想マシンをデプロイできる Azure リージョンの名前 (**eastus** など) に置き換えます)。
 
    >**注**: このラボは、米国東部を使用してテストおよび検証されているため、このリージョンを使用してください。 通常、Azure VM をプロビジョニングできる Azure リージョンを特定するには、「[ご利用のリージョンの Azure クレジット プランを確認する](https://aka.ms/regions-offers)」を参照してください。
 
@@ -85,8 +85,8 @@ lab:
    
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
-   - ユーザー名: **CONTOSO\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\Administrator`
+   - パスワード: `Pa55w.rd`
 
 1. **[すべての接続]** ページで **[sea-adm1.contoso.com]** エントリを選択します。 
 1. Windows Admin Center で、 **[ネットワーク]** 、 **[+ Azure ネットワーク アダプター (プレビュー) の追加]** の順に選択します。
@@ -107,7 +107,7 @@ lab:
 1. **[サインイン]** ページで、前の演習で Azure サブスクリプションへのサインインに使用したものと同じユーザー名を入力し、**[次へ]** を選択します。次に、対応するパスワードを入力し、**[サインイン]** を選択します。
 1. "**Are you trying to sign in to Windows Admin Center?**" (Windows Admin Center にサインインしますか?) というメッセージが表示されたら、**[続行]** を選びます。
 1. Windows Admin Center で、正常にサインインしたことを確認し、Microsoft Edge ウィンドウに新しく開いたタブを閉じます。
-1. **[Windows Admin Center で Azure を使用して作業を開始する]** ウィンドウで、**Azure Active Directory アプリケーション**が **[新規作成]** に設定されていることを確認した後、**[接続]** を選択します。
+1. **[Windows Admin Center で Azure を使用して作業を開始する]** ウィンドウで、**Microsoft Entra アプリケーション**が **[新規作成]** に設定されていることを確認した後、**[接続]** を選択します。
 1. 登録手順のステップの一覧で **[サインイン]** を選択します。 これにより、**[要求されたアクセス許可]** というラベルの付いたポップアップ ウィンドウが開きます。
 1. **[要求されたアクセス許可]** ポップアップ ウィンドウで、**[組織の代理として同意する]**、**[同意する]** の順に選択します。
 
@@ -176,6 +176,9 @@ lab:
 
    ```powershell
    Install-Module -Name pswsman
+   ```
+
+   ```powershell
    Disable-WSManCertVerification -All
    ```
 

@@ -10,7 +10,7 @@ lab:
 
 Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件がある大規模な組織です。 これらの要件を満たせるように、DHCP を展開および構成し、サービスの可用性を確保するための高可用性を実現します。 また、Contoso 内の部門である Trey Research がテスト領域で独自の DNS サーバーを持てるように、DNS を設定します。 最後に、Windows Admin Center へのリモート アクセスを提供し、Web アプリケーション プロキシを使用してセキュリティで保護します。
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20network%20infrastructure%20services%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20and%20configuring%20network%20infrastructure%20services%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
 ## 目標
 
@@ -23,16 +23,16 @@ Contoso, Ltd. は、ネットワーク サービスに関する複雑な要件�
 
 ## ラボのセットアップ
 
-仮想マシン: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、および **AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
+仮想マシン: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-ADM1** が実行されている必要があります。 他の VM が実行されていてもかまいませんが、このラボでは必要ありません。
 
 > **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-SEA-ADM1** 仮想マシンによって、**SEA-DC1**、**SEA-SVR1**、**SEA-ADM1** のインストールがホストされます。
 
 1. **SEA-ADM1** を選択します。
 1. 次の資格情報を使用してサインインします。
 
-   - ユーザー名: **Administrator**
-   - パスワード: **Pa55w.rd**
-   - ドメイン: **CONTOSO**
+   - ユーザー名: `Administrator`
+   - パスワード: `Pa55w.rd`
+   - ドメイン: `CONTOSO`
 
 このラボでは、利用可能な VM 環境を使用します。
 
@@ -75,8 +75,8 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
    
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
-   - ユーザー名: **CONTOSO\\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\\Administrator`
+   - パスワード: `Pa55w.rd`
 
 1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
 1. **[ツール]** リストで、 **[役割と機能]** を使用して、**SEA-SVR1** に DHCP 役割をインストールします。

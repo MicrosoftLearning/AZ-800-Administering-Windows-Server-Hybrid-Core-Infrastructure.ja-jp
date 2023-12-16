@@ -7,7 +7,7 @@ lab:
 
 # ラボの回答キー: Windows Server での記憶域ソリューションの実装
 
-                **メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20storage%20solutions%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
+**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20storage%20solutions%20in%20Windows%20Server)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
 
 > **注**: 各演習の間で、仮想マシン (VM) を必ず元に戻してください。 ほとんどの VM は Windows Server 2019 Server Core なので、演習で記憶域環境に行った変更を元に戻すより、VM を元に戻して再起動する方が時間がかかりません。
 
@@ -33,7 +33,7 @@ lab:
    
    > **注**: PowerShell からメモ帳を開くには、「**メモ帳**」と入力し、Enter キーを押します。
 
-2. **Windows PowerShell** のプロンプトで次のコマンドを入力してそれぞれの後で Enter キーを押して、ReFS でフォーマットされた新しいドライブを作成します。
+1. **Windows PowerShell** のプロンプトで次のコマンドを入力してそれぞれの後で Enter キーを押して、ReFS でフォーマットされた新しいドライブを作成します。
 
    ```powershell
    Get-Disk
@@ -41,7 +41,7 @@ lab:
    New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter M
    Format-Volume -DriveLetter M -FileSystem ReFS
    ```
-3. **Windows PowerShell** のプロンプトで、次のコマンドを入力して Enter キーを押し、**SEA-ADM1** から重複除去するサンプル ファイルを作成するスクリプトをコピーして実行し、結果を確認します。
+1. **Windows PowerShell** のプロンプトで、次のコマンドを入力して Enter キーを押し、**SEA-ADM1** から重複除去するサンプル ファイルを作成するスクリプトをコピーして実行し、結果を確認します。
 
    ```powershell
    New-PSDrive –Name 'X' –PSProvider FileSystem –Root '\\SEA-ADM1\Labfiles'
@@ -92,27 +92,27 @@ lab:
 
    >**注**: **NET::ERR_CERT_DATE_INVALID** エラーが発生した場合は、Edge ブラウザー ページの **[詳細設定]** を選択し、ページの下部にある **[sea-adm1-contoso.com (アンセーフ) に移動]** を選択します。
 
-2. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
 
-   - ユーザー名: **CONTOSO\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\Administrator`
+   - パスワード: `Pa55w.rd`
 
-3. [すべての接続] ペインで、**[+ 追加]** を選択します。
-4. リソースの追加または作成ペインの **[サーバー]** タイルで、**[追加]** を選択します。
-5. **[サーバー名]** テキスト ボックスに、「**sea-svr3.contoso.com**」と入力します。 
-6. 必要に応じて、**[Use another account for this connection](この接続に別のアカウントを使用する)** オプションが選択されていることを確認し、次の資格情報を入力して、**[Add with credentials](資格情報を使用して追加)** を選択します。
+1. [すべての接続] ペインで、**[+ 追加]** を選択します。
+1. リソースの追加または作成ペインの **[サーバー]** タイルで、**[追加]** を選択します。
+1. **[サーバー名]** テキスト ボックスに、「**sea-svr3.contoso.com**」と入力します。 
+1. 必要に応じて、**[Use another account for this connection](この接続に別のアカウントを使用する)** オプションが選択されていることを確認し、次の資格情報を入力して、**[Add with credentials](資格情報を使用して追加)** を選択します。
 
-   - ユーザー名: **CONTOSO\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\Administrator`
+   - パスワード: `Pa55w.rd`
 
-7. **sea-svr3.contoso.com** ページの **[ツール]** メニューで **[PowerShell]** を選択してから、ダイアログが表示されたら、**Pa55w.rd** をパスワードとして使用し、**CONTOSO\Administrator** ユーザーとしてサインインします。
-8. **Windows PowerShell** コンソールで、次のコマンドを入力しから Enter キーを押して重複除去をトリガーします。
+1. **sea-svr3.contoso.com** ページの **[ツール]** メニューで **[PowerShell]** を選択してから、ダイアログが表示されたら、**Pa55w.rd** をパスワードとして使用し、**CONTOSO\Administrator** ユーザーとしてサインインします。
+1. **Windows PowerShell** コンソールで、次のコマンドを入力しから Enter キーを押して重複除去をトリガーします。
 
    ```powershell
    Start-DedupJob -Volume M: -Type Optimization –Memory 50
    ```
-9.  **SEA-SVR3** へのコンソール セッションに切り替えます。
-10. **SEA-SVR3** の **Windows PowerShell** プロンプトで次のコマンドを入力して Enter キーを押し、重複除去されているボリューム上で使用可能な領域を確認します。
+1.  **SEA-SVR3** へのコンソール セッションに切り替えます。
+1. **SEA-SVR3** の **Windows PowerShell** プロンプトで次のコマンドを入力して Enter キーを押し、重複除去されているボリューム上で使用可能な領域を確認します。
 
    ```powershell
    Get-PSDrive -Name M
@@ -120,18 +120,18 @@ lab:
 
    > **注**: 前に表示された値と現在の値を比較します。 
 
-11. 5 から 10 分待って重複除去ジョブが完了したら、前の手順を繰り返します。
-12. **SEA-ADM1** へのコンソール セッションに切り替えます。
-13. **SEA-ADM1** の、**sea-svr3.contoso.com** への Windows Admin Center 接続が表示されている **Microsoft Edge** ウィンドウ内の **Windows PowerShell** コンソールで、次のコマンドを入力して Enter キーを押し、重複除去ジョブの状態を確認します。
+1. 5 から 10 分待って重複除去ジョブが完了したら、前の手順を繰り返します。
+1. **SEA-ADM1** へのコンソール セッションに切り替えます。
+1. **SEA-ADM1** の、**sea-svr3.contoso.com** への Windows Admin Center 接続が表示されている **Microsoft Edge** ウィンドウ内の **Windows PowerShell** コンソールで、次のコマンドを入力して Enter キーを押し、重複除去ジョブの状態を確認します。
 
    ```powershell
    Get-DedupStatus –Volume M: | fl
    Get-DedupVolume –Volume M: |fl
    Get-DedupMetadata –Volume M: |fl
    ```
-14. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインに切り替えてから、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
-15. **[ボリューム]** セクションで **M:** ボリュームを選択して状況依存メニューを表示し、メニューから **[プロパティ]** を選択します。 
-16. **[ボリューム (M:\\) のプロパティ]** ウィンドウで、 **[重複除去率]** と **[重複除去による節約量]** の値を確認します。
+1. **SEA-ADM1** で、**サーバー マネージャー**の [ディスク] ペインに切り替えてから、右上隅にある **[タスク]** メニューの **[最新の状態に更新]** を選択します。
+1. **[ボリューム]** セクションで **M:** ボリュームを選択して状況依存メニューを表示し、メニューから **[プロパティ]** を選択します。 
+1. **[ボリューム (M:\\) のプロパティ]** ウィンドウで、 **[重複除去率]** と **[重複除去による節約量]** の値を確認します。
 
 ## 演習 2: iSCSI 記憶域の構成
 
@@ -451,8 +451,8 @@ lab:
 1. **[クラスター名]** テキスト ボックスに、「**S2DCluster.Contoso.com**」と入力します。
 1. **[Use another account for this connection](この接続に別のアカウントを使用する)** オプションが選択されていることを確認し、次の資格情報を入力して、**[Connect with account](アカウントを使用して接続)** を選択します。
 
-   - ユーザー名: **CONTOSO\Administrator**
-   - パスワード: **Pa55w.rd**
+   - ユーザー名: `CONTOSO\Administrator`
+   - パスワード: `Pa55w.rd`
    
 1. **[クラスターにサーバーも追加する]** をオフにして、 **[追加]** を選択します。
 1. **[すべての接続]** ページに戻り、**s2dcluster.contoso.com** を選択します。
