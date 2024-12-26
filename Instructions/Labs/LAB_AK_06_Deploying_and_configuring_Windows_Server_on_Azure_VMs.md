@@ -15,7 +15,7 @@ lab:
 
 このタスクでは、Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化機能を有効にします。
 
-1. **SEA-ADM1** に接続し、必要に応じて、パスワード **Pa55w.rd** を使用し、**CONTOSO\Administrator** としてサインインします。
+1. **SEA-ADM1** に接続してから、必要に応じて、講師から提供された資格情報でサインインします。
 1. **SEA-ADM1** で Microsoft Edge を起動して `https://portal.azure.com` にある Azure portal を開き、このラボで使用するサブスクリプションの所有者ロールを持つユーザー アカウントの資格情報を使用してサインインします。
 
 >**注**: Azure サブスクリプションで Microsoft Defender for Cloud を既に有効にしている場合は、このタスクの残りのステップをスキップし、次に直接進みます。
@@ -106,24 +106,24 @@ lab:
    >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
 
    ```json
-        {
-           "type": "Microsoft.Compute/virtualMachines/extensions",
-           "name": "[concat(parameters('virtualMachineName'), '/customScriptExtension')]",
-           "apiVersion": "2018-06-01",
-           "location": "[resourceGroup().location]",
-           "dependsOn": [
-               "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-           ],
-           "properties": {
-               "publisher": "Microsoft.Compute",
-               "type": "CustomScriptExtension",
-               "typeHandlerVersion": "1.7",
-               "autoUpgradeMinorVersion": true,
-               "settings": {
-                   "commandToExecute": "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)"
-              }
-           }
-        },
+   {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('virtualMachineName'), '/customScriptExtension')]",
+      "apiVersion": "2018-06-01",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+         "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+      ],
+      "properties": {
+         "publisher": "Microsoft.Compute",
+         "type": "CustomScriptExtension",
+         "typeHandlerVersion": "1.7",
+         "autoUpgradeMinorVersion": true,
+         "settings": {
+               "commandToExecute": "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)"
+         }
+      }
+   },
    ```
 
 1. 変更を保存して、ファイルを閉じます。
