@@ -28,11 +28,7 @@ lab:
 > **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-ADM1**、および **AZ-800T00A-SEA-SVR1** 仮想マシンによって、**SEA-DC1**、**SEA-SVR1**、および **SEA-ADM1** のインストールがホストされます。 
 
 1. **SEA-ADM1** を選択します。
-1. 次の資格情報を使用してサインインします。
-
-   - ユーザー名: `Administrator`
-   - パスワード: `Pa55w.rd`
-   - ドメイン: `CONTOSO`
+1. 講師から提供された資格情報を使用してサインインします。
 
 ## 演習 1: Server Core への新しいドメイン コントローラーの展開
 
@@ -63,7 +59,7 @@ lab:
 
    - 種類: 既存のドメインの追加ドメイン コントローラー
    - ドメイン: `contoso.com`
-   - 資格情報: パスワード **Pa55w.rd** を持つ **CONTOSO\\Administrator**
+   - 講師から提供された資格情報を挿入します。
    - ディレクトリ サービス復元モード (DSRM) パスワード: **Pa55w.rd**
    - DNS とグローバル カタログの選択を削除しない
 
@@ -88,10 +84,7 @@ lab:
    Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:$false -CreateDnsDelegation:$false -Credential (Get-Credential) -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:$true}
    ```
 
-1. 次の資格情報を入力します。
-
-   - ユーザー名: `CONTOSO\\Administrator`
-   - パスワード: `Pa55w.rd`
+1. 講師から提供された資格情報を挿入します。
 
 2. **SafeModeAdministratorPassword** を **Pa55w.rd** として設定します。
 3. **SEA-SVR1** が再起動した後、**SEA-ADM1** で **[サーバー マネージャー]** に切り替えてから **[AD DS]** ノードを選択します。 **SEA-SVR1** がドメイン コントローラーとして追加されたこと、および警告通知が表示されなくなったことに注意してください。 **[更新]** を選択する必要がある場合があります。
@@ -180,7 +173,7 @@ lab:
 1. サインアウトしてから、パスワード **Pa55w.rd** を使用して **CONTOSO\\Ty** としてサインインします。
 1. スクリーン セーバーの待機時間を変更し、設定を再開してみます。 グループ ポリシーによりこれらの操作がブロックされていることを確認します。
 1. レジストリ エディターを実行してみます。 グループ ポリシーによりこの操作がブロックされていることを確認します。 
-1. サインアウトしてから、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてサインインします。
+1. サインアウトしてから、講師から提供された資格情報でサインインします。
 
 #### タスク 4: 必要な GPO を作成してリンクする
 

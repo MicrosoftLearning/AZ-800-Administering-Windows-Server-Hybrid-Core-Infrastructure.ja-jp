@@ -33,11 +33,7 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 > **注**: **AZ-800T00A-SEA-DC1**、**AZ-800T00A-SEA-SVR1**、**AZ-800T00A-SEA-SVR2**、**AZ-800T00A-SEA-SVR3**、**AZ-800T00A-SEA-ADM1** の各仮想マシンは、それぞれ、**SEA-DC1**、**SEA-SVR1**、**SEA-SVR2**、**SEA-SVR3**、**SEA-ADM1** のインストールをホストしています。
 
 1. **SEA-ADM1** を選択します。
-1. 次の資格情報を使用してサインインします。
-
-   - ユーザー名: `Administrator`
-   - パスワード: `Pa55w.rd`
-   - ドメイン: `CONTOSO`
+1. 講師から提供された資格情報を使用してサインインします。
 
 このラボでは、利用可能な VM 環境を使用します。
 
@@ -57,7 +53,7 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 
 1. **SEA-ADM1** で、**サーバー マネージャー**を使用して **SEA-SVR3** にデータ重複除去役割サービスをインストールします。
 1. **SEA-ADM1** で、**Users** グループに**読み取り**アクセス許可を付与して **C:\Labfiles** フォルダーを共有します。
-1. **SEA-SVR3** のコンソール セッションに切り替え、必要に応じて、**Pa55w.rd** のパスワードを使用して **CONTOSO\\Administrator** としてサインインします。
+1. **SEA-SVR3** コンソール セッションに切り替えてから、必要に応じて、講師から提供された資格情報でサインインします。
 1. **SEA-SVR3** で **Windows PowerShell** セッションを開始し、**Windows PowerShell** コンソールで次のコマンドを実行して、ReFS でフォーマットされ、ドライブ文字 **M** が割り当てられたボリュームを作成します。
 
    ```powershell
@@ -110,12 +106,9 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
-1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに次の資格情報を入力し、**[OK]** を選択します。
+1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに講師から提供された資格情報を入力してから、**[OK]** を選択します。
 
-   - ユーザー名: `CONTOSO\\Administrator`
-   - パスワード: `Pa55w.rd`
-
-1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、パスワード **Pa55w.rd** を使用して **CONTOSO\\Administrator** としてそれに接続します。
+1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、講師から提供された資格情報で接続します。
 1. **sea-svr3.contoso.com** に接続している間に、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。
 
    ```powershell
@@ -216,7 +209,7 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
    - ディスク サイズ: **5 GB**、**可変容量**
    - iSCSI ターゲット: **iSCSIFarm**
 
-1. **SEA-DC1** のコンソール セッションに切り替え、必要に応じて、**Pa55w.rd** のパスワードを使用して **CONTOSO\\Administrator** としてサインインします。
+1. **SEA-DC1** コンソール セッションに切り替えてから、必要に応じて、講師から提供された資格情報でサインインします。
 1. **SEA-SVR3** で **Windows PowerShell** セッションを開始した後、**Windows PowerShell** コンソールで次のコマンドを実行して、iSCSI イニシエーター サービスを開始し、iSCSI イニシエーターの構成を表示します。
 
    ```powershell
