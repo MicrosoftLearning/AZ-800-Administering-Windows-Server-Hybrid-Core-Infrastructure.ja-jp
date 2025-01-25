@@ -87,17 +87,17 @@ lab:
 1. Azure portal の「**仮想マシンの作成**」ページで、**[オートメーション用のテンプレートをダウンロードする]** を選択します。
 1. 「**テンプレート**」ページで **[ダウンロード]** を選択します。
 1. **template.zip** の横にある省略記号ボタンを選択し、ポップアップ メニューで **[フォルダーに表示]** を選択します。 これにより、**[ダウンロード]** フォルダーの内容が表示されたエクスプローラーが開きます。
-1. エクスプローラーで、**template.zip** を **SEA-ADM1** の **C:\\Labfiles\\Lab06** フォルダーにコピーします (必要に応じて新しいフォルダーを作成します)。
+1. エクスプローラーで、**template.zip** をコピーし、**C:\\** ディレクトリに移動して、**Lab06files** という名前の新しいフォルダーを作成し、そのフォルダーを入力して **template.zip** ファイルを貼り付けます。
 1. 「**テンプレート**」ページから「**仮想マシンの作成**」ページに戻り、デプロイを完了せずに閉じます。
 
 ## 演習 2: VM 拡張機能ベースの構成を含むように ARM テンプレートを変更する
 
 #### タスク 1: Azure VM デプロイ用の ARM テンプレートとパラメーターのファイルを確認する
 
-1. **SEA-ADM1** で、エクスプローラーを開始し、**C:\\Labfiles\\Lab06** フォルダーを参照します。
+1. **SEA-ADM1** で、エクスプローラーを開始し、**C:\\Lab06files** フォルダーを参照します。
 1. **template.zip** ファイルの内容を同じフォルダーに抽出します。
 1. メモ帳で **template.json** ファイルを開き、内容を確認します。 メモ帳ウィンドウは開いたままにしておきます。
-1. エクスプローラーから、メモ帳で **C:\\Labfiles\\Lab06\\parameters.json** ファイルを開き、その内容を確認します。
+1. エクスプローラーから、メモ帳で **C:\\Lab06files\\parameters.json** ファイルを開き、その内容を確認します。
 1. **parameters.json** ファイルが表示されているメモ帳ウィンドウを閉じます。
 
 #### タスク 2: 既存のテンプレートに Azure VM 拡張機能セクションを追加する
@@ -106,25 +106,26 @@ lab:
    >**注**:intellisense 行ごとにコードを貼り付けるツールを使用している場合は、検証エラーを引き起こす余分な角かっこが追加される可能性があります。 コードを最初にメモ帳に貼り付け、次に JSON ファイルに貼り付けることができます。
 
    ```json
-   {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('virtualMachineName'), '/customScriptExtension')]",
-      "apiVersion": "2018-06-01",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-         "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-      ],
-      "properties": {
-         "publisher": "Microsoft.Compute",
-         "type": "CustomScriptExtension",
-         "typeHandlerVersion": "1.7",
-         "autoUpgradeMinorVersion": true,
-         "settings": {
-               "commandToExecute": "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)"
+      {
+         "type": "Microsoft.Compute/virtualMachines/extensions",
+         "name": "[concat(parameters('virtualMachineName'), '/customScriptExtension')]",
+         "apiVersion": "2018-06-01",
+         "location": "[resourceGroup().location]",
+         "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+         ],
+         "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.7",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+                  "commandToExecute": "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)"
+            }
          }
-      }
-   },
+      },
    ```
+   >注: コード スニペットがスクリプトの残りの部分と一致していることを確認してください。
 
 1. 変更を保存して、ファイルを閉じます。
 
@@ -159,7 +160,7 @@ lab:
 1. 「**リソース グループ**」ページで、**[AZ800-L0601-RG]** エントリを選択します。
 1. **AZ800-L0601-RG** ページの **[概要]** ページで、Azure VM **az800L06-vm0** が含まれるリソースのリストを確認します。
 1. リソースの一覧で、Azure VM **[az800L06-vm0]** エントリを選択します。 
-1. **az800L06-vm0** のページで **[拡張機能 + アプリケーション]** を選択し、拡張機能の一覧で **customScriptExtension** が正常にプロビジョニングされていることを確認します。
+1. **az800L06-vm0** ページの [設定] タブで、**[拡張機能 + アプリケーション]** を選択し、拡張機能の一覧で **customScriptExtension** が正常にプロビジョニングされていることを確認します。
 1. **AZ800-L0601-RG** のページに戻り、**[設定]** セクションで **[デプロイ]** を選択します。
 1. 「**AZ800-L0601-RG \| デプロイ**」ページで、**[Microsoft.Template]** リンクを選択します。
 1. **[Microsoft.Template \| 概要]** ページで、**[テンプレート]** を選択します。これは、デプロイに使用したテンプレートと同じであることに注意してください。
@@ -217,7 +218,7 @@ lab:
 
 #### タスク 2: Azure VM への受信 HTTP アクセスを構成する
 
-1. Azure portal のツール バーの [**リソース、サービス、ドキュメントの検索**] テキスト ボックスで、「**パブリック IP アドレス**」を検索して選択します。
+1. Azure portal のツール バーの **[リソース、サービス、ドキュメントの検索]** テキスト ボックスで、**パブリック IP アドレス**を検索して選択します。
 1. [**パブリック IP アドレス**] ページで、[**+ 作成**] を選択します。
 1. [**パブリック IP アドレスの作成**] ページの [**基本**] タブで、次の設定を指定します (他の設定は既定値のままにします)。
 
@@ -232,12 +233,12 @@ lab:
 1. [**パブリック IP アドレスの作成**] ページの [**基本**] タブで、[**確認と作成**] を選択し、[**作成**] を選択します。
 1. デプロイが正常に完了したことを確認します。
 1. Azure portal で **AZ800-L0601-RG** のページに戻り、リソースの一覧で、Azure VM **az800l06-vm0** を表すエントリを選択します。
-1. **az800l06-vm0** のページで、**[ネットワーク]** を選択します。
-1. **[az800l06-vm0\| ネットワーク]** ページで、**az800l06-vm0** にアタッチされているネットワーク インターフェイスを示すリンクを選択します。
+1. **az800l06-vm0** ページの **[ネットワーク]** メニューで、**[ネットワーク設定]** を選択します。
+1. **az800l06-vm0 \| ネットワーク設定** ページで、**az800l06-vm0** にアタッチされているネットワーク インターフェイスを示すリンクを選択します。
 1. ネットワーク インターフェイスのプロパティを表示しているページの左側にある垂直メニューの **[設定]** セクションで、**[ネットワーク セキュリティ グループ]** を選択します。 
 1. **[ネットワーク セキュリティ グループ]** ページで、ドロップダウン リストから **[az800l06-vm0-nsg1]** を選択し、**[保存]** を選択します。
 1. ネットワーク インターフェイスのプロパティが表示されたページに戻り、**[IP 構成]** を選択して、**[ipconfig1]** エントリを選択します。
-1. **ipconfig1** のページの [**パブリック IP アドレス**] セクションで、**関連付け**を選択し、**パブリック IP アドレス** ドロップダウン リストで **az800l06-vm0-pip1** を選択します。
+1. **ipconfig1** ページの **[パブリック IP アドレス]** セクションで、**[パブリック IP アドレスを関連付ける]** ボックスを選択して、**[パブリック IP アドレス]** ドロップダウン リストで **az800l06-vm0-pip1** を選択します。
 1. **ipconfig1** のページで、[**保存**] を選択します。
 1. ネットワーク インターフェイスのプロパティが表示されたページに戻り、**[概要]** を選択します。 インターフェイスに割り当てられているパブリック IP アドレスの値を確認します。
 1. ブラウザーで別のタブを開いてその IP アドレスに移動し、**"Hello World from az800L06-vm0"** が表示された Web ページが開くことを確認します。
@@ -250,7 +251,7 @@ lab:
 >**注**: このタスクは、Azure VM の JIT 状態の再評価をトリガーするために必要です。 既定では、これには最大 24 時間かかる場合があります。
 
 1. Azure portal で **AZ800-L0601-RG** のページに戻り、リソースの一覧から Azure VM **az800L06-vm0** を表すエントリを選択します。
-1. **[az800L06-vm0]** ページで、**[構成]** を選択します。 
+1. **az800L06-vm0** ページの [設定] セクションで、**[構成]** を選択します。 
 1. **[az800L06-vm0 \| 構成]** ページで **[Just-In-Time VM アクセスを有効にする]** を選択し、 **[Microsoft Defender for Cloud を開く]** リンクを選択します。
 1. **[Just-In-Time VM アクセス]** ページで、**az800L06-vm0** Azure VM を表すエントリが **[構成済み]** タブに表示されていることを確認します。
 
