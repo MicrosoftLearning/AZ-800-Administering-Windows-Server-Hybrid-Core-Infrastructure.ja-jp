@@ -7,8 +7,6 @@ lab:
 
 # ラボの回答キー: AD DS と Microsoft Entra ID の統合の実装
 
-**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20integration%20between%20AD%20DS%20and%20Azure%20AD)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
-
 ## ラボのセットアップ
 
 1. **SEA-ADM1** に接続し、必要に応じて、講師から提供された資格情報でサインインします。

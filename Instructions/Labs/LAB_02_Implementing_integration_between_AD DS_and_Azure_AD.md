@@ -14,8 +14,6 @@ Azure リソースへのアクセスの Microsoft Entra ID を使用した認証
 
 あなたの目標は、オンプレミスの AD DS と Microsoft Entra ID の間でパススルー認証を実装することです。
 
-**メモ:** このラボをご自分のペースでクリックして進めることができる、 **[ラボの対話型シミュレーション](https://mslabs.cloudguides.com/guides/AZ-800%20Lab%20Simulation%20-%20Implementing%20integration%20between%20AD%20DS%20and%20Azure%20AD)** が用意されています。 対話型シミュレーションとホストされたラボの間に若干の違いがある場合がありますが、示されている主要な概念とアイデアは同じです。 
-
 ## 目標
 
 このラボを完了すると、次のことができるようになります。
