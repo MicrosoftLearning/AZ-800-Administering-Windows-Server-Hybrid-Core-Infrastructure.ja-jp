@@ -74,12 +74,16 @@ lab:
 1. **Windows PowerShell** コンソールで、次のコマンドを入力してから Enter キーを押し、Windows Admin Center の最新バージョンをダウンロードします。
     
    ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   $parameters = @{
+     Source = "https://aka.ms/WACdownload"
+     Destination = ".\WindowsAdminCenter.exe"
+     }
+   Start-BitsTransfer @parameters
    ```
 1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+   Start-Process -FilePath '.\WindowsAdminCenter.exe' -ArgumentList '/VERYSILENT' -Wait
    ```
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
@@ -91,7 +95,7 @@ lab:
    >**注**: **NET::ERR_CERT_DATE_INVALID** エラーが発生した場合は、Edge ブラウザー ページの **[詳細設定]** を選択し、ページの下部にある **[sea-adm1-contoso.com (アンセーフ) に移動]** を選択します。
 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに講師から提供された資格情報を入力してから、**[OK]** を選択します。
-
+1. **[拡張機能]** タブを含めて、**[Windows Admin Center の設定と環境を構成する]** ポップアップ ウィンドウのすべてのタブを確認し、**[完了]** を選択してウィンドウを閉じます。
 1. [すべての接続] ペインで、**[+ 追加]** を選択します。
 1. リソースの追加または作成ペインの **[サーバー]** タイルで、**[追加]** を選択します。
 1. **[サーバー名]** テキスト ボックスに、「**sea-svr3.contoso.com**」と入力します。 
@@ -445,7 +449,8 @@ lab:
    
 1. **[クラスターにサーバーも追加する]** をオフにして、 **[追加]** を選択します。
 1. **[すべての接続]** ページに戻り、**s2dcluster.contoso.com** を選択します。
-1. ページが読み込まれると、[ダッシュボード] ペインに **SEA-SVR3** に到達できないことを示す警告が表示されることを確認します。 
+1. ページが読み込まれると、[ダッシュボード] ペインに **SEA-SVR3** に到達できないことを示す警告が表示されることを確認します。
+   > **注**:概要ページにアラートがない場合は、左側のメニューで **[クラスター リソース]** までスクロールし、**[サーバー]** を選択してクラスター メンバー サーバーの状態を確認します。
 1. **SEA-SVR3** へのコンソール セッションに切り替えて、それを開始します。 
 
    > **注**: 警告が自動的に消えるまで数分かかる場合があります。
