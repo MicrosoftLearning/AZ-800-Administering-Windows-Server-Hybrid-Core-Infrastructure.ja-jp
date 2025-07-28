@@ -47,14 +47,17 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 1. **Windows PowerShell** コンソールで、次のコマンドを実行して Windows Admin Center の最新バージョンをダウンロードします。
     
    ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   $parameters = @{
+         Source = "https://aka.ms/WACdownload"
+         Destination = ".\WindowsAdminCenter.exe"
+    }
+    Start-BitsTransfer @parameters
    ```
 1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+    Start-Process -FilePath '.\WindowsAdminCenter.exe' -ArgumentList '/VERYSILENT' -Wait
    ```
-
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
    > **注**:インストールが完了すると、"ERR_Connection_Refused" というエラー メッセージが表示されることがあります。 これが発生した場合は、SEA-ADM1 を再起動して問題を修正します。
@@ -73,11 +76,9 @@ Server Core サーバーをデプロイしたので、リモート管理のた�
 
 1. **SEA-ADM1** の右上隅にある **[設定]** アイコン (歯車) を選択します。
 1. 使用可能な拡張機能を確認します。
-1. **セキュリティ (プレビュー)** 拡張機能をインストールします。 拡張機能がインストールされ Windows Admin Center が更新されます。
+1. **DNS** 拡張機能をインストールします。 拡張機能がインストールされ Windows Admin Center が更新されます。
 
-   > **注**: **セキュリティ (プレビュー)** 拡張機能を使用できない場合は、別の Microsoft 拡張機能を選択します。
-
-1. インストールされている拡張機能の一覧に DNS (プレビュー) 拡張機能が含まれていることを確認します。
+1. インストール済みの拡張機能の一覧に DNS 拡張機能が含まれていることを確認します。
 1. 上部メニューの **[設定]** の横にあるドロップダウン矢印を選択してから、**[サーバー マネージャー]** を選択します。
 1. Windows Admin Center 内で、`sea-dc1.contoso.com` に接続し、必要に応じて、講師から提供された資格情報を使用してサインインします。
 1. `sea-dc1.contoso.com` 上の DNS サーバーに接続し、DNS PowerShell ツールをインストールします。

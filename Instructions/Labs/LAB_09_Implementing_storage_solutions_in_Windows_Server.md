@@ -93,19 +93,23 @@ Contoso, Ltd. では、ストレージ アクセスを簡略化し、ストレ�
 1. **Windows PowerShell** コンソールで、次のコマンドを実行して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   $parameters = @{
+     Source = "https://aka.ms/WACdownload"
+     Destination = ".\WindowsAdminCenter.exe"
+     }
+   Start-BitsTransfer @parameters
    ```
 1. 次のコマンドを実行して、Windows Admin Center をインストールします。
     
    ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+   Start-Process -FilePath '.\WindowsAdminCenter.exe' -ArgumentList '/VERYSILENT' -Wait
    ```
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
 
 1. **SEA-ADM1** で Microsoft Edge を起動し、`https://SEA-ADM1.contoso.com` で Windows Admin Center のローカル インスタンスに接続します。 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに講師から提供された資格情報を入力してから、**[OK]** を選択します。
-
+1. **[拡張機能]** タブを含めて、**[Windows Admin Center の設定と環境を構成する]** ポップアップ ウィンドウのすべてのタブを確認し、**[完了]** を選択してウィンドウを閉じます。
 1. Windows Admin Center で、**sea-svr3.contoso.com** への接続を追加し、講師から提供された資格情報で接続します。
 1. **sea-svr3.contoso.com** に接続している間に、**[ツール]** の一覧の **PowerShell** ツールを使用して、重複除去をトリガーする次のコマンドを実行します。
 
@@ -418,7 +422,8 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 
    > **注**: クラスター ノードは、Windows Admin Center で既に使用できるので追加しないでください。 
 
-1. Windows Admin Center のクラスターの [ダッシュボード] ペインで、**SEA-SVR3** に到達できないことを示す警告を確認します。 
+1. Windows Admin Center のクラスターの [ダッシュボード] ペインで、**SEA-SVR3** に到達できないことを示す警告を確認します。
+   > **注**:概要ページにアラートがない場合は、左側のメニューで **[クラスター リソース]** までスクロールし、**[サーバー]** を選択してクラスター メンバー サーバーの状態を確認します。
 1. **SEA-SVR3** へのコンソール セッションに切り替えて、それを開始します。 
 1. 数分後に警告が自動的に消えることを確認します。
 1. Windows Admin Center が表示されているブラウザー ページを更新し、すべてのサーバーが正常であることを確認します。
