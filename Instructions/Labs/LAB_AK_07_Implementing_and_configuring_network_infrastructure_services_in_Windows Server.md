@@ -19,12 +19,16 @@ lab:
 1. **[Windows PowerShell]** コンソールで、次のコマンドを入力し、Enter キーを押して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   $parameters = @{
+     Source = "https://aka.ms/WACdownload"
+     Destination = ".\WindowsAdminCenter.exe"
+   }
+   Start-BitsTransfer @parameters
    ```
 1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+   Start-Process -FilePath '.\WindowsAdminCenter.exe' -ArgumentList '/VERYSILENT' -Wait
    ```
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
@@ -36,7 +40,11 @@ lab:
    >**注**: **NET::ERR_CERT_DATE_INVALID** エラーが発生した場合は、Edge ブラウザー ページの **[詳細設定]** を選択し、ページの下部にある **[sea-adm1-contoso.com (アンセーフ) に移動]** を選択します。
 
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに講師から提供された資格情報を入力してから、**[OK]** を選択します。
-
+1. **[拡張機能]** タブを含めて、**[Windows Admin Center の設定と環境を構成する]** ポップアップ ウィンドウのすべてのタブを確認し、**[完了]** を選択してウィンドウを閉じます。
+1. **SEA-ADM1** 上の、Windows Admin Center を表示している Microsoft Edge ウィンドウの右上隅で、**[設定]** アイコン (歯車ホイール) を選択します。
+1. 左側のウィンドウで、**[拡張機能]** を選択します。 使用可能な拡張機能を確認します。
+1. **DHCP** と **DNS** 拡張機能を選んでから、まだインストールされていない場合は **[Install]** を選びます。 拡張機能がインストールされ Windows Admin Center が更新されます。
+1. 詳細ペインで **[Installed extensions]** を選んで、先ほどインストールした拡張機能が一覧に含まれていることを確認します。
 1. [すべての接続] ペインで、**[+ 追加]** を選択します。
 1. リソースの追加または作成ペインの **[サーバー]** タイルで、 **[追加]** を選択します。
 1. **[サーバー名]** テキスト ボックスに、「**sea-svr1.contoso.com**」と入力します。 
@@ -269,7 +277,7 @@ lab:
 1. **SEA-ADM1** で、**[イーサネットの状態]** ウィンドウに戻ります。
 1. **[イーサネットの状態]** ウィンドウで、**[プロパティ]** を選択します。
 1. **[イーサネットのプロパティ]** ダイアログ ボックスで、**[インターネット プロトコル バージョン 4 (TCP/IPv4)]** を選んでから、**[プロパティ]** を選択します。
-1. **[インターネット プロトコル バージョン 4 (TCP/IPv4) のプロパティ]** ダイアログ ボックスで、現在割り当てられている IP アドレス (**172.16.10.11**) を、**HeadOfficeSubnet** の IP アドレスの範囲外の IP アドレス **172.16.11.11** に変更してから **[OK]** を選択します。
+1. **[Internet Protocol Version 4 (TCP/IPv4) Properties]** ダイアログ ボックスで、現在割り当てられている IP アドレス (**172.16.10.11**) を、**HeadOfficeSubnet** の IP アドレス範囲に含まれない IP アドレス **172.16.11.11** に変更し、サブネット マスク **255.255.0.0** と DNS サーバー IP **172.60.10.12** を使うようにしてから、**[OK]** を選びます。
 1. **SEA-ADM1** で、**Windows PowerShell** コンソールに切り替えます。
 1. **Windows PowerShell** コンソールで、次のコマンドを入力してから、Enter キーを押して `testapp.treyresearch.net` DNS レコードの解決をテストします。
 
