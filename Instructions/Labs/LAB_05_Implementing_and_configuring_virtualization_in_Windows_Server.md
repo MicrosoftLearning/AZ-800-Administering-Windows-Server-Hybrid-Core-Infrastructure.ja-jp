@@ -88,12 +88,16 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 1. **Windows PowerShell** コンソールで、次のコマンドを実行してから Enter キーを押し、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   $parameters = @{
+     Source = "https://aka.ms/WACdownload"
+     Destination = ".\WindowsAdminCenter.exe"
+     }
+   Start-BitsTransfer @parameters
    ```
 1. 次のコマンドを入力してから Enter キーを押して、Windows Admin Center をインストールします。
     
    ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+   Start-Process -FilePath '.\WindowsAdminCenter.exe' -ArgumentList '/VERYSILENT' -Wait
    ```
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
@@ -127,35 +131,21 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 #### タスク 1: Windows Server に Docker をインストールする
 
-1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** に接続している間に、**[ツール]** メニューを使用して、そのサーバーへの PowerShell リモート処理セッションを確立します。 
+1. **SEA-ADM1** で、**SEA-SVR1** の **[ツール]** リストの **[PowerShell]** を選択します。 メッセージが表示されたら、講師から提供された資格情報で認証してから、Enter キーを押します。 
+
+   > **注**: これにより、SEA-SVR1 への PowerShell リモート処理接続が確立されます。
 
    > **注**: Windows Admin Center での PowerShell 接続は、ラボで使用される入れ子になった仮想化が原因で比較的遅くなる可能性があります。そのため、**SEA-ADM1** の Windows Powershell コンソールから `Enter-PSSession -ComputerName SEA-SVR1` を実行する別の方法があります。
 
-1. PowerShell コンソールで次のコマンドを実行して、TLS 1.2 を強制的に使用し、PowerShellGet モジュールをインストールします。 
+1. **Windows PowerShell** コンソールで次のコマンドを入力して Enter キーを押し、**SEA-SVR1** に Docker CE (Community Edition) をインストールします。
 
    ```powershell
-   [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-   Install-PackageProvider -Name NuGet -Force
-   Install-Module PowerShellGet -RequiredVersion 2.2.4 -SkipPublisherCheck
-   ```
-1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
+   Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/microsoft/Windows-Containers/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1" -o install-docker-ce.ps1
 
-   ```powershell
-   Restart-Computer -Force
+   .\install-docker-ce.ps1
    ```
-1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
-
-1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker Microsoft PackageManagement プロバイダーをインストールします。
-
-   ```powershell
-   Install-Module -Name DockerProvider -Repository PSGallery -Force
-   ```
-1. **Windows PowerShell** コンソールで次のコマンドを実行し、**SEA-SVR1** に Docker ランタイムをインストールします。
-
-   ```powershell
-   Install-Package -Name docker -ProviderName DockerProvider
-   ```
-1. インストールが完了した後、次のコマンドを実行して **SEA-SVR1** を再起動します。
+ 
+1. インストールが完了した後、次のコマンドを入力し、Enter キーを押して **SEA-SVR1** を再起動します。
 
    ```powershell
    Restart-Computer -Force
@@ -163,13 +153,10 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 #### タスク 2: Windows コンテナーをインストールして実行する
 
-1. **SEA-SVR1** が再起動した後、**PowerShell** ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
-1. **Windows PowerShell** コンソールで次のコマンドを実行し、インストールされた Docker のバージョンを確認します。
 
-   ```powershell
-   Get-Package -Name Docker -ProviderName DockerProvider
-   ```
-1. 次のコマンドを実行して、現在 **SEA-SVR1** に存在する Docker イメージを特定します。 
+1. **SEA-SVR1** が再起動した後、PowerShell ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
+
+1. **Windows PowerShell** コンソールで次のコマンドを入力して Enter キーを押し、現在 **SEA-SVR1** に存在する Docker イメージを確認します。 
 
    ```powershell
    docker images
@@ -177,57 +164,88 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
    > **注**: ローカル リポジトリ ストアにイメージがないことを確認してください。
 
-1. 次のコマンドを実行して、インターネット インフォメーション サービス (IIS) インストールを含む Nano Server イメージをダウンロードします。
+1. 次のコマンドを入力して Enter キーを押し、Nano Server イメージをダウンロードします。
 
    ```powershell
-   docker pull nanoserver/iis
+   docker pull mcr.microsoft.com/windows/nanoserver:ltsc2022
    ```
 
    > **注**: ダウンロードが完了するのにかかる時間は、ラボ VM から Microsoft コンテナー レジストリへのネットワーク接続の使用可能な帯域幅によって異なります。
 
-1. 次のコマンドを実行して、Docker イメージが正常にダウンロードされたことを確認します。
+1. 次のコマンドを入力し、Enter キーを押して、Docker イメージが正常にダウンロードされたことを確認します。
 
    ```powershell
    docker images
    ```
-1. 次のコマンドを実行し、ダウンロードされたイメージに基づいてコンテナーを起動します。
+
+1. 次のコマンドを入力し、Enter キーを押して、ダウンロードされたイメージに基づいてコンテナーを起動します。
 
    ```powershell
-   docker run --isolation=hyperv -d -t --name nano -p 80:80 nanoserver/iis 
+   docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe 
    ```
 
-   > **注**: docker コマンドでは、(ホスト オペレーティング システムの非互換性の問題に対処する) Hyper-V 分離モードのコンテナーをバックグラウンド サービスとして起動し (`-d`)、コンテナー ホストのポート 80 がコンテナーのポート 80 にマップされるようにネットワークが構成されます。 
+   > **注**:この docker コマンドはコンテナーを起動し、コンテナーのコマンド ライン インターフェイスに接続します。 
 
-1. 次のコマンドを実行して、コンテナー ホストの IP アドレス情報を取得します。
+1. 次のコマンドを入力し、Enter キーを押して、コンテナー ホストの IP アドレス情報を取得します。
 
    ```powershell
-   ipconfig
+   hostname
    ```
+    > **注**:これは、**SEA-SVR1** ではなく、コンテナー インスタンスのホスト名であることを確認します。
 
-   > **注**: vEthernet (nat) という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これは、新しいコンテナーのアドレスです。 次に、**Ethernet** という名前のイーサネット アダプターの IPv4 アドレスを特定します。 これはホスト (**SEA-SVR1**) の IP アドレスであり、**172.16.10.12** に設定されています。
-
-1. **SEA-ADM1** で、Microsoft Edge ウィンドウに切り替え、別のタブを開き、**http://172.16.10.12** に移動します。 ブラウザーに既定の IIS ページが表示されていることを確認します。
-1. **SEA-ADM1** で、**SEA-SVR1** への PowerShell リモート処理セッションに戻り、**Windows PowerShell** コンソールで次のコマンドを実行し、実行中のコンテナーを一覧表示します。
+1. 次のコマンドを入力して Enter キーを押し、コンテナーにテキスト ファイルを作成します。
 
    ```powershell
-   docker ps
+   echo "Hello World!" > C:\Users\Public\Hello.txt
    ```
-   > **注**: このコマンドは、**SEA-SVR1** で現在実行されているコンテナーに関する情報を提供するものです。 コンテナーを停止するために使用するため、コンテナー ID を記録します。 
 
-1. 次のコマンドを実行して、実行中のコンテナーを停止します (`<ContainerID>` プレースホルダーは、前の手順で特定したコンテナー ID に置き換えてください)。
-
-   ```powershell
-   docker stop <ContainerID>
-   ```
-1. 次のコマンドを実行して、コンテナーが停止したことを確認します。
+1. 次のコマンドを入力して Enter キーを押し、コンテナーのコマンド ライン インターフェイスを終了して、**SEA-SVR1** の PowerShell プロンプトに戻ります。
 
    ```powershell
-   docker ps
+   exit
    ```
+
+1. 次のコマンドを入力して Enter キーを押し、docker ps コマンドを実行して終了したばかりのコンテナーのコンテナー ID を取得します。
+
+   ```powershell
+   docker ps -a
+   ```
+   > **注**:`-a` スイッチを指定すると、現在実行されていないものを含むすべてのコンテナーの一覧が表示されます。
+
+1. 最初に実行したコンテナーでの変更を含む新しい helloworld イメージを作成します。 これを行うには、docker commit コマンドを実行し、\<containerID\> をコンテナーの ID に置き換えます。
+
+   ```powershell
+   docker commit <containerID> helloworld
+   ```
+
+1. これで、Hello.txt ファイルを含むカスタム イメージが作成されます。 docker images コマンドを使って、新しいイメージを確認できます。
+
+   ```powershell
+   docker images
+   ```
+
+1. docker run コマンドと --rm オプションを使って、新しいコンテナーを実行します。 このオプションを使うと、コマンド (この場合は cmd.exe) が停止すると、Docker によってコンテナーが自動的に削除されます。
+
+   ```powershell
+   docker run --rm helloworld cmd.exe /s /c type C:\Users\Public\Hello.txt
+   ```
+   > **注**:このコマンド ラインは、前に作成したファイルの内容を出力して、コンテナーを再び停止します。
+
+1. 次のコマンドを入力して Enter キーを押し、元のイメージの新しいコンテナー インスタンスを起動して、作成したファイルが存在するかどうかを確認します。
+
+   ```powershell
+   docker run --rm mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe /s /c type C:\Users\Public\Hello.txt
+   ```
+   > **注**:元のイメージは、ファイルを追加しても変更されず、停止後に元の状態に戻されました。
 
 #### タスク 3: Windows Admin Center を使用してコンテナーを管理する
 
-1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com** の **[ツール]** メニューの **[コンテナー]** を選択します。 **PowerShell** セッションを閉じるように求められたら、 **[続行]** を選択します。
+1. **SEA-ADM1** の Windows Admin Center で、左上隅にある設定アイコンに移動し、**[Extensions]** を選びます。
+
+1. **[Extensions]** ペインの **[Installed Extension]** で、**Containers** 拡張機能がインストールされて更新されていることを確認します。 この拡張機能がインストールされていない場合は、**[Available Extensions]** ペインから追加します。
+
+1. **SEA-ADM1** の Windows Admin Center で、**sea-svr1.contoso.com**の [ツール] メニューの **[コンテナー]** を選択します。 **PowerShell** セッションを閉じるように求められたら、 **[続行]** を選択します。
+
 1. コンテナー ペインで、 **[要約]** 、 **[コンテナー]** 、 **[イメージ]** 、 **[ネットワーク]** 、 **[ボリューム]** の各タブを参照します。
 
 ### 演習 2 の結果

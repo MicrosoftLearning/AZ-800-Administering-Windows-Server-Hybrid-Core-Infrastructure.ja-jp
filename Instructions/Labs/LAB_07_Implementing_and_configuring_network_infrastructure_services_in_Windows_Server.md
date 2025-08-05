@@ -53,12 +53,16 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
 1. **Windows PowerShell** コンソールで、次のコマンドを実行して、最新バージョンの Windows Admin Center をダウンロードします。
     
    ```powershell
-   Start-BitsTransfer -Source https://aka.ms/WACDownload -Destination "$env:USERPROFILE\Downloads\WindowsAdminCenter.msi"
+   $parameters = @{
+     Source = "https://aka.ms/WACdownload"
+     Destination = ".\WindowsAdminCenter.exe"
+   }
+   Start-BitsTransfer @parameters
    ```
 1. 次のコマンドを実行して、Windows Admin Center をインストールします。
     
    ```powershell
-   Start-Process msiexec.exe -Wait -ArgumentList "/i $env:USERPROFILE\Downloads\WindowsAdminCenter.msi /qn /L*v log.txt REGISTRY_REDIRECT_PORT_80=1 SME_PORT=443 SSL_CERTIFICATE_OPTION=generate"
+   Start-Process -FilePath '.\WindowsAdminCenter.exe' -ArgumentList '/VERYSILENT' -Wait
    ```
 
    > **注**: インストールが完了するまで待ちます。 これには 2 分ほどかかります。
@@ -68,7 +72,11 @@ Contoso の Trey Research の下位部門には、約 50 人のユーザーの�
    >**注**: リンクが機能しない場合は、**SEA-ADM1** で **WindowsAdminCenter.msi** ファイルを参照し、コンテキスト メニューを開いて **[修復]** を選択します。 修復が完了した後、Microsoft Edge を更新します。 
    
 1. メッセージが表示されたら、**[Windows セキュリティ]** ダイアログ ボックスに講師から提供された資格情報を入力してから、**[OK]** を選択します。
-
+1. **[拡張機能]** タブを含めて、**[Windows Admin Center の設定と環境を構成する]** ポップアップ ウィンドウのすべてのタブを確認し、**[完了]** を選択してウィンドウを閉じます。
+1. **SEA-ADM1** 上の、Windows Admin Center を表示している Microsoft Edge ウィンドウの右上隅で、**[設定]** アイコン (歯車ホイール) を選択します。
+1. 左側のウィンドウで、**[拡張機能]** を選択します。 使用可能な拡張機能を確認します。
+1. **DHCP** と **DNS** 拡張機能を選んでから、まだインストールされていない場合は **[Install]** を選びます。 拡張機能がインストールされ Windows Admin Center が更新されます。
+1. 詳細ペインで **[Installed extensions]** を選んで、先ほどインストールした拡張機能が一覧に含まれていることを確認します。
 1. Windows Admin Center で、**sea-svr1.contoso.com** への接続を追加し、講師から提供された資格情報で接続します。
 1. **[ツール]** リストで、 **[役割と機能]** を使用して、**SEA-SVR1** に DHCP 役割をインストールします。
 1. **[ツール]** リストで、**DHCP** ツールを参照し、**DHCP PowerShell** ツールをインストールします。 
@@ -221,7 +229,7 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
 
    > **注**: 名前が、**HeadOfficePolicy** で構成された IP アドレス **172.30.99.100** に解決されることを確認します。
 
-1. **SEA-ADM1** に割り当てられた IP アドレスを **172.16.10.11** から、**HeadOfficeSubnet** の IP アドレス範囲外の IP アドレス (**172.16.11.11**) に変更します。
+1. **[Internet Protocol Version 4 (TCP/IPv4) Properties]** ダイアログ ボックスで、現在割り当てられている IP アドレス (**172.16.10.11**) を、**HeadOfficeSubnet** の IP アドレス範囲に含まれない IP アドレス **172.16.11.11** に変更し、サブネット マスク **255.255.0.0** と DNS サーバー IP **172.60.10.12** を使うようにしてから、**[OK]** を選びます。
 1. **Windows PowerShell** コンソールで、次のコマンドを実行して DNS ポリシーをテストします。
 
     ```powershell
