@@ -156,6 +156,8 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 
 1. **SEA-SVR1** が再起動した後、PowerShell ツールを再度使用して、**SEA-SVR1** への新しい PowerShell リモート処理セッションを確立します。
 
+   > **注**:このタスクの残りの手順では、TTY 対応のターミナルを必要とする対話型 Docker コマンドを実行する必要があります。 Windows Admin Center の PowerShell コンソールは TTY をサポートしていません。 そのため、別の方法を使用することをお勧めします。つまり、**SEA-ADM1** 上で管理者権限で **Windows PowerShell** を開き、`Enter-PSSession -ComputerName SEA-SVR1` を実行して PowerShell リモート セッションを確立します。
+
 1. **Windows PowerShell** コンソールで次のコマンドを入力して Enter キーを押し、現在 **SEA-SVR1** に存在する Docker イメージを確認します。 
 
    ```powershell

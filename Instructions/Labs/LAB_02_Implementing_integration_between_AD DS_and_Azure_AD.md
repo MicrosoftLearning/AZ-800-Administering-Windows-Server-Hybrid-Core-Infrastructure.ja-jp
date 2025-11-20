@@ -37,6 +37,8 @@ Azure リソースへのアクセスの Microsoft Entra ID を使用した認証
 
 このラボでは、使用可能な VM 環境と Microsoft Entra テナントを使用します。 ラボを開始する前に、Microsoft Entra テナントと、そのテナントのグローバル管理者ロールがあるユーザー アカウントを持っていることを確認してください。
 
+> **重要**: このラボ用に新しい Microsoft Entra テナントを作成する場合は、演習 3 で Microsoft Entra Connect をインストールする前に、ディレクトリ同期を完全に初期化する必要があることに注意してください。 通常、この初期化プロセスは、テナント作成後 10 分から 30 分かかります。 ディレクトリ同期の準備が整うまで、演習 1 と 2 を進めることができます。 Microsoft Entra Connect のインストール時に "このディレクトリではディレクトリ同期が有効になっていますが、まだ実施されていません" というエラーが発生した場合は、さらに 15 分から 30 分待ってから再試行してください。
+
 ## 演習 1: AD DS 統合用に Microsoft Entra ID を準備する
 
 ### シナリオ
@@ -54,7 +56,7 @@ Azure リソースへのアクセスの Microsoft Entra ID を使用した認証
 1. **SEA-ADM1** で Microsoft Edge を起動してから、Azure portal に移動します。
 1. インストラクターが提供する資格情報を使用して、Azure portal にサインインします。
 1. Azure portal で ** Microsoft Entra ID** に移動します。
-1. **[Microsoft Entra ID]** ページで、**[カスタム ドメイン名]** を選択し、`contoso.com` を追加します。
+1. **Microsoft Entra ID** ページで、左側のナビゲーション ウィンドウの **[管理]** セクションを展開し、**[カスタム ドメイン名]** を選択して、`contoso.com` を追加します。
 1. ドメインの検証に使用する DNS レコードの種類を確認し、ドメイン名を確認せずにウィンドウを閉じます。
 
    > **注**: 一般には、DNS レコードを使用してドメインを確認しますが、このラボでは検証済みドメインを使用する必要はありません。
@@ -65,7 +67,7 @@ Azure リソースへのアクセスの Microsoft Entra ID を使用した認証
 
    - ユーザー名: `admin`
 
-   > **注**: **[ユーザー名]** の [ドメイン名] ドロップダウンメニューに、`onmicrosoft.com` で終わる既定のドメイン名が表示されていることを確認します。
+   > **注**: **[ユーザー名]** の [ドメイン名] ドロップダウンメニューに、`onmicrosoft.com` で終わる既定のドメイン名が表示されていることを確認します。 このラボの後半でサインインするときに必要になるので、完全なユーザー名 (たとえば、admin@contoso35501731.onmicrosoft.com) をメモしてください。
 
    - 名前: **admin**
    - ロール: **グローバル管理者**
@@ -110,13 +112,15 @@ Azure リソースへのアクセスの Microsoft Entra ID を使用した認証
 
 演習のシナリオ: Microsoft Entra Connect をダウンロードし、**SEA-ADM1** にインストールし、統合の目標に合わせて設定を構成することで、統合を実装する準備ができました。
 
+> **重要**: (新しいテナントを作成した場合は) この演習を進める前に、Microsoft Entra テナントの作成後から十分な時間 (少なくとも 15 分から 30 分) が経過するまで待ちます。 Microsoft Entra Connect をインストールする前に、ディレクトリ同期の初期化が完了している必要があります。 エラー "このディレクトリではディレクトリ同期が有効になっていますが、まだ実施されていません。 ディレクトリ同期の準備が整うまでお待ちください" が表示される場合は、もう少し待ってからインストールを再試行する必要があります。
+
 この演習の主なタスクは次のとおりです。
 
 1. Microsoft Entra Connect をインストールして構成する。
 
 #### タスク 1: Microsoft Entra Connect をインストールして構成する
 
-1. **SEA-ADM1** で Azure portal が表示されている Microsoft Edge ウィンドウで、**[Microsoft Entra ID]** ページから **[Microsoft Entra Connect]** ページに移動します。
+1. **SEA-ADM1** の場合、Azure portal が表示されている Microsoft Edge ウィンドウの **Microsoft Entra ID** ページで、左側のナビゲーション ウィンドウの **[管理]** セクションを展開し、下にスクロールして **[Microsoft Entra Connect]** を選択し、**Microsoft Entra Connect** ページを参照します。
 1. **[Microsoft Entra Connect]** ページから、**[ダウンロード]** を選択します。
 1. Microsoft Entra Connect のインストール バイナリをダウンロードし、インストールを開始します。
 1. **[Microsoft Entra Connect]** ページで、**[ライセンス条項とプライバシーに関する声明に同意します]** チェックボックスをオンにし、**[続行]** を選択します。
@@ -221,8 +225,14 @@ Microsoft Entra Connect をインストールして構成したので、同期�
 
 #### タスク 1: Azure でセルフサービス パスワード リセットを有効にする
 
-1. **SEA-ADM1** で Azure portal が表示されている Microsoft Edge ウィンドウで、Microsoft Entra ID の **[ライセンス]** ページを参照し、**[Microsoft Entra ID P2]** 無料試用版をアクティブにします。 
+1. **SEA-ADM1** の場合、Azure portal が表示されている Microsoft Edge ウィンドウの Microsoft Entra ID ページに移動し、左側のナビゲーション ウィンドウの **[管理]** セクションを展開し、下にスクロールして **[ライセンス]** を選択し、**Microsoft Entra ID P2** 無料試用版のライセンス認証を行います。
+   
+   > **注**:Microsoft Entra ID P2 無料試用版のライセンス認証を行う際に問題が発生し、支払いオプションの設定を求めるエラー メッセージが表示される場合は、テナントの組織の要件が原因である可能性があります。 このような場合は、P2 ライセンスの機能を特に必要としないラボ演習を続行するか、管理者に問い合わせてサポートを受けることができます。
+   
 1. 演習 1 で作成した Microsoft Entra ID グローバル管理者ユーザー アカウントに Microsoft Entra ID P2 ライセンスを割り当てます。
+   
+   > **注**:ライセンスを割り当てるには、**[ライセンス]** ページで、左側のナビゲーション ウィンドウの **[管理]** セクションを展開し、下にスクロールして **[すべての製品]** を選択します。
+   
 1. Azure portal で、Microsoft Entra ID **[パスワードのリセット]** ページを参照します。
 1. **[パスワードのリセット]** ページで、構成を適用するユーザーのスコープを選択できることに注目してください。
 
@@ -367,27 +377,31 @@ Microsoft Entra Connect をインストールして構成したので、同期�
 #### タスク 2: Azure でディレクトリ同期を無効にする
 
 1. **SEA-ADM1** で、**Windows PowerShell** ウィンドウに切り替えます。
-1. **Windows PowerShell** コンソールで次のコマンドを実行し、Microsoft Entra ID 用の Microsoft Online モジュールをインストールします。
+1. **Windows PowerShell** コンソールで次のコマンドを実行して Microsoft Graph PowerShell SDK をインストールします。
 
    ```powershell
-   Install-Module -Name MSOnline
+   Install-Module -Name Microsoft.Graph -Force
    ```
-1. 次のコマンドを実行して、資格情報を Azure に提供します。
+1. 次のコマンドを実行して、必要なアクセス許可を持つ Microsoft Entra ID に接続します。
 
    ```powershell
-   $msolcred=Get-Credential
+   Connect-MgGraph -Scopes "Organization.ReadWrite.All"
    ```
-1. ダイアログが表示されたら、**[Windows PowerShell 資格情報要求]** ダイアログ ボックスで、演習 1 で作成したユーザー アカウントの資格情報を入力します。
-1. 次のコマンドを実行して Azure に接続します。
-
-   ```powershell
-   Connect-MsolService -Credential $msolcred
-   ```
+1. プロンプトが表示されたら、演習 1 で作成した全体管理者ユーザー アカウントの資格情報を使用してサインインします。
 1. 次のコマンドを実行して、Azure でディレクトリ同期を無効にします。
 
    ```powershell
-   Set-MsolDirSyncEnabled -EnableDirSync $false
+   $OrgID = (Get-MgOrganization).Id
+   $params = @{ onPremisesSyncEnabled = $false }
+   Update-MgOrganization -OrganizationId $OrgID -BodyParameter $params
    ```
+1. 次のコマンドを実行して、ディレクトリ同期が無効であることを確認します。
+
+   ```powershell
+   Get-MgOrganization | Select-Object DisplayName, OnPremisesSyncEnabled
+   ```
+
+   > **注**:**OnPremisesSyncEnabled** プロパティは **False** になっているはずです。 同期されたすべてのユーザーがクラウド専用アカウントに完全に変換されるまで、最長 72 時間かかる場合があります。
 
 ### 次のモジュールの準備
 
