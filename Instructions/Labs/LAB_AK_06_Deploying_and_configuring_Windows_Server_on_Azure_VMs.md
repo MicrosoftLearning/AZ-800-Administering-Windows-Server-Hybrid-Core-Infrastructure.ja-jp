@@ -7,6 +7,8 @@ lab:
 
 # ラボ回答キー: Azure VM での Windows Server のデプロイと構成
 
+このラボは完了するまで、約 **90** 分かかります。
+
 ## 演習 1: Azure VM デプロイ用の Azure Resource Manager (ARM) テンプレートの作成
 
 #### タスク 1: Azure サブスクリプションに接続し、Microsoft Defender for Cloud のセキュリティ強化を有効にする
