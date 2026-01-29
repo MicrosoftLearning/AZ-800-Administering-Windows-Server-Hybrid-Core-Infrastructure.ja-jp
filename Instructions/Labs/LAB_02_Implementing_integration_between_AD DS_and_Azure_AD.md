@@ -6,6 +6,8 @@ lab:
 
 # ラボ: AD DS と Microsoft Entra ID の統合の実装
 
+このラボは完了するまで、約 **60** 分かかります。
+
 ## シナリオ
 
 Azure リソースへのアクセスの Microsoft Entra ID を使用した認証および承認する作業で生じる管理と監視のオーバーヘッドの懸念事項に対処するために、あなたは、オンプレミスの Active Directory Domain Services (AD DS) と Microsoft Entra ID の統合をテストし、複数のユーザー アカウントの管理に、オンプレミスとクラウドのリソースを組み合わせて使用することに関するビジネス上の懸念に対処できることを検証することにしました。
@@ -23,8 +25,6 @@ Azure リソースへのアクセスの Microsoft Entra ID を使用した認証
 - Microsoft Entra Connect をインストールして構成する。
 - 同期プロセスをテストして、AD DS と Microsoft Entra ID の統合を検証する。
 - Active Directory に Microsoft Entra ID 統合機能を実装する。これには Windows Server Active Directory 用の Microsoft Entra ID パスワード保護や、パスワード ライトバックを使用した SSPR が含まれます。
-
-## 予想所要時間: 60 分
 
 ## ラボのセットアップ
 

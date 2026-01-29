@@ -7,6 +7,8 @@ lab:
 
 # ラボの回答キー: ハイブリッド シナリオでの Windows Admin Center の使用
 
+このラボは完了するまで、約 **90** 分かかります。
+
 ## 演習 1: Windows Server を実行する Azure VM のプロビジョニング
 
 #### タスク 1: Azure Resource Manager テンプレートを使用して Azure リソース グループを作成する
