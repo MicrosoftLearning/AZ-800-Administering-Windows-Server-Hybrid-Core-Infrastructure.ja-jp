@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ: ID サービスおよびグループ ポリシーの実装'
   module: 'Module 1: Identity services in Windows Server'
+  description: このラボでは、リモート管理と PowerShell を使って、Windows Server Core コンピューターに追加のドメイン コントローラーをデプロイします。 その後、Active Directory オブジェクトを作成して管理し、グループ ポリシーの設定を構成して一元化された構成を適用します。
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Windows Server
+    - Windows Server Active Directory
+    - Group Policy
+    - PowerShell
 ---
 
 # ラボ: ID サービスおよびグループ ポリシーの実装
@@ -209,3 +218,6 @@ lab:
 ### 結果
 
 この演習が完了すると、GPO を正常に作成して構成したことになります。
+
+
+

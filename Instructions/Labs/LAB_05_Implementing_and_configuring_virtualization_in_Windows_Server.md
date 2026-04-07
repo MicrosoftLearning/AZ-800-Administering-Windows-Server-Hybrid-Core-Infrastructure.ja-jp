@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ: Windows Server での仮想化の実装と構成'
   module: 'Module 5: Hyper-V virtualization in Windows Server'
+  description: このラボでは、仮想スイッチや仮想ハード ディスクを含む Hyper-V 仮想マシンを作成して構成します。 また、Windows コンテナーをデプロイして管理し、ホストの仮想化とコンテナーベースのワークロードを練習します。
+  duration: 60 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Hyper-V
+    - Windows Containers
+    - Windows Server
+    - Virtualization
 ---
 
 # ラボ: Windows Server での仮想化の実装と構成
@@ -253,3 +262,6 @@ Contoso は、米国シアトルに本社があるグローバルなエンジニ
 ### 演習 2 の結果
 
 この演習が完了すると、Windows Server に Docker をインストールし、Web サービスを含む Windows コンテナー イメージをダウンロードして、その機能を確認したことになります。
+
+
+

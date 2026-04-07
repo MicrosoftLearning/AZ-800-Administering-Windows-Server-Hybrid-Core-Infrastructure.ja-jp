@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ : Azure File Sync の実装'
   module: 'Module 10: Implementing a hybrid file server infrastructure'
+  description: このラボでは、オンプレミス環境に DFS レプリケーションを実装して、Azure File Sync 同期グループを作成します。 レプリケーション ワークフローを Azure File Sync に移行し、同期とクラウドの階層化を検証して、競合シナリオのトラブルシューティングを行います。
+  duration: 60 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure File Sync
+    - DFS Replication
+    - Windows Server File Services
+    - Azure
 ---
 
 # ラボ: Azure File Sync の実装
@@ -253,3 +262,6 @@ DFS レプリケーション環境を File Sync に移行するための準備�
 ### 結果
 
 この演習を完了すると、このラボで作成した Azure リソースがクリーンアップされます。
+
+
+

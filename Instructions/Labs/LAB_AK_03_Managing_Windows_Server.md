@@ -3,6 +3,15 @@ lab:
   title: 'ラボ: Windows Server の管理'
   type: Answer Key
   module: 'Module 3: Windows Server administration'
+  description: このラボでは、リモート サーバー管理用の Windows Admin Center をインストールして構成します。 ラボ サーバーに接続し、グラフィカル ツールと PowerShell リモート処理を使って一般的な管理タスクを実行します。
+  duration: 45 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Windows Admin Center
+    - Windows Server
+    - PowerShell Remoting
+    - Remote Management
 ---
 
 # ラボの回答キー: Windows Server の管理
@@ -112,3 +121,6 @@ lab:
 ### 結果
 
 この演習を完了すると、Windows Admin Center がインストールされ、ラボ環境内のサーバーに接続されます。 機能のインストールや、リモート デスクトップ接続の有効化およびテストなどのリモート管理タスクを複数実行しました。 最後に、PowerShell リモート処理を使用してサービスの状態を確認して、開始しました。
+
+
+

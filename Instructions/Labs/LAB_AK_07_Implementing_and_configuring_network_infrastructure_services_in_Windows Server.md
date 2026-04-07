@@ -1,8 +1,17 @@
 ---
 lab:
-  title: 'ラボ: Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
+  title: 'ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   type: Answer Key
   module: 'Module 7: Network Infrastructure services in Windows Server'
+  description: このラボでは、ブランチ シナリオでの高可用性のために、DHCP スコープとフェールオーバーをデプロイして構成します。 また、コア ネットワーク インフラストラクチャ サービスをサポートするために、DNS 構成を実装して検証します。
+  duration: 60 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - DHCP
+    - DNS
+    - Windows Server
+    - Network Infrastructure
 ---
 
 # ラボの回答キー : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
@@ -296,3 +305,6 @@ lab:
 1. **[インターネット プロトコル バージョン 4 (TCP/IPv4) のプロパティ]** ダイアログ ボックスで、現在割り当てられている IP アドレス (**172.16.11.11**) をその元の値 (**172.16.10.11**) に変更し、**[OK]** を選択します。
 1. **[閉じる]** を 2 回選択します。
 1. 開いているすべてのウィンドウを閉じます。
+
+
+

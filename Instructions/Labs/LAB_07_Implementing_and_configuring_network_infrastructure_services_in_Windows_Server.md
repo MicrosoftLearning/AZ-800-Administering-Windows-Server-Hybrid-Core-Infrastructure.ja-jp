@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成'
   module: 'Module 7: Network Infrastructure services in Windows Server'
+  description: このラボでは、ブランチ シナリオでの高可用性のために、DHCP スコープとフェールオーバーをデプロイして構成します。 また、コア ネットワーク インフラストラクチャ サービスをサポートするために、DNS 構成を実装して検証します。
+  duration: 60 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - DHCP
+    - DNS
+    - Windows Server
+    - Network Infrastructure
 ---
 
 # ラボ : Windows Server でのネットワーク インフラストラクチャ サービスの実装と構成
@@ -238,3 +247,6 @@ Contoso 内の Trey Research の場所で働いているスタッフには、テ
    > **注**: 名前が **172.30.99.234** に解決されることを確認します。 **SEA-ADM1** の IP アドレスが **HeadOfficeSubnet** 内に存在しなくなったため、これは想定内です。 `testapp.treyresearch.net` をターゲットとする **(172.16.10.0/24)** の **HeadOfficeSubnet** からの DNS クエリは、**172.30.99.100** に解決されます。 `testapp.treyresearch.net` をターゲットとするこのサブネット外からの DNS クエリは、**172.30.99.234** に解決されます。
 
 1. **SEA-ADM1** の IP アドレスを元の値に戻します。
+
+
+

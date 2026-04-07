@@ -3,6 +3,16 @@ lab:
   title: 'ラボ: Windows Server での記憶域ソリューションの実装'
   type: Answer Key
   module: 'Module 9: File servers and storage management in Windows Server'
+  description: このラボでは、データ重複除去、iSCSI、記憶域スペースなどの主要な Windows Server ストレージ ソリューションを実装します。 また、回復性があるソフトウェアによるストレージを提供するために記憶域スペース ダイレクトを構成して検証します。
+  duration: 90 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Storage Spaces Direct
+    - Storage Spaces
+    - iSCSI
+    - Data Deduplication
+    - Windows Server Storage
 ---
 
 # ラボの回答キー: Windows Server での記憶域ソリューションの実装
@@ -458,3 +468,6 @@ lab:
    > **注**: 警告が自動的に消えるまで数分かかる場合があります。
 
 1. Windows Admin Center が表示されているブラウザー ページを更新し、すべてのサーバーが正常であることを確認します。
+
+
+

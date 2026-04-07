@@ -3,6 +3,15 @@ lab:
   title: 'ラボ: AD DS と Microsoft Entra ID の統合の実装'
   type: Answer Key
   module: 'Module 2: Implementing Identity in Hybrid Scenarios'
+  description: このラボでは、ハイブリッド ID 用に Microsoft Entra ID とオンプレミス AD DS の両方を準備します。 Microsoft Entra Connect をインストールして構成し、同期を検証し、パスワード保護やセルフサービス パスワード リセット書き戻しなどの統合機能を有効にします。
+  duration: 60 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Microsoft Entra ID
+    - Windows Server Active Directory
+    - Microsoft Entra Connect
+    - Hybrid Identity
 ---
 
 # ラボの回答キー: AD DS と Microsoft Entra ID の統合の実装
@@ -376,3 +385,6 @@ lab:
    ```
 
    > **注**:**OnPremisesSyncEnabled** プロパティは **False** になっているはずです。 同期されたすべてのユーザーがクラウド専用アカウントに完全に変換されるまで、最長 72 時間かかる場合があります。
+
+
+
