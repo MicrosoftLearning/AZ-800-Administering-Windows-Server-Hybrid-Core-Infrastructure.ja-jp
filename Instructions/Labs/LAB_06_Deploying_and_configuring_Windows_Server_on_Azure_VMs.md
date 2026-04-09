@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ: Azure VM での Windows Server のデプロイと構成'
   module: 'Module 6: Deploying and Configuring Azure VMs'
+  description: このラボでは、ARM テンプレートを作成および変更して、Azure に Windows Server 仮想マシンをデプロイします。 デプロイされた VM で管理アクセスとセキュリティ設定を構成した後、Azure リソースのプロビジョニングを解除します。
+  duration: 90 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure Resource Manager
+    - Azure Virtual Machines
+    - Windows Server
+    - Infrastructure as Code
 ---
 
 # ラボ: Azure VM での Windows Server のデプロイと構成
@@ -307,3 +316,6 @@ Azure 関連の料金を最小限に抑えるため、このラボでプロビ�
 ## 結果
 
 このラボを完了すると、Contoso, Ltd. の管理容易性とセキュリティの要件を満たす方法で Windows Server を実行している Azure VM がデプロイおよび構成されます。
+
+
+

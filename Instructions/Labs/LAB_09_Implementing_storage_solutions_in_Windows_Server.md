@@ -2,6 +2,16 @@
 lab:
   title: 'ラボ: Windows Server での記憶域ソリューションの実装'
   module: 'Module 9: File servers and storage management in Windows Server'
+  description: このラボでは、データ重複除去、iSCSI、記憶域スペースなどの主要な Windows Server ストレージ ソリューションを実装します。 また、回復性があるソフトウェアによるストレージを提供するために記憶域スペース ダイレクトを構成して検証します。
+  duration: 90 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Storage Spaces Direct
+    - Storage Spaces
+    - iSCSI
+    - Data Deduplication
+    - Windows Server Storage
 ---
 
 # ラボ: Windows Server での記憶域ソリューションの実装
@@ -436,3 +446,6 @@ Contoso の経営陣は、iSCSI を使用して、一元化された記憶域を
 - iSCSI 記憶域をインストールして構成しました。
 - 冗長記憶域スペースを構成しました。
 - 記憶域スペース ダイレクトの実装をテストしました。
+
+
+

@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ: AD DS と Microsoft Entra ID の統合の実装'
   module: 'Module 2: Implementing Identity in Hybrid Scenarios'
+  description: このラボでは、ハイブリッド ID 用に Microsoft Entra ID とオンプレミス AD DS の両方を準備します。 Microsoft Entra Connect をインストールして構成し、同期を検証し、パスワード保護やセルフサービス パスワード リセット書き戻しなどの統合機能を有効にします。
+  duration: 60 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Microsoft Entra ID
+    - Windows Server Active Directory
+    - Microsoft Entra Connect
+    - Hybrid Identity
 ---
 
 # ラボ: AD DS と Microsoft Entra ID の統合の実装
@@ -406,3 +415,6 @@ Microsoft Entra Connect をインストールして構成したので、同期�
 ### 次のモジュールの準備
 
 次のモジュールの準備が完了したら、ラボを終了します。
+
+
+

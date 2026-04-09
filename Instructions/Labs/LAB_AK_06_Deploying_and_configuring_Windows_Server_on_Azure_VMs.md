@@ -3,6 +3,15 @@ lab:
   title: 'ラボ: Azure VM での Windows Server のデプロイと構成'
   type: Answer Key
   module: 'Module 6: Deploying and Configuring Azure VMs'
+  description: このラボでは、ARM テンプレートを作成および変更して、Azure に Windows Server 仮想マシンをデプロイします。 デプロイされた VM で管理アクセスとセキュリティ設定を構成した後、Azure リソースのプロビジョニングを解除します。
+  duration: 90 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure Resource Manager
+    - Azure Virtual Machines
+    - Windows Server
+    - Infrastructure as Code
 ---
 
 # ラボ回答キー: Azure VM での Windows Server のデプロイと構成
@@ -290,3 +299,6 @@ lab:
    Get-AzResourceGroup -Name 'AZ800-L06*' | Remove-AzResourceGroup -Force -AsJob
    ```
    >**注**: このコマンドは非同期で実行されます (*-AsJob* パラメーターによって決定されます)。 そのため、同じ PowerShell セッション内ですぐに別の PowerShell コマンドを実行できるようになりますが、リソース グループが実際に削除されるまでに数分かかります。
+
+
+

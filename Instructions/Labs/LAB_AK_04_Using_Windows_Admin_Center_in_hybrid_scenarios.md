@@ -3,6 +3,16 @@ lab:
   title: 'ラボ: ハイブリッド シナリオでの Windows Admin Center の使用'
   type: Answer Key
   module: 'Module 4: Facilitating hybrid management'
+  description: このラボでは、Windows Admin Center ゲートウェイを Azure にデプロイして、それをオンプレミス リソースに接続します。 Azure ネットワーク アダプターとのハイブリッド接続をテストし、Azure ベースの Windows Server システムのリモート管理を確認します。
+  duration: 90 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Windows Admin Center
+    - Azure
+    - Azure Virtual Network
+    - Hybrid Management
+    - Windows Server
 ---
 
 # ラボの回答キー: ハイブリッド シナリオでの Windows Admin Center の使用
@@ -272,3 +282,6 @@ lab:
    ```
 
    >**注**: このコマンドは非同期で実行されるため (-AsJob パラメーターによって決定されます)、同じ PowerShell セッション内で、直後に別の PowerShell コマンドを実行できますが、リソース グループが実際に削除されるまでに数分かかります。
+
+
+

@@ -3,6 +3,15 @@ lab:
   title: 'ラボ : Azure File Sync の実装'
   type: Answer Key
   module: 'Module 10: Implementing a hybrid file server infrastructure'
+  description: このラボでは、オンプレミス環境に DFS レプリケーションを実装して、Azure File Sync 同期グループを作成します。 レプリケーション ワークフローを Azure File Sync に移行し、同期とクラウドの階層化を検証して、競合シナリオのトラブルシューティングを行います。
+  duration: 60 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure File Sync
+    - DFS Replication
+    - Windows Server File Services
+    - Azure
 ---
 
 # ラボの回答キー: Azure File Sync の実装
@@ -248,3 +257,6 @@ lab:
 1. [リソースの削除] ウィンドウで、**[削除]** を選択し、テキスト ボックスに「**はい**」と入力し、**[削除]** を選択します。
 1. ナビゲーション ウィンドウで、**[リソース グループ]** を選択します。
 1. 詳細ウィンドウで、**[AZ800-L1001-RG]**、**[リソース グループの削除]** の順に選択し、「**AZ800-L1001-RG**」と入力して、**[削除]** を選択します。
+
+
+

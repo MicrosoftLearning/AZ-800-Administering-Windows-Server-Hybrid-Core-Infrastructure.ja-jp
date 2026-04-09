@@ -3,6 +3,15 @@ lab:
   title: 'ラボ: Windows Server IaaS VM のネットワークの実装'
   type: Answer Key
   module: 'Module 8: Implementing Windows Server IaaS VM networking'
+  description: このラボでは、複数の仮想ネットワークと仮想マシンを使って、Azure にハブ アンド スポーク仮想ネットワーク トポロジをデプロイします。 Azure ルーティングと DNS 名前解決を構成してハイブリッド ネットワークの動作を検証した後、デプロイされたリソースをクリーンアップします。
+  duration: 60 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure Virtual Network
+    - Azure Routing
+    - Azure DNS
+    - Hybrid Networking
 ---
 
 # ラボの回答キー: ハイブリッド ネットワーク インフラストラクチャの実装
@@ -429,3 +438,6 @@ lab:
    ```
 
    >**注**: このコマンドは非同期で実行されるため ( *-AsJob* パラメーターによって決定されます)、同じ PowerShell セッション内で直後に別の PowerShell コマンドを実行できますが、リソース グループが実際に削除されるまでに数分かかります。
+
+
+

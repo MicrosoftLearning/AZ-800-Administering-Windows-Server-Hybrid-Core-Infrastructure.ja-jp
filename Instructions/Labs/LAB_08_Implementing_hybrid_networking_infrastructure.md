@@ -2,6 +2,15 @@
 lab:
   title: 'ラボ: ハイブリッド ネットワーク インフラストラクチャの実装'
   module: 'Module 8: Implementing Windows Server IaaS VM networking'
+  description: このラボでは、複数の仮想ネットワークと仮想マシンを使って、Azure にハブ アンド スポーク仮想ネットワーク トポロジをデプロイします。 Azure ルーティングと DNS 名前解決を構成してハイブリッド ネットワークの動作を検証した後、デプロイされたリソースをクリーンアップします。
+  duration: 60 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure Virtual Network
+    - Azure Routing
+    - Azure DNS
+    - Hybrid Networking
 ---
 
 # ラボ: ハイブリッド ネットワーク インフラストラクチャの実装
@@ -464,3 +473,6 @@ lab:
 - ハブ アンド スポーク トポロジでルーティングを構成しました。
 - 内部の名前解決のために Azure DNS を構成しました。
 - 外部の名前解決のために Azure DNS を構成しました。
+
+
+
